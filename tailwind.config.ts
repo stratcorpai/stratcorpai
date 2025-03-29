@@ -63,12 +63,12 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Custom colors for Stratified Advisory
+				// Updated custom colors for Stratified Advisory based on the design
 				stratified: {
 					DEFAULT: '#8B2F41', // Deep burgundy from hero image
 					light: '#D8A0A6',    // Soft pink/rose
 					lighter: '#F0D9DC',  // Very light pink
-					dark: '#5A1F2A',     // Darker burgundy
+					dark: '#3C1822',     // Darker burgundy (used in button)
 				}
 			},
 			borderRadius: {

@@ -29,9 +29,11 @@ const Navbar = () => {
       <div className="container-custom flex justify-between items-center">
         {/* Logo */}
         <a href="/" className="flex items-center">
-          <span className="text-2xl font-heading font-bold text-stratified">
-            Stratified Advisory
-          </span>
+          <img 
+            src="/lovable-uploads/bbbadf15-0ecd-4cdd-88b6-7bb56e21837f.png" 
+            alt="Stratified Advisory Logo" 
+            className="h-12 md:h-14"
+          />
         </a>
 
         {/* Desktop Menu */}
