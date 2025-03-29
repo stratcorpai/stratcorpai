@@ -16,11 +16,18 @@ const Hero = () => {
       {/* Content */}
       <div className="container-custom relative z-10 text-center">
         <div className="max-w-3xl mx-auto mt-20">
+          <div className="mb-8 flex justify-center">
+            <img 
+              src="/lovable-uploads/bbbadf15-0ecd-4cdd-88b6-7bb56e21837f.png" 
+              alt="Stratified Advisory Logo" 
+              className="h-20 md:h-24"
+            />
+          </div>
           <h1 className="font-bold mb-6 text-white">
             Welcome to<br />Stratified Advisory
           </h1>
           <p className="text-xl md:text-2xl mb-10 text-white/90 max-w-2xl mx-auto">
-            Experience the power of our <span className="font-bold">Executive-as-a-Service</span> practice to 
+            Experience the power of our <span className="font-bold">Board-as-a-Service</span> practice to 
             elevate and transform your executive board whether you are a VC, a 
             startup or a small medium business.
           </p>
