@@ -7,7 +7,7 @@ const Hero = () => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <img 
-          src="/lovable-uploads/48e0bace-a8aa-4cdb-b984-48712397fb45.png" 
+          src="/lovable-uploads/0ae8bdf5-33e6-4040-b227-017f8717c813.png" 
           alt="Abstract blocks representing innovative structure" 
           className="w-full h-full object-cover"
         />
