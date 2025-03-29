@@ -32,7 +32,7 @@ const Navbar = () => {
           <img 
             src="/lovable-uploads/bbbadf15-0ecd-4cdd-88b6-7bb56e21837f.png" 
             alt="Stratified Advisory Logo" 
-            className="h-12 md:h-14"
+            className="h-16 md:h-20" // Increased from h-12 md:h-14
           />
         </a>
 
