@@ -79,7 +79,9 @@ const Footer = () => {
             <ul className="space-y-4 text-gray-300 dark:text-gray-400">
               <li className="flex items-start">
                 <MapPin size={18} className="mr-3 mt-1 flex-shrink-0 text-stratified-light" />
-                <span className="leading-relaxed">Seattle, Washington & Bucharest, Romania</span>
+                <span className="leading-relaxed">
+                  Seattle | Bucharest | Amsterdam
+                </span>
               </li>
               <li className="flex items-center">
                 <Mail size={18} className="mr-3 flex-shrink-0 text-stratified-light" />
