@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { ThemeToggle } from '@/components/ThemeToggle';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,15 +50,13 @@ const Navbar = () => {
           <a href="#stratcorp-ai" className="text-foreground hover:text-stratified font-medium transition-colors">
             StratCorp.AI
           </a>
-          <ThemeToggle />
           <Button className="bg-stratified hover:bg-stratified-dark text-white">
             Contact Us
           </Button>
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center space-x-2">
-          <ThemeToggle />
+        <div className="md:hidden flex items-center">
           <button 
             className="text-foreground"
             onClick={() => setIsOpen(!isOpen)}
