@@ -129,6 +129,52 @@
   @apply bg-clip-text text-transparent bg-gradient-to-r from-stratified-dark to-stratified-light;
 }
 
+/* Radar Chart Styles */
+.radar-container {
+  perspective: 1000px;
+}
+
+.radar-graphic {
+  transform-style: preserve-3d;
+}
+
+/* Only start animations when in view */
+.radar-graphic.visible .animate-radar-bg,
+.radar-graphic.visible .animate-radar-center,
+.radar-graphic.visible .animate-radar-line-1,
+.radar-graphic.visible .animate-radar-line-2,
+.radar-graphic.visible .animate-radar-line-3,
+.radar-graphic.visible .animate-radar-node-1,
+.radar-graphic.visible .animate-radar-node-2,
+.radar-graphic.visible .animate-radar-node-3,
+.radar-graphic.visible .animate-radar-label-1,
+.radar-graphic.visible .animate-radar-label-2,
+.radar-graphic.visible .animate-radar-label-3,
+.radar-graphic.visible .animate-radar-triangle,
+.radar-graphic.visible .animate-radar-pulse-1,
+.radar-graphic.visible .animate-radar-pulse-2 {
+  animation-play-state: running;
+}
+
+/* Pause animations until visible */
+.animate-radar-bg,
+.animate-radar-center,
+.animate-radar-line-1,
+.animate-radar-line-2,
+.animate-radar-line-3,
+.animate-radar-node-1,
+.animate-radar-node-2,
+.animate-radar-node-3,
+.animate-radar-label-1,
+.animate-radar-label-2,
+.animate-radar-label-3,
+.animate-radar-triangle,
+.animate-radar-pulse-1,
+.animate-radar-pulse-2 {
+  animation-play-state: paused;
+}
+
+/* Original styles */
 .axis-container {
   perspective: 1000px;
   perspective-origin: 50% 50%;

@@ -113,12 +113,36 @@ export default {
 						transform: 'translateY(10px)'
 					}
 				},
+				// New radar chart animations
+				'radar-fade-in': {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' }
+				},
+				'radar-scale-in': {
+					'0%': { transform: 'scale(0.8)', opacity: '0' },
+					'100%': { transform: 'scale(1)', opacity: '1' }
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.5s ease-out',
 				'fade-out': 'fade-out 0.5s ease-out',
+				// New radar chart animations
+				'radar-bg': 'radar-fade-in 1s ease-out forwards',
+				'radar-center': 'radar-fade-in 0.5s ease-out 0.3s forwards',
+				'radar-line-1': 'radar-fade-in 0.5s ease-out 0.5s forwards',
+				'radar-line-2': 'radar-fade-in 0.5s ease-out 0.7s forwards',
+				'radar-line-3': 'radar-fade-in 0.5s ease-out 0.9s forwards',
+				'radar-node-1': 'radar-fade-in 0.5s ease-out 1.1s forwards',
+				'radar-node-2': 'radar-fade-in 0.5s ease-out 1.3s forwards',
+				'radar-node-3': 'radar-fade-in 0.5s ease-out 1.5s forwards',
+				'radar-label-1': 'radar-fade-in 0.5s ease-out 1.7s forwards',
+				'radar-label-2': 'radar-fade-in 0.5s ease-out 1.9s forwards',
+				'radar-label-3': 'radar-fade-in 0.5s ease-out 2.1s forwards',
+				'radar-triangle': 'radar-fade-in 0.8s ease-out 2.3s forwards',
+				'radar-pulse-1': 'radar-fade-in 0.8s ease-out 2.5s forwards',
+				'radar-pulse-2': 'radar-fade-in 0.8s ease-out 2.7s forwards',
 			},
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
