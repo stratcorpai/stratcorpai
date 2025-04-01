@@ -13,7 +13,7 @@ const Team = () => {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-xl shadow-md overflow-hidden">
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
             <div className="md:flex">
               <div className="md:flex-shrink-0 md:w-1/3">
                 {/* Placeholder for Andreea's photo - replace with actual photo when available */}
@@ -69,29 +69,29 @@ const Team = () => {
             </div>
           </div>
           
-          <div className="mt-12 bg-white rounded-xl shadow-md p-8">
+          <div className="mt-12 bg-white rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl">
             <h4 className="text-xl font-semibold mb-4 text-stratified">Value to Boards</h4>
             <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h5 className="font-semibold mb-2">Strategic Guidance on AI and Cybersecurity</h5>
+              <div className="p-4 bg-gray-50 rounded-lg hover:bg-stratified/5 transition-colors">
+                <h5 className="font-semibold mb-2 text-stratified">Strategic Guidance on AI and Cybersecurity</h5>
                 <p className="text-gray-700">
                   Practical insights into adopting and scaling disruptive technologies while mitigating risks and ensuring compliance.
                 </p>
               </div>
-              <div>
-                <h5 className="font-semibold mb-2">Business Model Innovation</h5>
+              <div className="p-4 bg-gray-50 rounded-lg hover:bg-stratified/5 transition-colors">
+                <h5 className="font-semibold mb-2 text-stratified">Business Model Innovation</h5>
                 <p className="text-gray-700">
                   Expertise in incubating emerging technologies into scalable and commercially viable structures.
                 </p>
               </div>
-              <div>
-                <h5 className="font-semibold mb-2">Growth Acceleration</h5>
+              <div className="p-4 bg-gray-50 rounded-lg hover:bg-stratified/5 transition-colors">
+                <h5 className="font-semibold mb-2 text-stratified">Growth Acceleration</h5>
                 <p className="text-gray-700">
                   Proven capability to drive operational efficiencies and scale organizations, particularly for PE-backed businesses.
                 </p>
               </div>
-              <div>
-                <h5 className="font-semibold mb-2">Regulatory Alignment</h5>
+              <div className="p-4 bg-gray-50 rounded-lg hover:bg-stratified/5 transition-colors">
+                <h5 className="font-semibold mb-2 text-stratified">Regulatory Alignment</h5>
                 <p className="text-gray-700">
                   A strong understanding of global compliance landscapes, helping boards navigate complex challenges in cybersecurity, AI ethics, and data privacy.
                 </p>

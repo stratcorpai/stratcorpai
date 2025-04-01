@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
@@ -77,7 +78,7 @@
   }
 
   .section-padding {
-    @apply py-16 md:py-24;
+    @apply py-20 md:py-28;
   }
 
   .container-custom {
@@ -86,7 +87,30 @@
 }
 
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-stratified-dark to-stratified-light;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-stratified to-stratified-dark;
+}
+
+/* Modern Card Styling */
+.card-modern {
+  @apply bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300;
+}
+
+.card-bordered {
+  @apply border border-gray-100 hover:border-stratified/20 transition-all duration-300;
+}
+
+/* Animated Underline for Links */
+.link-underline {
+  @apply relative;
+}
+
+.link-underline:after {
+  @apply absolute bottom-0 left-0 w-0 h-0.5 bg-stratified transition-all duration-300;
+  content: '';
+}
+
+.link-underline:hover:after {
+  @apply w-full;
 }
 
 /* Radar Chart Styles */
@@ -143,4 +167,29 @@
 .axis-3d {
   transform-style: preserve-3d;
   transform: rotateX(60deg) rotateY(0deg) rotateZ(45deg);
+}
+
+/* Custom animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* Improved section transitions */
+section {
+  @apply relative overflow-hidden;
+}
+
+/* Image box styling */
+.img-box {
+  @apply overflow-hidden rounded-lg;
+}
+
+.img-box img {
+  @apply transition-all duration-500 hover:scale-105;
 }

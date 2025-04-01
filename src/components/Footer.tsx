@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           {/* Company Info */}
           <div className="md:col-span-5">
-            <h3 className="text-2xl font-heading font-bold mb-4">Stratified Advisory</h3>
+            <h3 className="text-2xl font-heading font-bold mb-4 text-white">Stratified Advisory</h3>
             <p className="mb-6 text-gray-300 max-w-md leading-relaxed">
               Transforming executive leadership through AI-augmented human ingenuity. 
               Our Board-as-a-Service and strategic consulting solutions drive innovation and sustainable growth.
@@ -21,15 +21,18 @@ const Footer = () => {
                  className="bg-gray-800 hover:bg-stratified hover:text-white p-2 rounded-full transition-colors"
                  target="_blank" rel="noopener noreferrer">
                 <Linkedin size={20} />
+                <span className="sr-only">LinkedIn</span>
               </a>
               <a href="https://twitter.com/stratifiedadv" 
                  className="bg-gray-800 hover:bg-stratified hover:text-white p-2 rounded-full transition-colors"
                  target="_blank" rel="noopener noreferrer">
                 <Twitter size={20} />
+                <span className="sr-only">Twitter</span>
               </a>
               <a href="mailto:contact@stratifiedadvisory.com" 
                  className="bg-gray-800 hover:bg-stratified hover:text-white p-2 rounded-full transition-colors">
                 <Mail size={20} />
+                <span className="sr-only">Email</span>
               </a>
             </div>
           </div>
@@ -39,27 +42,27 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4 text-white">Services</h4>
             <ul className="space-y-3 text-gray-300">
               <li>
-                <a href="#board-service" className="hover:text-stratified-light transition-colors inline-block py-1">
+                <a href="#board-service" className="hover:text-stratified-light transition-colors inline-block py-1 link-underline">
                   Board-as-a-Service
                 </a>
               </li>
               <li>
-                <a href="#stratcorp-ai" className="hover:text-stratified-light transition-colors inline-block py-1">
+                <a href="#stratcorp-ai" className="hover:text-stratified-light transition-colors inline-block py-1 link-underline">
                   AI Assessment
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-stratified-light transition-colors inline-block py-1">
+                <a href="#" className="hover:text-stratified-light transition-colors inline-block py-1 link-underline">
                   Cybersecurity Strategy
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-stratified-light transition-colors inline-block py-1">
+                <a href="#" className="hover:text-stratified-light transition-colors inline-block py-1 link-underline">
                   Digital Transformation
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-stratified-light transition-colors inline-block py-1">
+                <a href="#" className="hover:text-stratified-light transition-colors inline-block py-1 link-underline">
                   Growth Advisory
                 </a>
               </li>
@@ -78,7 +81,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <Mail size={18} className="mr-3 flex-shrink-0 text-stratified-light" />
-                <a href="mailto:contact@stratifiedadvisory.com" className="hover:text-stratified-light transition-colors">
+                <a href="mailto:contact@stratifiedadvisory.com" className="hover:text-stratified-light transition-colors link-underline">
                   contact@stratifiedadvisory.com
                 </a>
               </li>

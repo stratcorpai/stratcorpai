@@ -119,7 +119,7 @@ const InvestmentThesis = () => {
 
           {/* Explanation */}
           <div className="space-y-8">
-            <div>
+            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 border-l-4 border-stratified">
               <h3 className="text-2xl font-semibold mb-3 text-stratified">Efficiency</h3>
               <p className="text-gray-700">
                 We measure and optimize the resources consumed by AI solutions, focusing on carbon footprint reduction, 
@@ -128,7 +128,7 @@ const InvestmentThesis = () => {
               </p>
             </div>
             
-            <div>
+            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 border-l-4 border-stratified-light">
               <h3 className="text-2xl font-semibold mb-3 text-stratified">Effectiveness</h3>
               <p className="text-gray-700">
                 Beyond mere functionality, we evaluate AI solutions against the state-of-the-art benchmarks for 
@@ -137,7 +137,7 @@ const InvestmentThesis = () => {
               </p>
             </div>
             
-            <div>
+            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 border-l-4 border-stratified-dark">
               <h3 className="text-2xl font-semibold mb-3 text-stratified">Responsibility</h3>
               <p className="text-gray-700">
                 In an increasingly regulated landscape, we prioritize ethical considerations, regulatory compliance, 

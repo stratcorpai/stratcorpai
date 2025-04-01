@@ -49,7 +49,7 @@ const Navbar = () => {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-background/90 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'
+      isScrolled ? 'bg-background/95 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'
     }`}>
       <div className="container-custom flex justify-between items-center">
         {/* Logo */}
@@ -65,34 +65,38 @@ const Navbar = () => {
         <div className="hidden md:flex items-center space-x-8">
           <a 
             href="#investment-thesis" 
-            className="text-foreground hover:text-stratified font-medium transition-colors"
+            className="text-foreground hover:text-stratified font-medium transition-colors relative group"
             onClick={handleNavClick('investment-thesis')}
           >
             Investment Thesis
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
           </a>
           <a 
             href="#board-service" 
-            className="text-foreground hover:text-stratified font-medium transition-colors"
+            className="text-foreground hover:text-stratified font-medium transition-colors relative group"
             onClick={handleNavClick('board-service')}
           >
             Board-as-a-Service
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
           </a>
           <a 
             href="#team" 
-            className="text-foreground hover:text-stratified font-medium transition-colors"
+            className="text-foreground hover:text-stratified font-medium transition-colors relative group"
             onClick={handleNavClick('team')}
           >
             Our Team
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
           </a>
           <a 
             href="#stratcorp-ai" 
-            className="text-foreground hover:text-stratified font-medium transition-colors"
+            className="text-foreground hover:text-stratified font-medium transition-colors relative group"
             onClick={handleNavClick('stratcorp-ai')}
           >
             StratCorp.AI
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
           </a>
           <Button 
-            className="bg-stratified hover:bg-stratified-dark text-white"
+            className="bg-stratified hover:bg-stratified-dark text-white shadow-md hover:shadow-lg transition-all"
             onClick={handleContactClick}
           >
             <Mail className="mr-2 h-4 w-4" />
@@ -115,34 +119,34 @@ const Navbar = () => {
           <div className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-sm shadow-lg mt-0 py-5 px-6 md:hidden flex flex-col space-y-4 animate-fade-in">
             <a 
               href="#investment-thesis" 
-              className="text-foreground hover:text-stratified font-medium transition-colors"
+              className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
               onClick={handleNavClick('investment-thesis')}
             >
               Investment Thesis
             </a>
             <a 
               href="#board-service" 
-              className="text-foreground hover:text-stratified font-medium transition-colors"
+              className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
               onClick={handleNavClick('board-service')}
             >
               Board-as-a-Service
             </a>
             <a 
               href="#team" 
-              className="text-foreground hover:text-stratified font-medium transition-colors"
+              className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
               onClick={handleNavClick('team')}
             >
               Our Team
             </a>
             <a 
               href="#stratcorp-ai" 
-              className="text-foreground hover:text-stratified font-medium transition-colors"
+              className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
               onClick={handleNavClick('stratcorp-ai')}
             >
               StratCorp.AI
             </a>
             <Button 
-              className="bg-stratified hover:bg-stratified-dark text-white w-full"
+              className="bg-stratified hover:bg-stratified-dark text-white w-full shadow-md"
               onClick={handleContactClick}
             >
               <Mail className="mr-2 h-4 w-4" />

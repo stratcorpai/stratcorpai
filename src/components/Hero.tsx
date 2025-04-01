@@ -33,6 +33,9 @@ const Hero = () => {
         />
       </div>
 
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-stratified/90 to-transparent z-0"></div>
+
       {/* Content */}
       <div className="container-custom relative z-10 text-center">
         <div className="max-w-3xl mx-auto mt-20">
@@ -43,17 +46,17 @@ const Hero = () => {
               className="h-56 md:h-72" // Increased from h-28 md:h-36 (100% increase)
             />
           </div>
-          <h1 className="font-bold mb-6 text-white">
+          <h1 className="font-bold mb-6 text-white drop-shadow-md">
             Welcome to<br />Stratified Advisory
           </h1>
-          <p className="text-xl md:text-2xl mb-10 text-white/90 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl mb-10 text-white max-w-2xl mx-auto drop-shadow-sm font-medium">
             Experience the power of our <span className="font-bold">Board-as-a-Service</span> practice to 
             elevate and transform your executive board whether you are a VC, a 
             startup or a small medium business.
           </p>
           
           <Button 
-            className="bg-[#3C1822] hover:bg-[#2c111a] text-white px-8 py-6 text-lg rounded-full"
+            className="bg-[#3C1822] hover:bg-[#2c111a] text-white px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all"
             onClick={handleLearnMoreClick}
           >
             Learn More <ArrowRight className="ml-2 h-5 w-5" />
