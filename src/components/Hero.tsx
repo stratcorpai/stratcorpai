@@ -29,7 +29,7 @@ const Hero = () => {
             <img 
               src="/lovable-uploads/bbbadf15-0ecd-4cdd-88b6-7bb56e21837f.png" 
               alt="Stratified Advisory Logo" 
-              className="h-28 md:h-36" 
+              className="h-56 md:h-72" // Increased from h-28 md:h-36 (100% increase)
             />
           </div>
           <h1 className="font-bold mb-6 text-white">
