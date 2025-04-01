@@ -3,11 +3,22 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 
 const Hero = () => {
-  const handleLearnMoreClick = () => {
-    // Scroll to the investment thesis section
+  const handleLearnMoreClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Scroll to the investment thesis section with offset
     const element = document.getElementById('investment-thesis');
+    
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Get the navbar height for offset
+      const navbarHeight = document.querySelector('nav')?.offsetHeight || 0;
+      
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 

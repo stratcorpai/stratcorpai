@@ -26,6 +26,27 @@ const Navbar = () => {
     window.location.href = "mailto:andreea@stratifiedadvisory.com?subject=I%20am%20ready%20to%20be%20Stratified!&body=**Crafted%20by%20humans%2C%20delivered%20by%20technology%20%E2%80%93%20bridging%20communication%20gaps%20with%20precision%20and%20a%20personal%20touch.**%0A%0ADear%20Andreea%2C%20%0A%0APlease%20help%20me%20get%20stratified%2C%20here%20are%20some%20details%20about%20my%20company%3A%20%0A%0ACompany%20location%3A%20%0ASize%3A%20%0AWebsite%3A%20%0A%0AThank%20you!%20%0A%0A%5BYour%20Name%5D%20%0A";
   };
 
+  const handleNavClick = (sectionId: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    
+    if (element) {
+      // Get the navbar height for offset
+      const navbarHeight = document.querySelector('nav')?.offsetHeight || 0;
+      
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+      
+      // Close mobile menu if open
+      if (isOpen) setIsOpen(false);
+    }
+  };
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled ? 'bg-background/90 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'
@@ -42,16 +63,32 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8">
-          <a href="#investment-thesis" className="text-foreground hover:text-stratified font-medium transition-colors">
+          <a 
+            href="#investment-thesis" 
+            className="text-foreground hover:text-stratified font-medium transition-colors"
+            onClick={handleNavClick('investment-thesis')}
+          >
             Investment Thesis
           </a>
-          <a href="#board-service" className="text-foreground hover:text-stratified font-medium transition-colors">
+          <a 
+            href="#board-service" 
+            className="text-foreground hover:text-stratified font-medium transition-colors"
+            onClick={handleNavClick('board-service')}
+          >
             Board-as-a-Service
           </a>
-          <a href="#team" className="text-foreground hover:text-stratified font-medium transition-colors">
+          <a 
+            href="#team" 
+            className="text-foreground hover:text-stratified font-medium transition-colors"
+            onClick={handleNavClick('team')}
+          >
             Our Team
           </a>
-          <a href="#stratcorp-ai" className="text-foreground hover:text-stratified font-medium transition-colors">
+          <a 
+            href="#stratcorp-ai" 
+            className="text-foreground hover:text-stratified font-medium transition-colors"
+            onClick={handleNavClick('stratcorp-ai')}
+          >
             StratCorp.AI
           </a>
           <Button 
@@ -79,28 +116,28 @@ const Navbar = () => {
             <a 
               href="#investment-thesis" 
               className="text-foreground hover:text-stratified font-medium transition-colors"
-              onClick={() => setIsOpen(false)}
+              onClick={handleNavClick('investment-thesis')}
             >
               Investment Thesis
             </a>
             <a 
               href="#board-service" 
               className="text-foreground hover:text-stratified font-medium transition-colors"
-              onClick={() => setIsOpen(false)}
+              onClick={handleNavClick('board-service')}
             >
               Board-as-a-Service
             </a>
             <a 
               href="#team" 
               className="text-foreground hover:text-stratified font-medium transition-colors"
-              onClick={() => setIsOpen(false)}
+              onClick={handleNavClick('team')}
             >
               Our Team
             </a>
             <a 
               href="#stratcorp-ai" 
               className="text-foreground hover:text-stratified font-medium transition-colors"
-              onClick={() => setIsOpen(false)}
+              onClick={handleNavClick('stratcorp-ai')}
             >
               StratCorp.AI
             </a>
