@@ -1,7 +1,16 @@
 
 import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
 const Hero = () => {
+  const handleLearnMoreClick = () => {
+    // Scroll to the investment thesis section
+    const element = document.getElementById('investment-thesis');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-stratified/80">
       {/* Background Image */}
@@ -20,7 +29,7 @@ const Hero = () => {
             <img 
               src="/lovable-uploads/bbbadf15-0ecd-4cdd-88b6-7bb56e21837f.png" 
               alt="Stratified Advisory Logo" 
-              className="h-28 md:h-36" // Increased from h-20 md:h-24
+              className="h-28 md:h-36" 
             />
           </div>
           <h1 className="font-bold mb-6 text-white">
@@ -32,8 +41,11 @@ const Hero = () => {
             startup or a small medium business.
           </p>
           
-          <Button className="bg-[#3C1822] hover:bg-[#2c111a] text-white px-8 py-6 text-lg rounded-full">
-            Learn More
+          <Button 
+            className="bg-[#3C1822] hover:bg-[#2c111a] text-white px-8 py-6 text-lg rounded-full"
+            onClick={handleLearnMoreClick}
+          >
+            Learn More <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>
       </div>

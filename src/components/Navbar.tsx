@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Navbar = () => {
@@ -21,6 +21,10 @@ const Navbar = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const handleContactClick = () => {
+    window.location.href = "mailto:andreea@stratifiedadvisory.com?subject=I%20am%20ready%20to%20be%20Stratified!&body=**Crafted%20by%20humans%2C%20delivered%20by%20technology%20%E2%80%93%20bridging%20communication%20gaps%20with%20precision%20and%20a%20personal%20touch.**%0A%0ADear%20Andreea%2C%20%0A%0APlease%20help%20me%20get%20stratified%2C%20here%20are%20some%20details%20about%20my%20company%3A%20%0A%0ACompany%20location%3A%20%0ASize%3A%20%0AWebsite%3A%20%0A%0AThank%20you!%20%0A%0A%5BYour%20Name%5D%20%0A";
+  };
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -50,7 +54,11 @@ const Navbar = () => {
           <a href="#stratcorp-ai" className="text-foreground hover:text-stratified font-medium transition-colors">
             StratCorp.AI
           </a>
-          <Button className="bg-stratified hover:bg-stratified-dark text-white">
+          <Button 
+            className="bg-stratified hover:bg-stratified-dark text-white"
+            onClick={handleContactClick}
+          >
+            <Mail className="mr-2 h-4 w-4" />
             Contact Us
           </Button>
         </div>
@@ -96,7 +104,11 @@ const Navbar = () => {
             >
               StratCorp.AI
             </a>
-            <Button className="bg-stratified hover:bg-stratified-dark text-white w-full">
+            <Button 
+              className="bg-stratified hover:bg-stratified-dark text-white w-full"
+              onClick={handleContactClick}
+            >
+              <Mail className="mr-2 h-4 w-4" />
               Contact Us
             </Button>
           </div>

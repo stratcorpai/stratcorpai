@@ -1,8 +1,20 @@
-
-import { Shield, Users, Lightbulb, TrendingUp } from 'lucide-react';
+import { Shield, Users, Lightbulb, TrendingUp, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const BoardService = () => {
+  const handleScheduleClick = () => {
+    const emailSubject = "Board Strategy Session Request";
+    const emailBody = 
+      "**Crafted by humans, delivered by technology – bridging communication gaps with precision and a personal touch.**\n\n" +
+      "Dear Andreea,\n\n" +
+      "I would like to schedule a Board Strategy Session. Here are some details about my company:\n\n" +
+      "Company location:\nSize:\nWebsite:\nPreferred timeframe for session:\n\n" +
+      "Thank you!\n\n" +
+      "[Your Name]";
+    
+    window.location.href = `mailto:andreea@stratifiedadvisory.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+  };
+
   return (
     <section id="board-service" className="section-padding bg-white">
       <div className="container-custom">
@@ -87,7 +99,11 @@ const BoardService = () => {
         </div>
 
         <div className="text-center">
-          <Button className="bg-stratified hover:bg-stratified-dark text-white px-8 py-6 text-lg">
+          <Button 
+            className="bg-stratified hover:bg-stratified-dark text-white px-8 py-6 text-lg"
+            onClick={handleScheduleClick}
+          >
+            <Calendar className="mr-2 h-5 w-5" />
             Schedule a Board Strategy Session
           </Button>
         </div>

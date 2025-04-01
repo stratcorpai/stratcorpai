@@ -1,8 +1,21 @@
 
-import { Brain, Shield, BarChart3, Layers } from 'lucide-react';
+import { Brain, Shield, BarChart3, Layers, Bot } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const StratCorpAI = () => {
+  const handleRequestAssessment = () => {
+    const emailSubject = "AI Assessment Request";
+    const emailBody = 
+      "**Crafted by humans, delivered by technology – bridging communication gaps with precision and a personal touch.**\n\n" +
+      "Dear Andreea,\n\n" +
+      "I would like to request an AI assessment for my organization. Here are some details about our current AI needs:\n\n" +
+      "Company name:\nIndustry:\nCurrent AI implementation status:\nKey challenges we're looking to solve:\n\n" +
+      "Thank you for your assistance!\n\n" +
+      "[Your Name]\n[Your Position]\n[Your Contact Information]";
+    
+    window.location.href = `mailto:andreea@stratifiedadvisory.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+  };
+
   return (
     <section id="stratcorp-ai" className="section-padding bg-stratified text-white">
       <div className="container-custom">
@@ -76,7 +89,11 @@ const StratCorpAI = () => {
               Discover how StratCorp.AI can help your organization harness the full potential of artificial 
               intelligence through our rigorous testing methodology and strategic implementation frameworks.
             </p>
-            <Button className="bg-white text-stratified hover:bg-gray-100 px-8 py-6 text-lg">
+            <Button 
+              className="bg-white text-stratified hover:bg-gray-100 px-8 py-6 text-lg"
+              onClick={handleRequestAssessment}
+            >
+              <Bot className="mr-2 h-5 w-5" />
               Request AI Assessment
             </Button>
           </div>
