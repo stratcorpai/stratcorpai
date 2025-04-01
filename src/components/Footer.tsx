@@ -6,20 +6,13 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-gray-900 text-white dark:bg-gray-950">
+    <footer className="bg-gray-900 text-white">
       <div className="container-custom py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           {/* Company Info */}
           <div className="md:col-span-5">
-            <div className="flex items-center mb-4">
-              <img 
-                src="/lovable-uploads/bbbadf15-0ecd-4cdd-88b6-7bb56e21837f.png" 
-                alt="Stratified Advisory Logo" 
-                className="h-14 mr-3"
-              />
-              <h3 className="text-2xl font-heading font-bold">Stratified Advisory</h3>
-            </div>
-            <p className="mb-6 text-gray-300 dark:text-gray-400 max-w-md leading-relaxed">
+            <h3 className="text-2xl font-heading font-bold mb-4">Stratified Advisory</h3>
+            <p className="mb-6 text-gray-300 max-w-md leading-relaxed">
               Transforming executive leadership through AI-augmented human ingenuity. 
               Our Board-as-a-Service and strategic consulting solutions drive innovation and sustainable growth.
             </p>
@@ -43,8 +36,8 @@ const Footer = () => {
           
           {/* Services */}
           <div className="md:col-span-3">
-            <h4 className="text-lg font-semibold mb-4 text-white dark:text-white">Services</h4>
-            <ul className="space-y-3 text-gray-300 dark:text-gray-400">
+            <h4 className="text-lg font-semibold mb-4 text-white">Services</h4>
+            <ul className="space-y-3 text-gray-300">
               <li>
                 <a href="#board-service" className="hover:text-stratified-light transition-colors inline-block py-1">
                   Board-as-a-Service
@@ -75,8 +68,8 @@ const Footer = () => {
           
           {/* Contact */}
           <div className="md:col-span-4">
-            <h4 className="text-lg font-semibold mb-4 text-white dark:text-white">Contact Us</h4>
-            <ul className="space-y-4 text-gray-300 dark:text-gray-400">
+            <h4 className="text-lg font-semibold mb-4 text-white">Contact Us</h4>
+            <ul className="space-y-4 text-gray-300">
               <li className="flex items-start">
                 <MapPin size={18} className="mr-3 mt-1 flex-shrink-0 text-stratified-light" />
                 <span className="leading-relaxed">
@@ -93,7 +86,7 @@ const Footer = () => {
           </div>
         </div>
         
-        <Separator className="my-8 bg-gray-800 dark:bg-gray-800" />
+        <Separator className="my-8 bg-gray-800" />
         
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 mb-4 md:mb-0">
