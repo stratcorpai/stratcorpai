@@ -19,7 +19,7 @@ const AssessmentHeader = ({ currentStep }: AssessmentHeaderProps) => {
   }
 
   return (
-    <section className="bg-stratified py-20 relative overflow-hidden">
+    <section className="bg-stratified py-16 relative overflow-hidden">
       {/* Enhanced background pattern with subtle animation */}
       <div className="absolute inset-0 z-0 opacity-10">
         <motion.svg 
@@ -54,7 +54,7 @@ const AssessmentHeader = ({ currentStep }: AssessmentHeaderProps) => {
           className="text-center"
         >
           <motion.h1 
-            className="text-white mb-4 drop-shadow-md"
+            className="text-white mb-3 drop-shadow-md text-3xl md:text-4xl"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
@@ -63,7 +63,7 @@ const AssessmentHeader = ({ currentStep }: AssessmentHeaderProps) => {
           </motion.h1>
           
           <motion.p 
-            className="text-xl text-white/90 max-w-3xl mx-auto"
+            className="text-lg text-white/90 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}

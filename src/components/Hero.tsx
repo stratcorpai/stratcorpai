@@ -39,26 +39,26 @@ const Hero = () => {
 
       {/* Content */}
       <div className="container-custom relative z-10 text-center">
-        <div className="max-w-3xl mx-auto mt-20">
-          <div className="mb-8 flex justify-center">
+        <div className="max-w-3xl mx-auto mt-20 px-4">
+          <div className="mb-6 flex justify-center">
             <img 
               src="/lovable-uploads/bbbadf15-0ecd-4cdd-88b6-7bb56e21837f.png" 
               alt="Stratified Advisory Logo" 
-              className="h-56 md:h-72"
+              className="h-48 md:h-64"
             />
           </div>
-          <h1 className="font-bold mb-6 text-white drop-shadow-md">
+          <h1 className="font-bold mb-5 text-white drop-shadow-md text-4xl md:text-5xl">
             Welcome to<br />Stratified Advisory
           </h1>
-          <p className="text-xl md:text-2xl mb-10 text-white max-w-2xl mx-auto drop-shadow-sm font-medium">
+          <p className="text-lg md:text-xl mb-8 text-white max-w-2xl mx-auto drop-shadow-sm font-medium leading-relaxed">
             Experience the power of our <span className="font-bold">Board-as-a-Service</span> practice to 
             elevate and transform your executive board whether you are a VC, a 
             startup or a small medium business.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
             <Button 
-              className="bg-[#3C1822] hover:bg-[#2c111a] text-white px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all"
+              className="bg-[#3C1822] hover:bg-[#2c111a] text-white px-7 py-5 text-base rounded-full shadow-lg hover:shadow-xl transition-all"
               onClick={handleLearnMoreClick}
             >
               Learn More <ArrowRight className="ml-2 h-5 w-5" />
@@ -66,7 +66,7 @@ const Hero = () => {
             
             <Link to="/assessment">
               <Button 
-                className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/20 px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all"
+                className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/20 px-7 py-5 text-base rounded-full shadow-lg hover:shadow-xl transition-all"
               >
                 AI-Powered Assessment Suite <LineChart className="ml-2 h-5 w-5" />
               </Button>
