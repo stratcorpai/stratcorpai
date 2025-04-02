@@ -55,6 +55,9 @@ const NavbarLinks = ({ isMobile = false, closeMenu }: NavbarLinksProps) => {
       <a href="#stratcorp-ai" className={linkClass} onClick={(e) => handleLinkClick(e, "stratcorp-ai")}>
         StratCorp.AI
       </a>
+      <Link to="/assessment" className={linkClass} onClick={closeMenu}>
+        Assessments
+      </Link>
     </>
   );
 };

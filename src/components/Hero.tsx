@@ -23,25 +23,6 @@ const Hero = () => {
     }
   };
 
-  const handleAssessmentClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    // Scroll to the StratCorp.AI section with offset
-    const element = document.getElementById('stratcorp-ai');
-    
-    if (element) {
-      // Get the navbar height for offset
-      const navbarHeight = document.querySelector('nav')?.offsetHeight || 0;
-      
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-      
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-stratified/80">
       {/* Background Image */}
@@ -83,12 +64,13 @@ const Hero = () => {
               Learn More <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             
-            <Button 
-              className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/20 px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all"
-              onClick={handleAssessmentClick}
-            >
-              AI Assessment Options <LineChart className="ml-2 h-5 w-5" />
-            </Button>
+            <Link to="/assessment">
+              <Button 
+                className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/20 px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all"
+              >
+                AI-Powered Assessment Suite <LineChart className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

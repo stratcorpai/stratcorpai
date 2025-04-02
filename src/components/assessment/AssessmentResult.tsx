@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
+import { useEffect } from "react";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 type AssessmentResultProps = {
   result: {
@@ -33,9 +36,63 @@ const AssessmentResult = ({
 
   const title = assessmentTitles[assessmentType] || "Assessment";
   
-  const handleDownloadReport = () => {
-    toast.success("Report is being prepared for download");
-    // In a real implementation, this would generate and download a PDF
+  useEffect(() => {
+    // Save results to local storage when component mounts
+    const savedResults = JSON.parse(localStorage.getItem('stratifiedAssessments') || '{}');
+    savedResults[assessmentType] = result;
+    localStorage.setItem('stratifiedAssessments', JSON.stringify(savedResults));
+    
+    // Check if all assessments are completed
+    checkAllAssessmentsCompleted();
+  }, [assessmentType, result]);
+  
+  const checkAllAssessmentsCompleted = () => {
+    const savedResults = JSON.parse(localStorage.getItem('stratifiedAssessments') || '{}');
+    const allAssessmentTypes = Object.keys(assessmentTitles);
+    const completedAssessments = Object.keys(savedResults);
+    
+    // Check if all assessment types have been completed
+    const allCompleted = allAssessmentTypes.every(type => completedAssessments.includes(type));
+    
+    if (allCompleted) {
+      localStorage.setItem('stratifiedAllAssessmentsCompleted', 'true');
+    }
+  };
+  
+  const handleDownloadReport = async () => {
+    toast.success("Generating PDF report...");
+    
+    try {
+      const reportElement = document.getElementById('assessment-report');
+      if (!reportElement) {
+        toast.error("Could not generate report");
+        return;
+      }
+      
+      const canvas = await html2canvas(reportElement, {
+        scale: 2, 
+        logging: false,
+        useCORS: true,
+      });
+      
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4'
+      });
+      
+      const imgWidth = 210;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+      pdf.save(`Stratified_${title.replace(/\s+/g, '_')}_Report.pdf`);
+      
+      toast.success("Report downloaded successfully!");
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      toast.error("Could not generate PDF report");
+    }
   };
   
   const handleEmailReport = () => {
@@ -43,7 +100,11 @@ const AssessmentResult = ({
       action: {
         label: "Enter Email",
         onClick: () => {
-          // In a real implementation, this would show an email input form
+          const email = prompt("Please enter your email address:");
+          if (email) {
+            toast.success(`Report will be sent to ${email} shortly`);
+            // In a real implementation, this would send the email with the report
+          }
         }
       }
     });
@@ -73,7 +134,7 @@ const AssessmentResult = ({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Card className="border-0 shadow-2xl overflow-hidden">
+          <Card className="border-0 shadow-2xl overflow-hidden" id="assessment-report">
             <div className="bg-stratified text-white p-8 relative">
               <div className="absolute inset-0 z-0 opacity-10">
                 <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
