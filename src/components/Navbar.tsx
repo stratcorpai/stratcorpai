@@ -1,11 +1,14 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X, Mail } from 'lucide-react';
+import { Menu, X, Mail, LineChart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,48 +56,70 @@ const Navbar = () => {
     }`}>
       <div className="container-custom flex justify-between items-center">
         {/* Logo */}
-        <a href="/" className="flex items-center">
+        <Link to="/" className="flex items-center">
           <img 
             src="/lovable-uploads/bbbadf15-0ecd-4cdd-88b6-7bb56e21837f.png" 
             alt="Stratified Advisory Logo" 
             className="h-16 md:h-20" 
           />
-        </a>
+        </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8">
-          <a 
-            href="#investment-thesis" 
-            className="text-foreground hover:text-stratified font-medium transition-colors relative group"
-            onClick={handleNavClick('investment-thesis')}
+          {isHomePage ? (
+            <>
+              <a 
+                href="#investment-thesis" 
+                className="text-foreground hover:text-stratified font-medium transition-colors relative group"
+                onClick={handleNavClick('investment-thesis')}
+              >
+                Investment Thesis
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
+              </a>
+              <a 
+                href="#board-service" 
+                className="text-foreground hover:text-stratified font-medium transition-colors relative group"
+                onClick={handleNavClick('board-service')}
+              >
+                Board-as-a-Service
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
+              </a>
+              <a 
+                href="#team" 
+                className="text-foreground hover:text-stratified font-medium transition-colors relative group"
+                onClick={handleNavClick('team')}
+              >
+                Our Team
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
+              </a>
+              <a 
+                href="#stratcorp-ai" 
+                className="text-foreground hover:text-stratified font-medium transition-colors relative group"
+                onClick={handleNavClick('stratcorp-ai')}
+              >
+                StratCorp.AI
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
+              </a>
+            </>
+          ) : (
+            <Link 
+              to="/" 
+              className="text-foreground hover:text-stratified font-medium transition-colors relative group"
+            >
+              Home
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
+            </Link>
+          )}
+          
+          <Link 
+            to="/assessment" 
+            className="text-foreground hover:text-stratified font-medium transition-colors relative group flex items-center"
           >
-            Investment Thesis
+            <LineChart className="mr-1 h-4 w-4" />
+            Assessments
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
-          </a>
-          <a 
-            href="#board-service" 
-            className="text-foreground hover:text-stratified font-medium transition-colors relative group"
-            onClick={handleNavClick('board-service')}
-          >
-            Board-as-a-Service
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
-          </a>
-          <a 
-            href="#team" 
-            className="text-foreground hover:text-stratified font-medium transition-colors relative group"
-            onClick={handleNavClick('team')}
-          >
-            Our Team
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
-          </a>
-          <a 
-            href="#stratcorp-ai" 
-            className="text-foreground hover:text-stratified font-medium transition-colors relative group"
-            onClick={handleNavClick('stratcorp-ai')}
-          >
-            StratCorp.AI
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
-          </a>
+          </Link>
+          
           <Button 
             className="bg-stratified hover:bg-stratified-dark text-white shadow-md hover:shadow-lg transition-all"
             onClick={handleContactClick}
@@ -117,34 +142,54 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {isOpen && (
           <div className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-sm shadow-lg mt-0 py-5 px-6 md:hidden flex flex-col space-y-4 animate-fade-in">
-            <a 
-              href="#investment-thesis" 
-              className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
-              onClick={handleNavClick('investment-thesis')}
+            {isHomePage ? (
+              <>
+                <a 
+                  href="#investment-thesis" 
+                  className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
+                  onClick={handleNavClick('investment-thesis')}
+                >
+                  Investment Thesis
+                </a>
+                <a 
+                  href="#board-service" 
+                  className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
+                  onClick={handleNavClick('board-service')}
+                >
+                  Board-as-a-Service
+                </a>
+                <a 
+                  href="#team" 
+                  className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
+                  onClick={handleNavClick('team')}
+                >
+                  Our Team
+                </a>
+                <a 
+                  href="#stratcorp-ai" 
+                  className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
+                  onClick={handleNavClick('stratcorp-ai')}
+                >
+                  StratCorp.AI
+                </a>
+              </>
+            ) : (
+              <Link 
+                to="/" 
+                className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
+              >
+                Home
+              </Link>
+            )}
+            
+            <Link 
+              to="/assessment" 
+              className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2 flex items-center"
             >
-              Investment Thesis
-            </a>
-            <a 
-              href="#board-service" 
-              className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
-              onClick={handleNavClick('board-service')}
-            >
-              Board-as-a-Service
-            </a>
-            <a 
-              href="#team" 
-              className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
-              onClick={handleNavClick('team')}
-            >
-              Our Team
-            </a>
-            <a 
-              href="#stratcorp-ai" 
-              className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
-              onClick={handleNavClick('stratcorp-ai')}
-            >
-              StratCorp.AI
-            </a>
+              <LineChart className="mr-1 h-4 w-4" />
+              Assessments
+            </Link>
+            
             <Button 
               className="bg-stratified hover:bg-stratified-dark text-white w-full shadow-md"
               onClick={handleContactClick}

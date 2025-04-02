@@ -1,6 +1,7 @@
 
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, LineChart } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   const handleLearnMoreClick = (e: React.MouseEvent) => {
@@ -43,7 +44,7 @@ const Hero = () => {
             <img 
               src="/lovable-uploads/bbbadf15-0ecd-4cdd-88b6-7bb56e21837f.png" 
               alt="Stratified Advisory Logo" 
-              className="h-56 md:h-72" // Increased from h-28 md:h-36 (100% increase)
+              className="h-56 md:h-72"
             />
           </div>
           <h1 className="font-bold mb-6 text-white drop-shadow-md">
@@ -55,12 +56,22 @@ const Hero = () => {
             startup or a small medium business.
           </p>
           
-          <Button 
-            className="bg-[#3C1822] hover:bg-[#2c111a] text-white px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all"
-            onClick={handleLearnMoreClick}
-          >
-            Learn More <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              className="bg-[#3C1822] hover:bg-[#2c111a] text-white px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all"
+              onClick={handleLearnMoreClick}
+            >
+              Learn More <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+            
+            <Link to="/assessment">
+              <Button 
+                className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/20 px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all"
+              >
+                Take Assessment <LineChart className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
