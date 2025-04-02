@@ -1,6 +1,7 @@
 
-import { Brain, Shield, BarChart3, Layers, Bot } from 'lucide-react';
+import { Brain, Shield, BarChart3, Layers, Bot, LineChart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const StratCorpAI = () => {
   const handleRequestAssessment = () => {
@@ -97,18 +98,29 @@ const StratCorpAI = () => {
 
         <div className="bg-white/10 backdrop-blur-sm p-8 md:p-12 rounded-xl shadow-xl border border-white/20">
           <div className="max-w-3xl mx-auto text-center">
-            <h3 className="text-2xl font-semibold mb-6">Ready to Transform Your AI Strategy?</h3>
+            <h3 className="text-2xl font-semibold mb-6">Experience Our AI Assessment</h3>
             <p className="mb-8 text-white/90">
-              Discover how StratCorp.AI can help your organization harness the full potential of artificial 
-              intelligence through our rigorous testing methodology and strategic implementation frameworks.
+              Discover how StratCorp.AI can help your organization leverage artificial intelligence strategically. 
+              Choose between our instant self-service assessment or request a personalized evaluation conducted by our team.
             </p>
-            <Button 
-              className="bg-white text-stratified hover:bg-gray-100 px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all"
-              onClick={handleRequestAssessment}
-            >
-              <Bot className="mr-2 h-5 w-5" />
-              Request AI Assessment
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/assessment">
+                <Button 
+                  className="bg-white text-stratified hover:bg-gray-100 px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
+                >
+                  <LineChart className="mr-2 h-5 w-5" />
+                  Instant Self-Assessment
+                </Button>
+              </Link>
+              
+              <Button 
+                className="bg-stratified/20 backdrop-blur-sm hover:bg-stratified/30 text-white border border-white/20 px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
+                onClick={handleRequestAssessment}
+              >
+                <Bot className="mr-2 h-5 w-5" />
+                Request Expert AI Evaluation
+              </Button>
+            </div>
           </div>
         </div>
       </div>

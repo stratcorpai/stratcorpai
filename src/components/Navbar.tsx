@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X, Mail, LineChart } from 'lucide-react';
+import { Menu, X, Mail, LineChart, Bot } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -111,15 +111,6 @@ const Navbar = () => {
             </Link>
           )}
           
-          <Link 
-            to="/assessment" 
-            className="text-foreground hover:text-stratified font-medium transition-colors relative group flex items-center"
-          >
-            <LineChart className="mr-1 h-4 w-4" />
-            Assessments
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
-          </Link>
-          
           <Button 
             className="bg-stratified hover:bg-stratified-dark text-white shadow-md hover:shadow-lg transition-all"
             onClick={handleContactClick}
@@ -181,14 +172,6 @@ const Navbar = () => {
                 Home
               </Link>
             )}
-            
-            <Link 
-              to="/assessment" 
-              className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2 flex items-center"
-            >
-              <LineChart className="mr-1 h-4 w-4" />
-              Assessments
-            </Link>
             
             <Button 
               className="bg-stratified hover:bg-stratified-dark text-white w-full shadow-md"
