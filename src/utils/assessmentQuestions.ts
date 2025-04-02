@@ -529,9 +529,9 @@ export function generateQuestionsForAssessment(assessmentType: string): Assessme
       }
     ]
   };
-
+  
   // Default questions if the assessment type doesn't have custom questions
-  const defaultQuestions = [
+  const defaultQuestions: AssessmentQuestion[] = [
     {
       id: "general-1",
       section: "Organization Overview",
