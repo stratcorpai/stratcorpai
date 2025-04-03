@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AssessmentHeader from "@/components/assessment/AssessmentHeader";
@@ -9,6 +9,9 @@ import AssessmentResult from "@/components/assessment/AssessmentResult";
 import AssessmentChat from "@/components/assessment/AssessmentChat";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { MessageCircle, PenLine } from "lucide-react";
+import { motion } from "framer-motion";
 
 // The main assessment steps
 const STEPS = {
@@ -22,28 +25,16 @@ const Assessment = () => {
   const [selectedAssessment, setSelectedAssessment] = useState<string | null>(null);
   const [assessmentResult, setAssessmentResult] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [allAssessmentsCompleted, setAllAssessmentsCompleted] = useState(false);
+  const [completedAssessments, setCompletedAssessments] = useState<string[]>([]);
+  const [showChat, setShowChat] = useState(false);
+  const [autoAssessMode, setAutoAssessMode] = useState(false);
+  const chatRef = useRef<HTMLDivElement>(null);
   
-  // Check if all assessments are completed on mount
+  // Check for completed assessments on mount
   useEffect(() => {
-    const assessmentTypes = [
-      "ai-readiness", 
-      "board-effectiveness", 
-      "business-strategy", 
-      "organizational-structure",
-      "digital-transformation",
-      "executive-alignment"
-    ];
-    
     const savedResults = JSON.parse(localStorage.getItem('stratifiedAssessments') || '{}');
-    const completedCount = Object.keys(savedResults).length;
-    
-    // Check if all assessment types have completed results
-    const allCompleted = assessmentTypes.every(type => 
-      Object.keys(savedResults).includes(type)
-    );
-    
-    setAllAssessmentsCompleted(allCompleted);
+    const completed = Object.keys(savedResults);
+    setCompletedAssessments(completed);
     
     // If we have a saved assessment, and we're on the SELECT step, check if we
     // should restore from localStorage
@@ -67,12 +58,28 @@ const Assessment = () => {
         }
       }
     }
+    
+    // Show chat if we have at least 1 completed assessment
+    if (completed.length > 0) {
+      setShowChat(true);
+    }
   }, [currentStep]);
 
   const handleSelectAssessment = (type: string) => {
     setSelectedAssessment(type);
+    
+    // Check if this assessment was already completed
+    const savedResults = JSON.parse(localStorage.getItem('stratifiedAssessments') || '{}');
+    if (savedResults[type]) {
+      // Show results immediately if already completed
+      setAssessmentResult(savedResults[type]);
+      setCurrentStep(STEPS.RESULT);
+    } else {
+      // Go to form if not completed
+      setCurrentStep(STEPS.FORM);
+    }
+    
     localStorage.setItem('stratifiedLastAssessment', type);
-    setCurrentStep(STEPS.FORM);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -118,27 +125,28 @@ const Assessment = () => {
       setAssessmentResult(results);
       setCurrentStep(STEPS.RESULT);
       
-      // Check if all assessments are now completed
-      const allAssessmentTypes = [
-        "ai-readiness", 
-        "board-effectiveness", 
-        "business-strategy", 
-        "organizational-structure",
-        "digital-transformation",
-        "executive-alignment"
-      ];
+      // Update completed assessments
+      const allCompleted = [...completedAssessments];
+      if (!allCompleted.includes(selectedAssessment!)) {
+        allCompleted.push(selectedAssessment!);
+        setCompletedAssessments(allCompleted);
+      }
       
-      const allCompleted = allAssessmentTypes.every(type => 
-        Object.keys(savedResults).includes(type)
-      );
-      
-      if (allCompleted && !allAssessmentsCompleted) {
-        setAllAssessmentsCompleted(true);
+      // Show toast based on completion status
+      if (allCompleted.length === 6 && completedAssessments.length < 6) {
         toast.success(
-          "You've completed all assessments! The AI chat assistant is now available to discuss your results.",
+          "You've completed all assessments! The AI chat assistant has been fully unlocked.",
           { duration: 6000 }
         );
+      } else if (allCompleted.length > completedAssessments.length) {
+        toast.success(
+          `${selectedAssessment!.replace(/-/g, ' ')} assessment completed! ${6 - allCompleted.length} more to unlock all AI features.`,
+          { duration: 4000 }
+        );
       }
+      
+      // Show chat after completing at least one assessment
+      setShowChat(true);
       
     } catch (error) {
       console.error("Error processing assessment:", error);
@@ -152,6 +160,21 @@ const Assessment = () => {
     setCurrentStep(STEPS.SELECT);
     setSelectedAssessment(null);
     setAssessmentResult(null);
+    setAutoAssessMode(false);
+  };
+  
+  const scrollToChat = () => {
+    chatRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+  
+  const startAutoAssessment = () => {
+    setAutoAssessMode(true);
+    setShowChat(true);
+    
+    setTimeout(() => {
+      scrollToChat();
+      toast.success("Auto-assessment mode activated. The AI will now guide you through a conversational assessment.");
+    }, 100);
   };
   
   // Function to generate relevant strengths based on assessment type and responses
@@ -323,7 +346,38 @@ const Assessment = () => {
         <AssessmentHeader currentStep={currentStep} />
         
         {currentStep === STEPS.SELECT && (
-          <AssessmentTypes onSelect={handleSelectAssessment} />
+          <>
+            <div className="bg-white py-6">
+              <div className="container-custom">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex-1">
+                    <h3 className="text-xl font-medium text-gray-800">Choose your assessment method</h3>
+                    <p className="text-gray-600">Get insights about your organization through structured assessments or AI-powered conversation.</p>
+                  </div>
+                  <div className="flex gap-3">
+                    <Button 
+                      variant="outline" 
+                      className="border-stratified text-stratified hover:bg-stratified/5 flex items-center gap-2"
+                      onClick={startAutoAssessment}
+                    >
+                      <MessageCircle className="h-4 w-4" />
+                      Conversational Assessment
+                    </Button>
+                    <Button 
+                      className="bg-stratified hover:bg-stratified-dark text-white flex items-center gap-2"
+                    >
+                      <PenLine className="h-4 w-4" />
+                      Guided Assessment
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <AssessmentTypes 
+              onSelect={handleSelectAssessment} 
+              completedAssessments={completedAssessments} 
+            />
+          </>
         )}
         
         {currentStep === STEPS.FORM && selectedAssessment && (
@@ -336,17 +390,49 @@ const Assessment = () => {
         )}
         
         {currentStep === STEPS.RESULT && assessmentResult && (
-          <>
-            <AssessmentResult 
-              result={assessmentResult} 
-              assessmentType={selectedAssessment!}
-              onStartNew={resetAssessment}
-            />
+          <AssessmentResult 
+            result={assessmentResult} 
+            assessmentType={selectedAssessment!}
+            onStartNew={resetAssessment}
+          />
+        )}
             
-            {allAssessmentsCompleted && (
-              <AssessmentChat />
-            )}
-          </>
+        {showChat && (
+          <div ref={chatRef}>
+            <AssessmentChat 
+              autoAssessMode={autoAssessMode} 
+              completedCount={completedAssessments.length}
+              assessmentTypes={["ai-readiness", "board-effectiveness", "business-strategy", "organizational-structure", "digital-transformation", "executive-alignment"]}
+              onCompleteAutoAssessment={(type, result) => {
+                // Save auto-generated assessment results
+                const savedResults = JSON.parse(localStorage.getItem('stratifiedAssessments') || '{}');
+                savedResults[type] = result;
+                localStorage.setItem('stratifiedAssessments', JSON.stringify(savedResults));
+                
+                // Update completed assessments list
+                if (!completedAssessments.includes(type)) {
+                  setCompletedAssessments([...completedAssessments, type]);
+                }
+                
+                toast.success(`${type.replace(/-/g, ' ')} assessment completed via conversation!`);
+              }}
+            />
+          </div>
+        )}
+        
+        {showChat && currentStep !== STEPS.SELECT && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="fixed bottom-6 right-6 z-10"
+          >
+            <Button 
+              onClick={scrollToChat}
+              className="bg-stratified hover:bg-stratified-dark text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg"
+            >
+              <MessageCircle className="h-6 w-6" />
+            </Button>
+          </motion.div>
         )}
       </main>
       <Footer />

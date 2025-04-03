@@ -1,15 +1,28 @@
 
 import { motion } from "framer-motion";
-import { Brain, BarChart3, Users, Building, Bot, Briefcase, ArrowRight } from "lucide-react";
+import { Brain, BarChart3, Users, Building, Bot, Briefcase, ArrowRight, CheckCircle } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { useEffect, useState } from "react";
 
 type AssessmentTypesProps = {
   onSelect: (type: string) => void;
+  completedAssessments?: string[];
 };
 
-const AssessmentTypes = ({ onSelect }: AssessmentTypesProps) => {
+const AssessmentTypes = ({ onSelect, completedAssessments = [] }: AssessmentTypesProps) => {
+  const [completed, setCompleted] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    // Convert array to record for easier lookup
+    const completedMap: Record<string, boolean> = {};
+    completedAssessments.forEach(type => {
+      completedMap[type] = true;
+    });
+    setCompleted(completedMap);
+  }, [completedAssessments]);
+
   const assessmentTypes = [
     {
       id: "ai-readiness",
@@ -96,6 +109,12 @@ const AssessmentTypes = ({ onSelect }: AssessmentTypesProps) => {
             Choose the assessment that best aligns with your organization's current needs and goals. 
             Each assessment is designed to provide actionable insights for your specific context.
           </p>
+          {completedAssessments.length > 0 && (
+            <p className="text-sm text-stratified mt-2 font-medium">
+              You've completed {completedAssessments.length} of {assessmentTypes.length} assessments.
+              Complete all assessments to unlock the full AI assistant capabilities.
+            </p>
+          )}
         </motion.div>
 
         <motion.div 
@@ -111,13 +130,18 @@ const AssessmentTypes = ({ onSelect }: AssessmentTypesProps) => {
                 <HoverCardTrigger asChild>
                   <Card className={`h-full border shadow-md transition-all duration-500 cursor-pointer backdrop-blur-sm ${type.color} hover:shadow-xl hover:scale-[1.02] transform`}>
                     <CardHeader>
-                      <div className="bg-white rounded-full w-12 h-12 flex items-center justify-center mb-4 shadow-sm">
-                        <motion.div
-                          whileHover={{ rotate: 15 }}
-                          transition={{ type: "spring", stiffness: 200 }}
-                        >
-                          <type.icon className="h-6 w-6 text-stratified" />
-                        </motion.div>
+                      <div className="flex justify-between items-start">
+                        <div className="bg-white rounded-full w-12 h-12 flex items-center justify-center mb-4 shadow-sm">
+                          <motion.div
+                            whileHover={{ rotate: 15 }}
+                            transition={{ type: "spring", stiffness: 200 }}
+                          >
+                            <type.icon className="h-6 w-6 text-stratified" />
+                          </motion.div>
+                        </div>
+                        {completed[type.id] && (
+                          <CheckCircle className="h-6 w-6 text-emerald-500" />
+                        )}
                       </div>
                       <CardTitle className="text-xl font-bold text-gray-800">{type.title}</CardTitle>
                       <CardDescription className="text-gray-600">
@@ -134,7 +158,7 @@ const AssessmentTypes = ({ onSelect }: AssessmentTypesProps) => {
                         onClick={() => onSelect(type.id)} 
                         className="w-full bg-stratified hover:bg-stratified-dark text-white group transition-all duration-300"
                       >
-                        Start Assessment
+                        {completed[type.id] ? "View Results" : "Start Assessment"}
                         <motion.div
                           className="inline-block ml-2"
                           initial={{ x: 0 }}

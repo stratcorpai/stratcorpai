@@ -1,13 +1,15 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Send, RefreshCw, Bot, User } from 'lucide-react';
+import { Send, RefreshCw, Bot, User, ArrowRight, Brain, Users, BarChart3, Building, ClipboardCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Progress } from '@/components/ui/progress';
+import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 
 type Message = {
@@ -17,27 +19,81 @@ type Message = {
   timestamp: Date;
 };
 
-const AssessmentChat = () => {
+type AssessmentChatProps = {
+  autoAssessMode?: boolean;
+  completedCount?: number;
+  assessmentTypes?: string[];
+  onCompleteAutoAssessment?: (type: string, result: any) => void;
+};
+
+const AssessmentChat = ({ 
+  autoAssessMode = false, 
+  completedCount = 0,
+  assessmentTypes = [],
+  onCompleteAutoAssessment 
+}: AssessmentChatProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [tab, setTab] = useState('chat');
+  const [currentAutoAssessType, setCurrentAutoAssessType] = useState<string | null>(null);
+  const [autoAssessProgress, setAutoAssessProgress] = useState(0);
+  const [detectedKeywords, setDetectedKeywords] = useState<Record<string, number>>({});
   
   // Load stored assessment results
   const savedResults = JSON.parse(localStorage.getItem('stratifiedAssessments') || '{}');
   
-  // Initial welcome message when component mounts
+  // Initial message setup
   useEffect(() => {
-    const initialMessage: Message = {
-      id: '1',
-      role: 'assistant',
-      content: "Congratulations on completing all assessments! I'm your StratCorp AI assistant, ready to discuss your assessment results and provide further insights. How can I help you today?",
-      timestamp: new Date()
-    };
+    let initialMessage: Message;
+    
+    if (autoAssessMode) {
+      // Start auto-assess mode with specific message
+      initialMessage = {
+        id: '1',
+        role: 'assistant',
+        content: "I'll help you complete assessments through our conversation! This is a more natural way to gather insights about your organization. I'll ask you questions about your organization, and based on your responses, I'll automatically generate assessment results. Let's start with learning about your organization - could you tell me about your company's size, industry, and main challenges?",
+        timestamp: new Date()
+      };
+      
+      // Pre-fill some detected keywords
+      setDetectedKeywords({
+        'company_size': 0,
+        'industry': 0,
+        'challenges': 0,
+        'strategy': 0,
+        'digital': 0,
+        'ai': 0
+      });
+    } else if (completedCount === 0) {
+      // No assessments completed
+      initialMessage = {
+        id: '1',
+        role: 'assistant',
+        content: "Welcome to the StratCorp AI assistant! Complete assessments to unlock more capabilities. I can help answer questions about the assessment process or provide general guidance based on your needs.",
+        timestamp: new Date()
+      };
+    } else if (completedCount < assessmentTypes.length) {
+      // Some assessments completed
+      initialMessage = {
+        id: '1',
+        role: 'assistant',
+        content: `You've completed ${completedCount} of ${assessmentTypes.length} assessments. I can discuss your current results or help you with the remaining assessments. What would you like to know?`,
+        timestamp: new Date()
+      };
+    } else {
+      // All assessments completed
+      initialMessage = {
+        id: '1',
+        role: 'assistant',
+        content: "Congratulations on completing all assessments! I'm your StratCorp AI assistant, ready to discuss your assessment results and provide further insights. How can I help you today?",
+        timestamp: new Date()
+      };
+    }
     
     setMessages([initialMessage]);
-  }, []);
+  }, [autoAssessMode, completedCount, assessmentTypes.length]);
   
   // Scroll to bottom whenever messages change
   useEffect(() => {
@@ -60,14 +116,43 @@ const AssessmentChat = () => {
     setIsLoading(true);
     
     try {
-      // In a real implementation, this would call the Azure OpenAI or Claude API
-      // with the context of all assessment results
+      let response;
       
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      
-      // Generate a response based on the question and assessment results
-      const response = await generateAIResponse(userMessage.content, savedResults);
+      if (autoAssessMode) {
+        // Process for auto-assessment mode
+        const { updatedKeywords, nextAssessType } = processAutoAssessmentInput(inputValue);
+        setDetectedKeywords(updatedKeywords);
+        
+        // Calculate progress based on keywords
+        const keywordCount = Object.values(updatedKeywords).reduce((sum, count) => sum + Math.min(count, 3), 0);
+        const maxPossibleCount = Object.keys(updatedKeywords).length * 3; // Cap at 3 mentions per keyword
+        const progress = Math.min(Math.round((keywordCount / maxPossibleCount) * 100), 100);
+        setAutoAssessProgress(progress);
+        
+        // Check if we have enough data for an assessment
+        if (nextAssessType && nextAssessType !== currentAutoAssessType) {
+          setCurrentAutoAssessType(nextAssessType);
+          
+          // Generate assessment result for this type
+          const result = generateAutoAssessmentResult(nextAssessType, updatedKeywords);
+          
+          // Notify parent component
+          if (onCompleteAutoAssessment) {
+            onCompleteAutoAssessment(nextAssessType, result);
+          }
+          
+          // Response indicates assessment completion
+          response = `Based on our conversation, I've completed an assessment of your organization's ${nextAssessType.replace(/-/g, ' ')}. You can view the detailed results in your assessment dashboard.
+          
+Would you like to continue our conversation to generate more assessments? I still need to learn more about ${getNextTopicPrompt(nextAssessType)}.`;
+        } else {
+          // Continue gathering information
+          response = generateAutoAssessResponse(inputValue, updatedKeywords, progress);
+        }
+      } else {
+        // Standard chat response
+        response = await generateAIResponse(userMessage.content, savedResults);
+      }
       
       const assistantMessage: Message = {
         id: Date.now().toString(),
@@ -85,6 +170,268 @@ const AssessmentChat = () => {
     }
   };
   
+  const processAutoAssessmentInput = (input: string) => {
+    const lowerInput = input.toLowerCase();
+    const updatedKeywords = { ...detectedKeywords };
+    
+    // Define keywords to detect for each assessment type
+    const keywordMapping: Record<string, string[]> = {
+      'ai-readiness': ['ai', 'artificial intelligence', 'machine learning', 'data', 'automation'],
+      'board-effectiveness': ['board', 'directors', 'governance', 'oversight', 'committee'],
+      'business-strategy': ['strategy', 'market', 'competitive', 'growth', 'vision'],
+      'organizational-structure': ['structure', 'department', 'reporting', 'hierarchy', 'team'],
+      'digital-transformation': ['digital', 'transformation', 'technology', 'innovation', 'platform'],
+      'executive-alignment': ['executive', 'leadership', 'alignment', 'management', 'communication']
+    };
+    
+    // Update keyword counts
+    Object.keys(keywordMapping).forEach(assessType => {
+      keywordMapping[assessType].forEach(keyword => {
+        if (lowerInput.includes(keyword)) {
+          // Create the keyword if it doesn't exist
+          if (!updatedKeywords[keyword]) {
+            updatedKeywords[keyword] = 0;
+          }
+          updatedKeywords[keyword] += 1;
+        }
+      });
+    });
+    
+    // Check if we have enough information for an assessment
+    let nextAssessType: string | null = null;
+    let highestScore = 0;
+    
+    Object.entries(keywordMapping).forEach(([assessType, keywords]) => {
+      // Skip if already completed via auto-assessment
+      if (currentAutoAssessType === assessType) return;
+      
+      // Calculate how many relevant keywords were mentioned
+      const score = keywords.reduce((sum, keyword) => {
+        return sum + (updatedKeywords[keyword] || 0);
+      }, 0);
+      
+      if (score > highestScore && score >= 3) { // Threshold to trigger assessment
+        highestScore = score;
+        nextAssessType = assessType;
+      }
+    });
+    
+    return { updatedKeywords, nextAssessType };
+  };
+  
+  const generateAutoAssessmentResult = (assessmentType: string, keywords: Record<string, number>) => {
+    // Generate a realistic assessment result based on conversation data
+    const score = 40 + Math.floor(Math.random() * 40); // Base score between 40-80
+    
+    // Generate strengths, opportunities and recommendations based on assessment type
+    const strengths = generateRelevantAutoStrengths(assessmentType, keywords);
+    const opportunities = generateRelevantAutoOpportunities(assessmentType, keywords);
+    const recommendations = generateRelevantAutoRecommendations(assessmentType, keywords);
+    
+    return {
+      score,
+      strengths,
+      opportunities,
+      recommendations,
+      autoGenerated: true
+    };
+  };
+  
+  const getNextTopicPrompt = (currentType: string) => {
+    // Determine what topic to ask about next based on current assessment
+    const topicMap: Record<string, string> = {
+      'ai-readiness': 'your digital transformation initiatives',
+      'board-effectiveness': 'your executive leadership team',
+      'business-strategy': 'your organizational structure',
+      'organizational-structure': 'your board governance',
+      'digital-transformation': 'your AI initiatives',
+      'executive-alignment': 'your business strategy'
+    };
+    
+    return topicMap[currentType] || 'your organization';
+  };
+  
+  const generateAutoAssessResponse = (userInput: string, keywords: Record<string, number>, progress: number) => {
+    // Generate an appropriate response to gather more information
+    const lowerInput = userInput.toLowerCase();
+    
+    // Check what aspects we need more information about
+    const needsMoreInfo: string[] = [];
+    
+    if (!lowerInput.includes('ai') && !lowerInput.includes('artificial intelligence')) {
+      needsMoreInfo.push('AI initiatives or plans');
+    }
+    
+    if (!lowerInput.includes('board') && !lowerInput.includes('director')) {
+      needsMoreInfo.push('board structure and governance');
+    }
+    
+    if (!lowerInput.includes('strategy') && !lowerInput.includes('competitive')) {
+      needsMoreInfo.push('business strategy and competitive positioning');
+    }
+    
+    if (!lowerInput.includes('structure') && !lowerInput.includes('reporting')) {
+      needsMoreInfo.push('organizational structure');
+    }
+    
+    if (!lowerInput.includes('digital') && !lowerInput.includes('technology')) {
+      needsMoreInfo.push('digital transformation efforts');
+    }
+    
+    if (!lowerInput.includes('executive') && !lowerInput.includes('leadership')) {
+      needsMoreInfo.push('executive leadership team');
+    }
+    
+    // If we have less than 3 topics to ask about, add some general questions
+    if (needsMoreInfo.length < 3) {
+      needsMoreInfo.push('current challenges and priorities');
+      needsMoreInfo.push('future goals and vision');
+    }
+    
+    // Pick 1-2 topics to ask about
+    const topicsToAsk = needsMoreInfo.slice(0, 2);
+    
+    // Generate response with progress indicator
+    return `Thank you for sharing that information. I've analyzed ${progress}% of what I need to generate a comprehensive assessment.
+    
+Could you tell me more about your organization's ${topicsToAsk.join(' and ')}? This will help me complete a more accurate assessment.`;
+  };
+  
+  const generateRelevantAutoStrengths = (assessmentType: string, keywords: Record<string, number>) => {
+    // Generate strengths based on assessment type and conversation keywords
+    const strengthsByType: Record<string, string[]> = {
+      "ai-readiness": [
+        "Strong leadership commitment to AI transformation",
+        "Good data governance foundations in place",
+        "Clear alignment between AI initiatives and business objectives",
+        "Existing pockets of AI expertise across key departments"
+      ],
+      "board-effectiveness": [
+        "Diverse range of relevant expertise on the board",
+        "Strong strategic oversight and vision",
+        "Effective governance and risk management protocols",
+        "Productive working relationship with executive team"
+      ],
+      "business-strategy": [
+        "Clear articulation of strategic priorities",
+        "Strong market position in core segments",
+        "Effective competitive differentiation",
+        "Alignment between strategy and organizational capabilities"
+      ],
+      "organizational-structure": [
+        "Adaptable structure that evolves with strategic needs",
+        "Clear accountability and decision rights",
+        "Effective cross-functional collaboration mechanisms",
+        "Appropriate balance of centralization and decentralization"
+      ],
+      "digital-transformation": [
+        "Strong digital vision aligned to business strategy",
+        "Effective technology modernization roadmap",
+        "Good digital skills across key functions",
+        "Customer-centric approach to digital initiatives"
+      ],
+      "executive-alignment": [
+        "Strong alignment on strategic priorities",
+        "Effective executive decision-making processes",
+        "Collaborative leadership team dynamics",
+        "Clear cascade of priorities from executive team"
+      ]
+    };
+    
+    // Select 3 relevant strengths for the assessment type
+    return (strengthsByType[assessmentType] || []).slice(0, 3);
+  };
+  
+  const generateRelevantAutoOpportunities = (assessmentType: string, keywords: Record<string, number>) => {
+    // Similar to strengths, but for improvement opportunities
+    const opportunitiesByType: Record<string, string[]> = {
+      "ai-readiness": [
+        "Develop more comprehensive data strategy for AI applications",
+        "Strengthen cross-functional AI governance",
+        "Build broader AI literacy across the organization",
+        "Create more robust AI experimentation frameworks"
+      ],
+      "board-effectiveness": [
+        "Enhance strategic foresight capabilities",
+        "Improve board succession planning process",
+        "Strengthen technology expertise representation",
+        "Develop more robust board evaluation practices"
+      ],
+      "business-strategy": [
+        "Accelerate response to emerging market opportunities",
+        "Strengthen strategic communication throughout organization",
+        "Develop more agile strategic planning processes",
+        "Enhance strategic resource allocation mechanisms"
+      ],
+      "organizational-structure": [
+        "Reduce organizational silos that impede collaboration",
+        "Streamline decision-making processes for greater agility",
+        "Strengthen matrix management capabilities",
+        "Align incentive structures with collaborative behaviors"
+      ],
+      "digital-transformation": [
+        "Accelerate legacy system modernization",
+        "Develop comprehensive digital talent strategy",
+        "Strengthen digital change management approach",
+        "Improve digital metrics and measurement frameworks"
+      ],
+      "executive-alignment": [
+        "Create more robust strategic alignment mechanisms",
+        "Strengthen collective accountability at executive level",
+        "Enhance executive team psychological safety",
+        "Improve strategic cascading throughout organization"
+      ]
+    };
+    
+    // Select 3 relevant opportunities
+    return (opportunitiesByType[assessmentType] || []).slice(0, 3);
+  };
+  
+  const generateRelevantAutoRecommendations = (assessmentType: string, keywords: Record<string, number>) => {
+    // Similar to strengths and opportunities, but for actionable recommendations
+    const recommendationsByType: Record<string, string[]> = {
+      "ai-readiness": [
+        "Establish a cross-functional AI governance council with clear mandate and authority",
+        "Develop a comprehensive data strategy focused on supporting AI applications",
+        "Implement an AI knowledge development program for key leadership",
+        "Create an AI pilot framework with clear success metrics and scaling criteria"
+      ],
+      "board-effectiveness": [
+        "Conduct a comprehensive board skills assessment against future strategic needs",
+        "Implement quarterly strategic deep-dive sessions separate from regular board meetings",
+        "Establish a more structured board evaluation process with external facilitation",
+        "Create a board technology committee to strengthen digital oversight"
+      ],
+      "business-strategy": [
+        "Implement quarterly strategy review sessions with explicit assumption testing",
+        "Develop a strategic narrative that can be effectively communicated at all levels",
+        "Create a strategic initiatives dashboard with clear success metrics",
+        "Establish cross-functional strategy execution teams for key priorities"
+      ],
+      "organizational-structure": [
+        "Conduct a decision mapping exercise to identify and address bottlenecks",
+        "Implement formal cross-functional teaming structures for key initiatives",
+        "Review incentive systems to ensure alignment with collaborative behaviors",
+        "Establish clear organizational design principles aligned to strategic priorities"
+      ],
+      "digital-transformation": [
+        "Develop an integrated digital transformation roadmap with clear sequencing",
+        "Create a digital skills academy to address capability gaps systematically",
+        "Implement digital transformation metrics that balance process and outcomes",
+        "Establish a digital governance framework that enables rather than controls"
+      ],
+      "executive-alignment": [
+        "Conduct a strategic alignment session with structured follow-up mechanisms",
+        "Implement a collective leadership development program for the executive team",
+        "Establish clear decision protocols for different types of executive decisions",
+        "Create a cascading mechanism to translate executive priorities throughout organization"
+      ]
+    };
+    
+    // Select 3 relevant recommendations
+    return (recommendationsByType[assessmentType] || []).slice(0, 3);
+  };
+  
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -93,12 +440,27 @@ const AssessmentChat = () => {
   };
   
   const resetConversation = () => {
-    const initialMessage: Message = {
-      id: Date.now().toString(),
-      role: 'assistant',
-      content: "I've reset our conversation. How else can I help you with your assessment results?",
-      timestamp: new Date()
-    };
+    let initialMessage: Message;
+    
+    if (autoAssessMode) {
+      initialMessage = {
+        id: Date.now().toString(),
+        role: 'assistant',
+        content: "I've reset our conversation. Let's start again with your organization's details. Could you tell me about your company's size, industry, and main challenges?",
+        timestamp: new Date()
+      };
+      // Reset auto-assessment progress
+      setAutoAssessProgress(0);
+      setDetectedKeywords({});
+      setCurrentAutoAssessType(null);
+    } else {
+      initialMessage = {
+        id: Date.now().toString(),
+        role: 'assistant',
+        content: "I've reset our conversation. How else can I help you with your assessment results?",
+        timestamp: new Date()
+      };
+    }
     
     setMessages([initialMessage]);
   };
@@ -310,77 +672,106 @@ Would you like to explore any specific aspect of this assessment in more detail?
               <CardTitle className="flex items-center text-xl">
                 <Bot className="mr-2 h-5 w-5" />
                 StratCorp AI Assistant
+                {autoAssessMode && (
+                  <Badge variant="outline" className="ml-2 bg-white/10 text-white">Auto-Assess Mode</Badge>
+                )}
               </CardTitle>
               
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white/20">
-                    View Assessment Overview
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto">
-                  <DialogHeader>
-                    <DialogTitle>Assessment Results Overview</DialogTitle>
-                  </DialogHeader>
-                  
-                  <Tabs value={tab} onValueChange={setTab} className="w-full mt-4">
-                    <TabsList className="grid grid-cols-3 mb-6">
-                      <TabsTrigger value="chat">Chat</TabsTrigger>
-                      <TabsTrigger value="scores">Scores</TabsTrigger>
-                      <TabsTrigger value="recommendations">Recommendations</TabsTrigger>
-                    </TabsList>
+              {!autoAssessMode && (
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white/20">
+                      View Assessment Overview
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle>Assessment Results Overview</DialogTitle>
+                    </DialogHeader>
                     
-                    <TabsContent value="chat" className="space-y-4">
-                      <div className="text-sm text-gray-600">
-                        <p className="mb-3">The AI assistant can help you understand your assessment results by:</p>
-                        <ul className="list-disc pl-5 space-y-1.5">
-                          <li>Providing summaries across all assessments</li>
-                          <li>Explaining specific assessment results</li>
-                          <li>Recommending action plans based on your results</li>
-                          <li>Answering questions about organizational development</li>
-                        </ul>
-                        
-                        <p className="mt-4 font-medium">Try asking:</p>
-                        <ul className="list-disc pl-5 space-y-1.5 text-stratified">
-                          <li>"Summarize my assessment results"</li>
-                          <li>"What are my organization's key strengths?"</li>
-                          <li>"What are our biggest opportunities for improvement?"</li>
-                          <li>"Tell me about our AI readiness assessment"</li>
-                        </ul>
-                      </div>
-                    </TabsContent>
-                    
-                    <TabsContent value="scores" className="space-y-4">
-                      <div className="space-y-4">
-                        {Object.entries(savedResults).map(([type, data]: [string, any]) => (
-                          <div key={type} className="flex justify-between items-center border-b pb-3">
-                            <div className="font-medium">{type.replace('-', ' ')}</div>
-                            <div className={`text-lg font-bold ${data.score >= 70 ? 'text-emerald-600' : data.score >= 50 ? 'text-amber-600' : 'text-red-600'}`}>
-                              {data.score}/100
+                    <Tabs value={tab} onValueChange={setTab} className="w-full mt-4">
+                      <TabsList className="grid grid-cols-3 mb-6">
+                        <TabsTrigger value="chat">Chat</TabsTrigger>
+                        <TabsTrigger value="scores">Scores</TabsTrigger>
+                        <TabsTrigger value="recommendations">Recommendations</TabsTrigger>
+                      </TabsList>
+                      
+                      <TabsContent value="chat" className="space-y-4">
+                        <div className="text-sm text-gray-600">
+                          <p className="mb-3">The AI assistant can help you understand your assessment results by:</p>
+                          <ul className="list-disc pl-5 space-y-1.5">
+                            <li>Providing summaries across all assessments</li>
+                            <li>Explaining specific assessment results</li>
+                            <li>Recommending action plans based on your results</li>
+                            <li>Answering questions about organizational development</li>
+                          </ul>
+                          
+                          <p className="mt-4 font-medium">Try asking:</p>
+                          <ul className="list-disc pl-5 space-y-1.5 text-stratified">
+                            <li>"Summarize my assessment results"</li>
+                            <li>"What are my organization's key strengths?"</li>
+                            <li>"What are our biggest opportunities for improvement?"</li>
+                            <li>"Tell me about our AI readiness assessment"</li>
+                          </ul>
+                        </div>
+                      </TabsContent>
+                      
+                      <TabsContent value="scores" className="space-y-4">
+                        <div className="space-y-4">
+                          {Object.entries(savedResults).map(([type, data]: [string, any]) => (
+                            <div key={type} className="flex justify-between items-center border-b pb-3">
+                              <div className="font-medium flex items-center">
+                                {type.replace('-', ' ')}
+                                {data.autoGenerated && (
+                                  <Badge variant="outline" className="ml-2 text-xs">Auto-Generated</Badge>
+                                )}
+                              </div>
+                              <div className={`text-lg font-bold ${data.score >= 70 ? 'text-emerald-600' : data.score >= 50 ? 'text-amber-600' : 'text-red-600'}`}>
+                                {data.score}/100
+                              </div>
                             </div>
-                          </div>
-                        ))}
-                      </div>
-                    </TabsContent>
-                    
-                    <TabsContent value="recommendations" className="space-y-4">
-                      <div className="space-y-6">
-                        {Object.entries(savedResults).map(([type, data]: [string, any]) => (
-                          <div key={type} className="space-y-2">
-                            <h4 className="font-medium text-stratified">{type.replace('-', ' ')}</h4>
-                            <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
-                              {data.recommendations.map((rec: string, i: number) => (
-                                <li key={i}>{rec}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    </TabsContent>
-                  </Tabs>
-                </DialogContent>
-              </Dialog>
+                          ))}
+                        </div>
+                      </TabsContent>
+                      
+                      <TabsContent value="recommendations" className="space-y-4">
+                        <div className="space-y-6">
+                          {Object.entries(savedResults).map(([type, data]: [string, any]) => (
+                            <div key={type} className="space-y-2">
+                              <h4 className="font-medium text-stratified">{type.replace('-', ' ')}</h4>
+                              <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
+                                {data.recommendations.map((rec: string, i: number) => (
+                                  <li key={i}>{rec}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      </TabsContent>
+                    </Tabs>
+                  </DialogContent>
+                </Dialog>
+              )}
             </div>
+            
+            {autoAssessMode && (
+              <div className="mt-4">
+                <div className="flex justify-between text-xs mb-1">
+                  <span>Assessment Progress</span>
+                  <span>{autoAssessProgress}%</span>
+                </div>
+                <Progress value={autoAssessProgress} className="h-2 bg-white/20" />
+                
+                {currentAutoAssessType && (
+                  <div className="mt-2 text-sm flex items-center">
+                    <ClipboardCheck className="h-4 w-4 mr-1" />
+                    <span>
+                      Completed: {currentAutoAssessType.replace(/-/g, ' ')} assessment
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
           </CardHeader>
           
           <CardContent className="p-6">
@@ -457,7 +848,10 @@ Would you like to explore any specific aspect of this assessment in more detail?
                 </div>
                 
                 <p className="text-xs text-gray-500 mt-2">
-                  This AI assistant has access to all your assessment results and can provide personalized insights.
+                  {autoAssessMode 
+                    ? "Just chat naturally about your organization. I'll automatically generate assessments based on our conversation."
+                    : `This AI assistant has ${completedCount === assessmentTypes.length ? 'full' : 'limited'} access to your assessment results and can provide personalized insights.`
+                  }
                 </p>
               </div>
             </div>
