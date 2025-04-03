@@ -7,7 +7,7 @@ import AssessmentSelector from "@/components/assessment/AssessmentSelector";
 import AssessmentForm from "@/components/assessment/AssessmentForm";
 import AssessmentResult from "@/components/assessment/AssessmentResult";
 import AssessmentChat from "@/components/assessment/AssessmentChat";
-import ChatButton from "@/components/assessment/ChatButton";
+import AssessmentDashboard from "@/components/assessment/dashboard/AssessmentDashboard";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { generateRelevantStrengths, generateRelevantOpportunities, generateRelevantRecommendations, calculateAssessmentScore } from "@/utils/assessmentUtils";
@@ -16,7 +16,8 @@ import { generateRelevantStrengths, generateRelevantOpportunities, generateRelev
 const STEPS = {
   SELECT: 'select',
   FORM: 'form',
-  RESULT: 'result'
+  RESULT: 'result',
+  DASHBOARD: 'dashboard'
 };
 
 const Assessment = () => {
@@ -27,7 +28,6 @@ const Assessment = () => {
   const [completedAssessments, setCompletedAssessments] = useState<string[]>([]);
   const [showChat, setShowChat] = useState(false);
   const [autoAssessMode, setAutoAssessMode] = useState(false);
-  const chatRef = useRef<HTMLDivElement>(null);
   
   // Check for completed assessments on mount
   useEffect(() => {
@@ -162,16 +162,11 @@ const Assessment = () => {
     setAutoAssessMode(false);
   };
   
-  const scrollToChat = () => {
-    chatRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-  
   const startAutoAssessment = () => {
     setAutoAssessMode(true);
     setShowChat(true);
     
     setTimeout(() => {
-      scrollToChat();
       toast.success("Auto-assessment mode activated. The AI will now guide you through a conversational assessment.");
     }, 100);
   };
@@ -190,6 +185,11 @@ const Assessment = () => {
     toast.success(`${type.replace(/-/g, ' ')} assessment completed via conversation!`);
   };
 
+  const viewDashboard = () => {
+    setCurrentStep(STEPS.DASHBOARD);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const assessmentTypes = ["ai-readiness", "board-effectiveness", "business-strategy", "organizational-structure", "digital-transformation", "executive-alignment"];
 
   return (
@@ -199,11 +199,39 @@ const Assessment = () => {
         <AssessmentHeader currentStep={currentStep} />
         
         {currentStep === STEPS.SELECT && (
-          <AssessmentSelector
-            completedAssessments={completedAssessments}
-            onSelect={handleSelectAssessment}
-            onAutoAssess={startAutoAssessment}
-          />
+          <>
+            {completedAssessments.length > 0 && (
+              <div className="bg-stratified/5 py-4 border-y">
+                <div className="container-custom">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <h3 className="text-lg font-medium">
+                        {completedAssessments.length === assessmentTypes.length
+                          ? "All assessments completed!"
+                          : `${completedAssessments.length} of ${assessmentTypes.length} assessments completed`}
+                      </h3>
+                      <p className="text-sm text-gray-600">
+                        {completedAssessments.length === assessmentTypes.length
+                          ? "View your dashboard for comprehensive insights."
+                          : "Continue to complete the remaining assessments."}
+                      </p>
+                    </div>
+                    <button
+                      onClick={viewDashboard}
+                      className="bg-stratified hover:bg-stratified-dark text-white px-4 py-2 rounded-md"
+                    >
+                      View Dashboard
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+            <AssessmentSelector
+              completedAssessments={completedAssessments}
+              onSelect={handleSelectAssessment}
+              onAutoAssess={startAutoAssessment}
+            />
+          </>
         )}
         
         {currentStep === STEPS.FORM && selectedAssessment && (
@@ -222,20 +250,22 @@ const Assessment = () => {
             onStartNew={resetAssessment}
           />
         )}
+        
+        {currentStep === STEPS.DASHBOARD && (
+          <AssessmentDashboard
+            completedAssessments={completedAssessments}
+            assessmentTypes={assessmentTypes}
+            onSelectAssessment={handleSelectAssessment}
+          />
+        )}
             
         {showChat && (
-          <div ref={chatRef}>
-            <AssessmentChat 
-              autoAssessMode={autoAssessMode} 
-              completedCount={completedAssessments.length}
-              assessmentTypes={assessmentTypes}
-              onCompleteAutoAssessment={handleCompleteAutoAssessment}
-            />
-          </div>
-        )}
-        
-        {showChat && currentStep !== STEPS.SELECT && (
-          <ChatButton onClick={scrollToChat} />
+          <AssessmentChat 
+            autoAssessMode={autoAssessMode} 
+            completedCount={completedAssessments.length}
+            assessmentTypes={assessmentTypes}
+            onCompleteAutoAssessment={handleCompleteAutoAssessment}
+          />
         )}
       </main>
       <Footer />

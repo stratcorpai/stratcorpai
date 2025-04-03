@@ -1,6 +1,6 @@
 
 import { FC } from 'react';
-import AssessmentChatEngine from './chat/AssessmentChatEngine';
+import CollapsibleChatPanel from './chat/CollapsibleChatPanel';
 
 type AssessmentChatProps = {
   autoAssessMode?: boolean;
@@ -16,7 +16,7 @@ const AssessmentChat: FC<AssessmentChatProps> = ({
   onCompleteAutoAssessment 
 }: AssessmentChatProps) => {
   return (
-    <AssessmentChatEngine
+    <CollapsibleChatPanel
       autoAssessMode={autoAssessMode}
       completedCount={completedCount}
       assessmentTypes={assessmentTypes}

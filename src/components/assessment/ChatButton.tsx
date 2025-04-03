@@ -1,4 +1,7 @@
 
+// This component has been deprecated and replaced by CollapsibleChatPanel
+// The file is kept for backward compatibility but should not be used in new code
+
 import { FC } from "react";
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
@@ -8,6 +11,9 @@ interface ChatButtonProps {
   onClick: () => void;
 }
 
+/**
+ * @deprecated Use CollapsibleChatPanel instead
+ */
 const ChatButton: FC<ChatButtonProps> = ({ onClick }) => {
   return (
     <motion.div

@@ -30,6 +30,7 @@ const AssessmentChatEngine = ({
   const [currentAutoAssessType, setCurrentAutoAssessType] = useState<string | null>(null);
   const [autoAssessProgress, setAutoAssessProgress] = useState(0);
   const [detectedKeywords, setDetectedKeywords] = useState<Record<string, number>>({});
+  const [typingIndicatorId, setTypingIndicatorId] = useState<string | null>(null);
   
   // Load stored assessment results
   const savedResults = JSON.parse(localStorage.getItem('stratifiedAssessments') || '{}');
@@ -90,6 +91,41 @@ const AssessmentChatEngine = ({
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
   
+  // Simulates the typing effect
+  const simulateTyping = async (response: string) => {
+    // Add typing indicator
+    const typingId = Date.now().toString();
+    setTypingIndicatorId(typingId);
+    
+    const typingMessage: Message = {
+      id: typingId,
+      role: 'assistant',
+      content: '',
+      timestamp: new Date(),
+      isTyping: true
+    };
+    
+    setMessages(prev => [...prev, typingMessage]);
+    
+    // Simulate thinking/typing time proportional to message length
+    const typingDelay = Math.min(1000 + response.length * 10, 3000);
+    await new Promise(resolve => setTimeout(resolve, typingDelay));
+    
+    // Replace typing indicator with actual message
+    setTypingIndicatorId(null);
+    
+    const assistantMessage: Message = {
+      id: Date.now().toString(),
+      role: 'assistant',
+      content: response,
+      timestamp: new Date()
+    };
+    
+    setMessages(prev => prev.map(msg => 
+      msg.id === typingId ? assistantMessage : msg
+    ));
+  };
+  
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
     
@@ -144,17 +180,13 @@ Would you like to continue our conversation to generate more assessments? I stil
         response = await generateAIResponse(userMessage.content, savedResults);
       }
       
-      const assistantMessage: Message = {
-        id: Date.now().toString(),
-        role: 'assistant',
-        content: response,
-        timestamp: new Date()
-      };
+      // Simulate typing effect for the response
+      await simulateTyping(response);
       
-      setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
       console.error('Error generating response:', error);
       toast.error('Failed to generate a response. Please try again.');
+      setTypingIndicatorId(null);
     } finally {
       setIsLoading(false);
     }
@@ -225,12 +257,7 @@ Would you like to continue our conversation to generate more assessments? I stil
   };
   
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.2 }}
-      className="section-padding bg-white"
-    >
+    <div className="section-padding bg-white">
       <div className="container-custom max-w-4xl">
         <Card className="border shadow-lg overflow-hidden">
           <ChatHeader 
@@ -263,7 +290,7 @@ Would you like to continue our conversation to generate more assessments? I stil
           </CardContent>
         </Card>
       </div>
-    </motion.section>
+    </div>
   );
 };
 
