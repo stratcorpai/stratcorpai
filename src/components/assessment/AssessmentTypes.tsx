@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Brain, BarChart3, Users, Building, Bot, Briefcase } from "lucide-react";
+import { Brain, BarChart3, Users, Building, Bot, Briefcase, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
