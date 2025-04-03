@@ -46,6 +46,10 @@ const AssessmentHeader = ({ currentStep }: AssessmentHeaderProps) => {
         </motion.svg>
       </div>
       
+      {/* Glassmorphism overlays */}
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-stratified/80 to-transparent backdrop-blur-sm"></div>
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-stratified/80 to-transparent backdrop-blur-sm"></div>
+      
       <div className="container-custom relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
@@ -54,16 +58,18 @@ const AssessmentHeader = ({ currentStep }: AssessmentHeaderProps) => {
           className="text-center"
         >
           <motion.h1 
-            className="text-white mb-3 drop-shadow-md text-3xl md:text-4xl"
+            className="text-white mb-3 drop-shadow-md text-3xl md:text-4xl font-bold tracking-tight"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            {title}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white/95 to-white/85">
+              {title}
+            </span>
           </motion.h1>
           
           <motion.p 
-            className="text-lg text-white/90 max-w-3xl mx-auto"
+            className="text-lg text-white/90 max-w-3xl mx-auto font-medium"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
@@ -78,12 +84,18 @@ const AssessmentHeader = ({ currentStep }: AssessmentHeaderProps) => {
               transition={{ delay: 0.6, duration: 0.5 }}
               className="mt-8 max-w-2xl mx-auto"
             >
-              <p className="text-white/80 italic border-l-4 border-white/30 pl-4 py-1 text-left">
-                "Strategic assessment is not about finding problems; it's about uncovering opportunities that align with your vision."
-              </p>
-              <p className="text-white/70 text-right mt-2">— Stratified Advisory Leadership Team</p>
+              <div className="px-6 py-4 backdrop-blur-md bg-white/5 border border-white/10 rounded-lg shadow-lg">
+                <p className="text-white/80 italic border-l-4 border-white/30 pl-4 py-1 text-left">
+                  "Strategic assessment is not about finding problems; it's about uncovering opportunities that align with your vision."
+                </p>
+                <p className="text-white/70 text-right mt-2">— Stratified Advisory Leadership Team</p>
+              </div>
             </motion.div>
           )}
+          
+          {/* Decorative elements */}
+          <div className="hidden md:block absolute -top-6 -left-6 w-24 h-24 rounded-full bg-white/5 backdrop-blur-sm animate-pulse"></div>
+          <div className="hidden md:block absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-white/5 backdrop-blur-sm animate-pulse" style={{ animationDelay: "1.5s" }}></div>
         </motion.div>
       </div>
     </section>
