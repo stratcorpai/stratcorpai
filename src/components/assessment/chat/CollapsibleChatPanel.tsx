@@ -5,7 +5,7 @@ import { MessageCircle, X, Minimize2, Maximize2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AssessmentChatEngine from './AssessmentChatEngine';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { useMediaQuery } from '@/hooks/use-mobile';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 type CollapsibleChatPanelProps = {
   autoAssessMode?: boolean;
@@ -22,7 +22,7 @@ const CollapsibleChatPanel = ({
 }: CollapsibleChatPanelProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isMobile = useIsMobile();
   
   // Open chat automatically if in autoAssessMode
   useEffect(() => {
