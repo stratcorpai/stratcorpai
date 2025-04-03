@@ -1,5 +1,4 @@
-
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AssessmentHeader from "@/components/assessment/AssessmentHeader";
@@ -12,7 +11,6 @@ import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { generateRelevantStrengths, generateRelevantOpportunities, generateRelevantRecommendations, calculateAssessmentScore } from "@/utils/assessmentUtils";
 
-// The main assessment steps
 const STEPS = {
   SELECT: 'select',
   FORM: 'form',
@@ -29,14 +27,11 @@ const Assessment = () => {
   const [showChat, setShowChat] = useState(false);
   const [autoAssessMode, setAutoAssessMode] = useState(false);
   
-  // Check for completed assessments on mount
   useEffect(() => {
     const savedResults = JSON.parse(localStorage.getItem('stratifiedAssessments') || '{}');
     const completed = Object.keys(savedResults);
     setCompletedAssessments(completed);
     
-    // If we have a saved assessment, and we're on the SELECT step, check if we
-    // should restore from localStorage
     if (currentStep === STEPS.SELECT) {
       const lastAssessmentType = localStorage.getItem('stratifiedLastAssessment');
       if (lastAssessmentType) {
@@ -51,14 +46,12 @@ const Assessment = () => {
             setAssessmentResult(lastResult);
             setCurrentStep(STEPS.RESULT);
           } else {
-            // Clear the last assessment if user doesn't want to restore
             localStorage.removeItem('stratifiedLastAssessment');
           }
         }
       }
     }
     
-    // Show chat if we have at least 1 completed assessment
     if (completed.length > 0) {
       setShowChat(true);
     }
@@ -67,14 +60,11 @@ const Assessment = () => {
   const handleSelectAssessment = (type: string) => {
     setSelectedAssessment(type);
     
-    // Check if this assessment was already completed
     const savedResults = JSON.parse(localStorage.getItem('stratifiedAssessments') || '{}');
     if (savedResults[type]) {
-      // Show results immediately if already completed
       setAssessmentResult(savedResults[type]);
       setCurrentStep(STEPS.RESULT);
     } else {
-      // Go to form if not completed
       setCurrentStep(STEPS.FORM);
     }
     
@@ -86,26 +76,13 @@ const Assessment = () => {
     setIsLoading(true);
     
     try {
-      // In a real implementation, this would call the Azure OpenAI or Claude API
-      // Here we'll simulate that with a more sophisticated response generation
-      
-      // Get assessment type to customize the response
       const assessmentTypeFormatted = selectedAssessment?.replace(/-/g, ' ') || 'general';
       
-      // We'd have prompts for each assessment type in a real implementation
-      // For now, simulate an API call with a delay
       await new Promise(resolve => setTimeout(resolve, 3000));
       
-      // Generate relevant strengths based on form data
       const strengths = generateRelevantStrengths(selectedAssessment, formData);
-      
-      // Generate relevant opportunities based on form data
       const opportunities = generateRelevantOpportunities(selectedAssessment, formData);
-      
-      // Generate relevant recommendations based on form data
       const recommendations = generateRelevantRecommendations(selectedAssessment, formData);
-      
-      // Calculate a weighted score based on responses
       const score = calculateAssessmentScore(formData);
       
       const results = {
@@ -115,7 +92,6 @@ const Assessment = () => {
         recommendations
       };
       
-      // Save to localStorage
       const savedResults = JSON.parse(localStorage.getItem('stratifiedAssessments') || '{}');
       savedResults[selectedAssessment!] = results;
       localStorage.setItem('stratifiedAssessments', JSON.stringify(savedResults));
@@ -124,14 +100,12 @@ const Assessment = () => {
       setAssessmentResult(results);
       setCurrentStep(STEPS.RESULT);
       
-      // Update completed assessments
       const allCompleted = [...completedAssessments];
       if (!allCompleted.includes(selectedAssessment!)) {
         allCompleted.push(selectedAssessment!);
         setCompletedAssessments(allCompleted);
       }
       
-      // Show toast based on completion status
       if (allCompleted.length === 6 && completedAssessments.length < 6) {
         toast.success(
           "You've completed all assessments! The AI chat assistant has been fully unlocked.",
@@ -144,9 +118,7 @@ const Assessment = () => {
         );
       }
       
-      // Show chat after completing at least one assessment
       setShowChat(true);
-      
     } catch (error) {
       console.error("Error processing assessment:", error);
       toast.error("An error occurred while processing your assessment");
@@ -172,12 +144,10 @@ const Assessment = () => {
   };
 
   const handleCompleteAutoAssessment = (type: string, result: any) => {
-    // Save auto-generated assessment results
     const savedResults = JSON.parse(localStorage.getItem('stratifiedAssessments') || '{}');
     savedResults[type] = result;
     localStorage.setItem('stratifiedAssessments', JSON.stringify(savedResults));
     
-    // Update completed assessments list
     if (!completedAssessments.includes(type)) {
       setCompletedAssessments([...completedAssessments, type]);
     }
@@ -231,6 +201,14 @@ const Assessment = () => {
               onSelect={handleSelectAssessment}
               onAutoAssess={startAutoAssessment}
             />
+            
+            {showChat && !autoAssessMode && (
+              <AssessmentChat 
+                completedCount={completedAssessments.length}
+                assessmentTypes={assessmentTypes}
+                onCompleteAutoAssessment={handleCompleteAutoAssessment}
+              />
+            )}
           </>
         )}
         
@@ -244,28 +222,50 @@ const Assessment = () => {
         )}
         
         {currentStep === STEPS.RESULT && assessmentResult && (
-          <AssessmentResult 
-            result={assessmentResult} 
-            assessmentType={selectedAssessment!}
-            onStartNew={resetAssessment}
-          />
+          <>
+            <AssessmentResult 
+              result={assessmentResult} 
+              assessmentType={selectedAssessment!}
+              onStartNew={resetAssessment}
+            />
+            
+            {showChat && !autoAssessMode && (
+              <AssessmentChat 
+                completedCount={completedAssessments.length}
+                assessmentTypes={assessmentTypes}
+                onCompleteAutoAssessment={handleCompleteAutoAssessment}
+              />
+            )}
+          </>
         )}
         
         {currentStep === STEPS.DASHBOARD && (
-          <AssessmentDashboard
-            completedAssessments={completedAssessments}
-            assessmentTypes={assessmentTypes}
-            onSelectAssessment={handleSelectAssessment}
-          />
+          <>
+            <AssessmentDashboard
+              completedAssessments={completedAssessments}
+              assessmentTypes={assessmentTypes}
+              onSelectAssessment={handleSelectAssessment}
+            />
+            
+            {showChat && !autoAssessMode && (
+              <AssessmentChat 
+                completedCount={completedAssessments.length}
+                assessmentTypes={assessmentTypes}
+                onCompleteAutoAssessment={handleCompleteAutoAssessment}
+              />
+            )}
+          </>
         )}
             
-        {showChat && (
-          <AssessmentChat 
-            autoAssessMode={autoAssessMode} 
-            completedCount={completedAssessments.length}
-            assessmentTypes={assessmentTypes}
-            onCompleteAutoAssessment={handleCompleteAutoAssessment}
-          />
+        {showChat && autoAssessMode && (
+          <div className="fixed bottom-0 right-0 z-50">
+            <AssessmentChat 
+              autoAssessMode={autoAssessMode} 
+              completedCount={completedAssessments.length}
+              assessmentTypes={assessmentTypes}
+              onCompleteAutoAssessment={handleCompleteAutoAssessment}
+            />
+          </div>
         )}
       </main>
       <Footer />
