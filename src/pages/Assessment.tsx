@@ -7,12 +7,24 @@ import AssessmentTypes from "@/components/assessment/AssessmentTypes";
 import AssessmentForm from "@/components/assessment/AssessmentForm";
 import AssessmentResult from "@/components/assessment/AssessmentResult";
 import IntegratedDashboard from "@/components/assessment/dashboard/IntegratedDashboard";
+import CollapsibleChatPanel from "@/components/assessment/chat/CollapsibleChatPanel";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { LineChart, PenLine, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { generateRelevantStrengths, generateRelevantOpportunities, generateRelevantRecommendations, calculateAssessmentScore } from "@/utils/assessmentUtils";
+import { 
+  Accordion, 
+  AccordionContent, 
+  AccordionItem, 
+  AccordionTrigger 
+} from "@/components/ui/accordion";
+import { 
+  generateRelevantStrengths, 
+  generateRelevantOpportunities, 
+  generateRelevantRecommendations, 
+  calculateAssessmentScore 
+} from "@/utils/assessmentUtils";
 
 const STEPS = {
   SELECT: 'select',
@@ -26,6 +38,7 @@ const Assessment = () => {
   const [assessmentResult, setAssessmentResult] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [completedAssessments, setCompletedAssessments] = useState<string[]>([]);
+  const [showDashboard, setShowDashboard] = useState(true);
   const [showConversationalAssessment, setShowConversationalAssessment] = useState(false);
   const [scrollToChat, setScrollToChat] = useState(false);
   
@@ -248,11 +261,30 @@ const Assessment = () => {
         
         {/* Progress Overview */}
         {completedAssessments.length > 0 && currentStep === STEPS.SELECT && (
-          <IntegratedDashboard 
-            completedAssessments={completedAssessments}
-            assessmentTypes={assessmentTypes}
-            onSelectAssessment={handleSelectAssessment}
-          />
+          <Accordion 
+            type="single" 
+            defaultValue="dashboard" 
+            collapsible
+            className="border-y border-gray-200"
+          >
+            <AccordionItem value="dashboard" className="border-none">
+              <AccordionTrigger className="bg-gray-50 py-3 px-4 hover:no-underline">
+                <span className="flex items-center text-lg font-semibold text-gray-800">
+                  <LineChart className="mr-2 h-5 w-5 text-stratified" />
+                  Assessment Dashboard
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="bg-gray-50 py-2 px-0">
+                <div className="py-2">
+                  <IntegratedDashboard 
+                    completedAssessments={completedAssessments}
+                    assessmentTypes={assessmentTypes}
+                    onSelectAssessment={handleSelectAssessment}
+                  />
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         )}
         
         {/* Main Content Section */}
@@ -285,49 +317,17 @@ const Assessment = () => {
           />
         )}
         
-        {/* Conversational Assessment Section - Always Present at Bottom */}
+        {/* Conversational Assessment Section - Accordion Style */}
         <section 
           id="conversational-assessment" 
-          className="bg-gray-50 border-t border-gray-200 py-12"
+          className="border-t border-gray-200 mb-8"
         >
-          <div className="container-custom max-w-4xl">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-                <MessageCircle className="h-5 w-5 text-stratified" />
-                Conversational Assessment
-              </h2>
-              <Button
-                variant="outline"
-                className="text-sm border-stratified text-stratified hover:bg-stratified/5"
-                onClick={() => setShowConversationalAssessment(!showConversationalAssessment)}
-              >
-                {showConversationalAssessment ? 'Minimize' : 'Expand'}
-              </Button>
-            </div>
-            
-            {showConversationalAssessment ? (
-              <div className="bg-white border rounded-lg shadow-sm overflow-hidden transition-all duration-300">
-                <div className="h-[500px]">
-                  <AssessmentChat
-                    completedCount={completedAssessments.length}
-                    assessmentTypes={assessmentTypes}
-                    onCompleteAutoAssessment={handleCompleteAutoAssessment}
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className="bg-gray-100 border rounded-lg p-6 text-center">
-                <p className="text-gray-600 mb-4">
-                  Our AI assistant can help you complete assessments through natural conversation.
-                </p>
-                <Button
-                  className="bg-stratified hover:bg-stratified-dark text-white"
-                  onClick={() => setShowConversationalAssessment(true)}
-                >
-                  Start Conversational Assessment
-                </Button>
-              </div>
-            )}
+          <div className="container-custom max-w-4xl py-6">
+            <CollapsibleChatPanel
+              completedCount={completedAssessments.length}
+              assessmentTypes={assessmentTypes}
+              onCompleteAutoAssessment={handleCompleteAutoAssessment}
+            />
           </div>
         </section>
       </main>
