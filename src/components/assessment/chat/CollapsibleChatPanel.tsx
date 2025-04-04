@@ -1,11 +1,10 @@
 
 import { useState, useEffect } from 'react';
-import { MessageCircle, X, Minimize2, Maximize2 } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AssessmentChatEngine from './AssessmentChatEngine';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
 type CollapsibleChatPanelProps = {
   autoAssessMode?: boolean;
@@ -20,21 +19,10 @@ const CollapsibleChatPanel = ({
   assessmentTypes = [],
   onCompleteAutoAssessment
 }: CollapsibleChatPanelProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true); // Default to expanded
   const isMobile = useIsMobile();
   
-  // Open chat automatically if in autoAssessMode
-  useEffect(() => {
-    if (autoAssessMode) {
-      setIsOpen(true);
-    }
-  }, [autoAssessMode]);
-
-  const toggleChat = () => {
-    setIsOpen(!isOpen);
-  };
-
-  // For mobile, we'll use Sheet component
+  // For mobile, we'll use Sheet component with a trigger button
   if (isMobile) {
     return (
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -58,40 +46,23 @@ const CollapsibleChatPanel = ({
     );
   }
 
-  // For desktop, we'll use Collapsible component integrated into the page
+  // For desktop, we'll return the fully expanded chat
   return (
     <div className="w-full border rounded-lg overflow-hidden shadow-sm">
-      <Collapsible
-        open={isOpen}
-        onOpenChange={toggleChat}
-        className="w-full"
-      >
-        <CollapsibleTrigger asChild>
-          <div className="bg-stratified p-3 flex justify-between items-center cursor-pointer hover:bg-stratified-dark text-white transition-colors">
-            <span className="font-medium flex items-center">
-              <MessageCircle className="h-4 w-4 mr-2" />
-              AI Assistant
-            </span>
-            <div className="flex items-center">
-              {isOpen ? (
-                <Minimize2 className="h-4 w-4" />
-              ) : (
-                <Maximize2 className="h-4 w-4" />
-              )}
-            </div>
-          </div>
-        </CollapsibleTrigger>
-        <CollapsibleContent>
-          <div className="bg-white border-t border-gray-200" style={{ height: '400px' }}>
-            <AssessmentChatEngine
-              autoAssessMode={autoAssessMode}
-              completedCount={completedCount}
-              assessmentTypes={assessmentTypes}
-              onCompleteAutoAssessment={onCompleteAutoAssessment}
-            />
-          </div>
-        </CollapsibleContent>
-      </Collapsible>
+      <div className="bg-stratified p-3 flex justify-between items-center text-white">
+        <span className="font-medium flex items-center">
+          <MessageCircle className="h-4 w-4 mr-2" />
+          AI Assistant
+        </span>
+      </div>
+      <div className="bg-white border-t border-gray-200" style={{ height: '400px' }}>
+        <AssessmentChatEngine
+          autoAssessMode={autoAssessMode}
+          completedCount={completedCount}
+          assessmentTypes={assessmentTypes}
+          onCompleteAutoAssessment={onCompleteAutoAssessment}
+        />
+      </div>
     </div>
   );
 };

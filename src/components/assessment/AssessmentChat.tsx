@@ -1,5 +1,6 @@
 
 import { FC } from 'react';
+import { MessageCircle } from 'lucide-react';
 import AssessmentChatEngine from './chat/AssessmentChatEngine';
 
 type AssessmentChatProps = {
@@ -16,13 +17,21 @@ const AssessmentChat: FC<AssessmentChatProps> = ({
   onCompleteAutoAssessment 
 }: AssessmentChatProps) => {
   return (
-    <div className="h-full">
-      <AssessmentChatEngine
-        autoAssessMode={autoAssessMode}
-        completedCount={completedCount}
-        assessmentTypes={assessmentTypes}
-        onCompleteAutoAssessment={onCompleteAutoAssessment}
-      />
+    <div className="h-full border rounded-lg shadow-sm overflow-hidden">
+      <div className="bg-stratified p-3 flex justify-between items-center text-white">
+        <span className="font-medium flex items-center">
+          <MessageCircle className="h-4 w-4 mr-2" />
+          AI Assistant
+        </span>
+      </div>
+      <div className="bg-white border-t border-gray-200" style={{ height: '400px' }}>
+        <AssessmentChatEngine
+          autoAssessMode={autoAssessMode}
+          completedCount={completedCount}
+          assessmentTypes={assessmentTypes}
+          onCompleteAutoAssessment={onCompleteAutoAssessment}
+        />
+      </div>
     </div>
   );
 };
