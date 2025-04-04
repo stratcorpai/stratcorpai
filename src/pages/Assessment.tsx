@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -11,6 +10,7 @@ import AssessmentDashboard from "@/components/assessment/dashboard/AssessmentDas
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { MessageCircle, X } from "lucide-react";
+import { motion } from "framer-motion";
 import { generateRelevantStrengths, generateRelevantOpportunities, generateRelevantRecommendations, calculateAssessmentScore } from "@/utils/assessmentUtils";
 
 const STEPS = {
