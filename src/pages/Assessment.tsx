@@ -1,23 +1,23 @@
+
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AssessmentHeader from "@/components/assessment/AssessmentHeader";
-import AssessmentSelector from "@/components/assessment/AssessmentSelector";
+import AssessmentTypes from "@/components/assessment/AssessmentTypes";
 import AssessmentForm from "@/components/assessment/AssessmentForm";
 import AssessmentResult from "@/components/assessment/AssessmentResult";
-import AssessmentChat from "@/components/assessment/AssessmentChat";
-import AssessmentDashboard from "@/components/assessment/dashboard/AssessmentDashboard";
+import IntegratedDashboard from "@/components/assessment/dashboard/IntegratedDashboard";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
-import { MessageCircle, X } from "lucide-react";
+import { LineChart, PenLine, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 import { generateRelevantStrengths, generateRelevantOpportunities, generateRelevantRecommendations, calculateAssessmentScore } from "@/utils/assessmentUtils";
 
 const STEPS = {
   SELECT: 'select',
   FORM: 'form',
-  RESULT: 'result',
-  DASHBOARD: 'dashboard'
+  RESULT: 'result'
 };
 
 const Assessment = () => {
@@ -26,9 +26,11 @@ const Assessment = () => {
   const [assessmentResult, setAssessmentResult] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [completedAssessments, setCompletedAssessments] = useState<string[]>([]);
-  const [showChat, setShowChat] = useState(false);
-  const [autoAssessMode, setAutoAssessMode] = useState(false);
-  const [chatMinimized, setChatMinimized] = useState(true);
+  const [showConversationalAssessment, setShowConversationalAssessment] = useState(false);
+  const [scrollToChat, setScrollToChat] = useState(false);
+  
+  // Assessment types array
+  const assessmentTypes = ["ai-readiness", "board-effectiveness", "business-strategy", "organizational-structure", "digital-transformation", "executive-alignment"];
   
   useEffect(() => {
     const savedResults = JSON.parse(localStorage.getItem('stratifiedAssessments') || '{}');
@@ -55,10 +57,16 @@ const Assessment = () => {
       }
     }
     
-    if (completed.length > 0) {
-      setShowChat(true);
+    // Handle scrolling to chat if triggered
+    if (scrollToChat) {
+      const chatSection = document.getElementById('conversational-assessment');
+      if (chatSection) {
+        chatSection.scrollIntoView({ behavior: 'smooth' });
+        setScrollToChat(false);
+        setShowConversationalAssessment(true);
+      }
     }
-  }, [currentStep]);
+  }, [currentStep, scrollToChat]);
 
   const handleSelectAssessment = (type: string) => {
     setSelectedAssessment(type);
@@ -73,7 +81,6 @@ const Assessment = () => {
     
     localStorage.setItem('stratifiedLastAssessment', type);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    setChatMinimized(true);
   };
 
   const handleSubmitAssessment = async (formData: any) => {
@@ -123,9 +130,6 @@ const Assessment = () => {
           { duration: 4000 }
         );
       }
-      
-      setShowChat(true);
-      setChatMinimized(true);
     } catch (error) {
       console.error("Error processing assessment:", error);
       toast.error("An error occurred while processing your assessment");
@@ -138,20 +142,12 @@ const Assessment = () => {
     setCurrentStep(STEPS.SELECT);
     setSelectedAssessment(null);
     setAssessmentResult(null);
-    setAutoAssessMode(false);
-    setChatMinimized(true);
   };
   
-  const startAutoAssessment = () => {
-    setAutoAssessMode(true);
-    setShowChat(true);
-    setChatMinimized(false);
-    
-    setTimeout(() => {
-      toast.success("Auto-assessment mode activated. The AI will now guide you through a conversational assessment.");
-    }, 100);
+  const startConversationalAssessment = () => {
+    setScrollToChat(true);
   };
-
+  
   const handleCompleteAutoAssessment = (type: string, result: any) => {
     const savedResults = JSON.parse(localStorage.getItem('stratifiedAssessments') || '{}');
     savedResults[type] = result;
@@ -164,54 +160,112 @@ const Assessment = () => {
     toast.success(`${type.replace(/-/g, ' ')} assessment completed via conversation!`);
   };
 
-  const viewDashboard = () => {
-    setCurrentStep(STEPS.DASHBOARD);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setChatMinimized(true);
-  };
-
-  const assessmentTypes = ["ai-readiness", "board-effectiveness", "business-strategy", "organizational-structure", "digital-transformation", "executive-alignment"];
-
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-grow relative">
-        <AssessmentHeader currentStep={currentStep} />
+      <main className="flex-grow">
+        {/* Hero/Header Section with Assessment Method Choice */}
+        <section className="bg-stratified py-16 md:py-20 relative overflow-hidden">
+          <div className="absolute inset-0 z-0 opacity-10">
+            <motion.svg 
+              width="100%" 
+              height="100%" 
+              viewBox="0 0 100 100" 
+              fill="none" 
+              preserveAspectRatio="none"
+              animate={{ 
+                scale: [1, 1.02, 1],
+                opacity: [0.1, 0.15, 0.1] 
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                repeatType: "reverse"
+              }}
+            >
+              <pattern id="grid" width="8" height="8" patternUnits="userSpaceOnUse">
+                <path d="M 8 0 L 0 0 0 8" fill="none" stroke="white" strokeWidth="0.5" />
+              </pattern>
+              <rect width="100%" height="100%" fill="url(#grid)" />
+            </motion.svg>
+          </div>
+          
+          <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-stratified/80 to-transparent backdrop-blur-sm"></div>
+          <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-stratified/80 to-transparent backdrop-blur-sm"></div>
+          
+          <div className="container-custom relative z-10">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ duration: 0.5 }}
+              className="text-center"
+            >
+              <motion.h1 
+                className="text-white mb-4 drop-shadow-md text-3xl md:text-5xl font-bold tracking-tight"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+              >
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white/95 to-white/85">
+                  Executive Assessment Center
+                </span>
+              </motion.h1>
+              
+              <motion.p 
+                className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto font-medium tracking-wide"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+              >
+                Gain strategic insights through our data-driven assessment tools
+              </motion.p>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.5 }}
+                className="mt-12 flex flex-col sm:flex-row gap-4 justify-center"
+              >
+                <Button 
+                  className="bg-white hover:bg-white/90 text-stratified flex items-center gap-2 px-6 py-5 text-base rounded-full shadow-lg"
+                  onClick={() => window.scrollTo({ top: document.getElementById('assessment-types')?.offsetTop || 0, behavior: 'smooth' })}
+                >
+                  <PenLine className="h-4 w-4" />
+                  Guided Assessment
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="bg-transparent hover:bg-white/10 text-white border-white/30 flex items-center gap-2 px-6 py-5 text-base rounded-full shadow-lg"
+                  onClick={startConversationalAssessment}
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  Conversational Assessment
+                </Button>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
         
+        {/* Progress Overview */}
+        {completedAssessments.length > 0 && currentStep === STEPS.SELECT && (
+          <IntegratedDashboard 
+            completedAssessments={completedAssessments}
+            assessmentTypes={assessmentTypes}
+            onSelectAssessment={handleSelectAssessment}
+          />
+        )}
+        
+        {/* Main Content Section */}
         {currentStep === STEPS.SELECT && (
-          <>
-            {completedAssessments.length > 0 && (
-              <div className="bg-stratified/5 py-5 border-y border-stratified/10 shadow-sm">
-                <div className="container-custom">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <h3 className="text-lg font-medium">
-                        {completedAssessments.length === assessmentTypes.length
-                          ? "All assessments completed!"
-                          : `${completedAssessments.length} of ${assessmentTypes.length} assessments completed`}
-                      </h3>
-                      <p className="text-sm text-gray-600">
-                        {completedAssessments.length === assessmentTypes.length
-                          ? "View your dashboard for comprehensive insights."
-                          : "Continue to complete the remaining assessments."}
-                      </p>
-                    </div>
-                    <button
-                      onClick={viewDashboard}
-                      className="bg-stratified hover:bg-stratified-dark text-white px-5 py-2.5 rounded-md transition-colors shadow-sm"
-                    >
-                      View Dashboard
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-            <AssessmentSelector
-              completedAssessments={completedAssessments}
-              onSelect={handleSelectAssessment}
-              onAutoAssess={startAutoAssessment}
-            />
-          </>
+          <div id="assessment-types" className="py-12">
+            <div className="container-custom">
+              <h2 className="text-2xl font-bold mb-8 text-gray-800">Select an Assessment</h2>
+              <AssessmentTypes 
+                onSelect={handleSelectAssessment} 
+                completedAssessments={completedAssessments} 
+              />
+            </div>
+          </div>
         )}
         
         {currentStep === STEPS.FORM && selectedAssessment && (
@@ -231,88 +285,51 @@ const Assessment = () => {
           />
         )}
         
-        {currentStep === STEPS.DASHBOARD && (
-          <AssessmentDashboard
-            completedAssessments={completedAssessments}
-            assessmentTypes={assessmentTypes}
-            onSelectAssessment={handleSelectAssessment}
-          />
-        )}
-        
-        {autoAssessMode && (
-          <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-            <motion.div 
-              className="bg-white rounded-lg w-full max-w-2xl h-[85vh] flex flex-col shadow-2xl"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="bg-stratified text-white p-3 flex justify-between items-center rounded-t-lg">
-                <span className="font-medium flex items-center">
-                  <MessageCircle className="h-4 w-4 mr-2" />
-                  Conversational Assessment
-                </span>
-                <button 
-                  onClick={() => setAutoAssessMode(false)} 
-                  className="hover:bg-stratified-dark p-1 rounded transition-colors"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
-              <div className="flex-grow overflow-hidden">
-                <AssessmentChat 
-                  autoAssessMode={true}
-                  completedCount={completedAssessments.length}
-                  assessmentTypes={assessmentTypes}
-                  onCompleteAutoAssessment={handleCompleteAutoAssessment}
-                />
-              </div>
-            </motion.div>
-          </div>
-        )}
-        
-        {showChat && !autoAssessMode && (
-          <div className={`fixed bottom-4 right-4 z-40 transition-all duration-300 
-            ${chatMinimized 
-              ? 'w-14 h-14 rounded-full' 
-              : 'w-[400px] max-w-[95vw] h-[500px] max-h-[80vh] rounded-xl'}`}
-          >
-            {chatMinimized ? (
-              <button 
-                onClick={() => setChatMinimized(false)}
-                className="w-full h-full bg-stratified hover:bg-stratified-dark text-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105"
+        {/* Conversational Assessment Section - Always Present at Bottom */}
+        <section 
+          id="conversational-assessment" 
+          className="bg-gray-50 border-t border-gray-200 py-12"
+        >
+          <div className="container-custom max-w-4xl">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                <MessageCircle className="h-5 w-5 text-stratified" />
+                Conversational Assessment
+              </h2>
+              <Button
+                variant="outline"
+                className="text-sm border-stratified text-stratified hover:bg-stratified/5"
+                onClick={() => setShowConversationalAssessment(!showConversationalAssessment)}
               >
-                <MessageCircle className="h-6 w-6" />
-              </button>
-            ) : (
-              <motion.div 
-                className="bg-white rounded-xl w-full h-full flex flex-col shadow-2xl border"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
-                <div className="bg-stratified text-white p-3 flex justify-between items-center rounded-t-xl">
-                  <span className="font-medium flex items-center">
-                    <MessageCircle className="h-4 w-4 mr-2" />
-                    AI Assistant
-                  </span>
-                  <button 
-                    onClick={() => setChatMinimized(true)} 
-                    className="hover:bg-stratified-dark p-1 rounded transition-colors"
-                  >
-                    <X className="h-5 w-5" />
-                  </button>
-                </div>
-                <div className="flex-grow overflow-hidden">
-                  <AssessmentChat 
+                {showConversationalAssessment ? 'Minimize' : 'Expand'}
+              </Button>
+            </div>
+            
+            {showConversationalAssessment ? (
+              <div className="bg-white border rounded-lg shadow-sm overflow-hidden transition-all duration-300">
+                <div className="h-[500px]">
+                  <AssessmentChat
                     completedCount={completedAssessments.length}
                     assessmentTypes={assessmentTypes}
                     onCompleteAutoAssessment={handleCompleteAutoAssessment}
                   />
                 </div>
-              </motion.div>
+              </div>
+            ) : (
+              <div className="bg-gray-100 border rounded-lg p-6 text-center">
+                <p className="text-gray-600 mb-4">
+                  Our AI assistant can help you complete assessments through natural conversation.
+                </p>
+                <Button
+                  className="bg-stratified hover:bg-stratified-dark text-white"
+                  onClick={() => setShowConversationalAssessment(true)}
+                >
+                  Start Conversational Assessment
+                </Button>
+              </div>
             )}
           </div>
-        )}
+        </section>
       </main>
       <Footer />
       <Toaster position="top-center" />
