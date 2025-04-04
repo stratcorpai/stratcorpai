@@ -1,13 +1,14 @@
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowLeft, Send, Loader2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowLeft, Send, Loader2, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { toast } from "sonner";
 import { generateQuestionsForAssessment } from "@/utils/assessmentQuestions";
 
@@ -26,6 +27,7 @@ const AssessmentForm = ({
 }: AssessmentFormProps) => {
   const [currentSection, setCurrentSection] = useState(0);
   const [formData, setFormData] = useState<Record<string, any>>({});
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   // Generate questions based on assessment type
   const questions = generateQuestionsForAssessment(assessmentType);
@@ -50,6 +52,7 @@ const AssessmentForm = ({
     
     if (currentSection < sections.length - 1) {
       setCurrentSection(currentSection + 1);
+      setCurrentQuestionIndex(0);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       // Submit the form if we're on the last section
@@ -60,112 +63,190 @@ const AssessmentForm = ({
   const handlePrevSection = () => {
     if (currentSection > 0) {
       setCurrentSection(currentSection - 1);
+      setCurrentQuestionIndex(0);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       onBack();
     }
   };
+  
+  const handleNextQuestion = () => {
+    const currentSectionQuestions = sections[currentSection].questions;
+    if (!formData[currentSectionQuestions[currentQuestionIndex].id]) {
+      toast.error("Please answer this question before continuing");
+      return;
+    }
+    
+    if (currentQuestionIndex < currentSectionQuestions.length - 1) {
+      setCurrentQuestionIndex(prevIndex => prevIndex + 1);
+    } else {
+      handleNextSection();
+    }
+  };
+  
+  const handlePrevQuestion = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(prevIndex => prevIndex - 1);
+    } else if (currentSection > 0) {
+      setCurrentSection(prevIndex => prevIndex - 1);
+      setCurrentQuestionIndex(sections[currentSection - 1].questions.length - 1);
+    } else {
+      onBack();
+    }
+  };
 
-  const progressPercentage = ((currentSection + 1) / sections.length) * 100;
+  const currentSectionQuestions = sections[currentSection].questions;
+  const currentQuestion = currentSectionQuestions[currentQuestionIndex];
+  const totalQuestions = sections.reduce((sum, section) => sum + section.questions.length, 0);
+  const completedQuestions = Object.keys(formData).length;
+  
+  // Calculate overall progress
+  const overallQuestionIndex = sections.slice(0, currentSection).reduce(
+    (sum, section) => sum + section.questions.length, 
+    0
+  ) + currentQuestionIndex;
+  
+  const progressPercentage = (overallQuestionIndex / totalQuestions) * 100;
 
   return (
     <section className="section-padding bg-gray-50">
-      <div className="container-custom max-w-4xl">
+      <div className="container-custom max-w-3xl">
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <Button
               variant="ghost"
-              onClick={handlePrevSection}
+              onClick={handlePrevQuestion}
               className="flex items-center text-gray-600"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back
             </Button>
             <div className="text-sm text-gray-500">
-              Section {currentSection + 1} of {sections.length}
+              <span className="font-medium">{sections[currentSection].title}</span> • Question {currentQuestionIndex + 1} of {currentSectionQuestions.length}
             </div>
           </div>
           
-          <Progress value={progressPercentage} className="h-2" />
+          <div className="space-y-2">
+            <Progress value={progressPercentage} className="h-2" />
+            <div className="flex justify-between text-xs text-gray-500">
+              <span>Overall Progress: {completedQuestions}/{totalQuestions} Questions</span>
+              <span>Section {currentSection + 1} of {sections.length}</span>
+            </div>
+          </div>
         </div>
 
         <Card className="border shadow-lg">
-          <CardContent className="p-6">
-            <motion.div
-              key={currentSection}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
-            >
-              <h3 className="text-2xl font-bold text-stratified mb-6">
-                {sections[currentSection].title}
-              </h3>
-
-              <div className="space-y-8">
-                {sections[currentSection].questions.map((question) => (
-                  <div key={question.id} className="border-b border-gray-100 pb-6 last:border-0">
-                    <h4 className="text-lg font-medium text-gray-800 mb-3">
-                      {question.text}
-                    </h4>
-                    <p className="text-gray-600 text-sm mb-4">{question.description}</p>
-                    
-                    {question.type === "text" && (
-                      <Textarea
-                        placeholder="Enter your answer..."
-                        value={formData[question.id] || ""}
-                        onChange={(e) => handleInputChange(question.id, e.target.value)}
-                        className="min-h-24"
-                      />
-                    )}
-                    
-                    {question.type === "radio" && (
-                      <RadioGroup
-                        value={formData[question.id] || ""}
-                        onValueChange={(value) => handleInputChange(question.id, value)}
-                        className="space-y-3"
-                      >
-                        {question.options?.map((option) => (
-                          <div key={option.value} className="flex items-center space-x-2">
-                            <RadioGroupItem value={option.value} id={`${question.id}-${option.value}`} />
-                            <Label htmlFor={`${question.id}-${option.value}`} className="text-gray-700">
+          <CardContent className="p-6 md:p-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`${currentSection}-${currentQuestionIndex}`}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="space-y-6"
+              >
+                <div className="flex items-start justify-between">
+                  <h3 className="text-xl md:text-2xl font-bold text-stratified">
+                    {currentQuestion.text}
+                  </h3>
+                  
+                  {currentQuestion.helpText && (
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="ghost" size="icon" className="text-gray-400 hover:text-gray-500">
+                            <HelpCircle className="h-5 w-5" />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent className="max-w-xs">
+                          <p>{currentQuestion.helpText}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  )}
+                </div>
+                
+                <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
+                  <p className="text-gray-600 text-sm md:text-base">
+                    {currentQuestion.description}
+                  </p>
+                </div>
+                
+                <div className="pt-4">
+                  {currentQuestion.type === "text" && (
+                    <Textarea
+                      placeholder="Enter your answer..."
+                      value={formData[currentQuestion.id] || ""}
+                      onChange={(e) => handleInputChange(currentQuestion.id, e.target.value)}
+                      className="min-h-32 bg-white shadow-sm focus:border-stratified"
+                    />
+                  )}
+                  
+                  {currentQuestion.type === "radio" && (
+                    <RadioGroup
+                      value={formData[currentQuestion.id] || ""}
+                      onValueChange={(value) => handleInputChange(currentQuestion.id, value)}
+                      className="space-y-4"
+                    >
+                      {currentQuestion.options?.map((option) => (
+                        <div key={option.value} className="flex items-start space-x-3 bg-white p-4 rounded-lg border border-gray-100 hover:border-gray-200 transition-colors">
+                          <RadioGroupItem 
+                            value={option.value} 
+                            id={`${currentQuestion.id}-${option.value}`}
+                            className="mt-1" 
+                          />
+                          <div className="flex-1">
+                            <Label 
+                              htmlFor={`${currentQuestion.id}-${option.value}`} 
+                              className="text-gray-800 font-medium"
+                            >
                               {option.label}
                             </Label>
+                            {option.description && (
+                              <p className="text-gray-500 text-sm mt-1">{option.description}</p>
+                            )}
                           </div>
-                        ))}
-                      </RadioGroup>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 flex justify-end">
-                <Button
-                  onClick={handleNextSection}
-                  disabled={isLoading}
-                  className="bg-stratified hover:bg-stratified-dark text-white px-6"
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Processing...
-                    </>
-                  ) : currentSection === sections.length - 1 ? (
-                    <>
-                      Submit Assessment
-                      <Send className="ml-2 h-4 w-4" />
-                    </>
-                  ) : (
-                    "Next Section"
+                        </div>
+                      ))}
+                    </RadioGroup>
                   )}
-                </Button>
-              </div>
-            </motion.div>
+                </div>
+
+                <div className="pt-4 flex justify-end">
+                  <Button
+                    onClick={handleNextQuestion}
+                    disabled={isLoading}
+                    className="bg-stratified hover:bg-stratified-dark text-white px-6"
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Processing...
+                      </>
+                    ) : isLastQuestionInLastSection() ? (
+                      <>
+                        Submit Assessment
+                        <Send className="ml-2 h-4 w-4" />
+                      </>
+                    ) : (
+                      "Next Question"
+                    )}
+                  </Button>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </CardContent>
         </Card>
       </div>
     </section>
   );
+  
+  // Helper function to check if we're on the last question of the last section
+  function isLastQuestionInLastSection() {
+    return currentSection === sections.length - 1 && 
+           currentQuestionIndex === sections[currentSection].questions.length - 1;
+  }
 };
 
 // Helper function to group questions by section

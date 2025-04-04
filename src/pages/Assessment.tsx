@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -27,6 +28,7 @@ const Assessment = () => {
   const [completedAssessments, setCompletedAssessments] = useState<string[]>([]);
   const [showChat, setShowChat] = useState(false);
   const [autoAssessMode, setAutoAssessMode] = useState(false);
+  const [chatMinimized, setChatMinimized] = useState(true);
   
   useEffect(() => {
     const savedResults = JSON.parse(localStorage.getItem('stratifiedAssessments') || '{}');
@@ -71,6 +73,7 @@ const Assessment = () => {
     
     localStorage.setItem('stratifiedLastAssessment', type);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setChatMinimized(true);
   };
 
   const handleSubmitAssessment = async (formData: any) => {
@@ -79,6 +82,7 @@ const Assessment = () => {
     try {
       const assessmentTypeFormatted = selectedAssessment?.replace(/-/g, ' ') || 'general';
       
+      // Simulate API call with a delay
       await new Promise(resolve => setTimeout(resolve, 3000));
       
       const strengths = generateRelevantStrengths(selectedAssessment, formData);
@@ -90,7 +94,8 @@ const Assessment = () => {
         score,
         strengths,
         opportunities,
-        recommendations
+        recommendations,
+        completedAt: new Date().toISOString()
       };
       
       const savedResults = JSON.parse(localStorage.getItem('stratifiedAssessments') || '{}');
@@ -120,6 +125,7 @@ const Assessment = () => {
       }
       
       setShowChat(true);
+      setChatMinimized(true);
     } catch (error) {
       console.error("Error processing assessment:", error);
       toast.error("An error occurred while processing your assessment");
@@ -133,11 +139,13 @@ const Assessment = () => {
     setSelectedAssessment(null);
     setAssessmentResult(null);
     setAutoAssessMode(false);
+    setChatMinimized(true);
   };
   
   const startAutoAssessment = () => {
     setAutoAssessMode(true);
     setShowChat(true);
+    setChatMinimized(false);
     
     setTimeout(() => {
       toast.success("Auto-assessment mode activated. The AI will now guide you through a conversational assessment.");
@@ -159,6 +167,7 @@ const Assessment = () => {
   const viewDashboard = () => {
     setCurrentStep(STEPS.DASHBOARD);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setChatMinimized(true);
   };
 
   const assessmentTypes = ["ai-readiness", "board-effectiveness", "business-strategy", "organizational-structure", "digital-transformation", "executive-alignment"];
@@ -166,13 +175,13 @@ const Assessment = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-grow">
+      <main className="flex-grow relative">
         <AssessmentHeader currentStep={currentStep} />
         
         {currentStep === STEPS.SELECT && (
           <>
             {completedAssessments.length > 0 && (
-              <div className="bg-stratified/5 py-4 border-y">
+              <div className="bg-stratified/5 py-5 border-y border-stratified/10 shadow-sm">
                 <div className="container-custom">
                   <div className="flex justify-between items-center">
                     <div>
@@ -189,7 +198,7 @@ const Assessment = () => {
                     </div>
                     <button
                       onClick={viewDashboard}
-                      className="bg-stratified hover:bg-stratified-dark text-white px-4 py-2 rounded-md"
+                      className="bg-stratified hover:bg-stratified-dark text-white px-5 py-2.5 rounded-md transition-colors shadow-sm"
                     >
                       View Dashboard
                     </button>
@@ -231,14 +240,22 @@ const Assessment = () => {
         )}
         
         {autoAssessMode && (
-          <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-lg w-full max-w-2xl h-[80vh] flex flex-col">
-              <div className="bg-stratified text-white p-3 flex justify-between items-center">
+          <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+            <motion.div 
+              className="bg-white rounded-lg w-full max-w-2xl h-[85vh] flex flex-col shadow-2xl"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="bg-stratified text-white p-3 flex justify-between items-center rounded-t-lg">
                 <span className="font-medium flex items-center">
                   <MessageCircle className="h-4 w-4 mr-2" />
                   Conversational Assessment
                 </span>
-                <button onClick={() => setAutoAssessMode(false)} className="hover:bg-stratified-dark p-1 rounded">
+                <button 
+                  onClick={() => setAutoAssessMode(false)} 
+                  className="hover:bg-stratified-dark p-1 rounded transition-colors"
+                >
                   <X className="h-5 w-5" />
                 </button>
               </div>
@@ -250,17 +267,50 @@ const Assessment = () => {
                   onCompleteAutoAssessment={handleCompleteAutoAssessment}
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
         )}
         
-        {showChat && !autoAssessMode && currentStep !== STEPS.FORM && (
-          <div className="mb-4 mt-8">
-            <AssessmentChat 
-              completedCount={completedAssessments.length}
-              assessmentTypes={assessmentTypes}
-              onCompleteAutoAssessment={handleCompleteAutoAssessment}
-            />
+        {showChat && !autoAssessMode && (
+          <div className={`fixed bottom-4 right-4 z-40 transition-all duration-300 
+            ${chatMinimized 
+              ? 'w-14 h-14 rounded-full' 
+              : 'w-[400px] max-w-[95vw] h-[500px] max-h-[80vh] rounded-xl'}`}
+          >
+            {chatMinimized ? (
+              <button 
+                onClick={() => setChatMinimized(false)}
+                className="w-full h-full bg-stratified hover:bg-stratified-dark text-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105"
+              >
+                <MessageCircle className="h-6 w-6" />
+              </button>
+            ) : (
+              <motion.div 
+                className="bg-white rounded-xl w-full h-full flex flex-col shadow-2xl border"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <div className="bg-stratified text-white p-3 flex justify-between items-center rounded-t-xl">
+                  <span className="font-medium flex items-center">
+                    <MessageCircle className="h-4 w-4 mr-2" />
+                    AI Assistant
+                  </span>
+                  <button 
+                    onClick={() => setChatMinimized(true)} 
+                    className="hover:bg-stratified-dark p-1 rounded transition-colors"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
+                <div className="flex-grow overflow-hidden">
+                  <AssessmentChat 
+                    completedCount={completedAssessments.length}
+                    assessmentTypes={assessmentTypes}
+                    onCompleteAutoAssessment={handleCompleteAutoAssessment}
+                  />
+                </div>
+              </motion.div>
+            )}
           </div>
         )}
       </main>

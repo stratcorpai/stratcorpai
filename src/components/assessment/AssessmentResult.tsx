@@ -1,11 +1,11 @@
 
 import { motion } from "framer-motion";
-import { Download, RefreshCw, Mail, BarChart3, CheckCircle2, AlertCircle } from "lucide-react";
+import { Download, RefreshCw, Mail, BarChart3, CheckCircle2, AlertCircle, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
@@ -25,6 +25,7 @@ const AssessmentResult = ({
   assessmentType,
   onStartNew
 }: AssessmentResultProps) => {
+  const [animateScore, setAnimateScore] = useState(false);
   const assessmentTitles: Record<string, string> = {
     "ai-readiness": "AI Readiness Assessment",
     "board-effectiveness": "Board Effectiveness Assessment",
@@ -44,6 +45,9 @@ const AssessmentResult = ({
     
     // Check if all assessments are completed
     checkAllAssessmentsCompleted();
+    
+    // Trigger score animation after a short delay
+    setTimeout(() => setAnimateScore(true), 500);
   }, [assessmentType, result]);
   
   const checkAllAssessmentsCompleted = () => {
@@ -125,6 +129,14 @@ const AssessmentResult = ({
     if (score >= 20) return "text-orange-600";
     return "text-red-600";
   };
+  
+  // Calculate the date the assessment was completed
+  const today = new Date();
+  const formattedDate = today.toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
 
   return (
     <section className="section-padding bg-gray-50">
@@ -135,7 +147,7 @@ const AssessmentResult = ({
           transition={{ duration: 0.5 }}
         >
           <Card className="border-0 shadow-2xl overflow-hidden" id="assessment-report">
-            <div className="bg-stratified text-white p-8 relative">
+            <div className="bg-stratified text-white p-8 md:p-10 relative">
               <div className="absolute inset-0 z-0 opacity-10">
                 <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                   <pattern id="gridPattern" width="10" height="10" patternUnits="userSpaceOnUse">
@@ -146,108 +158,172 @@ const AssessmentResult = ({
               </div>
               
               <div className="relative z-10">
-                <h2 className="text-2xl font-bold mb-2">
-                  {title}: Results
-                </h2>
-                <p className="opacity-90">
-                  Based on your responses, we've generated the following insights
+                <div className="flex items-center justify-between">
+                  <h2 className="text-2xl md:text-3xl font-bold">
+                    {title}
+                  </h2>
+                  <div className="flex items-center text-white/70 text-sm">
+                    <Calendar className="h-4 w-4 mr-1" />
+                    {formattedDate}
+                  </div>
+                </div>
+                <p className="opacity-90 mt-2 md:text-lg">
+                  Based on your responses, we've generated the following strategic insights
                 </p>
               </div>
             </div>
             
-            <CardContent className="p-8">
+            <CardContent className="p-8 md:p-10">
               <div className="flex flex-col md:flex-row gap-8 mb-8">
                 <div className="flex-1">
                   <p className="text-gray-500 mb-2 flex items-center">
-                    <BarChart3 className="h-4 w-4 mr-1" />
+                    <BarChart3 className="h-4 w-4 mr-2" />
                     Overall Score
                   </p>
                   <div className="flex items-end">
-                    <h3 className={`text-5xl font-bold ${getScoreColor(result.score)}`}>
+                    <motion.h3 
+                      className={`text-5xl md:text-7xl font-bold ${getScoreColor(result.score)}`}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ 
+                        opacity: 1, 
+                        scale: 1,
+                        y: animateScore ? [0, -10, 0] : 0 
+                      }}
+                      transition={{ 
+                        duration: 0.7,
+                        ease: "easeOut",
+                        delay: 0.3
+                      }}
+                    >
                       {result.score}
-                    </h3>
+                    </motion.h3>
                     <span className="text-gray-500 ml-2 mb-1">/100</span>
                   </div>
-                  <p className={`font-medium ${getScoreColor(result.score)} mt-1`}>
+                  <p className={`font-medium ${getScoreColor(result.score)} mt-1 text-lg`}>
                     {getScoreCategory(result.score)}
                   </p>
                 </div>
                 
                 <div className="flex-1">
-                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
-                    <p className="text-gray-800 font-medium mb-2">Summary</p>
-                    <p className="text-gray-600 text-sm">
+                  <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm">
+                    <p className="text-gray-800 font-semibold mb-3 text-lg">Executive Summary</p>
+                    <p className="text-gray-600 leading-relaxed">
                       Your organization demonstrates {result.score >= 50 ? 'strong potential' : 'areas for growth'} in {assessmentTitles[assessmentType]?.toLowerCase() || 'this area'}. 
-                      We've identified key strengths to leverage and opportunities for development.
+                      We've identified key strengths to leverage and strategic opportunities for development.
                     </p>
                   </div>
                 </div>
               </div>
               
-              <Separator className="my-6" />
+              <Separator className="my-8" />
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                <Card className="border border-emerald-100 bg-emerald-50/30">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center text-emerald-700">
-                      <CheckCircle2 className="h-5 w-5 mr-2" />
-                      Key Strengths
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      {result.strengths.map((strength, index) => (
-                        <li key={index} className="text-gray-800 flex">
-                          <span className="text-emerald-500 font-bold mr-2">+</span>
-                          {strength}
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  <Card className="border border-emerald-100 bg-emerald-50/30 shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <CardHeader className="pb-2">
+                      <CardTitle className="text-lg flex items-center text-emerald-700">
+                        <CheckCircle2 className="h-5 w-5 mr-2" />
+                        Key Strengths
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-3">
+                        {result.strengths.map((strength, index) => (
+                          <motion.li 
+                            key={index} 
+                            className="text-gray-800 flex bg-white p-3 rounded-lg shadow-sm"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3, delay: 0.1 * index }}
+                          >
+                            <span className="text-emerald-500 font-bold mr-2">+</span>
+                            {strength}
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </motion.div>
                 
-                <Card className="border border-amber-100 bg-amber-50/30">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center text-amber-700">
-                      <AlertCircle className="h-5 w-5 mr-2" />
-                      Opportunities
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      {result.opportunities.map((opportunity, index) => (
-                        <li key={index} className="text-gray-800 flex">
-                          <span className="text-amber-500 font-bold mr-2">›</span>
-                          {opportunity}
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  <Card className="border border-amber-100 bg-amber-50/30 shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <CardHeader className="pb-2">
+                      <CardTitle className="text-lg flex items-center text-amber-700">
+                        <AlertCircle className="h-5 w-5 mr-2" />
+                        Opportunities
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-3">
+                        {result.opportunities.map((opportunity, index) => (
+                          <motion.li 
+                            key={index} 
+                            className="text-gray-800 flex bg-white p-3 rounded-lg shadow-sm"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3, delay: 0.1 * index }}
+                          >
+                            <span className="text-amber-500 font-bold mr-2">›</span>
+                            {opportunity}
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               </div>
               
-              <div className="bg-gray-50 border border-gray-100 rounded-lg p-6 mb-8">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">
-                  Recommendations
-                </h3>
-                <ul className="space-y-4">
-                  {result.recommendations.map((recommendation, index) => (
-                    <li key={index} className="flex">
-                      <div className="bg-stratified text-white flex items-center justify-center rounded-full w-6 h-6 mt-0.5 mr-3 flex-shrink-0">
-                        {index + 1}
-                      </div>
-                      <p className="text-gray-700">{recommendation}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="mb-10"
+              >
+                <div className="bg-white border border-gray-200 rounded-xl p-8 shadow-md">
+                  <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                    <span className="bg-stratified text-white p-1 rounded-md mr-3">
+                      <BarChart3 className="h-5 w-5" />
+                    </span>
+                    Strategic Recommendations
+                  </h3>
+                  <ul className="space-y-5">
+                    {result.recommendations.map((recommendation, index) => (
+                      <motion.li 
+                        key={index} 
+                        className="flex group"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: 0.2 * index }}
+                      >
+                        <div className="bg-stratified text-white flex items-center justify-center rounded-full w-8 h-8 mt-0.5 mr-4 flex-shrink-0 group-hover:scale-110 transition-transform">
+                          {index + 1}
+                        </div>
+                        <div>
+                          <p className="text-gray-800 font-medium">{recommendation}</p>
+                          <p className="text-gray-500 text-sm mt-1">
+                            {index === 0 ? 'Immediate priority' : index === 1 ? 'Medium-term focus' : 'Strategic initiative'}
+                          </p>
+                        </div>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
               
               <div className="flex flex-wrap gap-4 justify-between">
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-3">
                   <Button 
                     variant="outline" 
                     onClick={handleDownloadReport}
-                    className="bg-white"
+                    className="bg-white hover:bg-gray-50"
                   >
                     <Download className="mr-2 h-4 w-4" />
                     Download Report
@@ -255,7 +331,7 @@ const AssessmentResult = ({
                   <Button 
                     variant="outline" 
                     onClick={handleEmailReport}
-                    className="bg-white"
+                    className="bg-white hover:bg-gray-50"
                   >
                     <Mail className="mr-2 h-4 w-4" />
                     Email Report

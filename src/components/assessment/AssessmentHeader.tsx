@@ -16,10 +16,13 @@ const AssessmentHeader = ({ currentStep }: AssessmentHeaderProps) => {
   } else if (currentStep === 'result') {
     title = "Strategic Analysis Results";
     subtitle = "Review your personalized insights and implementation roadmap";
+  } else if (currentStep === 'dashboard') {
+    title = "Assessment Dashboard";
+    subtitle = "Track your progress and compare results across assessments";
   }
 
   return (
-    <section className="bg-stratified py-16 relative overflow-hidden">
+    <section className="bg-stratified py-16 md:py-20 relative overflow-hidden">
       {/* Enhanced background pattern with subtle animation */}
       <div className="absolute inset-0 z-0 opacity-10">
         <motion.svg 
@@ -31,7 +34,7 @@ const AssessmentHeader = ({ currentStep }: AssessmentHeaderProps) => {
           preserveAspectRatio="none"
           animate={{ 
             scale: [1, 1.02, 1],
-            opacity: [0.1, 0.12, 0.1] 
+            opacity: [0.1, 0.15, 0.1] 
           }}
           transition={{
             duration: 8,
@@ -46,7 +49,7 @@ const AssessmentHeader = ({ currentStep }: AssessmentHeaderProps) => {
         </motion.svg>
       </div>
       
-      {/* Glassmorphism overlays */}
+      {/* Improved glassmorphism overlays */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-stratified/80 to-transparent backdrop-blur-sm"></div>
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-stratified/80 to-transparent backdrop-blur-sm"></div>
       
@@ -58,7 +61,7 @@ const AssessmentHeader = ({ currentStep }: AssessmentHeaderProps) => {
           className="text-center"
         >
           <motion.h1 
-            className="text-white mb-3 drop-shadow-md text-3xl md:text-4xl font-bold tracking-tight"
+            className="text-white mb-4 drop-shadow-md text-3xl md:text-5xl font-bold tracking-tight"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
@@ -69,7 +72,7 @@ const AssessmentHeader = ({ currentStep }: AssessmentHeaderProps) => {
           </motion.h1>
           
           <motion.p 
-            className="text-lg text-white/90 max-w-3xl mx-auto font-medium"
+            className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto font-medium tracking-wide"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
@@ -82,20 +85,20 @@ const AssessmentHeader = ({ currentStep }: AssessmentHeaderProps) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.5 }}
-              className="mt-8 max-w-2xl mx-auto"
+              className="mt-10 max-w-2xl mx-auto"
             >
-              <div className="px-6 py-4 backdrop-blur-md bg-white/5 border border-white/10 rounded-lg shadow-lg">
-                <p className="text-white/80 italic border-l-4 border-white/30 pl-4 py-1 text-left">
+              <div className="px-8 py-6 backdrop-blur-lg bg-white/8 border border-white/15 rounded-lg shadow-xl">
+                <p className="text-white/90 italic border-l-4 border-white/40 pl-6 py-2 text-left leading-relaxed">
                   "Strategic assessment is not about finding problems; it's about uncovering opportunities that align with your vision."
                 </p>
-                <p className="text-white/70 text-right mt-2">— Stratified Advisory Leadership Team</p>
+                <p className="text-white/70 text-right mt-3">— Stratified Advisory Leadership Team</p>
               </div>
             </motion.div>
           )}
           
           {/* Decorative elements */}
-          <div className="hidden md:block absolute -top-6 -left-6 w-24 h-24 rounded-full bg-white/5 backdrop-blur-sm animate-pulse"></div>
-          <div className="hidden md:block absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-white/5 backdrop-blur-sm animate-pulse" style={{ animationDelay: "1.5s" }}></div>
+          <div className="hidden md:block absolute -top-6 -left-6 w-24 h-24 rounded-full bg-white/10 backdrop-blur-sm animate-pulse"></div>
+          <div className="hidden md:block absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-white/10 backdrop-blur-sm animate-pulse" style={{ animationDelay: "1.5s" }}></div>
         </motion.div>
       </div>
     </section>
