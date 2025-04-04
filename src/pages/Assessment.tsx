@@ -9,6 +9,7 @@ import AssessmentChat from "@/components/assessment/AssessmentChat";
 import AssessmentDashboard from "@/components/assessment/dashboard/AssessmentDashboard";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
+import { MessageCircle, X } from "lucide-react";
 import { generateRelevantStrengths, generateRelevantOpportunities, generateRelevantRecommendations, calculateAssessmentScore } from "@/utils/assessmentUtils";
 
 const STEPS = {
@@ -242,7 +243,7 @@ const Assessment = () => {
                 </button>
               </div>
               <div className="flex-grow overflow-hidden">
-                <AssessmentChatEngine 
+                <AssessmentChat 
                   autoAssessMode={true}
                   completedCount={completedAssessments.length}
                   assessmentTypes={assessmentTypes}
