@@ -201,14 +201,6 @@ const Assessment = () => {
               onSelect={handleSelectAssessment}
               onAutoAssess={startAutoAssessment}
             />
-            
-            {showChat && !autoAssessMode && (
-              <AssessmentChat 
-                completedCount={completedAssessments.length}
-                assessmentTypes={assessmentTypes}
-                onCompleteAutoAssessment={handleCompleteAutoAssessment}
-              />
-            )}
           </>
         )}
         
@@ -222,45 +214,48 @@ const Assessment = () => {
         )}
         
         {currentStep === STEPS.RESULT && assessmentResult && (
-          <>
-            <AssessmentResult 
-              result={assessmentResult} 
-              assessmentType={selectedAssessment!}
-              onStartNew={resetAssessment}
-            />
-            
-            {showChat && !autoAssessMode && (
-              <AssessmentChat 
-                completedCount={completedAssessments.length}
-                assessmentTypes={assessmentTypes}
-                onCompleteAutoAssessment={handleCompleteAutoAssessment}
-              />
-            )}
-          </>
+          <AssessmentResult 
+            result={assessmentResult} 
+            assessmentType={selectedAssessment!}
+            onStartNew={resetAssessment}
+          />
         )}
         
         {currentStep === STEPS.DASHBOARD && (
-          <>
-            <AssessmentDashboard
-              completedAssessments={completedAssessments}
-              assessmentTypes={assessmentTypes}
-              onSelectAssessment={handleSelectAssessment}
-            />
-            
-            {showChat && !autoAssessMode && (
-              <AssessmentChat 
-                completedCount={completedAssessments.length}
-                assessmentTypes={assessmentTypes}
-                onCompleteAutoAssessment={handleCompleteAutoAssessment}
-              />
-            )}
-          </>
+          <AssessmentDashboard
+            completedAssessments={completedAssessments}
+            assessmentTypes={assessmentTypes}
+            onSelectAssessment={handleSelectAssessment}
+          />
         )}
-            
-        {showChat && autoAssessMode && (
-          <div className="fixed bottom-0 right-0 z-50">
+        
+        {autoAssessMode && (
+          <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+            <div className="bg-white rounded-lg w-full max-w-2xl h-[80vh] flex flex-col">
+              <div className="bg-stratified text-white p-3 flex justify-between items-center">
+                <span className="font-medium flex items-center">
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  Conversational Assessment
+                </span>
+                <button onClick={() => setAutoAssessMode(false)} className="hover:bg-stratified-dark p-1 rounded">
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              <div className="flex-grow overflow-hidden">
+                <AssessmentChatEngine 
+                  autoAssessMode={true}
+                  completedCount={completedAssessments.length}
+                  assessmentTypes={assessmentTypes}
+                  onCompleteAutoAssessment={handleCompleteAutoAssessment}
+                />
+              </div>
+            </div>
+          </div>
+        )}
+        
+        {showChat && !autoAssessMode && currentStep !== STEPS.FORM && (
+          <div className="mb-4 mt-8">
             <AssessmentChat 
-              autoAssessMode={autoAssessMode} 
               completedCount={completedAssessments.length}
               assessmentTypes={assessmentTypes}
               onCompleteAutoAssessment={handleCompleteAutoAssessment}

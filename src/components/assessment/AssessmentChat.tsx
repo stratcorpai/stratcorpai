@@ -16,7 +16,7 @@ const AssessmentChat: FC<AssessmentChatProps> = ({
   onCompleteAutoAssessment 
 }: AssessmentChatProps) => {
   return (
-    <div className="container-custom max-w-4xl mb-10">
+    <div className="container-custom max-w-4xl mb-8">
       <CollapsibleChatPanel
         autoAssessMode={autoAssessMode}
         completedCount={completedCount}
