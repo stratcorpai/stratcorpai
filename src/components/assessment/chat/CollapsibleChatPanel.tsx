@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AssessmentChatEngine from './AssessmentChatEngine';
@@ -35,27 +35,29 @@ const CollapsibleChatPanel = ({
           </Button>
         </SheetTrigger>
         <SheetContent side="bottom" className="h-[80vh] p-0 pt-10">
-          <AssessmentChatEngine
-            autoAssessMode={autoAssessMode}
-            completedCount={completedCount}
-            assessmentTypes={assessmentTypes}
-            onCompleteAutoAssessment={onCompleteAutoAssessment}
-          />
+          <div className="h-full flex flex-col">
+            <AssessmentChatEngine
+              autoAssessMode={autoAssessMode}
+              completedCount={completedCount}
+              assessmentTypes={assessmentTypes}
+              onCompleteAutoAssessment={onCompleteAutoAssessment}
+            />
+          </div>
         </SheetContent>
       </Sheet>
     );
   }
 
-  // For desktop, we'll return the fully expanded chat
+  // For desktop, we'll return the fully expanded chat with full height
   return (
-    <div className="w-full border rounded-lg overflow-hidden shadow-sm">
+    <div className="w-full border rounded-lg overflow-hidden shadow-sm" style={{ height: '600px' }}>
       <div className="bg-stratified p-3 flex justify-between items-center text-white">
         <span className="font-medium flex items-center">
           <MessageCircle className="h-4 w-4 mr-2" />
           AI Assistant
         </span>
       </div>
-      <div className="bg-white border-t border-gray-200" style={{ height: '400px' }}>
+      <div className="bg-white border-t border-gray-200" style={{ height: 'calc(100% - 48px)' }}>
         <AssessmentChatEngine
           autoAssessMode={autoAssessMode}
           completedCount={completedCount}

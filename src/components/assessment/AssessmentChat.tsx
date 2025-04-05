@@ -24,7 +24,7 @@ const AssessmentChat: FC<AssessmentChatProps> = ({
           AI Assistant
         </span>
       </div>
-      <div className="bg-white border-t border-gray-200" style={{ height: '400px' }}>
+      <div className="bg-white border-t border-gray-200" style={{ height: 'calc(100% - 48px)' }}>
         <AssessmentChatEngine
           autoAssessMode={autoAssessMode}
           completedCount={completedCount}
