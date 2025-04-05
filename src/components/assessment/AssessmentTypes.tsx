@@ -27,7 +27,7 @@ const AssessmentTypes = ({ onSelect, completedAssessments = [] }: AssessmentType
     {
       id: "ai-readiness",
       title: "AI Readiness",
-      description: "Evaluate your organization's preparedness to adopt and integrate AI technologies effectively.",
+      description: "Evaluate your preparedness for AI adoption and integration. Assess organizational capabilities and infrastructure requirements. Identify key opportunities for AI enhancement.",
       icon: Brain,
       color: "bg-gradient-to-br from-purple-500/10 to-purple-700/20 border-purple-200/20",
       detail: "Assess AI infrastructure needs, data readiness, talent gaps, and cultural preparedness for AI transformation.",
@@ -36,7 +36,7 @@ const AssessmentTypes = ({ onSelect, completedAssessments = [] }: AssessmentType
     {
       id: "board-effectiveness",
       title: "Board Effectiveness",
-      description: "Assess your board's performance, structure, and strategic alignment with organizational goals.",
+      description: "Analyze board structure, dynamics, and strategic alignment. Evaluate governance practices and decision-making processes. Enhance board performance and organizational oversight capabilities.",
       icon: Users,
       color: "bg-gradient-to-br from-blue-500/10 to-blue-700/20 border-blue-200/20",
       detail: "Evaluate board composition, meeting effectiveness, decision-making processes, and strategic oversight capabilities.",
@@ -45,7 +45,7 @@ const AssessmentTypes = ({ onSelect, completedAssessments = [] }: AssessmentType
     {
       id: "business-strategy",
       title: "Business Strategy",
-      description: "Analyze your strategic positioning, competitive advantage, and growth trajectory in the market.",
+      description: "Examine strategic positioning and competitive market advantages. Identify growth trajectories and opportunity areas. Align resources with long-term organizational objectives.",
       icon: BarChart3,
       color: "bg-gradient-to-br from-emerald-500/10 to-emerald-700/20 border-emerald-200/20",
       detail: "Examine market position, competitive differentiation, growth vectors, and alignment of resources with strategic objectives.",
@@ -54,7 +54,7 @@ const AssessmentTypes = ({ onSelect, completedAssessments = [] }: AssessmentType
     {
       id: "organizational-structure",
       title: "Organizational Structure",
-      description: "Evaluate your company's structure, roles, and operational efficiency for optimal performance.",
+      description: "Evaluate company structure, role clarity, and reporting relationships. Analyze cross-functional collaboration and workflow efficiency. Identify and address operational bottlenecks and redundancies.",
       icon: Building,
       color: "bg-gradient-to-br from-amber-500/10 to-amber-700/20 border-amber-200/20",
       detail: "Analyze reporting structures, role clarity, cross-functional collaboration, and operational bottlenecks.",
@@ -63,7 +63,7 @@ const AssessmentTypes = ({ onSelect, completedAssessments = [] }: AssessmentType
     {
       id: "digital-transformation",
       title: "Digital Transformation",
-      description: "Measure your progress and readiness for comprehensive digital transformation initiatives.",
+      description: "Measure digital maturity and technology infrastructure readiness. Assess change management capabilities and digital adoption strategies. Identify priority areas for digital enhancement initiatives.",
       icon: Bot,
       color: "bg-gradient-to-br from-cyan-500/10 to-cyan-700/20 border-cyan-200/20",
       detail: "Assess digital maturity, technology stack, change management capabilities, and cultural readiness for transformation.",
@@ -72,7 +72,7 @@ const AssessmentTypes = ({ onSelect, completedAssessments = [] }: AssessmentType
     {
       id: "executive-alignment",
       title: "Executive Alignment",
-      description: "Assess how well your leadership team is aligned on vision, strategy, and execution plans.",
+      description: "Evaluate leadership team unity on vision and strategic direction. Assess communication effectiveness and collaborative decision-making. Ensure consistent execution and accountability across executive functions.",
       icon: Briefcase,
       color: "bg-gradient-to-br from-rose-500/10 to-rose-700/20 border-rose-200/20",
       detail: "Evaluate communication effectiveness, goal alignment, collaborative decision-making, and execution consistency among executives.",
@@ -104,7 +104,7 @@ const AssessmentTypes = ({ onSelect, completedAssessments = [] }: AssessmentType
   };
 
   return (
-    <section className="section-padding bg-gray-50">
+    <section className="section-padding bg-gray-50" id="assessment-types">
       <div className="container-custom">
         <motion.div 
           className="max-w-3xl mx-auto text-center mb-12"
@@ -150,7 +150,7 @@ const AssessmentTypes = ({ onSelect, completedAssessments = [] }: AssessmentType
                         )}
                       </div>
                       <CardTitle className="text-xl font-bold text-gray-800">{type.title}</CardTitle>
-                      <CardDescription className="text-gray-600 min-h-[72px]">
+                      <CardDescription className="text-gray-600 min-h-[108px]">
                         {type.description}
                       </CardDescription>
                     </CardHeader>

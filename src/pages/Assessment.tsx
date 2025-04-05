@@ -144,7 +144,7 @@ const Assessment = () => {
   };
   
   const startConversationalAssessment = () => {
-    setScrollToChat(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   
   const handleStartGuidedAssessment = () => {
