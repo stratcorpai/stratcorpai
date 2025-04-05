@@ -20,30 +20,23 @@ const DashboardSection: React.FC<DashboardSectionProps> = ({
   }
   
   return (
-    <Accordion 
-      type="single" 
-      defaultValue="dashboard" 
-      collapsible
-      className="border-y border-gray-200"
-    >
-      <AccordionItem value="dashboard" className="border-none">
-        <AccordionTrigger className="bg-gray-50 py-3 px-4 hover:no-underline">
-          <span className="flex items-center text-lg font-semibold text-gray-800">
+    <section className="py-8 border-t border-gray-200">
+      <div className="container-custom">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-2xl font-bold text-gray-800 flex items-center">
             <LineChart className="mr-2 h-5 w-5 text-stratified" />
             Assessment Dashboard
-          </span>
-        </AccordionTrigger>
-        <AccordionContent className="bg-gray-50 py-2 px-0">
-          <div className="py-2">
-            <IntegratedDashboard 
-              completedAssessments={completedAssessments}
-              assessmentTypes={assessmentTypes}
-              onSelectAssessment={onSelectAssessment}
-            />
-          </div>
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
+          </h2>
+        </div>
+        <div className="bg-gray-50 rounded-lg p-4">
+          <IntegratedDashboard 
+            completedAssessments={completedAssessments}
+            assessmentTypes={assessmentTypes}
+            onSelectAssessment={onSelectAssessment}
+          />
+        </div>
+      </div>
+    </section>
   );
 };
 

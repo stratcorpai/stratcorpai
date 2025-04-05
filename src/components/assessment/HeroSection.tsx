@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { PenLine, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -77,10 +76,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           >
             <Button 
               className="bg-white hover:bg-white/90 text-stratified flex items-center gap-2 px-6 py-5 text-base rounded-full shadow-lg"
-              onClick={() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                onStartGuidedAssessment();
-              }}
+              onClick={onStartGuidedAssessment}
             >
               <PenLine className="h-4 w-4" />
               Guided Assessment
@@ -88,10 +84,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             <Button 
               variant="outline" 
               className="bg-transparent hover:bg-white/10 text-white border-white/30 flex items-center gap-2 px-6 py-5 text-base rounded-full shadow-lg"
-              onClick={() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                onStartConversationalAssessment();
-              }}
+              onClick={onStartConversationalAssessment}
             >
               <MessageCircle className="h-4 w-4" />
               Conversational Assessment

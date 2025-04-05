@@ -141,14 +141,25 @@ const Assessment = () => {
     setCurrentStep(STEPS.SELECT);
     setSelectedAssessment(null);
     setAssessmentResult(null);
+    
+    // Ensure we scroll to the assessment types section
+    setTimeout(() => {
+      document.getElementById('assessment-types')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   };
   
   const startConversationalAssessment = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Scroll to the chat section
+    setTimeout(() => {
+      document.getElementById('conversational-assessment')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   };
   
   const handleStartGuidedAssessment = () => {
-    document.getElementById('assessment-types')?.scrollIntoView({ behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      document.getElementById('assessment-types')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   };
   
   const handleCompleteAutoAssessment = (type: string, result: any) => {
@@ -173,14 +184,7 @@ const Assessment = () => {
           onStartConversationalAssessment={startConversationalAssessment}
         />
         
-        {/* Dashboard section */}
-        <DashboardSection 
-          completedAssessments={completedAssessments}
-          assessmentTypes={assessmentTypes}
-          onSelectAssessment={handleSelectAssessment}
-        />
-        
-        {/* Assessment section */}
+        {/* Assessment section - moved up before dashboard */}
         <AssessmentSection 
           currentStep={currentStep}
           selectedAssessment={selectedAssessment}
@@ -191,6 +195,15 @@ const Assessment = () => {
           onSubmitAssessment={handleSubmitAssessment}
           onResetAssessment={resetAssessment}
         />
+        
+        {/* Dashboard section - only show when there are completed assessments */}
+        {completedAssessments.length > 0 && (
+          <DashboardSection 
+            completedAssessments={completedAssessments}
+            assessmentTypes={assessmentTypes}
+            onSelectAssessment={handleSelectAssessment}
+          />
+        )}
         
         {/* Chat section */}
         <ChatSection 
