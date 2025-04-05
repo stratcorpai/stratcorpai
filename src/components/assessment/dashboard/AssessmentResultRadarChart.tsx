@@ -20,11 +20,21 @@ const AssessmentResultRadarChart: FC<AssessmentResultRadarChartProps> = ({
   completedAssessments,
   results 
 }) => {
-  // Format assessment names for display
+  // Format assessment names for display with proper capitalization
   const formatAssessmentName = (type: string) => {
-    return type.split('-').map(word => 
-      word.charAt(0).toUpperCase() + word.slice(1)
-    ).join(' ');
+    // Special case for AI readiness
+    if (type === 'ai-readiness') {
+      return 'AI Readiness';
+    }
+    
+    // Handle other assessment types
+    return type.split('-').map(word => {
+      // Capitalize AI anywhere it appears as a whole word
+      if (word.toLowerCase() === 'ai') {
+        return 'AI';
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    }).join(' ');
   };
   
   // Transform data for the radar chart

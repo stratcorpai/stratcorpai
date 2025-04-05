@@ -47,7 +47,19 @@ const IntegratedDashboard: React.FC<IntegratedDashboardProps> = ({
   
   // Format assessment name for display
   const formatAssessmentName = (type: string) => {
-    return type.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    // Special case for AI readiness to ensure AI is capitalized
+    if (type === 'ai-readiness') {
+      return 'AI Readiness';
+    }
+    
+    // Handle other assessment types
+    return type.split('-').map(word => {
+      // Capitalize AI anywhere it appears as a whole word
+      if (word.toLowerCase() === 'ai') {
+        return 'AI';
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    }).join(' ');
   };
   
   // Count completed and remaining assessments
@@ -139,7 +151,7 @@ const IntegratedDashboard: React.FC<IntegratedDashboardProps> = ({
                       <div>
                         <div className="font-medium">{formatAssessmentName(type)}</div>
                         <div className="text-sm text-muted-foreground">
-                          Completed on {new Date(results[type]?.completedAt).toLocaleDateString()}
+                          Completed on {new Date(results[type]?.completedAt || new Date()).toLocaleDateString()}
                         </div>
                       </div>
                       <div className="text-xl font-bold text-stratified">{results[type]?.score}%</div>
