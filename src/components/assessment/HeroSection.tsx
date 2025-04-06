@@ -1,96 +1,107 @@
-import React from 'react';
-import { PenLine, MessageCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
+
+import { Button } from "@/components/ui/button";
+import { ArrowDown, MessageCircle } from "lucide-react";
+import { motion } from "framer-motion";
 
 type HeroSectionProps = {
   onStartGuidedAssessment: () => void;
   onStartConversationalAssessment: () => void;
 };
 
-const HeroSection: React.FC<HeroSectionProps> = ({ 
-  onStartGuidedAssessment, 
-  onStartConversationalAssessment 
+const HeroSection: React.FC<HeroSectionProps> = ({
+  onStartGuidedAssessment,
+  onStartConversationalAssessment
 }) => {
   return (
-    <section className="bg-stratified py-16 md:py-20 relative overflow-hidden">
-      <div className="absolute inset-0 z-0 opacity-10">
-        <motion.svg 
-          width="100%" 
-          height="100%" 
-          viewBox="0 0 100 100" 
-          fill="none" 
-          preserveAspectRatio="none"
-          animate={{ 
-            scale: [1, 1.02, 1],
-            opacity: [0.1, 0.15, 0.1] 
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-        >
-          <pattern id="grid" width="8" height="8" patternUnits="userSpaceOnUse">
-            <path d="M 8 0 L 0 0 0 8" fill="none" stroke="white" strokeWidth="0.5" />
+    <section className="min-h-[85vh] flex items-center relative overflow-hidden">
+      {/* Background overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-stratified/10 via-transparent to-stratified/5 z-0"></div>
+      
+      {/* Grid pattern */}
+      <div className="absolute inset-0 z-0 opacity-5">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <pattern id="grid" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+            <path d="M 50 0 L 0 0 0 50" fill="none" stroke="currentColor" strokeWidth="0.5" />
           </pattern>
           <rect width="100%" height="100%" fill="url(#grid)" />
-        </motion.svg>
+        </svg>
       </div>
       
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-stratified/80 to-transparent backdrop-blur-sm"></div>
-      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-stratified/80 to-transparent backdrop-blur-sm"></div>
-      
       <div className="container-custom relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          transition={{ duration: 0.5 }}
-          className="text-center"
-        >
-          <motion.h1 
-            className="text-white mb-4 drop-shadow-md text-3xl md:text-5xl font-bold tracking-tight"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-          >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white/95 to-white/85">
-              Executive Assessment Center
-            </span>
-          </motion.h1>
-          
-          <motion.p 
-            className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto font-medium tracking-wide"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-          >
-            Gain strategic insights through our data-driven assessment tools
-          </motion.p>
-          
-          <motion.div
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
-            className="mt-12 flex flex-col sm:flex-row gap-4 justify-center"
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl"
           >
-            <Button 
-              className="bg-white hover:bg-white/90 text-stratified flex items-center gap-2 px-6 py-5 text-base rounded-full shadow-lg"
-              onClick={onStartGuidedAssessment}
-            >
-              <PenLine className="h-4 w-4" />
-              Guided Assessment
-            </Button>
-            <Button 
-              variant="outline" 
-              className="bg-transparent hover:bg-white/10 text-white border-white/30 flex items-center gap-2 px-6 py-5 text-base rounded-full shadow-lg"
-              onClick={onStartConversationalAssessment}
-            >
-              <MessageCircle className="h-4 w-4" />
-              Conversational Assessment
-            </Button>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-stratified">
+              Strategic Assessment Center
+            </h1>
+            
+            <p className="text-lg md:text-xl mb-8 text-gray-700">
+              Use our AI-powered assessment tools to analyze your organization's strengths and identify opportunities for growth in key strategic areas.
+            </p>
+            
+            <div className="flex flex-wrap gap-4">
+              <Button
+                size="lg" 
+                className="bg-stratified hover:bg-stratified-dark text-white"
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                  setTimeout(() => {
+                    onStartGuidedAssessment();
+                  }, 100);
+                }}
+              >
+                <ArrowDown className="mr-2 h-4 w-4" />
+                Start Guided Assessment
+              </Button>
+              
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-stratified text-stratified hover:bg-stratified/5" 
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                  setTimeout(() => {
+                    onStartConversationalAssessment();
+                  }, 100);
+                }}
+              >
+                <MessageCircle className="mr-2 h-4 w-4" />
+                Start with a Conversation
+              </Button>
+            </div>
           </motion.div>
-        </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="hidden md:block"
+          >
+            <div className="relative">
+              <div className="absolute -inset-0.5 rounded-lg bg-gradient-to-r from-stratified to-stratified-light opacity-30 blur"></div>
+              <div className="relative bg-white rounded-lg shadow-xl overflow-hidden">
+                <div className="p-6 bg-gray-50 border-b">
+                  <h3 className="text-xl font-semibold text-gray-800">Assessment Dashboard</h3>
+                  <p className="text-gray-500">Organizational insights at a glance</p>
+                </div>
+                <div className="p-6">
+                  <div className="space-y-4">
+                    <div className="bg-gray-100 h-20 rounded-md animate-pulse"></div>
+                    <div className="bg-gray-100 h-40 rounded-md animate-pulse"></div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="bg-gray-100 h-24 rounded-md animate-pulse"></div>
+                      <div className="bg-gray-100 h-24 rounded-md animate-pulse"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

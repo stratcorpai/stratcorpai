@@ -58,7 +58,7 @@ const AssessmentResultRadarChart: FC<AssessmentResultRadarChartProps> = ({
   };
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full min-h-[300px]">
       <ResponsiveContainer width="100%" height="100%">
         <ChartContainer config={chartConfig}>
           <RadarChart 
@@ -73,6 +73,7 @@ const AssessmentResultRadarChart: FC<AssessmentResultRadarChartProps> = ({
               tick={{ fontSize: 12, fill: "#6b7280" }}
               tickLine={false}
               style={{ textTransform: 'capitalize' }}
+              dy={4} // Add offset to prevent clipping of labels
             />
             <PolarRadiusAxis 
               angle={90} 

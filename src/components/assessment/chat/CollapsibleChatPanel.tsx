@@ -19,7 +19,7 @@ const CollapsibleChatPanel = ({
   assessmentTypes = [],
   onCompleteAutoAssessment
 }: CollapsibleChatPanelProps) => {
-  const [isOpen, setIsOpen] = useState(true); // Default to expanded
+  const [isOpen, setIsOpen] = useState(false); // Change default to closed
   const isMobile = useIsMobile();
   
   // For mobile, we'll use Sheet component with a trigger button
