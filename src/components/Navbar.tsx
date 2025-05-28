@@ -77,11 +77,11 @@ const Navbar = () => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
               </a>
               <a 
-                href="#board-service" 
+                href="#ai-governance" 
                 className="text-foreground hover:text-stratified font-medium transition-colors relative group"
-                onClick={handleNavClick('board-service')}
+                onClick={handleNavClick('ai-governance')}
               >
-                Board-as-a-Service
+                AI Governance
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
               </a>
               <a 
@@ -93,11 +93,11 @@ const Navbar = () => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
               </a>
               <a 
-                href="#ai-governance" 
+                href="#board-service" 
                 className="text-foreground hover:text-stratified font-medium transition-colors relative group"
-                onClick={handleNavClick('ai-governance')}
+                onClick={handleNavClick('board-service')}
               >
-                AI Governance
+                Board-as-a-Service
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
               </a>
             </>
@@ -143,11 +143,11 @@ const Navbar = () => {
                   Investment Thesis
                 </a>
                 <a 
-                  href="#board-service" 
+                  href="#ai-governance" 
                   className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
-                  onClick={handleNavClick('board-service')}
+                  onClick={handleNavClick('ai-governance')}
                 >
-                  Board-as-a-Service
+                  AI Governance
                 </a>
                 <a 
                   href="#team" 
@@ -157,11 +157,11 @@ const Navbar = () => {
                   Our Team
                 </a>
                 <a 
-                  href="#ai-governance" 
+                  href="#board-service" 
                   className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
-                  onClick={handleNavClick('ai-governance')}
+                  onClick={handleNavClick('board-service')}
                 >
-                  AI Governance
+                  Board-as-a-Service
                 </a>
               </>
             ) : (

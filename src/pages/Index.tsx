@@ -3,9 +3,9 @@ import { useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import InvestmentThesis from "@/components/InvestmentThesis";
-import BoardService from "@/components/BoardService";
-import Team from "@/components/Team";
 import BlogSection from "@/components/blog/BlogSection";
+import Team from "@/components/Team";
+import BoardService from "@/components/BoardService";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 
@@ -64,7 +64,7 @@ const Index = () => {
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        <BoardService />
+        <BlogSection />
       </motion.div>
       
       <motion.div
@@ -82,7 +82,7 @@ const Index = () => {
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        <BlogSection />
+        <BoardService />
       </motion.div>
       
       <Footer />
