@@ -1,37 +1,38 @@
-
 import { motion } from "framer-motion";
 import { FileText, ExternalLink, Users, Handshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getBlogPosts, openPDF } from "@/utils/blogUtils";
-
 const BlogSection = () => {
   const blogPosts = getBlogPosts();
   const featuredPost = blogPosts.find(post => post.isFeatured);
   const pillarPosts = blogPosts.filter(post => !post.isFeatured);
-
   const handleReadArticle = (pdfUrl: string) => {
     openPDF(pdfUrl);
   };
-
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    return date.toLocaleDateString('en-US', {
+      month: 'long',
+      year: 'numeric'
+    });
   };
-
-  return (
-    <section id="ai-governance" className="section-padding bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+  return <section id="ai-governance" className="section-padding bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-br from-stratified/5 to-transparent"></div>
       
       <div className="container-custom relative">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 20
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.8
+      }} viewport={{
+        once: true
+      }} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
             AI Governance for Boards
           </h2>
@@ -45,14 +46,18 @@ const BlogSection = () => {
         </motion.div>
 
         {/* Featured Blog Post */}
-        {featuredPost && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="mb-16"
-          >
+        {featuredPost && <motion.div initial={{
+        opacity: 0,
+        y: 30
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.8,
+        delay: 0.2
+      }} viewport={{
+        once: true
+      }} className="mb-16">
             <Card className="card-modern hover:shadow-xl transition-all duration-300 group cursor-pointer bg-gradient-to-br from-white to-gray-50" onClick={() => handleReadArticle(featuredPost.pdfUrl)}>
               <CardHeader className="pb-6">
                 <div className="flex items-start justify-between mb-4">
@@ -78,49 +83,49 @@ const BlogSection = () => {
                   {featuredPost.description}
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {featuredPost.tags?.map((tag, index) => (
-                    <span key={index} className="text-sm bg-stratified/10 text-stratified px-3 py-1 rounded-full">
+                  {featuredPost.tags?.map((tag, index) => <span key={index} className="text-sm bg-stratified/10 text-stratified px-3 py-1 rounded-full">
                       {tag}
-                    </span>
-                  ))}
+                    </span>)}
                 </div>
               </CardHeader>
               <CardContent>
-                <Button 
-                  size="lg"
-                  className="bg-stratified hover:bg-stratified-dark text-white group-hover:shadow-lg transition-all duration-300"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleReadArticle(featuredPost.pdfUrl);
-                  }}
-                >
+                <Button size="lg" className="bg-stratified hover:bg-stratified-dark text-white group-hover:shadow-lg transition-all duration-300" onClick={e => {
+              e.stopPropagation();
+              handleReadArticle(featuredPost.pdfUrl);
+            }}>
                   Read Featured Article
                 </Button>
               </CardContent>
             </Card>
-          </motion.div>
-        )}
+          </motion.div>}
 
         {/* Three Pillars */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <h3 className="text-2xl md:text-3xl font-bold text-center mb-8 text-gray-800">
-            The Three Pillars
-          </h3>
+        <motion.div initial={{
+        opacity: 0,
+        y: 30
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.8,
+        delay: 0.4
+      }} viewport={{
+        once: true
+      }} className="mb-16">
+          <h3 className="text-2xl md:text-3xl font-bold text-center mb-8 text-gray-800">Capacity, Geopolitics, Sustainability</h3>
           <div className="grid md:grid-cols-3 gap-8">
-            {pillarPosts.map((post, index) => (
-              <motion.div
-                key={post.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
+            {pillarPosts.map((post, index) => <motion.div key={post.id} initial={{
+            opacity: 0,
+            y: 20
+          }} whileInView={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.6,
+            delay: index * 0.1
+          }} viewport={{
+            once: true
+          }}>
                 <Card className="h-full card-modern hover:shadow-xl transition-all duration-300 group cursor-pointer" onClick={() => handleReadArticle(post.pdfUrl)}>
                   <CardHeader className="pb-4">
                     <div className="flex items-start justify-between mb-3">
@@ -141,37 +146,35 @@ const BlogSection = () => {
                       {post.description}
                     </p>
                     <div className="flex flex-wrap gap-1 mb-4">
-                      {post.tags?.slice(0, 2).map((tag, index) => (
-                        <span key={index} className="text-xs bg-stratified/10 text-stratified px-2 py-1 rounded-full">
+                      {post.tags?.slice(0, 2).map((tag, index) => <span key={index} className="text-xs bg-stratified/10 text-stratified px-2 py-1 rounded-full">
                           {tag}
-                        </span>
-                      ))}
+                        </span>)}
                     </div>
-                    <Button 
-                      variant="outline" 
-                      className="w-full group-hover:bg-stratified group-hover:text-white group-hover:border-stratified transition-all duration-300"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleReadArticle(post.pdfUrl);
-                      }}
-                    >
+                    <Button variant="outline" className="w-full group-hover:bg-stratified group-hover:text-white group-hover:border-stratified transition-all duration-300" onClick={e => {
+                  e.stopPropagation();
+                  handleReadArticle(post.pdfUrl);
+                }}>
                       Read Article
                     </Button>
                   </CardContent>
                 </Card>
-              </motion.div>
-            ))}
+              </motion.div>)}
           </div>
         </motion.div>
 
         {/* Partnership Program Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
-          className="bg-white rounded-2xl p-8 md:p-12 shadow-lg border border-gray-100"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 30
+      }} whileInView={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.8,
+        delay: 0.6
+      }} viewport={{
+        once: true
+      }} className="bg-white rounded-2xl p-8 md:p-12 shadow-lg border border-gray-100">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <div className="flex items-center gap-3 mb-4">
@@ -208,18 +211,13 @@ const BlogSection = () => {
                   Transform how boards approach AI governance together
                 </p>
               </div>
-              <Button 
-                size="lg" 
-                className="bg-stratified hover:bg-stratified-dark text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg"
-              >
+              <Button size="lg" className="bg-stratified hover:bg-stratified-dark text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg">
                 Explore Partnership
               </Button>
             </div>
           </div>
         </motion.div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default BlogSection;
