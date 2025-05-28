@@ -5,7 +5,7 @@ import Hero from "@/components/Hero";
 import InvestmentThesis from "@/components/InvestmentThesis";
 import BoardService from "@/components/BoardService";
 import Team from "@/components/Team";
-import StratCorpAI from "@/components/StratCorpAI";
+import BlogSection from "@/components/blog/BlogSection";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 
@@ -82,7 +82,7 @@ const Index = () => {
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        <StratCorpAI />
+        <BlogSection />
       </motion.div>
       
       <Footer />
