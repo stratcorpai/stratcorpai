@@ -1,7 +1,6 @@
 
 import { Button } from '@/components/ui/button';
-import { ArrowRight, LineChart } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ArrowRight, FileText } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
@@ -9,6 +8,25 @@ const Hero = () => {
     e.preventDefault();
     // Scroll to the investment thesis section with offset
     const element = document.getElementById('investment-thesis');
+    
+    if (element) {
+      // Get the navbar height for offset
+      const navbarHeight = document.querySelector('nav')?.offsetHeight || 0;
+      
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleAIGovernanceClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Scroll to the AI governance section with offset
+    const element = document.getElementById('ai-governance');
     
     if (element) {
       // Get the navbar height for offset
@@ -100,13 +118,12 @@ const Hero = () => {
               Learn More <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
             
-            <Link to="/assessment">
-              <Button 
-                className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/20 px-7 py-5 text-base rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105 transform duration-300"
-              >
-                AI-Powered Assessment Suite <LineChart className="ml-2 h-5 w-5 group-hover:translate-y-[-2px] transition-transform" />
-              </Button>
-            </Link>
+            <Button 
+              className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/20 px-7 py-5 text-base rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105 transform duration-300"
+              onClick={handleAIGovernanceClick}
+            >
+              AI Governance for Boards <FileText className="ml-2 h-5 w-5 group-hover:translate-y-[-2px] transition-transform" />
+            </Button>
           </motion.div>
         </motion.div>
       </div>
