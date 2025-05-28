@@ -3,38 +3,17 @@ import { motion } from "framer-motion";
 import { FileText, ExternalLink, Users, Handshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getBlogPosts, openPDF } from "@/utils/blogUtils";
 
 const BlogSection = () => {
-  // Placeholder blog posts - these will be replaced with actual PDF data
-  const blogPosts = [
-    {
-      id: 1,
-      title: "AI Risk Management Framework for Modern Boards",
-      description: "A comprehensive guide to establishing AI governance frameworks that enable strategic oversight while fostering innovation.",
-      pdfUrl: "/blog/ai-risk-management.pdf", // Placeholder
-      publishDate: "2024-01-15",
-      readTime: "12 min read"
-    },
-    {
-      id: 2,
-      title: "From Reactive to Proactive: AI Governance Strategies",
-      description: "Transforming board oversight from traditional reactive models to forward-thinking AI governance approaches.",
-      pdfUrl: "/blog/proactive-ai-governance.pdf", // Placeholder
-      publishDate: "2024-02-08",
-      readTime: "8 min read"
-    },
-    {
-      id: 3,
-      title: "Board Readiness for AI Transformation",
-      description: "Essential frameworks and assessment tools for boards navigating AI adoption and digital transformation.",
-      pdfUrl: "/blog/board-ai-readiness.pdf", // Placeholder
-      publishDate: "2024-02-22",
-      readTime: "15 min read"
-    }
-  ];
+  const blogPosts = getBlogPosts();
+
+  const handleReadArticle = (pdfUrl: string) => {
+    openPDF(pdfUrl);
+  };
 
   return (
-    <section className="section-padding bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+    <section id="ai-governance" className="section-padding bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-br from-stratified/5 to-transparent"></div>
       
@@ -64,7 +43,7 @@ const BlogSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16"
         >
           {blogPosts.map((post, index) => (
             <motion.div
@@ -74,13 +53,13 @@ const BlogSection = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="h-full card-modern hover:shadow-xl transition-all duration-300 group cursor-pointer">
+              <Card className="h-full card-modern hover:shadow-xl transition-all duration-300 group cursor-pointer" onClick={() => handleReadArticle(post.pdfUrl)}>
                 <CardHeader className="pb-4">
                   <div className="flex items-start justify-between mb-3">
                     <FileText className="h-8 w-8 text-stratified group-hover:scale-110 transition-transform duration-300" />
                     <ExternalLink className="h-5 w-5 text-gray-400 group-hover:text-stratified transition-colors duration-300" />
                   </div>
-                  <CardTitle className="text-xl font-semibold group-hover:text-stratified transition-colors duration-300 line-clamp-2">
+                  <CardTitle className="text-lg font-semibold group-hover:text-stratified transition-colors duration-300 line-clamp-2">
                     {post.title}
                   </CardTitle>
                   <div className="flex items-center gap-3 text-sm text-gray-500">
@@ -90,12 +69,23 @@ const BlogSection = () => {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600 leading-relaxed mb-4 line-clamp-3">
+                  <p className="text-gray-600 leading-relaxed mb-4 line-clamp-3 text-sm">
                     {post.description}
                   </p>
+                  <div className="flex flex-wrap gap-1 mb-4">
+                    {post.tags?.slice(0, 2).map((tag, index) => (
+                      <span key={index} className="text-xs bg-stratified/10 text-stratified px-2 py-1 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                   <Button 
                     variant="outline" 
                     className="w-full group-hover:bg-stratified group-hover:text-white group-hover:border-stratified transition-all duration-300"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleReadArticle(post.pdfUrl);
+                    }}
                   >
                     Read Article
                   </Button>

@@ -10,7 +10,7 @@ const Footer = () => {
       <div className="container-custom py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           {/* Company Info */}
-          <div className="md:col-span-5">
+          <div className="md:col-span-6">
             <h3 className="text-2xl font-heading font-bold mb-4 text-white">Stratified Advisory</h3>
             <p className="mb-6 text-gray-300 max-w-md leading-relaxed">
               Transforming executive leadership through AI-augmented human ingenuity. 
@@ -47,30 +47,15 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#stratcorp-ai" className="hover:text-stratified-light transition-colors inline-block py-1 link-underline">
-                  AI Assessment
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-stratified-light transition-colors inline-block py-1 link-underline">
-                  Cybersecurity Strategy
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-stratified-light transition-colors inline-block py-1 link-underline">
-                  Digital Transformation
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-stratified-light transition-colors inline-block py-1 link-underline">
-                  Growth Advisory
+                <a href="#ai-governance" className="hover:text-stratified-light transition-colors inline-block py-1 link-underline">
+                  AI Governance
                 </a>
               </li>
             </ul>
           </div>
           
           {/* Contact */}
-          <div className="md:col-span-4">
+          <div className="md:col-span-3">
             <h4 className="text-lg font-semibold mb-4 text-white">Contact Us</h4>
             <ul className="space-y-4 text-gray-300">
               <li className="flex items-start">
@@ -98,7 +83,6 @@ const Footer = () => {
           <div className="flex space-x-6 text-sm text-gray-400">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
           </div>
         </div>
       </div>

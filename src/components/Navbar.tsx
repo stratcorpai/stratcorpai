@@ -93,11 +93,11 @@ const Navbar = () => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
               </a>
               <a 
-                href="#stratcorp-ai" 
+                href="#ai-governance" 
                 className="text-foreground hover:text-stratified font-medium transition-colors relative group"
-                onClick={handleNavClick('stratcorp-ai')}
+                onClick={handleNavClick('ai-governance')}
               >
-                StratCorp.AI
+                AI Governance
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
               </a>
             </>
@@ -157,11 +157,11 @@ const Navbar = () => {
                   Our Team
                 </a>
                 <a 
-                  href="#stratcorp-ai" 
+                  href="#ai-governance" 
                   className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
-                  onClick={handleNavClick('stratcorp-ai')}
+                  onClick={handleNavClick('ai-governance')}
                 >
-                  StratCorp.AI
+                  AI Governance
                 </a>
               </>
             ) : (

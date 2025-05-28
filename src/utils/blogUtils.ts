@@ -10,35 +10,42 @@ export interface BlogPost {
 }
 
 export const getBlogPosts = (): BlogPost[] => {
-  // This function will be updated to read from the blog folder
-  // For now, returning placeholder data that matches the structure
   return [
     {
       id: 1,
-      title: "AI Risk Management Framework for Modern Boards",
-      description: "A comprehensive guide to establishing AI governance frameworks that enable strategic oversight while fostering innovation.",
-      pdfUrl: "/blog/ai-risk-management.pdf",
-      publishDate: "2024-01-15",
-      readTime: "12 min read",
-      tags: ["AI Governance", "Risk Management", "Board Strategy"]
+      title: "The Next AI Imperative",
+      description: "Strategic insights into AI transformation and the imperative for organizational readiness in the age of artificial intelligence.",
+      pdfUrl: "/blog/TheNextAIImperative, A.Bulisache, F.Chima, 04.25.pdf",
+      publishDate: "2024-04-25",
+      readTime: "15 min read",
+      tags: ["AI Strategy", "Digital Transformation", "Leadership"]
     },
     {
       id: 2,
-      title: "From Reactive to Proactive: AI Governance Strategies",
-      description: "Transforming board oversight from traditional reactive models to forward-thinking AI governance approaches.",
-      pdfUrl: "/blog/proactive-ai-governance.pdf",
-      publishDate: "2024-02-08",
-      readTime: "8 min read",
-      tags: ["Strategy", "Proactive Governance", "Digital Transformation"]
+      title: "The Next AI Imperative: Capacity",
+      description: "Building organizational capacity for AI adoption and scaling intelligent systems across enterprise operations.",
+      pdfUrl: "/blog/TheNextAIImperative- Capacity, A.Bulisache, F.Chima, 05.25.pdf",
+      publishDate: "2024-05-25",
+      readTime: "12 min read",
+      tags: ["Capacity Building", "AI Implementation", "Organizational Design"]
     },
     {
       id: 3,
-      title: "Board Readiness for AI Transformation",
-      description: "Essential frameworks and assessment tools for boards navigating AI adoption and digital transformation.",
-      pdfUrl: "/blog/board-ai-readiness.pdf",
-      publishDate: "2024-02-22",
-      readTime: "15 min read",
-      tags: ["Board Development", "AI Readiness", "Assessment Tools"]
+      title: "The Next AI Imperative: Geopolitics",
+      description: "Navigating the geopolitical landscape of AI development and the strategic implications for global business operations.",
+      pdfUrl: "/blog/TheNextAIImperative-Geopolitics, A.Bulisache, F.Chima, 05.25.pdf",
+      publishDate: "2024-05-25",
+      readTime: "18 min read",
+      tags: ["Geopolitics", "AI Policy", "Global Strategy"]
+    },
+    {
+      id: 4,
+      title: "Next Imperative: Sustainability at Scale",
+      description: "Integrating sustainability principles with AI-driven transformation to achieve scalable environmental and business impact.",
+      pdfUrl: "/blog/Next Imperative- Sustainability at Scale, A.Bulisache, F.Chima 05.25.pdf",
+      publishDate: "2024-05-25",
+      readTime: "14 min read",
+      tags: ["Sustainability", "ESG", "Scale", "Environmental Impact"]
     }
   ];
 };
