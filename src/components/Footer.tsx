@@ -1,16 +1,12 @@
-
 import { useState } from 'react';
 import { Linkedin, Mail, MapPin } from 'lucide-react';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import ContactForm from './ContactForm';
 import ContactCTA from './ContactCTA';
-
 const Footer = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);
-
-  return (
-    <footer className="bg-gray-900 text-white">
+  return <footer className="bg-gray-900 text-white">
       <div className="container-custom py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -53,7 +49,7 @@ const Footer = () => {
             <div className="space-y-4">
               <Dialog open={isContactOpen} onOpenChange={setIsContactOpen}>
                 <DialogTrigger asChild>
-                  <Button variant="outline" className="w-full text-white border-white hover:bg-white hover:text-gray-900">
+                  <Button variant="outline" className="w-full border-white hover:bg-white text-slate-950">
                     Get in Touch
                   </Button>
                 </DialogTrigger>
@@ -63,13 +59,10 @@ const Footer = () => {
               </Dialog>
               
               <div className="flex space-x-3">
-                <a href="https://linkedin.com/in/andreeabulisache" 
-                   className="bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors"
-                   target="_blank" rel="noopener noreferrer">
+                <a href="https://linkedin.com/in/andreeabulisache" className="bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors" target="_blank" rel="noopener noreferrer">
                   <Linkedin size={20} />
                 </a>
-                <a href="mailto:andreea@stratifiedadvisory.com" 
-                   className="bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors">
+                <a href="mailto:andreea@stratifiedadvisory.com" className="bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors">
                   <Mail size={20} />
                 </a>
               </div>
@@ -88,8 +81,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
