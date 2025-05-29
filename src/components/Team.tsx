@@ -18,7 +18,7 @@ const Team = () => {
               <div className="md:flex-shrink-0 md:w-1/3">
                 <div className="h-full relative overflow-hidden">
                   <img 
-                    src="/lovable-uploads/f60f538c-b58d-4847-9c51-0f91d64da0b0.png" 
+                    src="/lovable-uploads/be1f59f9-bb53-42ab-9713-f56caa100945.png" 
                     alt="Andreea Bulisache" 
                     className="w-full h-full object-cover object-center"
                   />
