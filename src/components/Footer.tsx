@@ -1,88 +1,90 @@
 
-import { Mail, MapPin, Linkedin, Twitter } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
+import { useState } from 'react';
+import { Linkedin, Mail, MapPin } from 'lucide-react';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import ContactForm from './ContactForm';
+import ContactCTA from './ContactCTA';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-  
+  const [isContactOpen, setIsContactOpen] = useState(false);
+
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container-custom py-16">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
-          <div className="md:col-span-6">
-            <h3 className="text-2xl font-heading font-bold mb-4 text-white">Stratified Advisory</h3>
-            <p className="mb-6 text-gray-300 max-w-md leading-relaxed">
-              Transforming executive leadership through AI-augmented human ingenuity. 
-              Our Board-as-a-Service and strategic consulting solutions drive innovation and sustainable growth.
+          <div className="lg:col-span-2">
+            <h3 className="text-2xl font-bold mb-4">Stratified Advisory</h3>
+            <p className="text-gray-300 mb-6 max-w-md">
+              Strategic advisory services for AI governance, cybersecurity resilience, and digital transformation. 
+              Empowering boards and executives to navigate complex digital landscapes.
             </p>
-            <div className="flex space-x-4">
-              <a href="https://linkedin.com/company/stratifiedadvisory" 
-                 className="bg-gray-800 hover:bg-stratified hover:text-white p-2 rounded-full transition-colors"
-                 target="_blank" rel="noopener noreferrer">
-                <Linkedin size={20} />
-                <span className="sr-only">LinkedIn</span>
-              </a>
-              <a href="https://twitter.com/stratifiedadv" 
-                 className="bg-gray-800 hover:bg-stratified hover:text-white p-2 rounded-full transition-colors"
-                 target="_blank" rel="noopener noreferrer">
-                <Twitter size={20} />
-                <span className="sr-only">Twitter</span>
-              </a>
-              <a href="mailto:contact@stratifiedadvisory.com" 
-                 className="bg-gray-800 hover:bg-stratified hover:text-white p-2 rounded-full transition-colors">
-                <Mail size={20} />
-                <span className="sr-only">Email</span>
-              </a>
+            <div className="flex space-x-4 mb-6">
+              <ContactCTA variant="board-advisory" size="sm" />
+              <ContactCTA variant="consulting" size="sm" />
+            </div>
+            <div className="space-y-2 text-sm text-gray-300">
+              <div className="flex items-center space-x-2">
+                <Mail className="w-4 h-4" />
+                <span>andreea@stratifiedadvisory.com</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <MapPin className="w-4 h-4" />
+                <span>Seattle, Washington & Bucharest, Romania</span>
+              </div>
             </div>
           </div>
-          
+
           {/* Services */}
-          <div className="md:col-span-3">
-            <h4 className="text-lg font-semibold mb-4 text-white">Services</h4>
-            <ul className="space-y-3 text-gray-300">
-              <li>
-                <a href="#board-service" className="hover:text-stratified-light transition-colors inline-block py-1 link-underline">
-                  Board-as-a-Service
-                </a>
-              </li>
-              <li>
-                <a href="#ai-governance" className="hover:text-stratified-light transition-colors inline-block py-1 link-underline">
-                  AI Governance
-                </a>
-              </li>
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Services</h4>
+            <ul className="space-y-2 text-gray-300">
+              <li><a href="#team" className="hover:text-white transition-colors">Board Advisory</a></li>
+              <li><a href="#investment-thesis" className="hover:text-white transition-colors">Strategic Consulting</a></li>
+              <li><a href="#ai-governance" className="hover:text-white transition-colors">AI Governance</a></li>
+              <li><a href="#board-service" className="hover:text-white transition-colors">Digital Transformation</a></li>
             </ul>
           </div>
-          
-          {/* Contact */}
-          <div className="md:col-span-3">
-            <h4 className="text-lg font-semibold mb-4 text-white">Contact Us</h4>
-            <ul className="space-y-4 text-gray-300">
-              <li className="flex items-start">
-                <MapPin size={18} className="mr-3 mt-1 flex-shrink-0 text-stratified-light" />
-                <span className="leading-relaxed">
-                  Seattle | Bucharest | Amsterdam
-                </span>
-              </li>
-              <li className="flex items-center">
-                <Mail size={18} className="mr-3 flex-shrink-0 text-stratified-light" />
-                <a href="mailto:contact@stratifiedadvisory.com" className="hover:text-stratified-light transition-colors link-underline">
-                  contact@stratifiedadvisory.com
+
+          {/* Connect */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Connect</h4>
+            <div className="space-y-4">
+              <Dialog open={isContactOpen} onOpenChange={setIsContactOpen}>
+                <DialogTrigger asChild>
+                  <Button variant="outline" className="w-full text-white border-white hover:bg-white hover:text-gray-900">
+                    Get in Touch
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto p-0 border-0">
+                  <ContactForm />
+                </DialogContent>
+              </Dialog>
+              
+              <div className="flex space-x-3">
+                <a href="https://linkedin.com/in/andreeabulisache" 
+                   className="bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors"
+                   target="_blank" rel="noopener noreferrer">
+                  <Linkedin size={20} />
                 </a>
-              </li>
-            </ul>
+                <a href="mailto:andreea@stratifiedadvisory.com" 
+                   className="bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors">
+                  <Mail size={20} />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-        
-        <Separator className="my-8 bg-gray-800" />
-        
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 mb-4 md:mb-0">
-            &copy; {currentYear} Stratified Advisory. All rights reserved.
-          </p>
-          <div className="flex space-x-6 text-sm text-gray-400">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+
+        <div className="border-t border-gray-700 mt-12 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <p className="text-gray-300 text-sm">
+              © 2024 Stratified Advisory. All rights reserved.
+            </p>
+            <p className="text-gray-400 text-xs max-w-md text-center">
+              Data stored securely in EU-based data centers. Your privacy is protected under strict data protection standards.
+            </p>
           </div>
         </div>
       </div>

@@ -1,111 +1,121 @@
-import { Shield, Users, Lightbulb, TrendingUp, Calendar } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+
+import ContactCTA from './ContactCTA';
 
 const BoardService = () => {
-  const handleScheduleClick = () => {
-    const emailSubject = "Board Strategy Session Request";
-    const emailBody = 
-      "**Crafted by humans, delivered by technology – bridging communication gaps with precision and a personal touch.**\n\n" +
-      "Dear Andreea,\n\n" +
-      "I would like to schedule a Board Strategy Session. Here are some details about my company:\n\n" +
-      "Company location:\nSize:\nWebsite:\nPreferred timeframe for session:\n\n" +
-      "Thank you!\n\n" +
-      "[Your Name]";
-    
-    window.location.href = `mailto:andreea@stratifiedadvisory.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-  };
-
   return (
-    <section id="board-service" className="section-padding bg-white">
+    <section id="board-service" className="section-padding">
       <div className="container-custom">
-        <div className="max-w-3xl mx-auto text-center mb-16">
+        <div className="text-center mb-16">
           <h2 className="mb-4 gradient-text">Board-as-a-Service</h2>
-          <p className="text-xl text-gray-700">
-            Elevate your executive leadership with our transformative Board-as-a-Service practice. We provide 
-            comprehensive strategic guidance for ventures, startups, and SMBs navigating the complex digital landscape.
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            Expert board advisory services that bridge technology innovation with strategic governance, 
+            helping organizations navigate AI adoption, cybersecurity resilience, and digital transformation.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-          <div className="bg-gray-50 rounded-xl p-8 shadow-sm">
-            <h3 className="text-2xl font-semibold mb-6 text-stratified">Beyond Traditional Board Members</h3>
-            <p className="text-gray-700 mb-6">
-              In today's world of fluid expertise and rapid innovation, a single board member is no longer sufficient. 
-              Our model connects you with a specialized board advisor backed by an entire team of domain experts, 
-              providing unmatched depth and breadth of expertise.
-            </p>
-            <p className="text-gray-700">
-              This collaborative approach enables rapid hypothesis testing, accelerated decision-making, and 
-              strategic alignment across all aspects of your business, creating a multiplier effect on your 
-              board's capabilities and impact.
-            </p>
-          </div>
-
-          <div className="bg-stratified-lighter rounded-xl p-8 shadow-sm">
-            <h3 className="text-2xl font-semibold mb-6 text-stratified">A Full Executive Team at Your Service</h3>
-            <p className="text-gray-700 mb-6">
-              When you engage our Board-as-a-Service, you're not just getting a board member—you're gaining 
-              access to a complete ecosystem of specialized expertise that can be deployed precisely when and 
-              where you need it.
-            </p>
-            <p className="text-gray-700">
-              From AI strategy and cybersecurity to regulatory compliance and business model innovation, our 
-              team provides comprehensive support that adapts to your evolving needs, ensuring you have the 
-              right expertise at the right time.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          <div className="border border-gray-200 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
-            <div className="w-16 h-16 bg-stratified-lighter rounded-full flex items-center justify-center mx-auto mb-4">
-              <Users className="text-stratified" size={28} />
+        <div className="max-w-5xl mx-auto">
+          {/* Service Areas */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+              <div className="w-12 h-12 bg-stratified-lighter rounded-lg flex items-center justify-center mb-4">
+                <div className="w-6 h-6 bg-stratified rounded"></div>
+              </div>
+              <h3 className="text-xl font-semibold mb-3 text-stratified">AI Governance & Ethics</h3>
+              <p className="text-gray-600">
+                Strategic oversight of AI implementation, risk management, and ethical frameworks 
+                that balance innovation with responsibility and regulatory compliance.
+              </p>
             </div>
-            <h4 className="text-xl font-semibold mb-3 text-stratified">Strategic Partnerships</h4>
-            <p className="text-gray-700">
-              Forge valuable connections and strategic alliances to accelerate growth and market penetration.
-            </p>
-          </div>
 
-          <div className="border border-gray-200 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
-            <div className="w-16 h-16 bg-stratified-lighter rounded-full flex items-center justify-center mx-auto mb-4">
-              <Lightbulb className="text-stratified" size={28} />
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+              <div className="w-12 h-12 bg-stratified-lighter rounded-lg flex items-center justify-center mb-4">
+                <div className="w-6 h-6 bg-stratified rounded"></div>
+              </div>
+              <h3 className="text-xl font-semibold mb-3 text-stratified">Cybersecurity Resilience</h3>
+              <p className="text-gray-600">
+                Board-level cybersecurity strategy, risk assessment, and incident response planning 
+                to protect organizational assets and ensure business continuity.
+              </p>
             </div>
-            <h4 className="text-xl font-semibold mb-3 text-stratified">Innovation Governance</h4>
-            <p className="text-gray-700">
-              Implement frameworks that foster innovation while managing risk and ensuring alignment with business objectives.
-            </p>
-          </div>
 
-          <div className="border border-gray-200 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
-            <div className="w-16 h-16 bg-stratified-lighter rounded-full flex items-center justify-center mx-auto mb-4">
-              <Shield className="text-stratified" size={28} />
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+              <div className="w-12 h-12 bg-stratified-lighter rounded-lg flex items-center justify-center mb-4">
+                <div className="w-6 h-6 bg-stratified rounded"></div>
+              </div>
+              <h3 className="text-xl font-semibold mb-3 text-stratified">Digital Transformation</h3>
+              <p className="text-gray-600">
+                Strategic guidance on technology adoption, digital business models, and 
+                organizational change management for sustainable competitive advantage.
+              </p>
             </div>
-            <h4 className="text-xl font-semibold mb-3 text-stratified">Regulatory Navigation</h4>
-            <p className="text-gray-700">
-              Expertly guide your organization through complex regulatory landscapes in AI, data privacy, and cybersecurity.
-            </p>
-          </div>
 
-          <div className="border border-gray-200 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
-            <div className="w-16 h-16 bg-stratified-lighter rounded-full flex items-center justify-center mx-auto mb-4">
-              <TrendingUp className="text-stratified" size={28} />
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+              <div className="w-12 h-12 bg-stratified-lighter rounded-lg flex items-center justify-center mb-4">
+                <div className="w-6 h-6 bg-stratified rounded"></div>
+              </div>
+              <h3 className="text-xl font-semibold mb-3 text-stratified">M&A Technology Due Diligence</h3>
+              <p className="text-gray-600">
+                Expert assessment of technology assets, integration strategies, and 
+                digital value creation opportunities in merger and acquisition scenarios.
+              </p>
             </div>
-            <h4 className="text-xl font-semibold mb-3 text-stratified">Growth Acceleration</h4>
-            <p className="text-gray-700">
-              Identify and capitalize on opportunities to scale operations, optimize processes, and maximize market impact.
-            </p>
-          </div>
-        </div>
 
-        <div className="text-center">
-          <Button 
-            className="bg-stratified hover:bg-stratified-dark text-white px-8 py-6 text-lg"
-            onClick={handleScheduleClick}
-          >
-            <Calendar className="mr-2 h-5 w-5" />
-            Schedule a Board Strategy Session
-          </Button>
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+              <div className="w-12 h-12 bg-stratified-lighter rounded-lg flex items-center justify-center mb-4">
+                <div className="w-6 h-6 bg-stratified rounded"></div>
+              </div>
+              <h3 className="text-xl font-semibold mb-3 text-stratified">Regulatory & Compliance</h3>
+              <p className="text-gray-600">
+                Navigate complex regulatory landscapes including GDPR, AI Act, and emerging 
+                technology regulations with strategic compliance frameworks.
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+              <div className="w-12 h-12 bg-stratified-lighter rounded-lg flex items-center justify-center mb-4">
+                <div className="w-6 h-6 bg-stratified rounded"></div>
+              </div>
+              <h3 className="text-xl font-semibold mb-3 text-stratified">Innovation Strategy</h3>
+              <p className="text-gray-600">
+                Strategic innovation roadmaps, emerging technology assessment, and 
+                innovation portfolio management for sustained competitive advantage.
+              </p>
+            </div>
+          </div>
+
+          {/* Value Proposition */}
+          <div className="bg-gradient-to-r from-stratified-lighter to-stratified-light rounded-2xl p-8 mb-12">
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-stratified mb-4">Why Choose Our Board Advisory Services?</h3>
+              <div className="grid md:grid-cols-3 gap-6 mt-8">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-stratified mb-2">$1B+</div>
+                  <p className="text-gray-700">Revenue impact from strategic technology integrations</p>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-stratified mb-2">10+</div>
+                  <p className="text-gray-700">Years of leadership at global technology companies</p>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-stratified mb-2">100+</div>
+                  <p className="text-gray-700">Board decisions influenced across multiple industries</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA Section */}
+          <div className="text-center bg-white rounded-xl shadow-lg p-8">
+            <h3 className="text-2xl font-bold mb-4 text-stratified">Ready to Transform Your Board's Strategic Oversight?</h3>
+            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+              Connect with us to explore how our board advisory services can help your organization 
+              navigate digital transformation, AI governance, and cybersecurity challenges with confidence.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <ContactCTA variant="board-advisory" size="lg" />
+              <ContactCTA variant="partnership" size="lg" />
+            </div>
+          </div>
         </div>
       </div>
     </section>
