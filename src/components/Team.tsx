@@ -26,14 +26,14 @@ const Team = () => {
                 </p>
                 <div className="flex flex-wrap items-center text-sm text-gray-600 mb-6 gap-4">
                   <div className="flex items-center">
-                    <Phone size={16} className="mr-1" />
-                    <span>206 739 1205</span>
+                    
+                    
                   </div>
                   <div className="flex items-center">
-                    <Mail size={16} className="mr-1" />
-                    <span>andreea@stratifiedadvisory.com</span>
+                    
+                    
                   </div>
-                  <div className="flex items-center">
+                  <div className="">
                     <MapPin size={16} className="mr-1" />
                     <span>US & EMEA</span>
                   </div>
