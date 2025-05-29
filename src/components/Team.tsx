@@ -92,7 +92,7 @@ const Team = () => {
                 </div>
               </div>
               <div className="p-8 md:p-10 md:w-2/3">
-                <div className="uppercase tracking-wide text-sm text-stratified font-semibold mb-1">FOUNDING PARTNER</div>
+                <div className="uppercase tracking-wide text-sm text-stratified font-semibold mb-1">RESEARCH PARTNER</div>
                 <h3 className="text-3xl font-bold mb-2">Prof. dr. Désirée M. van Gorp LL.M</h3>
                 <p className="text-lg text-stratified font-medium mb-4">
                   Professor of International Business | Board Leadership & Ecosystem Development Expert
