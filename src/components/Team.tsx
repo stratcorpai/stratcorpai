@@ -1,9 +1,6 @@
-
 import { Linkedin, Mail, MapPin, Phone } from 'lucide-react';
-
 const Team = () => {
-  return (
-    <section id="team" className="section-padding bg-gray-50">
+  return <section id="team" className="section-padding bg-gray-50">
       <div className="container-custom">
         <div className="text-center mb-16">
           <h2 className="mb-4 gradient-text">Our Founding Team</h2>
@@ -18,11 +15,7 @@ const Team = () => {
             <div className="md:flex">
               <div className="md:flex-shrink-0 md:w-1/3">
                 <div className="h-full relative overflow-hidden">
-                  <img 
-                    src="/lovable-uploads/be1f59f9-bb53-42ab-9713-f56caa100945.png" 
-                    alt="Andreea Bulisache" 
-                    className="w-full h-full object-cover object-center"
-                  />
+                  <img src="/lovable-uploads/be1f59f9-bb53-42ab-9713-f56caa100945.png" alt="Andreea Bulisache" className="w-full h-full object-cover object-center" />
                 </div>
               </div>
               <div className="p-8 md:p-10 md:w-2/3">
@@ -79,13 +72,10 @@ const Team = () => {
                 </div>
                 
                 <div className="flex space-x-4">
-                  <a href="https://linkedin.com/in/andreeabulisache" 
-                     className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors"
-                     target="_blank" rel="noopener noreferrer">
+                  <a href="https://linkedin.com/in/andreeabulisache" className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors" target="_blank" rel="noopener noreferrer">
                     <Linkedin size={20} />
                   </a>
-                  <a href="mailto:andreea@stratifiedadvisory.com" 
-                     className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors">
+                  <a href="mailto:andreea@stratifiedadvisory.com" className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors">
                     <Mail size={20} />
                   </a>
                 </div>
@@ -98,15 +88,11 @@ const Team = () => {
             <div className="md:flex md:flex-row-reverse">
               <div className="md:flex-shrink-0 md:w-1/3">
                 <div className="h-full relative overflow-hidden">
-                  <img 
-                    src="/lovable-uploads/7b8d88cc-86d4-4796-885f-5de98bb9ca7f.png" 
-                    alt="Prof. dr. Désirée M. van Gorp LL.M" 
-                    className="w-full h-full object-cover object-center"
-                  />
+                  <img src="/lovable-uploads/7b8d88cc-86d4-4796-885f-5de98bb9ca7f.png" alt="Prof. dr. Désirée M. van Gorp LL.M" className="w-full h-full object-cover object-center" />
                 </div>
               </div>
               <div className="p-8 md:p-10 md:w-2/3">
-                <div className="uppercase tracking-wide text-sm text-stratified font-semibold mb-1">Strategic Partner</div>
+                <div className="uppercase tracking-wide text-sm text-stratified font-semibold mb-1">FOUNDING PARTNER</div>
                 <h3 className="text-3xl font-bold mb-2">Prof. dr. Désirée M. van Gorp LL.M</h3>
                 <p className="text-lg text-stratified font-medium mb-4">
                   Professor of International Business | Board Leadership & Ecosystem Development Expert
@@ -150,13 +136,10 @@ const Team = () => {
                 </div>
                 
                 <div className="flex space-x-4">
-                  <a href="#" 
-                     className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors"
-                     target="_blank" rel="noopener noreferrer">
+                  <a href="#" className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors" target="_blank" rel="noopener noreferrer">
                     <Linkedin size={20} />
                   </a>
-                  <a href="#" 
-                     className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors">
+                  <a href="#" className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors">
                     <Mail size={20} />
                   </a>
                 </div>
@@ -212,8 +195,6 @@ const Team = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Team;
