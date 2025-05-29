@@ -1,18 +1,7 @@
 
-import { Linkedin, Mail, MapPin, X } from 'lucide-react';
-import { useState } from 'react';
+import { Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 
 const Team = () => {
-  const [selectedMember, setSelectedMember] = useState<string | null>(null);
-
-  const openProfile = (memberId: string) => {
-    setSelectedMember(memberId);
-  };
-
-  const closeProfile = () => {
-    setSelectedMember(memberId);
-  };
-
   return (
     <section id="team" className="section-padding bg-gray-50">
       <div className="container-custom">
@@ -23,80 +12,159 @@ const Team = () => {
           </p>
         </div>
 
-        <div className="max-w-5xl mx-auto">
-          {/* Side by Side Team Members - Vertical Photos */}
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {/* Andreea Bulisache */}
-            <div 
-              className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl cursor-pointer group"
-              onClick={() => openProfile('andreea')}
-            >
-              <div className="relative">
-                <div className="h-80 relative overflow-hidden">
+        <div className="max-w-6xl mx-auto space-y-12">
+          {/* Andreea Bulisache */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
+            <div className="md:flex">
+              <div className="md:flex-shrink-0 md:w-1/3">
+                <div className="h-full relative overflow-hidden">
                   <img 
                     src="/lovable-uploads/be1f59f9-bb53-42ab-9713-f56caa100945.png" 
                     alt="Andreea Bulisache" 
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover object-center"
                   />
-                  <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
-                  <div className="uppercase tracking-wide text-sm font-semibold mb-1">CEO & Founder</div>
-                  <h3 className="text-2xl font-bold mb-2">Andreea Bulisache</h3>
-                  <p className="text-sm opacity-90">
-                    Global Tech Executive and Innovation Leader
-                  </p>
-                  <div className="flex items-center text-sm mt-2 opacity-90">
-                    <MapPin size={14} className="mr-1" />
+              </div>
+              <div className="p-8 md:p-10 md:w-2/3">
+                <div className="uppercase tracking-wide text-sm text-stratified font-semibold mb-1">CEO & Founder</div>
+                <h3 className="text-3xl font-bold mb-2">Andreea Bulisache</h3>
+                <p className="text-lg text-stratified font-medium mb-4">
+                  Global Tech Executive and Innovation Leader | AI, Cybersecurity, and Digital Transformation
+                </p>
+                <div className="flex flex-wrap items-center text-sm text-gray-600 mb-6 gap-4">
+                  <div className="flex items-center">
+                    <Phone size={16} className="mr-1" />
+                    <span>206 739 1205</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Mail size={16} className="mr-1" />
+                    <span>andreea@stratifiedadvisory.com</span>
+                  </div>
+                  <div className="flex items-center">
+                    <MapPin size={16} className="mr-1" />
                     <span>US & EMEA</span>
                   </div>
                 </div>
-              </div>
-              <div className="p-6">
-                <p className="text-gray-600 text-sm mb-4">
-                  Pioneered AI, data & analytics, blockchain, and cybersecurity integration at Microsoft. Click to read full bio.
-                </p>
-                <div className="text-stratified text-sm font-medium">Click to view full profile →</div>
-              </div>
-            </div>
-
-            {/* Désirée van Gorp */}
-            <div 
-              className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl cursor-pointer group"
-              onClick={() => openProfile('desiree')}
-            >
-              <div className="relative">
-                <div className="h-80 relative overflow-hidden">
-                  <img 
-                    src="/lovable-uploads/7b8d88cc-86d4-4796-885f-5de98bb9ca7f.png" 
-                    alt="Prof. dr. Désirée M. van Gorp LL.M" 
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
-                  <div className="uppercase tracking-wide text-sm font-semibold mb-1">Partner</div>
-                  <h3 className="text-2xl font-bold mb-2">Prof. dr. Désirée M. van Gorp LL.M</h3>
-                  <p className="text-sm opacity-90">
-                    Professor of International Business
+                
+                <div className="mb-6">
+                  <p className="text-gray-700 mb-4">
+                    Andreea Bulisache is a global tech executive, strategist, and influential thought leader with a decade of leadership at Microsoft, where she pioneered the integration of AI, data & analytics, blockchain, and cybersecurity into scalable business models. She played a key role in incubating and operationalizing emerging technologies, leading major integrations like GitHub and Databricks, and driving over $1 billion in global revenue through Microsoft's partner-to-partner model.
                   </p>
-                  <div className="flex items-center text-sm mt-2 opacity-90">
-                    <MapPin size={14} className="mr-1" />
-                    <span>Netherlands & International</span>
-                  </div>
+                  <p className="text-gray-700 mb-4">
+                    A sought-after speaker and advisor, Andreea demystifies AI, builds cybersecurity resilience, and leads digital transformation in high-growth and regulated markets. Beyond corporate leadership, she has shaped national cybersecurity policies and AI frameworks, earning her reputation as a trusted advisor to PE-backed companies, scale-ups, and enterprises navigating complex transitions.
+                  </p>
+                  <blockquote className="text-lg italic text-stratified border-l-4 border-stratified pl-4 mb-4">
+                    "Boards turn to me when the conversation shifts from compliance to competitiveness—and from digital strategy to enterprise transformation."
+                  </blockquote>
                 </div>
-              </div>
-              <div className="p-6">
-                <p className="text-gray-600 text-sm mb-4">
-                  Full-time professor at Nyenrode Business University, serves on multiple boards including Atradius. Click to read full bio.
-                </p>
-                <div className="text-stratified text-sm font-medium">Click to view full profile →</div>
+                
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold mb-3 text-stratified">Education & Credentials</h4>
+                  <ul className="list-disc list-inside text-gray-700 space-y-1">
+                    <li>MBA from Nyenrode Business University, Netherlands</li>
+                    <li>Harvard Business School Women on Boards Program (2024)</li>
+                    <li>CFA Certificate in Private Equity</li>
+                    <li>Bachelor's in International Economic Relations</li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold mb-3 text-stratified">Current Board & Governance Roles</h4>
+                  <ul className="list-disc list-inside text-gray-700 space-y-1">
+                    <li>Chair, Young & Bold (2020–Present) — Recognized by WEF & FT</li>
+                    <li>Board Member, Wildlife Forensics Academy</li>
+                    <li>Advisory Board Member, Nyenrode Business University (2018–Present)</li>
+                    <li>Startup Advisor — TypingDNA, FootprintAI, Flipsnack</li>
+                  </ul>
+                </div>
+                
+                <div className="flex space-x-4">
+                  <a href="https://linkedin.com/in/andreeabulisache" 
+                     className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors"
+                     target="_blank" rel="noopener noreferrer">
+                    <Linkedin size={20} />
+                  </a>
+                  <a href="mailto:andreea@stratifiedadvisory.com" 
+                     className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors">
+                    <Mail size={20} />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Combined Expertise Section */}
-          <div className="bg-white rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl">
+          {/* Désirée van Gorp */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
+            <div className="md:flex md:flex-row-reverse">
+              <div className="md:flex-shrink-0 md:w-1/3">
+                <div className="h-full relative overflow-hidden">
+                  <img 
+                    src="/lovable-uploads/7b8d88cc-86d4-4796-885f-5de98bb9ca7f.png" 
+                    alt="Prof. dr. Désirée M. van Gorp LL.M" 
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
+              </div>
+              <div className="p-8 md:p-10 md:w-2/3">
+                <div className="uppercase tracking-wide text-sm text-stratified font-semibold mb-1">Strategic Partner</div>
+                <h3 className="text-3xl font-bold mb-2">Prof. dr. Désirée M. van Gorp LL.M</h3>
+                <p className="text-lg text-stratified font-medium mb-4">
+                  Professor of International Business | Board Leadership & Ecosystem Development Expert
+                </p>
+                <div className="flex flex-wrap items-center text-sm text-gray-600 mb-6 gap-4">
+                  <div className="flex items-center">
+                    <MapPin size={16} className="mr-1" />
+                    <span>Netherlands & International</span>
+                  </div>
+                </div>
+                
+                <div className="mb-6">
+                  <p className="text-gray-700 mb-4">
+                    Désirée van Gorp is full-time professor of International Business and chairing the International Advisory Board at Nyenrode Business University. She serves on several supervisory and advisory boards including Atradius, World Trade Organization's Chairs Programme, NBTC Holland Marketing, Foundation Young & Bold, Impact Fair and Expert Panel, and chairs the early-stage funding initiative for start-ups with the regional development organization in Utrecht, the Netherlands.
+                  </p>
+                  <p className="text-gray-700 mb-4">
+                    She is involved in the Women in Business Awards for the United Nations' World Investment Forum and regularly participates in AMBA's Assessment Accreditation Committees. In addition to research and education, she advises organizations on building partnerships for sustainable value chains, creating effective ecosystems, and enhancing team and boardroom performance through design thinking and intelligent decision-making methods.
+                  </p>
+                </div>
+                
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold mb-3 text-stratified">Advisory Focus Areas</h4>
+                  <ul className="list-disc list-inside text-gray-700 space-y-1">
+                    <li>Building partnerships for sustainable value chains, global sourcing, offshoring and outsourcing</li>
+                    <li>Building ecosystems and making them work</li>
+                    <li>Increasing team and boardroom performance by enhancing their dynamics</li>
+                    <li>Using design thinking and intelligent decision making methods to support digital transformations</li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold mb-3 text-stratified">Current Board & Governance Roles</h4>
+                  <ul className="list-disc list-inside text-gray-700 space-y-1">
+                    <li>Professor & International Advisory Board Chair, Nyenrode Business University</li>
+                    <li>Board Member, Atradius</li>
+                    <li>Advisory Board, World Trade Organization's Chairs Programme</li>
+                    <li>Board Member, NBTC Holland Marketing</li>
+                    <li>Foundation Young & Bold Board Member</li>
+                    <li>Chairman, Early-stage Funding Initiative, Utrecht Regional Development</li>
+                  </ul>
+                </div>
+                
+                <div className="flex space-x-4">
+                  <a href="#" 
+                     className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors"
+                     target="_blank" rel="noopener noreferrer">
+                    <Linkedin size={20} />
+                  </a>
+                  <a href="#" 
+                     className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors">
+                    <Mail size={20} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-12 bg-white rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl">
             <h4 className="text-xl font-semibold mb-6 text-stratified">Combined Board-Ready Expertise & Value</h4>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="p-4 bg-gray-50 rounded-lg hover:bg-stratified/5 transition-colors">
@@ -144,162 +212,6 @@ const Team = () => {
           </div>
         </div>
       </div>
-
-      {/* Profile Overlay */}
-      {selectedMember && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center">
-              <h3 className="text-2xl font-bold text-stratified">
-                {selectedMember === 'andreea' ? 'Andreea Bulisache' : 'Prof. dr. Désirée M. van Gorp LL.M'}
-              </h3>
-              <button 
-                onClick={closeProfile}
-                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-              >
-                <X size={24} className="text-gray-600" />
-              </button>
-            </div>
-            
-            <div className="p-6">
-              {selectedMember === 'andreea' ? (
-                <div className="md:flex md:space-x-6">
-                  <div className="md:flex-shrink-0 mb-6 md:mb-0">
-                    <div className="h-64 w-48 mx-auto md:mx-0 relative overflow-hidden rounded-lg">
-                      <img 
-                        src="/lovable-uploads/be1f59f9-bb53-42ab-9713-f56caa100945.png" 
-                        alt="Andreea Bulisache" 
-                        className="w-full h-full object-cover object-center"
-                      />
-                    </div>
-                  </div>
-                  <div className="md:flex-1">
-                    <div className="uppercase tracking-wide text-sm text-stratified font-semibold mb-1">CEO & Founder</div>
-                    <h3 className="text-2xl font-bold mb-2">Andreea Bulisache</h3>
-                    <p className="text-base text-stratified font-medium mb-4">
-                      Global Tech Executive and Innovation Leader | AI, Cybersecurity, and Digital Transformation
-                    </p>
-                    <div className="flex items-center text-sm text-gray-600 mb-4">
-                      <MapPin size={16} className="mr-1" />
-                      <span>US & EMEA</span>
-                    </div>
-                    
-                    <div className="mb-4">
-                      <p className="text-gray-700 mb-3 text-sm">
-                        Andreea Bulisache is a global tech executive, strategist, and influential thought leader with a decade of leadership at Microsoft, where she pioneered the integration of AI, data & analytics, blockchain, and cybersecurity into scalable business models.
-                      </p>
-                      <p className="text-gray-700 mb-3 text-sm">
-                        A sought-after speaker and advisor, Andreea demystifies AI, builds cybersecurity resilience, and leads digital transformation in high-growth and regulated markets.
-                      </p>
-                      <blockquote className="text-sm italic text-stratified border-l-4 border-stratified pl-3 mb-3">
-                        "Boards turn to me when the conversation shifts from compliance to competitiveness—and from digital strategy to enterprise transformation."
-                      </blockquote>
-                    </div>
-                    
-                    <div className="mb-4">
-                      <h4 className="text-base font-semibold mb-2 text-stratified">Education & Credentials</h4>
-                      <ul className="list-disc list-inside text-gray-700 space-y-1 text-sm">
-                        <li>MBA from Nyenrode Business University, Netherlands</li>
-                        <li>Harvard Business School Women on Boards Program (2024)</li>
-                        <li>CFA Certificate in Private Equity</li>
-                        <li>Bachelor's in International Economic Relations</li>
-                      </ul>
-                    </div>
-
-                    <div className="mb-4">
-                      <h4 className="text-base font-semibold mb-2 text-stratified">Current Board & Governance Roles</h4>
-                      <ul className="list-disc list-inside text-gray-700 space-y-1 text-sm">
-                        <li>Chair, Young & Bold (2020–Present) — Recognized by WEF & FT</li>
-                        <li>Board Member, Wildlife Forensics Academy</li>
-                        <li>Advisory Board Member, Nyenrode Business University (2018–Present)</li>
-                        <li>Startup Advisor — TypingDNA, FootprintAI, Flipsnack</li>
-                      </ul>
-                    </div>
-                    
-                    <div className="flex space-x-4">
-                      <a href="https://linkedin.com/in/andreeabulisache" 
-                         className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors"
-                         target="_blank" rel="noopener noreferrer">
-                        <Linkedin size={20} />
-                      </a>
-                      <a href="mailto:andreea@stratifiedadvisory.com" 
-                         className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors">
-                        <Mail size={20} />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="md:flex md:space-x-6">
-                  <div className="md:flex-shrink-0 mb-6 md:mb-0">
-                    <div className="h-64 w-48 mx-auto md:mx-0 relative overflow-hidden rounded-lg">
-                      <img 
-                        src="/lovable-uploads/7b8d88cc-86d4-4796-885f-5de98bb9ca7f.png" 
-                        alt="Prof. dr. Désirée M. van Gorp LL.M" 
-                        className="w-full h-full object-cover object-center"
-                      />
-                    </div>
-                  </div>
-                  <div className="md:flex-1">
-                    <div className="uppercase tracking-wide text-sm text-stratified font-semibold mb-1">Partner</div>
-                    <h3 className="text-2xl font-bold mb-2">Prof. dr. Désirée M. van Gorp LL.M</h3>
-                    <p className="text-base text-stratified font-medium mb-4">
-                      Professor of International Business | Board Leadership & Ecosystem Development Expert
-                    </p>
-                    <div className="flex items-center text-sm text-gray-600 mb-4">
-                      <MapPin size={16} className="mr-1" />
-                      <span>Netherlands & International</span>
-                    </div>
-                    
-                    <div className="mb-4">
-                      <p className="text-gray-700 mb-3 text-sm">
-                        Désirée van Gorp is full-time professor of International Business and chairing the International Advisory Board at Nyenrode Business University. She serves on several supervisory and advisory boards including Atradius, World Trade Organization's Chairs Programme, NBTC Holland Marketing, Foundation Young & Bold, Impact Fair and Expert Panel.
-                      </p>
-                      <p className="text-gray-700 mb-3 text-sm">
-                        She is involved in the Women in Business Awards for the United Nations' World Investment Forum and regularly participates in AMBA's Assessment Accreditation Committees. In addition to research and education, she advises organizations on building partnerships for sustainable value chains, creating effective ecosystems, and enhancing team and boardroom performance.
-                      </p>
-                    </div>
-                    
-                    <div className="mb-4">
-                      <h4 className="text-base font-semibold mb-2 text-stratified">Advisory Focus Areas</h4>
-                      <ul className="list-disc list-inside text-gray-700 space-y-1 text-sm">
-                        <li>Building partnerships for sustainable value chains, global sourcing, offshoring and outsourcing</li>
-                        <li>Building ecosystems and making them work</li>
-                        <li>Increasing team and boardroom performance by enhancing their dynamics</li>
-                        <li>Using design thinking and intelligent decision making methods to support digital transformations</li>
-                      </ul>
-                    </div>
-
-                    <div className="mb-4">
-                      <h4 className="text-base font-semibold mb-2 text-stratified">Current Board & Governance Roles</h4>
-                      <ul className="list-disc list-inside text-gray-700 space-y-1 text-sm">
-                        <li>Professor & International Advisory Board Chair, Nyenrode Business University</li>
-                        <li>Board Member, Atradius</li>
-                        <li>Advisory Board, World Trade Organization's Chairs Programme</li>
-                        <li>Board Member, NBTC Holland Marketing</li>
-                        <li>Foundation Young & Bold Board Member</li>
-                        <li>Chairman, Early-stage Funding Initiative, Utrecht Regional Development</li>
-                      </ul>
-                    </div>
-                    
-                    <div className="flex space-x-4">
-                      <a href="#" 
-                         className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors"
-                         target="_blank" rel="noopener noreferrer">
-                        <Linkedin size={20} />
-                      </a>
-                      <a href="#" 
-                         className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors">
-                        <Mail size={20} />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 };
