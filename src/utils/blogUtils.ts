@@ -1,4 +1,5 @@
 
+
 export interface BlogPost {
   id: number;
   title: string;
@@ -42,7 +43,7 @@ export const getBlogPosts = (): BlogPost[] => {
     },
     {
       id: 4,
-      title: "The Next AI Imperative: Sustainability at Scale",
+      title: "The Next AI Imperative: Sustainability",
       description: "Integrating sustainability principles with AI-driven transformation to achieve scalable environmental and business impact.",
       pdfUrl: "/blog/TheNextAIImperative- Sustainability at Scale, A.Bulisache, F.Chima 05.25.pdf",
       publishDate: "2025-05-25",
@@ -64,3 +65,4 @@ export const downloadPDF = (pdfUrl: string, filename: string) => {
   link.click();
   document.body.removeChild(link);
 };
+
