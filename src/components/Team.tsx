@@ -1,7 +1,10 @@
 
 import { Linkedin, Mail, MapPin, Phone } from 'lucide-react';
+import ContactCTA from './ContactCTA';
+
 const Team = () => {
-  return <section id="team" className="section-padding bg-gray-50">
+  return (
+    <section id="team" className="section-padding bg-gray-50">
       <div className="container-custom">
         <div className="text-center mb-16">
           <h2 className="mb-4 gradient-text">Our Founding Team</h2>
@@ -16,7 +19,11 @@ const Team = () => {
             <div className="md:flex">
               <div className="md:flex-shrink-0 md:w-1/3">
                 <div className="h-full relative overflow-hidden">
-                  <img src="/lovable-uploads/be1f59f9-bb53-42ab-9713-f56caa100945.png" alt="Andreea Bulisache" className="w-full h-full object-cover object-center" />
+                  <img 
+                    src="/lovable-uploads/be1f59f9-bb53-42ab-9713-f56caa100945.png" 
+                    alt="Andreea Bulisache" 
+                    className="w-full h-full object-cover object-center" 
+                  />
                 </div>
               </div>
               <div className="p-8 md:p-10 md:w-2/3">
@@ -81,7 +88,11 @@ const Team = () => {
             <div className="md:flex md:flex-row-reverse">
               <div className="md:flex-shrink-0 md:w-1/3">
                 <div className="h-full relative overflow-hidden">
-                  <img src="/lovable-uploads/7b8d88cc-86d4-4796-885f-5de98bb9ca7f.png" alt="Prof. dr. Désirée M. van Gorp LL.M" className="w-full h-full object-cover object-center" />
+                  <img 
+                    src="/lovable-uploads/7b8d88cc-86d4-4796-885f-5de98bb9ca7f.png" 
+                    alt="Prof. dr. Désirée M. van Gorp LL.M" 
+                    className="w-full h-full object-cover object-center" 
+                  />
                 </div>
               </div>
               <div className="p-8 md:p-10 md:w-2/3">
@@ -185,9 +196,17 @@ const Team = () => {
           <div className="mt-8 bg-stratified-lighter/30 rounded-xl p-6 text-center">
             <h4 className="text-lg font-semibold mb-2 text-stratified">Board & Fund Focus</h4>
             <p className="text-gray-700 mb-4">Scale-up boards in enterprise SaaS, AI, or regulated markets (Series B–D) • Operating partner/advisor to PE or VC funds • Innovation, AI, ESG, or GTM-focused board committees • International expansion and ecosystem development</p>
+            
+            <div className="flex flex-wrap justify-center gap-4 mt-6">
+              <ContactCTA variant="board-advisory" size="default" />
+              <ContactCTA variant="consulting" size="default" />
+              <ContactCTA variant="partnership" size="default" />
+            </div>
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Team;

@@ -1,12 +1,10 @@
-import { useState } from 'react';
+
 import { Linkedin, Mail, MapPin } from 'lucide-react';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import ContactForm from './ContactForm';
 import ContactCTA from './ContactCTA';
+
 const Footer = () => {
-  const [isContactOpen, setIsContactOpen] = useState(false);
-  return <footer className="bg-gray-900 text-white">
+  return (
+    <footer className="bg-gray-900 text-white">
       <div className="container-custom py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -47,16 +45,11 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Connect</h4>
             <div className="space-y-4">
-              <Dialog open={isContactOpen} onOpenChange={setIsContactOpen}>
-                <DialogTrigger asChild>
-                  <Button variant="outline" className="w-full border-white hover:bg-white text-slate-950">
-                    Get in Touch
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto p-0 border-0">
-                  <ContactForm />
-                </DialogContent>
-              </Dialog>
+              <ContactCTA 
+                variant="consulting" 
+                size="default" 
+                className="w-full bg-white/10 hover:bg-white/20 border-white text-white hover:text-white"
+              />
               
               <div className="flex space-x-3">
                 <a href="https://linkedin.com/in/andreeabulisache" className="bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors" target="_blank" rel="noopener noreferrer">
@@ -81,6 +74,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 };
+
 export default Footer;
