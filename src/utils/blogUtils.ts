@@ -42,9 +42,9 @@ export const getBlogPosts = (): BlogPost[] => {
     },
     {
       id: 4,
-      title: "Next Imperative: Sustainability at Scale",
+      title: "The Next AI Imperative: Sustainability at Scale",
       description: "Integrating sustainability principles with AI-driven transformation to achieve scalable environmental and business impact.",
-      pdfUrl: "/blog/Next Imperative- Sustainability at Scale, A.Bulisache, F.Chima 05.25.pdf",
+      pdfUrl: "/blog/TheNextAIImperative- Sustainability at Scale, A.Bulisache, F.Chima 05.25.pdf",
       publishDate: "2025-05-25",
       readTime: "14 min read",
       tags: ["Sustainability", "ESG", "Scale", "Environmental Impact"]

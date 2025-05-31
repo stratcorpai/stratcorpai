@@ -1,3 +1,4 @@
+
 import { Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 const Team = () => {
   return <section id="team" className="section-padding bg-gray-50">
@@ -25,14 +26,6 @@ const Team = () => {
                   Global Tech Executive and Innovation Leader | AI, Cybersecurity, and Digital Transformation
                 </p>
                 <div className="flex flex-wrap items-center text-sm text-gray-600 mb-6 gap-4">
-                  <div className="flex items-center">
-                    <Phone size={16} className="mr-1" />
-                    <span>206 739 1205</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Mail size={16} className="mr-1" />
-                    <span>andreea@stratifiedadvisory.com</span>
-                  </div>
                   <div className="flex items-center">
                     <MapPin size={16} className="mr-1" />
                     <span>US & EMEA</span>
@@ -92,7 +85,7 @@ const Team = () => {
                 </div>
               </div>
               <div className="p-8 md:p-10 md:w-2/3">
-                <div className="uppercase tracking-wide text-sm text-stratified font-semibold mb-1">RESEARCH PARTNER</div>
+                <div className="uppercase tracking-wide text-sm text-stratified font-semibold mb-1">PARTNER</div>
                 <h3 className="text-3xl font-bold mb-2">Prof. dr. Désirée M. van Gorp LL.M</h3>
                 <p className="text-lg text-stratified font-medium mb-4">
                   Professor of International Business | Board Leadership & Ecosystem Development Expert
