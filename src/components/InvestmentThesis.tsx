@@ -1,152 +1,207 @@
 
-import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { Zap, Target, Shield } from 'lucide-react';
 
 const InvestmentThesis = () => {
-  const svgRef = useRef<SVGSVGElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (svgRef.current) {
-        const rect = svgRef.current.getBoundingClientRect();
-        const isInView = rect.top < window.innerHeight && rect.bottom > 0;
-        
-        if (isInView) {
-          // Add 'visible' class when in view for animations
-          svgRef.current.classList.add('visible');
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    // Trigger once on load
-    handleScroll();
-    
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const principles = [
+    {
+      icon: Zap,
+      title: "Efficiency",
+      color: "stratified",
+      description: "We measure and optimize the resources consumed by AI solutions, focusing on carbon footprint reduction, cost per query optimization, and infrastructure utilization. Our approach ensures AI implementations that are not only powerful but sustainable and economically viable for the long term."
+    },
+    {
+      icon: Target,
+      title: "Effectiveness", 
+      color: "stratified-light",
+      description: "Beyond mere functionality, we evaluate AI solutions against the state-of-the-art benchmarks for completeness, time efficiency, and value generation. Our methodologies quantify the true business impact of AI implementations, ensuring tangible returns on technological investments."
+    },
+    {
+      icon: Shield,
+      title: "Responsibility",
+      color: "stratified-dark", 
+      description: "In an increasingly regulated landscape, we prioritize ethical considerations, regulatory compliance, and risk management. Our governance frameworks address issues of bias, transparency, and legal liability, protecting organizations while fostering innovation and trust."
+    }
+  ];
 
   return (
-    <section id="investment-thesis" className="section-padding bg-gray-50 overflow-hidden">
+    <section id="investment-thesis" className="section-padding bg-gray-50">
       <div className="container-custom">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
           <h2 className="mb-4 gradient-text">Our Investment Thesis</h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             In the era of generative AI, we believe in balancing three critical dimensions that define successful technological integration and implementation.
           </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Visual Representation */}
+          <motion.div 
+            className="relative h-[500px] flex items-center justify-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            {/* Central Hub */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <motion.div 
+                className="w-24 h-24 bg-stratified rounded-full flex items-center justify-center shadow-lg"
+                animate={{ 
+                  scale: [1, 1.05, 1],
+                  boxShadow: [
+                    "0 10px 25px rgba(139, 47, 65, 0.2)",
+                    "0 20px 40px rgba(139, 47, 65, 0.3)", 
+                    "0 10px 25px rgba(139, 47, 65, 0.2)"
+                  ]
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                <span className="text-white font-bold text-sm">AI</span>
+              </motion.div>
+            </div>
+
+            {/* Orbiting Elements */}
+            {principles.map((principle, index) => {
+              const Icon = principle.icon;
+              const angle = (index * 120) - 90; // Start from top, 120 degrees apart
+              const radius = 160;
+              const x = Math.cos(angle * Math.PI / 180) * radius;
+              const y = Math.sin(angle * Math.PI / 180) * radius;
+              
+              return (
+                <motion.div
+                  key={principle.title}
+                  className="absolute"
+                  style={{
+                    left: '50%',
+                    top: '50%',
+                    transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`
+                  }}
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: 0.4 + (index * 0.2),
+                    type: "spring",
+                    stiffness: 100
+                  }}
+                  viewport={{ once: true }}
+                >
+                  <motion.div 
+                    className={`w-16 h-16 bg-${principle.color} rounded-full flex items-center justify-center shadow-lg cursor-pointer group`}
+                    whileHover={{ scale: 1.1 }}
+                    animate={{ 
+                      y: [0, -8, 0],
+                    }}
+                    transition={{ 
+                      y: { 
+                        duration: 2 + index * 0.5, 
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }
+                    }}
+                  >
+                    <Icon className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+                  </motion.div>
+                  
+                  {/* Connecting Lines */}
+                  <motion.div
+                    className="absolute inset-0 pointer-events-none"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.8 + (index * 0.1) }}
+                    viewport={{ once: true }}
+                  >
+                    <div 
+                      className="absolute w-0.5 bg-gradient-to-r from-gray-300 to-transparent"
+                      style={{
+                        height: `${radius - 48}px`,
+                        left: '50%',
+                        top: '50%',
+                        transformOrigin: 'top center',
+                        transform: `translateX(-50%) rotate(${angle + 180}deg)`
+                      }}
+                    />
+                  </motion.div>
+                </motion.div>
+              );
+            })}
+
+            {/* Background Circles */}
+            <motion.div 
+              className="absolute inset-0 rounded-full border border-gray-200"
+              style={{ width: '320px', height: '320px', margin: 'auto' }}
+              initial={{ scale: 0, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 1, delay: 0.6 }}
+              viewport={{ once: true }}
+            />
+            <motion.div 
+              className="absolute inset-0 rounded-full border border-gray-100"
+              style={{ width: '400px', height: '400px', margin: 'auto' }}
+              initial={{ scale: 0, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 1.2, delay: 0.8 }}
+              viewport={{ once: true }}
+            />
+          </motion.div>
+
+          {/* Content Cards */}
+          <div className="space-y-6">
+            {principles.map((principle, index) => {
+              const Icon = principle.icon;
+              return (
+                <motion.div
+                  key={principle.title}
+                  className="card-modern p-6 hover:shadow-xl transition-all duration-300 group"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 + (index * 0.1) }}
+                  viewport={{ once: true }}
+                >
+                  <div className="flex items-start space-x-4">
+                    <div className={`w-12 h-12 bg-${principle.color} rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                      <Icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className={`text-xl font-semibold mb-3 text-${principle.color} group-hover:text-opacity-80 transition-colors`}>
+                        {principle.title}
+                      </h3>
+                      <p className="text-gray-700 leading-relaxed">
+                        {principle.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Radar Visualization */}
-          <div className="radar-container h-[450px] flex items-center justify-center relative">
-            <svg 
-              ref={svgRef} 
-              className="radar-graphic w-full h-full" 
-              viewBox="0 0 1000 1000" 
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <defs>
-                <radialGradient id="bgGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                  <stop offset="0%" stopColor="#F0D9DC" stopOpacity="0.8" />
-                  <stop offset="100%" stopColor="#D8A0A6" stopOpacity="0.4" />
-                </radialGradient>
-                
-                <linearGradient id="efficiencyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#8B2F41" stopOpacity="0.7" />
-                  <stop offset="100%" stopColor="#8B2F41" stopOpacity="0.2" />
-                </linearGradient>
-                
-                <linearGradient id="effectivenessGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#D8A0A6" stopOpacity="0.7" />
-                  <stop offset="100%" stopColor="#D8A0A6" stopOpacity="0.2" />
-                </linearGradient>
-                
-                <linearGradient id="responsibilityGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#3C1822" stopOpacity="0.7" />
-                  <stop offset="100%" stopColor="#3C1822" stopOpacity="0.2" />
-                </linearGradient>
-                
-                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="5" result="blur" />
-                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                </filter>
-              </defs>
-              
-              <circle cx="500" cy="500" r="400" fill="url(#bgGradient)" className="radar-bg opacity-0 animate-radar-bg" />
-              
-              <g className="radar-shape">
-                <circle cx="500" cy="500" r="8" fill="#8B2F41" filter="url(#glow)" className="radar-center opacity-0 animate-radar-center">
-                  <animate attributeName="r" values="8;12;8" dur="3s" repeatCount="indefinite" />
-                </circle>
-                
-                {/* Efficiency Axis */}
-                <line x1="500" y1="500" x2="500" y2="150" stroke="rgba(139, 47, 65, 0.3)" strokeWidth="2" className="radar-line opacity-0 animate-radar-line-1" />
-                <circle cx="500" cy="180" r="15" fill="#8B2F41" opacity="0" filter="url(#glow)" className="animate-radar-node-1">
-                  <animate attributeName="cy" values="180;170;180" dur="4s" repeatCount="indefinite" />
-                </circle>
-                <text x="500" y="140" textAnchor="middle" fill="#8B2F41" className="dimension-label opacity-0 animate-radar-label-1 font-semibold text-lg">Efficiency</text>
-                
-                {/* Effectiveness Axis */}
-                <line x1="500" y1="500" x2="800" y2="700" stroke="rgba(216, 160, 166, 0.3)" strokeWidth="2" className="radar-line opacity-0 animate-radar-line-2" />
-                <circle cx="770" cy="680" r="15" fill="#D8A0A6" opacity="0" filter="url(#glow)" className="animate-radar-node-2">
-                  <animate attributeName="cx" values="770;780;770" dur="4.5s" repeatCount="indefinite" />
-                </circle>
-                <text x="820" y="710" textAnchor="middle" fill="#D8A0A6" className="dimension-label opacity-0 animate-radar-label-2 font-semibold text-lg">Effectiveness</text>
-                
-                {/* Responsibility Axis */}
-                <line x1="500" y1="500" x2="200" y2="700" stroke="rgba(60, 24, 34, 0.3)" strokeWidth="2" className="radar-line opacity-0 animate-radar-line-3" />
-                <circle cx="230" cy="680" r="15" fill="#3C1822" opacity="0" filter="url(#glow)" className="animate-radar-node-3">
-                  <animate attributeName="cx" values="230;220;230" dur="5s" repeatCount="indefinite" />
-                </circle>
-                <text x="180" y="710" textAnchor="middle" fill="#3C1822" className="dimension-label opacity-0 animate-radar-label-3 font-semibold text-lg">Responsibility</text>
-                
-                {/* Radar Triangle */}
-                <path d="M 500 180 L 770 680 L 230 680 Z" fill="url(#efficiencyGradient)" opacity="0" className="animate-radar-triangle">
-                  <animate attributeName="opacity" values="0.5;0.7;0.5" dur="5s" repeatCount="indefinite" />
-                </path>
-                
-                {/* Pulsing Circles */}
-                <circle cx="500" cy="500" r="100" fill="none" stroke="url(#effectivenessGradient)" strokeWidth="2" opacity="0" className="animate-radar-pulse-1">
-                  <animate attributeName="r" values="100;350;100" dur="15s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" values="0.5;0;0.5" dur="15s" repeatCount="indefinite" />
-                </circle>
-                
-                <circle cx="500" cy="500" r="150" fill="none" stroke="url(#responsibilityGradient)" strokeWidth="2" opacity="0" className="animate-radar-pulse-2">
-                  <animate attributeName="r" values="150;400;150" dur="20s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" values="0.3;0;0.3" dur="20s" repeatCount="indefinite" />
-                </circle>
-              </g>
-            </svg>
+        {/* Bottom Summary */}
+        <motion.div 
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8 border-l-4 border-stratified">
+            <h3 className="text-2xl font-semibold mb-4 text-stratified">The Stratified Advantage</h3>
+            <p className="text-lg text-gray-700">
+              Our three-dimensional framework ensures that AI implementations deliver not just technological advancement, 
+              but sustainable, effective, and responsible business transformation. We bridge the gap between innovation 
+              and practical value creation.
+            </p>
           </div>
-
-          {/* Explanation */}
-          <div className="space-y-8">
-            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 border-l-4 border-stratified">
-              <h3 className="text-2xl font-semibold mb-3 text-stratified">Efficiency</h3>
-              <p className="text-gray-700">
-                We measure and optimize the resources consumed by AI solutions, focusing on carbon footprint reduction, 
-                cost per query optimization, and infrastructure utilization. Our approach ensures AI implementations 
-                that are not only powerful but sustainable and economically viable for the long term.
-              </p>
-            </div>
-            
-            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 border-l-4 border-stratified-light">
-              <h3 className="text-2xl font-semibold mb-3 text-stratified">Effectiveness</h3>
-              <p className="text-gray-700">
-                Beyond mere functionality, we evaluate AI solutions against the state-of-the-art benchmarks for 
-                completeness, time efficiency, and value generation. Our methodologies quantify the true business 
-                impact of AI implementations, ensuring tangible returns on technological investments.
-              </p>
-            </div>
-            
-            <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 border-l-4 border-stratified-dark">
-              <h3 className="text-2xl font-semibold mb-3 text-stratified">Responsibility</h3>
-              <p className="text-gray-700">
-                In an increasingly regulated landscape, we prioritize ethical considerations, regulatory compliance, 
-                and risk management. Our governance frameworks address issues of bias, transparency, and legal 
-                liability, protecting organizations while fostering innovation and trust.
-              </p>
-            </div>
-          </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
