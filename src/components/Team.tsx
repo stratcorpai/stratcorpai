@@ -83,6 +83,92 @@ const Team = () => {
             </div>
           </div>
 
+          {/* Siddhartha Chaturvedi */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
+            <div className="md:flex">
+              <div className="md:flex-shrink-0 md:w-1/3">
+                <div className="h-full relative overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=face" 
+                    alt="Siddhartha Chaturvedi" 
+                    className="w-full h-full object-cover object-center" 
+                  />
+                </div>
+              </div>
+              <div className="p-8 md:p-10 md:w-2/3">
+                <div className="uppercase tracking-wide text-sm text-stratified font-semibold mb-1">PARTNER</div>
+                <h3 className="text-3xl font-bold mb-2">Siddhartha Chaturvedi</h3>
+                <p className="text-lg text-stratified font-medium mb-4">
+                  DeepTech Investor | Post-Agentic Web for Scientific Discovery
+                </p>
+                <div className="flex flex-wrap items-center text-sm text-gray-600 mb-6 gap-4">
+                  <div className="flex items-center">
+                    <MapPin size={16} className="mr-1" />
+                    <span>US, UK & India</span>
+                  </div>
+                </div>
+                
+                <div className="mb-6">
+                  <p className="text-gray-700 mb-4">
+                    Siddhartha Chaturvedi is a visionary product leader and AI strategist with over 13 years of experience driving breakthrough innovations at the intersection of artificial intelligence, healthcare technology, and scientific discovery. After transforming how organizations approach AI-powered solutions as Director of Product Management at Microsoft's Strategic Missions & Technologies division, Siddhartha has founded a startup pioneering the post-agentic web for scientific discovery.
+                  </p>
+                  <p className="text-gray-700 mb-4">
+                    During his Microsoft tenure, Siddhartha spearheaded Microsoft Premonition, an AI-powered biothreat detection platform that earned Fast Company's World Changing Idea Award and secured multi-million dollar government contracts. He co-led Microsoft's AI for Health initiative, mobilizing $60+ million in funding across 150+ global grantees and positioning Microsoft as a trusted partner in healthcare innovation. His leadership in bringing Generative AI to the US Federal market established new paradigms for secure AI deployment in classified environments, generating over $500 million in strategic value and fundamentally transforming government operations.
+                  </p>
+                  <p className="text-gray-700 mb-4">
+                    Now, through his startup work, Siddhartha is building the next evolution of AI-powered scientific discovery—moving beyond current agentic systems to create intelligent infrastructures that fundamentally transform how researchers discover, validate, and build upon scientific knowledge. A proven ecosystem builder, he has orchestrated complex partnerships spanning research institutions, government agencies, and Fortune 500 companies, consistently translating ambitious visions and patents into commercially viable products that drive both business value and societal impact.
+                  </p>
+                  <blockquote className="text-lg italic text-stratified border-l-4 border-stratified pl-4 mb-4">
+                    "We're not just building better AI agents—we're reimagining the entire fabric of how scientific knowledge is created, connected, and accelerated."
+                  </blockquote>
+                </div>
+                
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold mb-3 text-stratified">Education & Credentials</h4>
+                  <ul className="list-disc list-inside text-gray-700 space-y-1">
+                    <li>MBA, INSEAD (Singapore/France) - Strategy, Leadership, Innovation</li>
+                    <li>B.Tech Computer Science</li>
+                    <li>MIT Global Entrepreneurship Certification</li>
+                    <li>Certified in Generative AI (Google Cloud, DeepLearning.AI, Microsoft)</li>
+                    <li>Advanced certifications in Healthcare Analytics and AI Ethics</li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold mb-3 text-stratified">Current Roles & Recognition</h4>
+                  <ul className="list-disc list-inside text-gray-700 space-y-1">
+                    <li>Limited Partner, rpv (Deeptech VC) — Investing in scientific innovations</li>
+                    <li>Advisor, Loyal VC — Scaling technology startups</li>
+                    <li>Microsoft Gold Star Award recipient for Data and AI strategy</li>
+                    <li>Fast Company World Changing Idea Award 2021 (Microsoft Premonition)</li>
+                    <li>Recognized among MIT's Top 50 Global Startups (Co-founder, Tathaastu Social Initiative)</li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold mb-3 text-stratified">Advisory Focus Areas</h4>
+                  <ul className="list-disc list-inside text-gray-700 space-y-1">
+                    <li>Post-agentic AI systems and next-generation scientific computing platforms</li>
+                    <li>AI product strategy and go-to-market execution for emerging technologies</li>
+                    <li>Public-private partnerships in healthcare and government innovation</li>
+                    <li>Responsible AI governance and ethical technology deployment</li>
+                    <li>Cross-functional team leadership in complex, matrixed organizations</li>
+                    <li>Bridging academic research and commercial product development</li>
+                  </ul>
+                </div>
+                
+                <div className="flex space-x-4">
+                  <a href="#" className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors" target="_blank" rel="noopener noreferrer">
+                    <Linkedin size={20} />
+                  </a>
+                  <a href="#" className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors">
+                    <Mail size={20} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Désirée van Gorp */}
           <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
             <div className="md:flex md:flex-row-reverse">
