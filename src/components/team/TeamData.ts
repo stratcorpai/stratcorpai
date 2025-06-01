@@ -22,6 +22,13 @@ export const teamMembers = [
       "Advisory Board Member, Nyenrode Business University (2018–Present)",
       "Startup Advisor — TypingDNA, FootprintAI, Flipsnack"
     ],
+    advisoryFocus: [
+      "AI strategy and governance for enterprise-scale implementations in regulated environments",
+      "Cybersecurity risk management and digital transformation acceleration",
+      "Strategic M&A and technology integration with proven $1B+ revenue outcomes",
+      "PE/VC portfolio company growth through emerging technology adoption",
+      "International market expansion and regulatory compliance frameworks"
+    ],
     linkedinUrl: "https://linkedin.com/in/andreeabulisache",
     emailUrl: "mailto:andreea@stratifiedadvisory.com"
   },
