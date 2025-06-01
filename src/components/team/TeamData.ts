@@ -1,0 +1,112 @@
+
+export const teamMembers = [
+  {
+    role: "CEO & Founder",
+    name: "Andreea Bulisache",
+    title: "Global Tech Executive and Innovation Leader | AI, Cybersecurity, and Digital Transformation",
+    location: "US & EMEA",
+    image: "/lovable-uploads/be1f59f9-bb53-42ab-9713-f56caa100945.png",
+    description: [
+      "Andreea Bulisache is a global tech executive, strategist, and influential thought leader with a decade of leadership at Microsoft, where she pioneered the integration of AI, data & analytics, blockchain, and cybersecurity into scalable business models. She played a key role in incubating and operationalizing emerging technologies, leading major integrations like GitHub and Databricks, and driving over $1 billion in global revenue through Microsoft's partner-to-partner model.",
+      "A sought-after speaker and advisor, Andreea demystifies AI, builds cybersecurity resilience, and leads digital transformation in high-growth and regulated markets. Beyond corporate leadership, she has shaped national cybersecurity policies and AI frameworks, earning her reputation as a trusted advisor to PE-backed companies, scale-ups, and enterprises navigating complex transitions."
+    ],
+    quote: "Boards turn to me when the conversation shifts from compliance to competitiveness—and from digital strategy to enterprise transformation.",
+    education: [
+      "MBA from Nyenrode Business University, Netherlands",
+      "Harvard Business School Women on Boards Program (2024)",
+      "CFA Certificate in Private Equity",
+      "Bachelor's in International Economic Relations"
+    ],
+    currentRoles: [
+      "Chair, Young & Bold (2020–Present) — Recognized by WEF & FT",
+      "Board Member, Wildlife Forensics Academy",
+      "Advisory Board Member, Nyenrode Business University (2018–Present)",
+      "Startup Advisor — TypingDNA, FootprintAI, Flipsnack"
+    ],
+    linkedinUrl: "https://linkedin.com/in/andreeabulisache",
+    emailUrl: "mailto:andreea@stratifiedadvisory.com"
+  },
+  {
+    role: "PARTNER",
+    name: "Prof. dr. Désirée M. van Gorp LL.M",
+    title: "Professor of International Business | Board Leadership & Ecosystem Development Expert",
+    location: "Netherlands & International",
+    image: "/lovable-uploads/7b8d88cc-86d4-4796-885f-5de98bb9ca7f.png",
+    description: [
+      "Désirée van Gorp is full-time professor of International Business and chairing the International Advisory Board at Nyenrode Business University. She serves on several supervisory and advisory boards including Atradius, World Trade Organization's Chairs Programme, NBTC Holland Marketing, Foundation Young & Bold, Impact Fair and Expert Panel, and chairs the early-stage funding initiative for start-ups with the regional development organization in Utrecht, the Netherlands.",
+      "She is involved in the Women in Business Awards for the United Nations' World Investment Forum and regularly participates in AMBA's Assessment Accreditation Committees. In addition to research and education, she advises organizations on building partnerships for sustainable value chains, creating effective ecosystems, and enhancing team and boardroom performance through design thinking and intelligent decision-making methods."
+    ],
+    advisoryFocus: [
+      "Building partnerships for sustainable value chains, global sourcing, offshoring and outsourcing",
+      "Building ecosystems and making them work",
+      "Increasing team and boardroom performance by enhancing their dynamics",
+      "Using design thinking and intelligent decision making methods to support digital transformations"
+    ],
+    currentRoles: [
+      "Professor & International Advisory Board Chair, Nyenrode Business University",
+      "Board Member, Atradius",
+      "Advisory Board, World Trade Organization's Chairs Programme",
+      "Board Member, NBTC Holland Marketing",
+      "Foundation Young & Bold Board Member",
+      "Chairman, Early-stage Funding Initiative, Utrecht Regional Development"
+    ],
+    reverse: true
+  },
+  {
+    role: "PARTNER",
+    name: "Siddhartha Chaturvedi",
+    title: "DeepTech Investor | Post-Agentic Web for Scientific Discovery",
+    location: "US, UK & India",
+    image: "/lovable-uploads/01bea518-1dfa-435c-8fe4-3859f20e679b.png",
+    description: [
+      "Siddhartha Chaturvedi is a visionary product leader and AI strategist with over 13 years of experience driving breakthrough innovations at the intersection of artificial intelligence, healthcare technology, and scientific discovery. After transforming how organizations approach AI-powered solutions as Director of Product Management at Microsoft's Strategic Missions & Technologies division, Siddhartha has founded a startup pioneering the post-agentic web for scientific discovery.",
+      "During his Microsoft tenure, Siddhartha spearheaded Microsoft Premonition, an AI-powered biothreat detection platform that earned Fast Company's World Changing Idea Award and secured multi-million dollar government contracts. Now, through his startup work, Siddhartha is building the next evolution of AI-powered scientific discovery—moving beyond current agentic systems to create intelligent infrastructures that fundamentally transform how researchers discover, validate, and build upon scientific knowledge."
+    ],
+    quote: "We're not just building better AI agents—we're reimagining the entire fabric of how scientific knowledge is created, connected, and accelerated.",
+    education: [
+      "MBA, INSEAD (Singapore/France) - Strategy, Leadership, Innovation",
+      "B.Tech Computer Science",
+      "MIT Global Entrepreneurship Certification",
+      "Certified in Generative AI (Google Cloud, DeepLearning.AI, Microsoft)"
+    ],
+    currentRoles: [
+      "Limited Partner, rpv (Deeptech VC) — Investing in scientific innovations",
+      "Advisor, Loyal VC — Scaling technology startups",
+      "Microsoft Gold Star Award recipient for Data and AI strategy",
+      "Fast Company World Changing Idea Award 2021 (Microsoft Premonition)"
+    ],
+    advisoryFocus: [
+      "Post-agentic AI systems and next-generation scientific computing platforms",
+      "AI product strategy and go-to-market execution for emerging technologies",
+      "Public-private partnerships in healthcare and government innovation",
+      "Responsible AI governance and ethical technology deployment"
+    ]
+  }
+];
+
+export const expertiseItems = [
+  {
+    title: "AI & Cyber Governance",
+    description: "Board oversight of AI, cyber, and regulatory risk in complex markets with practical implementation experience from enterprise to federal environments."
+  },
+  {
+    title: "Innovation-to-Execution",
+    description: "Turning emerging tech into scalable revenue and operating models with proven $1B+ track record across enterprise and scientific discovery platforms."
+  },
+  {
+    title: "International Business Strategy",
+    description: "Academic and practical expertise in global partnerships, sustainable value chains, and ecosystem development across research institutions and Fortune 500 companies."
+  },
+  {
+    title: "M&A Strategy & Integration",
+    description: "Led strategic integrations (GitHub, Databricks) with proven ROI outcomes and expertise in translating research breakthroughs into commercial value."
+  },
+  {
+    title: "Product Strategy & Market Expansion",
+    description: "Deep-tech product leadership from concept to $500M+ commercial scale, with expertise in healthcare, government, and scientific computing markets."
+  },
+  {
+    title: "Regulatory & Policy Navigation",
+    description: "Bridging national digital policy with commercial scale, including EU AI Act contributions, UN involvement, and secure AI deployment in classified environments."
+  }
+];
