@@ -1,4 +1,3 @@
-
 import { Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import ContactCTA from './ContactCTA';
 
@@ -83,13 +82,81 @@ const Team = () => {
             </div>
           </div>
 
+          {/* Désirée van Gorp */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
+            <div className="md:flex md:flex-row-reverse">
+              <div className="md:flex-shrink-0 md:w-1/3">
+                <div className="h-full relative overflow-hidden">
+                  <img 
+                    src="/lovable-uploads/7b8d88cc-86d4-4796-885f-5de98bb9ca7f.png" 
+                    alt="Prof. dr. Désirée M. van Gorp LL.M" 
+                    className="w-full h-full object-cover object-center" 
+                  />
+                </div>
+              </div>
+              <div className="p-8 md:p-10 md:w-2/3">
+                <div className="uppercase tracking-wide text-sm text-stratified font-semibold mb-1">PARTNER</div>
+                <h3 className="text-3xl font-bold mb-2">Prof. dr. Désirée M. van Gorp LL.M</h3>
+                <p className="text-lg text-stratified font-medium mb-4">
+                  Professor of International Business | Board Leadership & Ecosystem Development Expert
+                </p>
+                <div className="flex flex-wrap items-center text-sm text-gray-600 mb-6 gap-4">
+                  <div className="flex items-center">
+                    <MapPin size={16} className="mr-1" />
+                    <span>Netherlands & International</span>
+                  </div>
+                </div>
+                
+                <div className="mb-6">
+                  <p className="text-gray-700 mb-4">
+                    Désirée van Gorp is full-time professor of International Business and chairing the International Advisory Board at Nyenrode Business University. She serves on several supervisory and advisory boards including Atradius, World Trade Organization's Chairs Programme, NBTC Holland Marketing, Foundation Young & Bold, Impact Fair and Expert Panel, and chairs the early-stage funding initiative for start-ups with the regional development organization in Utrecht, the Netherlands.
+                  </p>
+                  <p className="text-gray-700 mb-4">
+                    She is involved in the Women in Business Awards for the United Nations' World Investment Forum and regularly participates in AMBA's Assessment Accreditation Committees. In addition to research and education, she advises organizations on building partnerships for sustainable value chains, creating effective ecosystems, and enhancing team and boardroom performance through design thinking and intelligent decision-making methods.
+                  </p>
+                </div>
+                
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold mb-3 text-stratified">Advisory Focus Areas</h4>
+                  <ul className="list-disc list-inside text-gray-700 space-y-1">
+                    <li>Building partnerships for sustainable value chains, global sourcing, offshoring and outsourcing</li>
+                    <li>Building ecosystems and making them work</li>
+                    <li>Increasing team and boardroom performance by enhancing their dynamics</li>
+                    <li>Using design thinking and intelligent decision making methods to support digital transformations</li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold mb-3 text-stratified">Current Board & Governance Roles</h4>
+                  <ul className="list-disc list-inside text-gray-700 space-y-1">
+                    <li>Professor & International Advisory Board Chair, Nyenrode Business University</li>
+                    <li>Board Member, Atradius</li>
+                    <li>Advisory Board, World Trade Organization's Chairs Programme</li>
+                    <li>Board Member, NBTC Holland Marketing</li>
+                    <li>Foundation Young & Bold Board Member</li>
+                    <li>Chairman, Early-stage Funding Initiative, Utrecht Regional Development</li>
+                  </ul>
+                </div>
+                
+                <div className="flex space-x-4">
+                  <a href="#" className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors" target="_blank" rel="noopener noreferrer">
+                    <Linkedin size={20} />
+                  </a>
+                  <a href="#" className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors">
+                    <Mail size={20} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Siddhartha Chaturvedi */}
           <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
             <div className="md:flex">
               <div className="md:flex-shrink-0 md:w-1/3">
                 <div className="h-full relative overflow-hidden">
                   <img 
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=600&fit=crop&crop=face" 
+                    src="/lovable-uploads/01bea518-1dfa-435c-8fe4-3859f20e679b.png" 
                     alt="Siddhartha Chaturvedi" 
                     className="w-full h-full object-cover object-center" 
                   />
@@ -168,74 +235,6 @@ const Team = () => {
               </div>
             </div>
           </div>
-
-          {/* Désirée van Gorp */}
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
-            <div className="md:flex md:flex-row-reverse">
-              <div className="md:flex-shrink-0 md:w-1/3">
-                <div className="h-full relative overflow-hidden">
-                  <img 
-                    src="/lovable-uploads/7b8d88cc-86d4-4796-885f-5de98bb9ca7f.png" 
-                    alt="Prof. dr. Désirée M. van Gorp LL.M" 
-                    className="w-full h-full object-cover object-center" 
-                  />
-                </div>
-              </div>
-              <div className="p-8 md:p-10 md:w-2/3">
-                <div className="uppercase tracking-wide text-sm text-stratified font-semibold mb-1">PARTNER</div>
-                <h3 className="text-3xl font-bold mb-2">Prof. dr. Désirée M. van Gorp LL.M</h3>
-                <p className="text-lg text-stratified font-medium mb-4">
-                  Professor of International Business | Board Leadership & Ecosystem Development Expert
-                </p>
-                <div className="flex flex-wrap items-center text-sm text-gray-600 mb-6 gap-4">
-                  <div className="flex items-center">
-                    <MapPin size={16} className="mr-1" />
-                    <span>Netherlands & International</span>
-                  </div>
-                </div>
-                
-                <div className="mb-6">
-                  <p className="text-gray-700 mb-4">
-                    Désirée van Gorp is full-time professor of International Business and chairing the International Advisory Board at Nyenrode Business University. She serves on several supervisory and advisory boards including Atradius, World Trade Organization's Chairs Programme, NBTC Holland Marketing, Foundation Young & Bold, Impact Fair and Expert Panel, and chairs the early-stage funding initiative for start-ups with the regional development organization in Utrecht, the Netherlands.
-                  </p>
-                  <p className="text-gray-700 mb-4">
-                    She is involved in the Women in Business Awards for the United Nations' World Investment Forum and regularly participates in AMBA's Assessment Accreditation Committees. In addition to research and education, she advises organizations on building partnerships for sustainable value chains, creating effective ecosystems, and enhancing team and boardroom performance through design thinking and intelligent decision-making methods.
-                  </p>
-                </div>
-                
-                <div className="mb-6">
-                  <h4 className="text-lg font-semibold mb-3 text-stratified">Advisory Focus Areas</h4>
-                  <ul className="list-disc list-inside text-gray-700 space-y-1">
-                    <li>Building partnerships for sustainable value chains, global sourcing, offshoring and outsourcing</li>
-                    <li>Building ecosystems and making them work</li>
-                    <li>Increasing team and boardroom performance by enhancing their dynamics</li>
-                    <li>Using design thinking and intelligent decision making methods to support digital transformations</li>
-                  </ul>
-                </div>
-
-                <div className="mb-6">
-                  <h4 className="text-lg font-semibold mb-3 text-stratified">Current Board & Governance Roles</h4>
-                  <ul className="list-disc list-inside text-gray-700 space-y-1">
-                    <li>Professor & International Advisory Board Chair, Nyenrode Business University</li>
-                    <li>Board Member, Atradius</li>
-                    <li>Advisory Board, World Trade Organization's Chairs Programme</li>
-                    <li>Board Member, NBTC Holland Marketing</li>
-                    <li>Foundation Young & Bold Board Member</li>
-                    <li>Chairman, Early-stage Funding Initiative, Utrecht Regional Development</li>
-                  </ul>
-                </div>
-                
-                <div className="flex space-x-4">
-                  <a href="#" className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors" target="_blank" rel="noopener noreferrer">
-                    <Linkedin size={20} />
-                  </a>
-                  <a href="#" className="bg-stratified-lighter hover:bg-stratified-light text-stratified p-2 rounded-full transition-colors">
-                    <Mail size={20} />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
           
           <div className="mt-12 bg-white rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl">
             <h4 className="text-xl font-semibold mb-6 text-stratified">Combined Board-Ready Expertise & Value</h4>
@@ -243,37 +242,37 @@ const Team = () => {
               <div className="p-4 bg-gray-50 rounded-lg hover:bg-stratified/5 transition-colors">
                 <h5 className="font-semibold mb-2 text-stratified">AI & Cyber Governance</h5>
                 <p className="text-gray-700 text-sm">
-                  Board oversight of AI, cyber, and regulatory risk in complex markets with practical implementation experience.
+                  Board oversight of AI, cyber, and regulatory risk in complex markets with practical implementation experience from enterprise to federal environments.
                 </p>
               </div>
               <div className="p-4 bg-gray-50 rounded-lg hover:bg-stratified/5 transition-colors">
                 <h5 className="font-semibold mb-2 text-stratified">Innovation-to-Execution</h5>
                 <p className="text-gray-700 text-sm">
-                  Turning emerging tech into scalable revenue and operating models with proven $1B+ track record.
+                  Turning emerging tech into scalable revenue and operating models with proven $1B+ track record across enterprise and scientific discovery platforms.
                 </p>
               </div>
               <div className="p-4 bg-gray-50 rounded-lg hover:bg-stratified/5 transition-colors">
                 <h5 className="font-semibold mb-2 text-stratified">International Business Strategy</h5>
                 <p className="text-gray-700 text-sm">
-                  Academic and practical expertise in global partnerships, sustainable value chains, and ecosystem development.
+                  Academic and practical expertise in global partnerships, sustainable value chains, and ecosystem development across research institutions and Fortune 500 companies.
                 </p>
               </div>
               <div className="p-4 bg-gray-50 rounded-lg hover:bg-stratified/5 transition-colors">
                 <h5 className="font-semibold mb-2 text-stratified">M&A Strategy & Integration</h5>
                 <p className="text-gray-700 text-sm">
-                  Led strategic integrations (GitHub, Databricks) with proven ROI outcomes and valuation impact.
+                  Led strategic integrations (GitHub, Databricks) with proven ROI outcomes and expertise in translating research breakthroughs into commercial value.
                 </p>
               </div>
               <div className="p-4 bg-gray-50 rounded-lg hover:bg-stratified/5 transition-colors">
-                <h5 className="font-semibold mb-2 text-stratified">Boardroom Performance Enhancement</h5>
+                <h5 className="font-semibold mb-2 text-stratified">Product Strategy & Market Expansion</h5>
                 <p className="text-gray-700 text-sm">
-                  Design thinking and intelligent decision-making methods to optimize team dynamics and governance effectiveness.
+                  Deep-tech product leadership from concept to $500M+ commercial scale, with expertise in healthcare, government, and scientific computing markets.
                 </p>
               </div>
               <div className="p-4 bg-gray-50 rounded-lg hover:bg-stratified/5 transition-colors">
                 <h5 className="font-semibold mb-2 text-stratified">Regulatory & Policy Navigation</h5>
                 <p className="text-gray-700 text-sm">
-                  Bridging national digital policy with commercial scale, including EU AI Act contributions and UN involvement.
+                  Bridging national digital policy with commercial scale, including EU AI Act contributions, UN involvement, and secure AI deployment in classified environments.
                 </p>
               </div>
             </div>
@@ -281,7 +280,7 @@ const Team = () => {
 
           <div className="mt-8 bg-stratified-lighter/30 rounded-xl p-6 text-center">
             <h4 className="text-lg font-semibold mb-2 text-stratified">Board & Fund Focus</h4>
-            <p className="text-gray-700 mb-4">Scale-up boards in enterprise SaaS, AI, or regulated markets (Series B–D) • Operating partner/advisor to PE or VC funds • Innovation, AI, ESG, or GTM-focused board committees • International expansion and ecosystem development</p>
+            <p className="text-gray-700 mb-4">Scale-up boards in enterprise SaaS, AI, or regulated markets (Series B–D) • Operating partner/advisor to PE or VC funds • Innovation, AI, ESG, or GTM-focused board committees • International expansion and ecosystem development • Deep-tech and scientific discovery ventures</p>
             
             <div className="flex flex-wrap justify-center gap-4 mt-6">
               <ContactCTA variant="board-advisory" size="default" />
