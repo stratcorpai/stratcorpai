@@ -1,4 +1,3 @@
-
 export const teamMembers = [
   {
     role: "CEO & Founder",
@@ -80,7 +79,9 @@ export const teamMembers = [
       "AI product strategy and go-to-market execution for emerging technologies",
       "Public-private partnerships in healthcare and government innovation",
       "Responsible AI governance and ethical technology deployment"
-    ]
+    ],
+    linkedinUrl: "https://linkedin.com/in/siddharth",
+    emailUrl: "mailto:sc@stratcorp.ai"
   }
 ];
 
