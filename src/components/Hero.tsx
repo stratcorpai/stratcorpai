@@ -38,7 +38,7 @@ const Hero = () => {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Enhanced background with parallax effect */}
+      {/* Background */}
       <motion.div 
         className="absolute inset-0 z-0"
         initial={{ scale: 1.1 }}
@@ -50,27 +50,8 @@ const Hero = () => {
           alt="Abstract blocks representing innovative structure" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-stratified/95 via-stratified/80 to-stratified-dark/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-stratified/90 via-stratified/75 to-stratified-dark/85"></div>
       </motion.div>
-
-      {/* Floating decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div 
-          className="absolute top-20 left-10 w-32 h-32 border border-white/10 rounded-full backdrop-blur-lg"
-          animate={{ y: [0, -20, 0], rotate: [0, 180, 360] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        />
-        <motion.div 
-          className="absolute bottom-32 right-20 w-20 h-20 border border-white/15 rounded-xl backdrop-blur-lg"
-          animate={{ y: [0, 15, 0], rotate: [0, -90, 0] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div 
-          className="absolute top-1/2 right-10 w-16 h-16 bg-white/5 rounded-full backdrop-blur-lg"
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </div>
 
       {/* Main content */}
       <div className="container-custom relative z-10 text-center">
@@ -86,18 +67,11 @@ const Hero = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
           >
-            <div className="relative">
-              <motion.div
-                className="absolute inset-0 bg-white/10 rounded-3xl blur-2xl"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <img 
-                src="/lovable-uploads/bbbadf15-0ecd-4cdd-88b6-7bb56e21837f.png" 
-                alt="Stratified Advisory Logo" 
-                className="relative h-48 md:h-64 drop-shadow-2xl"
-              />
-            </div>
+            <img 
+              src="/lovable-uploads/bbbadf15-0ecd-4cdd-88b6-7bb56e21837f.png" 
+              alt="Stratified Advisory Logo" 
+              className="h-48 md:h-64 drop-shadow-xl"
+            />
           </motion.div>
           
           <motion.h1 
@@ -105,14 +79,10 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            style={{ 
-              textShadow: '0 4px 20px rgba(0,0,0,0.5), 0 0 40px rgba(255,255,255,0.1)' 
-            }}
+            style={{ textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}
           >
             Welcome to<br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/90 font-black">
-              Stratified Advisory
-            </span>
+            <span className="font-black">Stratified Advisory</span>
           </motion.h1>
           
           <motion.p 
@@ -134,7 +104,7 @@ const Hero = () => {
             transition={{ delay: 0.9, duration: 0.6 }}
           >
             <Button 
-              className="btn-primary btn-hover-effect px-8 py-6 text-lg rounded-full shadow-brand hover:shadow-elevated transition-all duration-300 group"
+              className="btn-primary btn-hover-effect px-8 py-6 text-lg rounded-full group"
               onClick={handleLearnMoreClick}
             >
               Learn More 
@@ -142,7 +112,7 @@ const Hero = () => {
             </Button>
             
             <Button 
-              className="btn-secondary btn-hover-effect px-8 py-6 text-lg rounded-full backdrop-blur-md border-white/30 hover:border-white/50 transition-all duration-300 group"
+              className="btn-secondary btn-hover-effect px-8 py-6 text-lg rounded-full bg-white/90 text-stratified hover:bg-white group"
               onClick={handleAIGovernanceClick}
             >
               AI Governance for Boards 

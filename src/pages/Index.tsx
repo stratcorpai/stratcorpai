@@ -1,8 +1,9 @@
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import InvestmentThesis from "@/components/InvestmentThesis";
+import AssessmentIntegration from "@/components/AssessmentIntegration";
 import BlogSection from "@/components/blog/BlogSection";
 import Team from "@/components/Team";
 import BoardService from "@/components/BoardService";
@@ -56,6 +57,15 @@ const Index = () => {
         viewport={{ once: true }}
       >
         <InvestmentThesis />
+      </motion.div>
+      
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        <AssessmentIntegration />
       </motion.div>
       
       <motion.div

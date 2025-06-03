@@ -14,16 +14,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 }) => {
   return (
     <section className="min-h-[85vh] flex items-center relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-stratified/10 via-transparent to-stratified/5 z-0"></div>
-      
-      <div className="absolute inset-0 z-0 opacity-5">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <pattern id="grid" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
-            <path d="M 50 0 L 0 0 0 50" fill="none" stroke="currentColor" strokeWidth="0.5" />
-          </pattern>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-br from-stratified/5 via-transparent to-stratified/5 z-0"></div>
       
       <div className="container-custom relative z-10">
         <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -33,18 +24,18 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             transition={{ duration: 0.8 }}
             className="max-w-2xl"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-8 text-stratified text-balance">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-stratified">
               Strategic Assessment Center
             </h1>
             
-            <p className="text-xl md:text-2xl mb-10 text-gray-700 leading-relaxed font-medium text-pretty">
+            <p className="text-xl md:text-2xl mb-10 text-gray-700 leading-relaxed">
               Use our AI-powered assessment tools to analyze your organization's strengths and identify opportunities for growth in key strategic areas.
             </p>
             
             <div className="flex flex-wrap gap-6">
               <Button
                 size="lg" 
-                className="btn-primary btn-hover-effect shadow-brand group"
+                className="btn-primary btn-hover-effect group"
                 onClick={() => {
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                   setTimeout(() => {
@@ -59,7 +50,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               <Button
                 variant="outline"
                 size="lg"
-                className="border-stratified text-stratified hover:bg-stratified/5 btn-hover-effect shadow-lg hover:shadow-xl group" 
+                className="border-stratified text-stratified hover:bg-stratified/5 btn-hover-effect group" 
                 onClick={() => {
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                   setTimeout(() => {
@@ -80,11 +71,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             className="hidden md:block"
           >
             <div className="relative">
-              <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-stratified to-stratified-light opacity-30 blur-lg"></div>
-              <div className="relative card-modern shadow-brand">
+              <div className="card-modern">
                 <div className="p-8 bg-gradient-to-br from-gray-50 to-white border-b border-gray-200">
-                  <h3 className="text-2xl font-black text-gray-800">Assessment Dashboard</h3>
-                  <p className="text-gray-600 font-medium">Organizational insights at a glance</p>
+                  <h3 className="text-2xl font-bold text-gray-800">Assessment Dashboard</h3>
+                  <p className="text-gray-600">Organizational insights at a glance</p>
                 </div>
                 <div className="p-8">
                   <div className="space-y-6">
