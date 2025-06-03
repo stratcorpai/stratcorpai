@@ -61,25 +61,25 @@ const TeamMemberModal = ({ member, isOpen, onClose }: TeamMemberModalProps) => {
             onClick={onClose}
           />
 
-          {/* Full Screen Modal */}
+          {/* Modal with proper navbar spacing */}
           <motion.div
-            className="relative w-full h-full bg-white overflow-hidden"
+            className="relative w-full h-full bg-white overflow-hidden pt-20 md:pt-24"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
           >
-            {/* Close Button - Fixed Position */}
+            {/* Close Button - positioned relative to modal content */}
             <button
               onClick={onClose}
-              className="fixed top-6 right-6 z-[110] p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
+              className="absolute top-6 right-6 z-[110] p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
             >
               <X size={20} className="text-gray-600" />
             </button>
 
             {/* Scrollable Content */}
             <ScrollArea className="h-full">
-              <div className="pt-8 pb-12">
+              <div className="pb-12">
                 {/* Hero Section */}
                 <div className="relative bg-gradient-to-br from-stratified/5 to-stratified-light/10 px-6 md:px-12 py-12 md:py-16">
                   <div className="max-w-4xl mx-auto">
