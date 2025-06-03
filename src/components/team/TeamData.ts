@@ -1,10 +1,9 @@
-
 export const teamMembers = [
   {
     role: "CEO & Founder",
     name: "Andreea Bulisache",
     title: "Global Tech Executive and Innovation Leader | AI, Cybersecurity, and Digital Transformation",
-    location: "US & EMEA",
+    location: "Seattle, Washington & Amsterdam, The Netherlands",
     image: "/lovable-uploads/be1f59f9-bb53-42ab-9713-f56caa100945.png",
     description: [
       "Andreea Bulisache is a global tech executive, strategist, and influential thought leader with a decade of leadership at Microsoft, where she pioneered the integration of AI, data & analytics, blockchain, and cybersecurity into scalable business models. She played a key role in incubating and operationalizing emerging technologies, leading major integrations like GitHub and Databricks, and driving over $1 billion in global revenue through Microsoft's partner-to-partner model.",
@@ -37,7 +36,7 @@ export const teamMembers = [
     role: "PARTNER",
     name: "Prof. dr. Désirée M. van Gorp LL.M",
     title: "Professor of International Business | Board Leadership & Ecosystem Development Expert",
-    location: "Netherlands & International",
+    location: "Seattle, Washington & Amsterdam, The Netherlands",
     image: "/lovable-uploads/7b8d88cc-86d4-4796-885f-5de98bb9ca7f.png",
     description: [
       "Désirée van Gorp is full-time professor of International Business and chairing the International Advisory Board at Nyenrode Business University. She serves on several supervisory and advisory boards including Atradius, World Trade Organization's Chairs Programme, NBTC Holland Marketing, Foundation Young & Bold, Impact Fair and Expert Panel, and chairs the early-stage funding initiative for start-ups with the regional development organization in Utrecht, the Netherlands.",
@@ -68,7 +67,7 @@ export const teamMembers = [
     role: "PARTNER",
     name: "Siddhartha Chaturvedi",
     title: "DeepTech Investor | Post-Agentic Web for Scientific Discovery",
-    location: "US, UK & India",
+    location: "Seattle, Washington & Amsterdam, The Netherlands",
     image: "/lovable-uploads/01757bae-1ff3-4788-a9af-1f8c98a5cef8.png",
     description: [
       "Siddhartha Chaturvedi is a visionary product leader and AI strategist with over 13 years of experience driving breakthrough innovations at the intersection of artificial intelligence, healthcare technology, and scientific discovery. After transforming how organizations approach AI-powered solutions as Director of Product Management at Microsoft's Strategic Missions & Technologies division, Siddhartha has founded a startup pioneering the post-agentic web for scientific discovery.",
