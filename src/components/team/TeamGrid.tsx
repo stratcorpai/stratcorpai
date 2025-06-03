@@ -3,18 +3,22 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { teamMembers } from './TeamData';
 import TeamMemberCard from './TeamMemberCard';
-import TeamMemberPanel from './TeamMemberPanel';
+import TeamMemberModal from './TeamMemberModal';
 
 const TeamGrid = () => {
   const [selectedMember, setSelectedMember] = useState<number | null>(null);
 
   const handleMemberSelect = (index: number) => {
-    setSelectedMember(selectedMember === index ? null : index);
+    setSelectedMember(index);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedMember(null);
   };
 
   return (
     <div className="relative">
-      {/* Main Grid */}
+      {/* Main Grid - Fixed alignment without staggering */}
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 lg:gap-12">
         {teamMembers.map((member, index) => (
           <motion.div
@@ -23,24 +27,23 @@ const TeamGrid = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.2 }}
             viewport={{ once: true }}
-            className={`${index === 1 ? 'lg:mt-12' : ''} ${index === 2 ? 'lg:mt-6' : ''}`}
+            className="h-full" // Ensure consistent height
           >
             <TeamMemberCard
               member={member}
               index={index}
-              isSelected={selectedMember === index}
               onSelect={() => handleMemberSelect(index)}
             />
           </motion.div>
         ))}
       </div>
 
-      {/* Floating Detail Panel */}
+      {/* Full-Page Modal */}
       {selectedMember !== null && (
-        <TeamMemberPanel
+        <TeamMemberModal
           member={teamMembers[selectedMember]}
           isOpen={selectedMember !== null}
-          onClose={() => setSelectedMember(null)}
+          onClose={handleCloseModal}
         />
       )}
     </div>
