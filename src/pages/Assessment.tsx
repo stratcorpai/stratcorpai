@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
@@ -30,43 +30,56 @@ const Assessment = () => {
     handleCompleteAutoAssessment
   } = useAssessment();
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 via-white to-gray-100">
       <Navbar />
       <main className="flex-grow">
-        {/* Hero section */}
-        <HeroSection 
-          onStartGuidedAssessment={handleStartGuidedAssessment}
-          onStartConversationalAssessment={startConversationalAssessment}
-        />
+        {/* Enhanced Hero section */}
+        <div className="bg-white shadow-lg border-b border-gray-200">
+          <HeroSection 
+            onStartGuidedAssessment={handleStartGuidedAssessment}
+            onStartConversationalAssessment={startConversationalAssessment}
+          />
+        </div>
         
-        {/* Assessment section - moved up before dashboard */}
-        <AssessmentSection 
-          currentStep={currentStep}
-          selectedAssessment={selectedAssessment}
-          assessmentResult={assessmentResult}
-          completedAssessments={completedAssessments}
-          isLoading={isLoading}
-          onSelectAssessment={handleSelectAssessment}
-          onSubmitAssessment={handleSubmitAssessment}
-          onResetAssessment={resetAssessment}
-        />
+        {/* Assessment section with improved styling */}
+        <div className="bg-white">
+          <AssessmentSection 
+            currentStep={currentStep}
+            selectedAssessment={selectedAssessment}
+            assessmentResult={assessmentResult}
+            completedAssessments={completedAssessments}
+            isLoading={isLoading}
+            onSelectAssessment={handleSelectAssessment}
+            onSubmitAssessment={handleSubmitAssessment}
+            onResetAssessment={resetAssessment}
+          />
+        </div>
         
         {/* Dashboard section - only show when there are completed assessments */}
         {completedAssessments.length > 0 && (
-          <DashboardSection 
-            completedAssessments={completedAssessments}
-            assessmentTypes={assessmentTypes}
-            onSelectAssessment={handleSelectAssessment}
-          />
+          <div className="bg-gray-50 border-t border-gray-200">
+            <DashboardSection 
+              completedAssessments={completedAssessments}
+              assessmentTypes={assessmentTypes}
+              onSelectAssessment={handleSelectAssessment}
+            />
+          </div>
         )}
         
         {/* Chat section */}
-        <ChatSection 
-          completedAssessments={completedAssessments}
-          assessmentTypes={assessmentTypes}
-          onCompleteAutoAssessment={handleCompleteAutoAssessment}
-        />
+        <div className="bg-white border-t border-gray-200">
+          <ChatSection 
+            completedAssessments={completedAssessments}
+            assessmentTypes={assessmentTypes}
+            onCompleteAutoAssessment={handleCompleteAutoAssessment}
+          />
+        </div>
       </main>
       <Footer />
       <Toaster position="top-center" />

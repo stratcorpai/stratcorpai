@@ -1,8 +1,8 @@
 
 import ContactCTA from './ContactCTA';
-import TeamMember from './team/TeamMember';
+import TeamCarousel from './team/TeamCarousel';
 import ExpertiseGrid from './team/ExpertiseGrid';
-import { teamMembers, expertiseItems } from './team/TeamData';
+import { expertiseItems } from './team/TeamData';
 import { motion } from 'framer-motion';
 
 const Team = () => {
@@ -24,67 +24,49 @@ const Team = () => {
           </p>
         </motion.div>
 
-        <div className="max-w-7xl mx-auto space-y-16">
-          {teamMembers.map((member, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              viewport={{ once: true }}
-            >
-              <TeamMember
-                role={member.role}
-                name={member.name}
-                title={member.title}
-                location={member.location}
-                image={member.image}
-                description={member.description}
-                quote={member.quote}
-                education={member.education}
-                currentRoles={member.currentRoles}
-                advisoryFocus={member.advisoryFocus}
-                linkedinUrl={member.linkedinUrl}
-                emailUrl={member.emailUrl}
-                reverse={member.reverse}
-              />
-            </motion.div>
-          ))}
-          
-          <motion.div 
-            className="mt-16 card-modern p-8 md:p-12 shadow-brand border-2 hover:border-stratified/20 transition-all duration-500"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h4 className="text-2xl md:text-3xl font-black mb-8 text-stratified text-center">
-              Combined Board-Ready Expertise & Value
-            </h4>
-            <ExpertiseGrid items={expertiseItems} />
-          </motion.div>
+        <motion.div 
+          className="mb-16"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <TeamCarousel />
+        </motion.div>
+        
+        <motion.div 
+          className="card-modern p-8 md:p-12 shadow-brand border-2 hover:border-stratified/20 transition-all duration-500 mb-12"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h4 className="text-2xl md:text-3xl font-black mb-8 text-stratified text-center">
+            Combined Board-Ready Expertise & Value
+          </h4>
+          <ExpertiseGrid items={expertiseItems} />
+        </motion.div>
 
-          <motion.div 
-            className="mt-12 bg-gradient-to-br from-stratified-lighter/60 via-stratified-light/40 to-stratified-lighter/60 rounded-2xl p-8 md:p-12 text-center shadow-brand border border-stratified-lighter/50"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <h4 className="text-xl md:text-2xl font-black mb-4 text-stratified">
-              Board & Fund Focus
-            </h4>
-            <p className="text-gray-700 mb-8 leading-relaxed text-base md:text-lg max-w-4xl mx-auto text-pretty">
-              Scale-up boards in enterprise SaaS, AI, or regulated markets (Series B–D) • Operating partner/advisor to PE or VC funds • Innovation, AI, ESG, or GTM-focused board committees • International expansion and ecosystem development • Deep-tech and scientific discovery ventures
-            </p>
-            
-            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 md:gap-6 mt-8">
-              <ContactCTA variant="board-advisory" size="default" className="shadow-lg hover:shadow-xl" />
-              <ContactCTA variant="consulting" size="default" className="shadow-lg hover:shadow-xl" />
-              <ContactCTA variant="partnership" size="default" className="shadow-lg hover:shadow-xl" />
-            </div>
-          </motion.div>
-        </div>
+        <motion.div 
+          className="bg-gradient-to-br from-stratified-lighter/60 via-stratified-light/40 to-stratified-lighter/60 rounded-2xl p-8 md:p-12 text-center shadow-brand border border-stratified-lighter/50"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          <h4 className="text-xl md:text-2xl font-black mb-4 text-stratified">
+            Board & Fund Focus
+          </h4>
+          <p className="text-gray-700 mb-8 leading-relaxed text-base md:text-lg max-w-4xl mx-auto text-pretty">
+            Scale-up boards in enterprise SaaS, AI, or regulated markets (Series B–D) • Operating partner/advisor to PE or VC funds • Innovation, AI, ESG, or GTM-focused board committees • International expansion and ecosystem development • Deep-tech and scientific discovery ventures
+          </p>
+          
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 md:gap-6 mt-8">
+            <ContactCTA variant="board-advisory" size="default" className="shadow-lg hover:shadow-xl" />
+            <ContactCTA variant="consulting" size="default" className="shadow-lg hover:shadow-xl" />
+            <ContactCTA variant="partnership" size="default" className="shadow-lg hover:shadow-xl" />
+          </div>
+        </motion.div>
       </div>
     </section>
   );
