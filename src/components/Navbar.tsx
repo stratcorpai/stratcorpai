@@ -1,146 +1,189 @@
 
 import { useState, useEffect } from 'react';
+import { Menu, X, Mail, LineChart, Bot } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import ContactCTA from './ContactCTA';
-import NavbarLinks from './NavbarLinks';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
-  const toggleMobileMenu = () => {
-    setIsOpen(!isOpen);
+  const handleContactClick = () => {
+    window.location.href = "mailto:andreea@stratifiedadvisory.com?subject=I%20am%20ready%20to%20be%20Stratified!&body=**Crafted%20by%20humans%2C%20delivered%20by%20technology%20%E2%80%93%20bridging%20communication%20gaps%20with%20precision%20and%20a%20personal%20touch.**%0A%0ADear%20Andreea%2C%20%0A%0APlease%20help%20me%20get%20stratified%2C%20here%20are%20some%20details%20about%20my%20company%3A%20%0A%0ACompany%20location%3A%20%0ASize%3A%20%0AWebsite%3A%20%0A%0AThank%20you!%20%0A%0A%5BYour%20Name%5D%20%0A";
+  };
+
+  const handleNavClick = (sectionId: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    
+    if (element) {
+      // Get the navbar height for offset
+      const navbarHeight = document.querySelector('nav')?.offsetHeight || 0;
+      
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+      
+      // Close mobile menu if open
+      if (isOpen) setIsOpen(false);
+    }
   };
 
   return (
-    <>
-      <motion.nav 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled 
-            ? 'bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-200/50' 
-            : 'bg-transparent'
-        }`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        <div className="container-custom">
-          <div className="flex items-center justify-between h-20">
-            {/* Enhanced logo */}
-            <motion.div 
-              className="flex items-center space-x-3"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="w-10 h-10 bg-gradient-to-br from-stratified to-stratified-dark rounded-xl flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-lg">S</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xl font-bold text-gray-900 leading-none">Stratified</span>
-                <span className="text-sm font-semibold text-stratified leading-none">Advisory</span>
-              </div>
-            </motion.div>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled ? 'bg-background/95 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'
+    }`}>
+      <div className="container-custom flex justify-between items-center">
+        {/* Logo */}
+        <Link to="/" className="flex items-center">
+          <img 
+            src="/lovable-uploads/bbbadf15-0ecd-4cdd-88b6-7bb56e21837f.png" 
+            alt="Stratified Advisory Logo" 
+            className="h-16 md:h-20" 
+          />
+        </Link>
 
-            {/* Enhanced desktop navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <NavbarLinks className="flex items-center space-x-6" />
-              <ContactCTA 
-                variant="consulting" 
-                size="default"
-                className="shadow-md hover:shadow-lg"
-              />
-            </div>
-
-            {/* Enhanced mobile menu button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleMobileMenu}
-              className="md:hidden w-12 h-12 rounded-xl hover:bg-gray-100 focus:ring-4 focus:ring-stratified/20 focus:outline-none transition-all duration-200"
-              aria-label="Toggle mobile menu"
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center space-x-8">
+          {isHomePage ? (
+            <>
+              <a 
+                href="#investment-thesis" 
+                className="text-foreground hover:text-stratified font-medium transition-colors relative group"
+                onClick={handleNavClick('investment-thesis')}
+              >
+                Investment Thesis
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
+              </a>
+              <a 
+                href="#ai-governance" 
+                className="text-foreground hover:text-stratified font-medium transition-colors relative group"
+                onClick={handleNavClick('ai-governance')}
+              >
+                AI Governance
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
+              </a>
+              <a 
+                href="#team" 
+                className="text-foreground hover:text-stratified font-medium transition-colors relative group"
+                onClick={handleNavClick('team')}
+              >
+                Our Team
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
+              </a>
+              <a 
+                href="#board-service" 
+                className="text-foreground hover:text-stratified font-medium transition-colors relative group"
+                onClick={handleNavClick('board-service')}
+              >
+                Board-as-a-Service
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
+              </a>
+            </>
+          ) : (
+            <Link 
+              to="/" 
+              className="text-foreground hover:text-stratified font-medium transition-colors relative group"
             >
-              <AnimatePresence mode="wait">
-                {isOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <X className="h-6 w-6 text-gray-700" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu className="h-6 w-6 text-gray-700" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              Home
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
+            </Link>
+          )}
+          
+          <Button 
+            className="bg-stratified hover:bg-stratified-dark text-white shadow-md hover:shadow-lg transition-all"
+            onClick={handleContactClick}
+          >
+            <Mail className="mr-2 h-4 w-4" />
+            Contact Us
+          </Button>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <div className="md:hidden flex items-center">
+          <button 
+            className="text-foreground"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {isOpen && (
+          <div className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-sm shadow-lg mt-0 py-5 px-6 md:hidden flex flex-col space-y-4 animate-fade-in">
+            {isHomePage ? (
+              <>
+                <a 
+                  href="#investment-thesis" 
+                  className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
+                  onClick={handleNavClick('investment-thesis')}
+                >
+                  Investment Thesis
+                </a>
+                <a 
+                  href="#ai-governance" 
+                  className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
+                  onClick={handleNavClick('ai-governance')}
+                >
+                  AI Governance
+                </a>
+                <a 
+                  href="#team" 
+                  className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
+                  onClick={handleNavClick('team')}
+                >
+                  Our Team
+                </a>
+                <a 
+                  href="#board-service" 
+                  className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
+                  onClick={handleNavClick('board-service')}
+                >
+                  Board-as-a-Service
+                </a>
+              </>
+            ) : (
+              <Link 
+                to="/" 
+                className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
+              >
+                Home
+              </Link>
+            )}
+            
+            <Button 
+              className="bg-stratified hover:bg-stratified-dark text-white w-full shadow-md"
+              onClick={handleContactClick}
+            >
+              <Mail className="mr-2 h-4 w-4" />
+              Contact Us
             </Button>
           </div>
-        </div>
-      </motion.nav>
-
-      {/* Enhanced mobile menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              onClick={() => setIsOpen(false)}
-            />
-            
-            {/* Mobile menu panel */}
-            <motion.div
-              className="fixed top-20 left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-xl z-40 md:hidden"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-            >
-              <div className="container-custom py-8">
-                <div className="flex flex-col space-y-6">
-                  <NavbarLinks 
-                    className="flex flex-col space-y-4" 
-                    isMobile={true}
-                    onLinkClick={() => setIsOpen(false)}
-                  />
-                  <div className="pt-4 border-t border-gray-200">
-                    <ContactCTA 
-                      variant="consulting" 
-                      size="default"
-                      className="w-full justify-center shadow-md"
-                    />
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </>
         )}
-      </AnimatePresence>
-    </>
+      </div>
+    </nav>
   );
 };
 
