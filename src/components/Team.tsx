@@ -1,14 +1,20 @@
 
 import ContactCTA from './ContactCTA';
-import TeamCarousel from './team/TeamCarousel';
+import TeamGrid from './team/TeamGrid';
 import ExpertiseGrid from './team/ExpertiseGrid';
 import { expertiseItems } from './team/TeamData';
 import { motion } from 'framer-motion';
 
 const Team = () => {
   return (
-    <section id="team" className="section-padding bg-gradient-to-br from-gray-50 via-white to-gray-100">
-      <div className="container-custom">
+    <section id="team" className="section-padding bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-20 w-96 h-96 bg-stratified rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-stratified-light rounded-full blur-3xl" />
+      </div>
+
+      <div className="container-custom relative z-10">
         <motion.div 
           className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
@@ -25,17 +31,17 @@ const Team = () => {
         </motion.div>
 
         <motion.div 
-          className="mb-16"
+          className="mb-20"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <TeamCarousel />
+          <TeamGrid />
         </motion.div>
         
         <motion.div 
-          className="card-modern p-8 md:p-12 shadow-brand border-2 hover:border-stratified/20 transition-all duration-500 mb-12"
+          className="bg-white/80 backdrop-blur-xl rounded-3xl p-8 md:p-12 shadow-2xl border border-white/20 hover:border-stratified/20 transition-all duration-500 mb-16"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -48,7 +54,7 @@ const Team = () => {
         </motion.div>
 
         <motion.div 
-          className="bg-gradient-to-br from-stratified-lighter/60 via-stratified-light/40 to-stratified-lighter/60 rounded-2xl p-8 md:p-12 text-center shadow-brand border border-stratified-lighter/50"
+          className="bg-gradient-to-br from-stratified-lighter/60 via-stratified-light/40 to-stratified-lighter/60 backdrop-blur-xl rounded-3xl p-8 md:p-12 text-center shadow-2xl border border-stratified-lighter/50"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}

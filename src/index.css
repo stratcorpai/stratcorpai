@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
@@ -109,40 +108,60 @@
   }
 }
 
-/* Clean gradient text */
+/* Modern gradient text */
 .gradient-text {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-stratified to-stratified-dark;
 }
 
-/* Modern Card Styling - simplified */
+/* Glass morphism card styling */
 .card-modern {
-  @apply bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100;
+  @apply bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl border border-white/20;
 }
 
-/* Clean button styles */
+/* Advanced glass morphism */
+.glass-card {
+  @apply bg-white/60 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl;
+}
+
+/* Modern button styles */
 .btn-primary {
   @apply bg-stratified hover:bg-stratified-dark text-white font-semibold;
-  @apply shadow-md hover:shadow-lg transition-all duration-300;
+  @apply shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl;
 }
 
 .btn-secondary {
-  @apply bg-white text-stratified font-semibold border border-stratified/20;
-  @apply shadow-sm hover:shadow-md transition-all duration-300;
-  @apply hover:bg-gray-50;
+  @apply bg-white/80 backdrop-blur-sm text-stratified font-semibold border-2 border-stratified/20;
+  @apply shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl;
+  @apply hover:bg-stratified hover:text-white hover:border-stratified;
 }
 
-/* Simple hover effects */
-.btn-hover-effect {
-  @apply transition-all duration-300 hover:scale-[1.02] active:scale-[0.98];
+/* Sophisticated hover effects */
+.hover-lift {
+  @apply transition-all duration-300 hover:scale-[1.02] hover:-translate-y-2 active:scale-[0.98];
 }
 
-/* Clean shadows */
+/* Advanced shadows */
 .shadow-soft {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .shadow-brand {
-  box-shadow: 0 4px 6px -1px rgba(139, 47, 65, 0.1), 0 2px 4px -1px rgba(139, 47, 65, 0.06);
+  box-shadow: 0 10px 25px -3px rgba(139, 47, 65, 0.1), 0 4px 6px -2px rgba(139, 47, 65, 0.05);
+}
+
+.shadow-glass {
+  box-shadow: 
+    0 8px 32px rgba(31, 38, 135, 0.1),
+    0 1px 3px rgba(255, 255, 255, 0.2) inset,
+    0 -1px 3px rgba(0, 0, 0, 0.1) inset;
+}
+
+/* Text utilities */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* Loading skeleton */
@@ -169,7 +188,7 @@
   opacity: 1;
 }
 
-/* Custom scrollbar */
+/* Modern scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
