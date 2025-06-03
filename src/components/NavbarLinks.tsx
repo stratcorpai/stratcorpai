@@ -1,64 +1,61 @@
 
-import { Link } from "react-router-dom";
+import { motion } from 'framer-motion';
 
 interface NavbarLinksProps {
+  className?: string;
   isMobile?: boolean;
-  closeMenu?: () => void;
+  onLinkClick?: () => void;
 }
 
-const NavbarLinks = ({ isMobile = false, closeMenu }: NavbarLinksProps) => {
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-    if (targetId.startsWith('/')) return; // For regular page links
-    
-    e.preventDefault();
+const NavbarLinks = ({ className = '', isMobile = false, onLinkClick }: NavbarLinksProps) => {
+  const links = [
+    { href: '#investment-thesis', label: 'Our Approach' },
+    { href: '#team', label: 'Leadership' },
+    { href: '#board-service', label: 'Services' },
+    { href: '/assessment', label: 'Assessment', isExternal: true },
+  ];
 
-    // If we're on the home page
-    if (window.location.pathname === '/') {
-      const element = document.getElementById(targetId);
-      
-      if (element) {
-        // Calculate offset for the header
-        const navbarHeight = document.querySelector('nav')?.offsetHeight || 0;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-        
-        if (isMobile && closeMenu) {
-          closeMenu();
-        }
-      }
+  const handleLinkClick = (href: string, isExternal?: boolean) => {
+    if (isExternal) {
+      // Handle external navigation
+      window.location.href = href;
     } else {
-      // If we're on another page, navigate to home first
-      window.location.href = `/#${targetId}`;
+      // Handle anchor navigation
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+    
+    if (onLinkClick) {
+      onLinkClick();
     }
   };
 
-  const linkClass = isMobile 
-    ? "block w-full py-2 text-lg hover:text-stratified transition-colors"
-    : "link-underline px-3 py-2 hover:text-stratified text-gray-700 transition-colors";
+  const linkBaseClasses = isMobile
+    ? "block py-3 px-4 text-lg font-semibold text-gray-800 hover:text-stratified rounded-xl hover:bg-stratified/5 transition-all duration-300 focus:ring-4 focus:ring-stratified/20 focus:outline-none focus:bg-stratified/5"
+    : "relative py-2 px-4 font-semibold text-gray-800 hover:text-stratified transition-all duration-300 rounded-lg hover:bg-gray-50 focus:ring-4 focus:ring-stratified/20 focus:outline-none group";
 
   return (
-    <>
-      <a href="#investment-thesis" className={linkClass} onClick={(e) => handleLinkClick(e, "investment-thesis")}>
-        Investment Thesis
-      </a>
-      <a href="#board-service" className={linkClass} onClick={(e) => handleLinkClick(e, "board-service")}>
-        Board Service
-      </a>
-      <a href="#team" className={linkClass} onClick={(e) => handleLinkClick(e, "team")}>
-        Team
-      </a>
-      <a href="#stratcorp-ai" className={linkClass} onClick={(e) => handleLinkClick(e, "stratcorp-ai")}>
-        StratCorp.AI
-      </a>
-      <Link to="/assessment" className={linkClass} onClick={closeMenu}>
-        Assessments
-      </Link>
-    </>
+    <div className={className}>
+      {links.map((link, index) => (
+        <motion.button
+          key={link.href}
+          onClick={() => handleLinkClick(link.href, link.isExternal)}
+          className={linkBaseClasses}
+          initial={isMobile ? { opacity: 0, x: -20 } : {}}
+          animate={isMobile ? { opacity: 1, x: 0 } : {}}
+          transition={isMobile ? { delay: index * 0.1 } : {}}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          {link.label}
+          {!isMobile && (
+            <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-stratified transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
+          )}
+        </motion.button>
+      ))}
+    </div>
   );
 };
 
