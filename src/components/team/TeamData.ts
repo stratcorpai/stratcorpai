@@ -100,27 +100,27 @@ export const teamMembers = [
 
 export const expertiseItems = [
   {
-    title: "AI & Cyber Governance",
-    description: "Board oversight of AI, cyber, and regulatory risk in complex markets with practical implementation experience from enterprise to federal environments."
+    title: "AI Strategy & Next-Generation Computing",
+    description: "Enterprise AI governance and post-agentic systems expertise spanning Microsoft-scale platforms, federal AI implementations, and scientific discovery infrastructures with proven commercial outcomes."
   },
   {
-    title: "Innovation-to-Execution",
-    description: "Turning emerging tech into scalable revenue and operating models with proven $1B+ track record across enterprise and scientific discovery platforms."
+    title: "Global Business Ecosystems & Value Chains",
+    description: "Academic and practical expertise in international partnerships, sustainable value chains, and ecosystem development across Fortune 500 companies, research institutions, and emerging markets."
   },
   {
-    title: "International Business Strategy",
-    description: "Academic and practical expertise in global partnerships, sustainable value chains, and ecosystem development across research institutions and Fortune 500 companies."
+    title: "Deep-Tech Innovation to Commercial Scale",
+    description: "Proven track record scaling deep-tech from concept to $500M+ commercial success, with expertise in healthcare, government, and scientific computing markets plus early-stage funding experience."
   },
   {
-    title: "M&A Strategy & Integration",
-    description: "Led strategic integrations (GitHub, Databricks) with proven ROI outcomes and expertise in translating research breakthroughs into commercial value."
+    title: "Strategic M&A & Technology Integration",
+    description: "Led major technology integrations (GitHub, Databricks) with $1B+ revenue outcomes and expertise in translating research breakthroughs into commercial value through strategic partnerships."
   },
   {
-    title: "Product Strategy & Market Expansion",
-    description: "Deep-tech product leadership from concept to $500M+ commercial scale, with expertise in healthcare, government, and scientific computing markets."
+    title: "Regulatory Compliance & Policy Leadership",
+    description: "Combined experience in EU AI Act contributions, national cybersecurity policies, WTO frameworks, and UN involvement with practical implementation in classified and regulated environments."
   },
   {
-    title: "Regulatory & Policy Navigation",
-    description: "Bridging national digital policy with commercial scale, including EU AI Act contributions, UN involvement, and secure AI deployment in classified environments."
+    title: "Board Governance & Institutional Excellence",
+    description: "Multiple board positions across Atradius, NBTC Holland Marketing, academic institutions, and government advisory roles with Harvard Business School governance training and proven boardroom dynamics enhancement."
   }
 ];
