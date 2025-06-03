@@ -1,3 +1,4 @@
+
 export const teamMembers = [
   {
     role: "CEO & Founder",
@@ -68,7 +69,7 @@ export const teamMembers = [
     name: "Siddhartha Chaturvedi",
     title: "DeepTech Investor | Post-Agentic Web for Scientific Discovery",
     location: "US, UK & India",
-    image: "/lovable-uploads/01bea518-1dfa-435c-8fe4-3859f20e679b.png",
+    image: "/lovable-uploads/01757bae-1ff3-4788-a9af-1f8c98a5cef8.png",
     description: [
       "Siddhartha Chaturvedi is a visionary product leader and AI strategist with over 13 years of experience driving breakthrough innovations at the intersection of artificial intelligence, healthcare technology, and scientific discovery. After transforming how organizations approach AI-powered solutions as Director of Product Management at Microsoft's Strategic Missions & Technologies division, Siddhartha has founded a startup pioneering the post-agentic web for scientific discovery.",
       "During his Microsoft tenure, Siddhartha spearheaded Microsoft Premonition, an AI-powered biothreat detection platform that earned Fast Company's World Changing Idea Award and secured multi-million dollar government contracts. Now, through his startup work, Siddhartha is building the next evolution of AI-powered scientific discovery—moving beyond current agentic systems to create intelligent infrastructures that fundamentally transform how researchers discover, validate, and build upon scientific knowledge."
