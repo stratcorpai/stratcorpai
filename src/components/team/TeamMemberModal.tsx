@@ -63,73 +63,74 @@ const TeamMemberModal = ({ member, isOpen, onClose }: TeamMemberModalProps) => {
 
           {/* Modal with proper navbar spacing */}
           <motion.div
-            className="relative w-full h-full bg-white overflow-hidden pt-20 md:pt-24"
+            className="relative w-full h-full bg-white overflow-hidden"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
           >
-            {/* Close Button - positioned relative to modal content */}
+            {/* Close Button - Fixed position accounting for navbar */}
             <button
               onClick={onClose}
-              className="absolute top-6 right-6 z-[110] p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
+              className="fixed top-24 md:top-28 right-6 z-[110] p-4 bg-stratified text-white rounded-full shadow-xl hover:shadow-2xl transition-all duration-200 hover:scale-110 hover:bg-stratified-dark"
+              aria-label="Close modal"
             >
-              <X size={20} className="text-gray-600" />
+              <X size={24} />
             </button>
 
-            {/* Scrollable Content */}
-            <ScrollArea className="h-full">
+            {/* Scrollable Content with navbar spacing */}
+            <ScrollArea className="h-full pt-20 md:pt-24">
               <div className="pb-12">
                 {/* Hero Section */}
-                <div className="relative bg-gradient-to-br from-stratified/5 to-stratified-light/10 px-6 md:px-12 py-12 md:py-16">
-                  <div className="max-w-4xl mx-auto">
-                    <div className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12">
+                <div className="relative bg-gradient-to-br from-stratified/5 to-stratified-light/10 px-6 md:px-12 py-16 md:py-20">
+                  <div className="max-w-5xl mx-auto">
+                    <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16">
                       {/* Profile Image */}
                       <div className="flex-shrink-0">
                         <div className="relative">
                           <img 
                             src={member.image} 
                             alt={member.name}
-                            className="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border-4 border-white shadow-2xl"
+                            className="w-40 h-40 md:w-48 md:h-48 object-cover rounded-full border-4 border-white shadow-2xl"
                           />
                           <div className="absolute inset-0 rounded-full ring-4 ring-stratified/20" />
                         </div>
                       </div>
 
                       {/* Header Info */}
-                      <div className="flex-1 text-center md:text-left space-y-4">
+                      <div className="flex-1 text-center lg:text-left space-y-6">
                         <div>
-                          <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-stratified mb-3">
+                          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-stratified mb-4 leading-tight">
                             {member.name}
                           </h1>
-                          <p className="text-xl md:text-2xl text-gray-700 font-semibold leading-tight">
+                          <p className="text-xl md:text-2xl lg:text-3xl text-gray-700 font-semibold leading-tight mb-4">
                             {member.title}
                           </p>
-                          <div className="flex items-center justify-center md:justify-start mt-3 text-gray-600">
-                            <MapPin size={18} className="mr-2 text-stratified/70" />
+                          <div className="flex items-center justify-center lg:justify-start text-gray-600 text-lg">
+                            <MapPin size={20} className="mr-3 text-stratified/70" />
                             <span className="font-medium">{member.location}</span>
                           </div>
                         </div>
 
                         {/* Contact Actions */}
-                        <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto md:mx-0">
+                        <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto lg:mx-0">
                           {member.linkedinUrl && (
                             <a
                               href={member.linkedinUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center justify-center gap-2 bg-stratified text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 flex-1"
+                              className="flex items-center justify-center gap-3 bg-stratified text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 flex-1"
                             >
-                              <Linkedin size={18} />
+                              <Linkedin size={20} />
                               LinkedIn
                             </a>
                           )}
                           {member.emailUrl && (
                             <a
                               href={member.emailUrl}
-                              className="flex items-center justify-center gap-2 bg-white border-2 border-stratified text-stratified px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:bg-stratified hover:text-white hover:scale-105 flex-1"
+                              className="flex items-center justify-center gap-3 bg-white border-2 border-stratified text-stratified px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:bg-stratified hover:text-white hover:scale-105 flex-1"
                             >
-                              <Mail size={18} />
+                              <Mail size={20} />
                               Email
                             </a>
                           )}
@@ -140,20 +141,20 @@ const TeamMemberModal = ({ member, isOpen, onClose }: TeamMemberModalProps) => {
                 </div>
 
                 {/* Content Sections */}
-                <div className="max-w-4xl mx-auto px-6 md:px-12 py-8 space-y-12">
+                <div className="max-w-5xl mx-auto px-6 md:px-12 py-12 space-y-16">
                   {/* About Section */}
                   <motion.section
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="space-y-6"
+                    className="space-y-8"
                   >
-                    <h2 className="text-2xl md:text-3xl font-black text-stratified border-b-2 border-stratified/20 pb-3">
+                    <h2 className="text-3xl md:text-4xl font-black text-stratified border-b-3 border-stratified/20 pb-4">
                       About
                     </h2>
-                    <div className="space-y-4">
+                    <div className="space-y-6">
                       {member.description.map((paragraph, index) => (
-                        <p key={index} className="text-gray-700 leading-relaxed text-lg">
+                        <p key={index} className="text-gray-700 leading-relaxed text-lg md:text-xl">
                           {paragraph}
                         </p>
                       ))}
@@ -166,11 +167,11 @@ const TeamMemberModal = ({ member, isOpen, onClose }: TeamMemberModalProps) => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2 }}
-                      className="space-y-6"
+                      className="space-y-8"
                     >
-                      <div className="bg-gradient-to-br from-stratified/10 to-stratified-light/5 rounded-2xl p-8 border-l-4 border-stratified relative">
-                        <Quote size={24} className="absolute top-6 right-6 text-stratified/30" />
-                        <p className="text-xl md:text-2xl italic text-stratified font-medium leading-relaxed pr-12">
+                      <div className="bg-gradient-to-br from-stratified/10 to-stratified-light/5 rounded-3xl p-10 md:p-12 border-l-6 border-stratified relative">
+                        <Quote size={32} className="absolute top-8 right-8 text-stratified/30" />
+                        <p className="text-xl md:text-3xl italic text-stratified font-medium leading-relaxed pr-16">
                           "{member.quote}"
                         </p>
                       </div>
@@ -178,27 +179,27 @@ const TeamMemberModal = ({ member, isOpen, onClose }: TeamMemberModalProps) => {
                   )}
 
                   {/* Professional Details Grid */}
-                  <div className="grid gap-8 md:gap-12">
+                  <div className="grid gap-12 md:gap-16">
                     {/* Education */}
                     {member.education && (
                       <motion.section
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
-                        className="space-y-6"
+                        className="space-y-8"
                       >
-                        <div className="flex items-center gap-4">
-                          <div className="p-3 bg-stratified/10 rounded-xl">
-                            <GraduationCap size={24} className="text-stratified" />
+                        <div className="flex items-center gap-6">
+                          <div className="p-4 bg-stratified/10 rounded-2xl">
+                            <GraduationCap size={32} className="text-stratified" />
                           </div>
-                          <h3 className="text-2xl md:text-3xl font-black text-stratified">
+                          <h3 className="text-3xl md:text-4xl font-black text-stratified">
                             Education & Credentials
                           </h3>
                         </div>
-                        <div className="grid gap-3">
+                        <div className="grid gap-4">
                           {member.education.map((item, index) => (
-                            <div key={index} className="bg-gray-50 rounded-xl p-4 border border-gray-200 hover:shadow-md transition-shadow duration-200">
-                              <p className="text-gray-700 font-medium">{item}</p>
+                            <div key={index} className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200">
+                              <p className="text-gray-700 font-medium text-lg">{item}</p>
                             </div>
                           ))}
                         </div>
@@ -211,20 +212,20 @@ const TeamMemberModal = ({ member, isOpen, onClose }: TeamMemberModalProps) => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 }}
-                        className="space-y-6"
+                        className="space-y-8"
                       >
-                        <div className="flex items-center gap-4">
-                          <div className="p-3 bg-stratified/10 rounded-xl">
-                            <Users size={24} className="text-stratified" />
+                        <div className="flex items-center gap-6">
+                          <div className="p-4 bg-stratified/10 rounded-2xl">
+                            <Users size={32} className="text-stratified" />
                           </div>
-                          <h3 className="text-2xl md:text-3xl font-black text-stratified">
+                          <h3 className="text-3xl md:text-4xl font-black text-stratified">
                             Current Roles
                           </h3>
                         </div>
-                        <div className="grid gap-3">
+                        <div className="grid gap-4">
                           {member.currentRoles.map((role, index) => (
-                            <div key={index} className="bg-gray-50 rounded-xl p-4 border border-gray-200 hover:shadow-md transition-shadow duration-200">
-                              <p className="text-gray-700 font-medium">{role}</p>
+                            <div key={index} className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200">
+                              <p className="text-gray-700 font-medium text-lg">{role}</p>
                             </div>
                           ))}
                         </div>
@@ -237,20 +238,20 @@ const TeamMemberModal = ({ member, isOpen, onClose }: TeamMemberModalProps) => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5 }}
-                        className="space-y-6"
+                        className="space-y-8"
                       >
-                        <div className="flex items-center gap-4">
-                          <div className="p-3 bg-stratified/10 rounded-xl">
-                            <Target size={24} className="text-stratified" />
+                        <div className="flex items-center gap-6">
+                          <div className="p-4 bg-stratified/10 rounded-2xl">
+                            <Target size={32} className="text-stratified" />
                           </div>
-                          <h3 className="text-2xl md:text-3xl font-black text-stratified">
+                          <h3 className="text-3xl md:text-4xl font-black text-stratified">
                             Advisory Focus
                           </h3>
                         </div>
-                        <div className="grid gap-3">
+                        <div className="grid gap-4">
                           {member.advisoryFocus.map((area, index) => (
-                            <div key={index} className="bg-gray-50 rounded-xl p-4 border border-gray-200 hover:shadow-md transition-shadow duration-200">
-                              <p className="text-gray-700 font-medium">{area}</p>
+                            <div key={index} className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200">
+                              <p className="text-gray-700 font-medium text-lg">{area}</p>
                             </div>
                           ))}
                         </div>

@@ -23,8 +23,8 @@ const TeamMemberCard = ({ member, index, onSelect }: TeamMemberCardProps) => {
       whileHover={{ y: -8 }}
       transition={{ duration: 0.3 }}
     >
-      {/* Main Card Container with consistent height */}
-      <div className="relative bg-white/80 backdrop-blur-xl border border-white/20 rounded-3xl overflow-hidden shadow-2xl hover:shadow-stratified/20 transition-all duration-500 h-full flex flex-col">
+      {/* Main Card Container with clean styling */}
+      <div className="relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 h-full flex flex-col border border-gray-100">
         
         {/* Portrait Container - Fixed aspect ratio */}
         <div className="relative aspect-[4/5] overflow-hidden flex-shrink-0">
@@ -39,7 +39,7 @@ const TeamMemberCard = ({ member, index, onSelect }: TeamMemberCardProps) => {
           
           {/* Role Badge */}
           <div className="absolute top-6 left-6">
-            <div className="bg-white/95 backdrop-blur-sm text-stratified px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg border border-stratified/10">
+            <div className="bg-white/95 backdrop-blur-sm text-stratified px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">
               {member.role}
             </div>
           </div>
@@ -80,8 +80,8 @@ const TeamMemberCard = ({ member, index, onSelect }: TeamMemberCardProps) => {
           </div>
         </div>
 
-        {/* Subtle Border Glow */}
-        <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/20 group-hover:ring-stratified/30 transition-all duration-500" />
+        {/* Subtle hover effect for the entire card */}
+        <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-transparent group-hover:ring-stratified/20 transition-all duration-500" />
       </div>
     </motion.div>
   );
