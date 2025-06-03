@@ -24,7 +24,7 @@ const TeamMemberCard = ({ member, index, onSelect }: TeamMemberCardProps) => {
       transition={{ duration: 0.3 }}
     >
       {/* Main Card Container with clean styling */}
-      <div className="relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 h-full flex flex-col border border-gray-100">
+      <div className="relative bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-500 h-full flex flex-col">
         
         {/* Portrait Container - Fixed aspect ratio */}
         <div className="relative aspect-[4/5] overflow-hidden flex-shrink-0">
@@ -39,14 +39,14 @@ const TeamMemberCard = ({ member, index, onSelect }: TeamMemberCardProps) => {
           
           {/* Role Badge */}
           <div className="absolute top-6 left-6">
-            <div className="bg-white/95 backdrop-blur-sm text-stratified px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">
+            <div className="bg-white/95 backdrop-blur-sm text-stratified px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
               {member.role}
             </div>
           </div>
 
           {/* Hover Arrow */}
           <motion.div 
-            className="absolute top-6 right-6 bg-white/95 backdrop-blur-sm rounded-full p-3 shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300"
+            className="absolute top-6 right-6 bg-white/95 backdrop-blur-sm rounded-full p-3 shadow-sm opacity-0 group-hover:opacity-100 transition-all duration-300"
             whileHover={{ scale: 1.1 }}
           >
             <ChevronRight size={20} className="text-stratified" />
