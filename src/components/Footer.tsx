@@ -3,6 +3,8 @@ import { Linkedin, Mail, MapPin } from 'lucide-react';
 import ContactCTA from './ContactCTA';
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+  
   return (
     <footer className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 text-white relative overflow-hidden">
       {/* Decorative background elements */}
@@ -40,7 +42,7 @@ const Footer = () => {
                 <div className="p-2 bg-white/10 rounded-lg group-hover:bg-white/20 transition-colors">
                   <MapPin className="w-5 h-5" />
                 </div>
-                <span className="font-medium">Seattle, Washington & Bucharest, Romania</span>
+                <span className="font-medium">US | EMEA | ASIA</span>
               </div>
             </div>
           </div>
@@ -105,7 +107,7 @@ const Footer = () => {
         <div className="border-t border-gray-700 mt-16 pt-10">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
             <p className="text-gray-300 font-medium">
-              © 2024 Stratified Advisory. All rights reserved.
+              © {currentYear} Stratified Advisory. All rights reserved.
             </p>
             <p className="text-gray-400 text-sm max-w-md text-center leading-relaxed">
               Data stored securely in EU-based data centers. Your privacy is protected under strict data protection standards.
