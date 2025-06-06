@@ -1,8 +1,8 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X, Mail, LineChart, Bot } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Menu, X, LineChart } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import ContactCTA from './ContactCTA';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,10 +24,6 @@ const Navbar = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  const handleContactClick = () => {
-    window.location.href = "mailto:andreea@stratifiedadvisory.com?subject=I%20am%20ready%20to%20be%20Stratified!&body=**Crafted%20by%20humans%2C%20delivered%20by%20technology%20%E2%80%93%20bridging%20communication%20gaps%20with%20precision%20and%20a%20personal%20touch.**%0A%0ADear%20Andreea%2C%20%0A%0APlease%20help%20me%20get%20stratified%2C%20here%20are%20some%20details%20about%20my%20company%3A%20%0A%0ACompany%20location%3A%20%0ASize%3A%20%0AWebsite%3A%20%0A%0AThank%20you!%20%0A%0A%5BYour%20Name%5D%20%0A";
-  };
 
   const handleNavClick = (sectionId: string) => (e: React.MouseEvent) => {
     e.preventDefault();
@@ -111,13 +107,11 @@ const Navbar = () => {
             </Link>
           )}
           
-          <Button 
+          <ContactCTA 
+            variant="consulting" 
+            size="default" 
             className="bg-stratified hover:bg-stratified-dark text-white shadow-md hover:shadow-lg transition-all"
-            onClick={handleContactClick}
-          >
-            <Mail className="mr-2 h-4 w-4" />
-            Contact Us
-          </Button>
+          />
         </div>
 
         {/* Mobile Menu Button */}
@@ -173,13 +167,11 @@ const Navbar = () => {
               </Link>
             )}
             
-            <Button 
+            <ContactCTA 
+              variant="consulting" 
+              size="default" 
               className="bg-stratified hover:bg-stratified-dark text-white w-full shadow-md"
-              onClick={handleContactClick}
-            >
-              <Mail className="mr-2 h-4 w-4" />
-              Contact Us
-            </Button>
+            />
           </div>
         )}
       </div>
