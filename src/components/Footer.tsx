@@ -28,7 +28,13 @@ const Footer = () => {
             
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <ContactCTA variant="board-advisory" size="sm" className="bg-white/10 hover:bg-white/20 border-white/20 text-white hover:text-white" />
-              <ContactCTA variant="consulting" size="sm" className="bg-white/10 hover:bg-white/20 border-white/20 text-white hover:text-white" />
+              <ContactCTA 
+                variant="consulting" 
+                size="sm" 
+                customText="Contact Us"
+                customIcon={Mail}
+                className="bg-white/10 hover:bg-white/20 border-white/20 text-white hover:text-white" 
+              />
             </div>
             
             <div className="space-y-4 text-gray-300">
@@ -81,6 +87,8 @@ const Footer = () => {
               <ContactCTA 
                 variant="consulting" 
                 size="default" 
+                customText="Contact Us"
+                customIcon={Mail}
                 className="w-full bg-white/10 hover:bg-white/20 border-white/20 text-white hover:text-white backdrop-blur-sm"
               />
               

@@ -3,15 +3,23 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import ContactForm from './ContactForm';
-import { ArrowRight, Users, Target, Handshake } from 'lucide-react';
+import { ArrowRight, Users, Target, Handshake, Mail } from 'lucide-react';
 
 interface ContactCTAProps {
   variant?: 'board-advisory' | 'consulting' | 'partnership';
   className?: string;
   size?: 'sm' | 'default' | 'lg';
+  customText?: string;
+  customIcon?: React.ComponentType<{ className?: string }>;
 }
 
-const ContactCTA = ({ variant = 'consulting', className = '', size = 'default' }: ContactCTAProps) => {
+const ContactCTA = ({ 
+  variant = 'consulting', 
+  className = '', 
+  size = 'default',
+  customText,
+  customIcon
+}: ContactCTAProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const ctaConfig = {
@@ -36,7 +44,8 @@ const ContactCTA = ({ variant = 'consulting', className = '', size = 'default' }
   };
 
   const config = ctaConfig[variant];
-  const IconComponent = config.icon;
+  const IconComponent = customIcon || config.icon;
+  const displayText = customText || config.text;
 
   const sizeClasses = {
     sm: 'px-4 py-2 text-sm',
@@ -52,7 +61,7 @@ const ContactCTA = ({ variant = 'consulting', className = '', size = 'default' }
           className={`btn-primary btn-hover-effect group transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] font-semibold ${sizeClasses[size]} ${className}`}
         >
           <IconComponent className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform duration-300" />
-          {config.text}
+          {displayText}
           <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
         </Button>
       </DialogTrigger>

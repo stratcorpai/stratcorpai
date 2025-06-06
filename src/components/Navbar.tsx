@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X, LineChart } from 'lucide-react';
+import { Menu, X, LineChart, Mail } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import ContactCTA from './ContactCTA';
 
@@ -110,6 +110,8 @@ const Navbar = () => {
           <ContactCTA 
             variant="consulting" 
             size="default" 
+            customText="Contact Us"
+            customIcon={Mail}
             className="bg-stratified hover:bg-stratified-dark text-white shadow-md hover:shadow-lg transition-all"
           />
         </div>
@@ -170,6 +172,8 @@ const Navbar = () => {
             <ContactCTA 
               variant="consulting" 
               size="default" 
+              customText="Contact Us"
+              customIcon={Mail}
               className="bg-stratified hover:bg-stratified-dark text-white w-full shadow-md"
             />
           </div>
