@@ -39,7 +39,7 @@ export const teamMembers = [
     location: "Seattle, Washington & Amsterdam, The Netherlands",
     image: "/lovable-uploads/7b8d88cc-86d4-4796-885f-5de98bb9ca7f.png",
     description: [
-      "Désirée van Gorp is full-time professor of International Business and chairing the International Advisory Board at Nyenrode Business University. She serves on several supervisory and advisory boards including Atradius, World Trade Organization's Chairs Programme, NBTC Holland Marketing, Foundation Young & Bold, Impact Fair and Expert Panel, and chairs the early-stage funding initiative for start-ups with the regional development organization in Utrecht, the Netherlands.",
+      "Désirée van Gorp is a professor of International Business and chairing the International Advisory Board at Nyenrode Business University. She serves on several supervisory and advisory boards including Atradius, World Trade Organization's Chairs Programme, NBTC Holland Marketing, Foundation Young & Bold, Impact Fair and Expert Panel, and chairs the early-stage funding initiative for start-ups with the regional development organization in Utrecht, the Netherlands.",
       "She is involved in the Women in Business Awards for the United Nations' World Investment Forum and regularly participates in AMBA's Assessment Accreditation Committees. In addition to research and education, she advises organizations on building partnerships for sustainable value chains, creating effective ecosystems, and enhancing team and boardroom performance through design thinking and intelligent decision-making methods."
     ],
     education: [
