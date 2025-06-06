@@ -38,19 +38,25 @@ const ContactCTA = ({ variant = 'consulting', className = '', size = 'default' }
   const config = ctaConfig[variant];
   const IconComponent = config.icon;
 
+  const sizeClasses = {
+    sm: 'px-4 py-2 text-sm',
+    default: 'px-6 py-3 text-base',
+    lg: 'px-8 py-4 text-lg'
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
           size={size}
-          className={`bg-stratified hover:bg-stratified-dark text-white group transition-all duration-200 hover:shadow-lg ${className}`}
+          className={`btn-primary btn-hover-effect group transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] font-semibold ${sizeClasses[size]} ${className}`}
         >
-          <IconComponent className="w-4 h-4 mr-2" />
+          <IconComponent className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform duration-300" />
           {config.text}
-          <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto p-0 border-0">
+      <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto p-0 border-0 shadow-elevated rounded-xl">
         <ContactForm
           defaultInquiryType={variant}
           title={config.title}

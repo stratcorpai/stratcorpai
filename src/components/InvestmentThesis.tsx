@@ -40,23 +40,24 @@ const InvestmentThesis = () => {
   ];
 
   return (
-    <section id="investment-thesis" className="section-padding bg-gradient-to-br from-gray-50 to-gray-100">
+    <section id="investment-thesis" className="section-padding bg-gradient-to-br from-gray-50 via-white to-gray-50">
       <div className="container-custom">
         <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="mb-6 gradient-text text-3xl md:text-4xl lg:text-5xl font-bold">Our Investment Thesis</h2>
-          <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+          <h2 className="mb-8 gradient-text text-3xl md:text-4xl lg:text-5xl font-black text-balance">
+            Our Investment Thesis
+          </h2>
+          <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed font-medium text-pretty">
             In the era of generative AI, we believe in balancing three critical dimensions that define successful technological integration and implementation.
           </p>
         </motion.div>
 
-        {/* Modern Card Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mb-20">
           {principles.map((principle, index) => {
             const Icon = principle.icon;
             const isExpanded = expandedCards.has(index);
@@ -65,31 +66,47 @@ const InvestmentThesis = () => {
             return (
               <motion.div
                 key={principle.title}
-                className="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl group border border-gray-200"
-                initial={{ opacity: 0, y: 20 }}
+                className="card-modern group hover:shadow-brand transition-all duration-500 interactive border-2 hover:border-stratified/20"
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.8, delay: index * 0.15 }}
                 viewport={{ once: true }}
               >
-                <div className="p-6 md:p-8 text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-stratified to-stratified-dark rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                    <Icon className="w-8 h-8 text-white" />
+                <div className="p-8 md:p-10 text-center">
+                  <div className="relative mb-8">
+                    <motion.div 
+                      className="w-20 h-20 bg-gradient-to-br from-stratified via-stratified-dark to-stratified rounded-2xl flex items-center justify-center mx-auto shadow-brand"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <Icon className="w-10 h-10 text-white" />
+                    </motion.div>
+                    <div className="absolute inset-0 w-20 h-20 mx-auto bg-stratified/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold mb-4 text-stratified">
+                  
+                  <h3 className="text-2xl md:text-3xl font-bold mb-6 text-stratified">
                     {principle.title}
                   </h3>
-                  <p className="text-gray-700 leading-relaxed mb-4">
+                  
+                  <p className="text-gray-700 leading-relaxed mb-6 text-lg">
                     {isMobile && !isExpanded ? principle.shortDescription : principle.fullDescription}
                   </p>
                   
                   {showExpandButton && (
-                    <button
+                    <motion.button
                       onClick={() => toggleCard(index)}
-                      className="text-stratified font-medium hover:text-stratified-dark transition-colors flex items-center gap-1 mx-auto"
+                      className="text-stratified font-semibold hover:text-stratified-dark transition-colors flex items-center gap-2 mx-auto group/btn"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                     >
                       {isExpanded ? 'Show Less' : 'Learn More'}
-                      {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                    </button>
+                      <motion.div
+                        animate={{ rotate: isExpanded ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <ChevronDown size={18} className="group-hover/btn:translate-y-0.5 transition-transform duration-200" />
+                      </motion.div>
+                    </motion.button>
                   )}
                 </div>
               </motion.div>
@@ -97,17 +114,18 @@ const InvestmentThesis = () => {
           })}
         </div>
 
-        {/* Bottom Summary */}
         <motion.div 
           className="text-center"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
           viewport={{ once: true }}
         >
-          <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-6 md:p-8 border-l-4 border-stratified">
-            <h3 className="text-xl md:text-2xl font-bold mb-4 text-stratified">The Stratified Advantage</h3>
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+          <div className="max-w-5xl mx-auto card-modern p-8 md:p-12 border-l-4 border-stratified shadow-brand">
+            <h3 className="text-2xl md:text-3xl font-black mb-6 text-stratified">
+              The Stratified Advantage
+            </h3>
+            <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-pretty">
               Our three-dimensional framework ensures that AI implementations deliver not just technological advancement, 
               but sustainable, effective, and responsible business transformation. We bridge the gap between innovation 
               and practical value creation.

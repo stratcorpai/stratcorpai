@@ -1,7 +1,8 @@
 
 import { useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { motion } from 'framer-motion';
 
 interface ExpertiseItem {
   title: string;
@@ -33,7 +34,7 @@ const ExpertiseGrid = ({ items }: ExpertiseGridProps) => {
   };
 
   return (
-    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
       {items.map((item, index) => {
         const isExpanded = expandedItems.has(index);
         const shouldTruncate = isMobile && item.description.split(' ').length > 15;
@@ -42,20 +43,47 @@ const ExpertiseGrid = ({ items }: ExpertiseGridProps) => {
           : item.description;
 
         return (
-          <div key={index} className="p-4 md:p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl hover:from-stratified/5 hover:to-stratified-light/10 transition-all duration-300 border border-gray-200 hover:border-stratified-light hover:shadow-lg">
-            <h5 className="font-bold mb-3 text-stratified text-lg leading-tight">{item.title}</h5>
-            <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-2">{displayDescription}</p>
+          <motion.div 
+            key={index} 
+            className="relative bg-white/60 backdrop-blur-xl border border-white/20 rounded-2xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-500 group overflow-hidden"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -4 }}
+          >
+            {/* Subtle gradient background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-stratified/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             
-            {shouldTruncate && (
-              <button
-                onClick={() => toggleItem(index)}
-                className="text-stratified font-medium hover:text-stratified-dark transition-colors flex items-center gap-1 text-sm mt-2"
-              >
-                {isExpanded ? 'Show Less' : 'Read More'}
-                {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-              </button>
-            )}
-          </div>
+            <div className="relative z-10">
+              <h5 className="font-black mb-4 text-stratified text-xl leading-tight text-balance group-hover:text-stratified-dark transition-colors duration-300">
+                {item.title}
+              </h5>
+              <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-3 text-pretty">
+                {displayDescription}
+              </p>
+              
+              {shouldTruncate && (
+                <motion.button
+                  onClick={() => toggleItem(index)}
+                  className="text-stratified font-semibold hover:text-stratified-dark transition-colors flex items-center gap-2 text-sm mt-4 group/btn bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-stratified/20 hover:border-stratified/40"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {isExpanded ? 'Show Less' : 'Read More'}
+                  <motion.div
+                    animate={{ rotate: isExpanded ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <ChevronDown size={16} className="group-hover/btn:translate-y-0.5 transition-transform duration-200" />
+                  </motion.div>
+                </motion.button>
+              )}
+            </div>
+
+            {/* Subtle border glow */}
+            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/20 group-hover:ring-stratified/30 transition-all duration-500" />
+          </motion.div>
         );
       })}
     </div>
