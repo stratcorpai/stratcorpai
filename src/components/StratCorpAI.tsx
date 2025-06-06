@@ -1,22 +1,10 @@
 
-import { Brain, Shield, BarChart3, Layers, Bot, LineChart } from 'lucide-react';
+import { Brain, Shield, BarChart3, Layers, LineChart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import ContactCTA from './ContactCTA';
 
 const StratCorpAI = () => {
-  const handleRequestAssessment = () => {
-    const emailSubject = "AI Assessment Request";
-    const emailBody = 
-      "**Crafted by humans, delivered by technology – bridging communication gaps with precision and a personal touch.**\n\n" +
-      "Dear Andreea,\n\n" +
-      "I would like to request an AI assessment for my organization. Here are some details about our current AI needs:\n\n" +
-      "Company name:\nIndustry:\nCurrent AI implementation status:\nKey challenges we're looking to solve:\n\n" +
-      "Thank you for your assistance!\n\n" +
-      "[Your Name]\n[Your Position]\n[Your Contact Information]";
-    
-    window.location.href = `mailto:andreea@stratifiedadvisory.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-  };
-
   return (
     <section id="stratcorp-ai" className="section-padding bg-stratified text-white relative overflow-hidden">
       {/* Background pattern */}
@@ -113,13 +101,11 @@ const StratCorpAI = () => {
                 </Button>
               </Link>
               
-              <Button 
+              <ContactCTA 
+                variant="board-advisory" 
+                size="lg" 
                 className="bg-stratified/20 backdrop-blur-sm hover:bg-stratified/30 text-white border border-white/20 px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
-                onClick={handleRequestAssessment}
-              >
-                <Bot className="mr-2 h-5 w-5" />
-                Request Expert AI Evaluation
-              </Button>
+              />
             </div>
           </div>
         </div>
