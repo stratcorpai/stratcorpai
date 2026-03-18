@@ -19,7 +19,7 @@ const NotFound = () => {
       <Navbar />
       <main className="pt-44 pb-24">
         <div className="container-custom">
-          <div className="max-w-3xl rounded-xl border border-border/80 bg-muted/20 p-10 md:p-12">
+          <div className="max-w-3xl rounded-xl border border-border/80 bg-muted/20 p-6 sm:p-10 md:p-12">
             <p className="text-xs uppercase tracking-[0.16em] text-stratified mb-4">404</p>
             <h1 className="text-4xl md:text-5xl mb-4">Page not found</h1>
             <p className="text-muted-foreground text-lg mb-8">

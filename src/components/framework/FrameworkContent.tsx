@@ -157,7 +157,7 @@ const FrameworkContent = () => {
         scale.
       </p>
 
-      <hr className="border-0 border-t border-border/60 my-12" />
+      <hr className="border-0 border-t border-border/60 my-8 md:my-12" />
 
       <h2 className="font-heading text-[1.6rem] font-normal mb-4 text-foreground">
         The problem is not technology. It is accountability.
@@ -187,7 +187,7 @@ const FrameworkContent = () => {
         ))}
       </div>
 
-      <hr className="border-0 border-t border-border/60 my-12" />
+      <hr className="border-0 border-t border-border/60 my-8 md:my-12" />
 
       <h2 className="font-heading text-[1.6rem] font-normal mb-4 text-foreground">
         One decision model. Every major commitment.
@@ -214,7 +214,7 @@ const FrameworkContent = () => {
         This scorecard makes them explicit before commitment, not visible after failure.
       </p>
 
-      <hr className="border-0 border-t border-border/60 my-12" />
+      <hr className="border-0 border-t border-border/60 my-8 md:my-12" />
 
       <h2 className="font-heading text-[1.6rem] font-normal mb-4 text-foreground">
         The framework: six pillars, one operating model
@@ -247,7 +247,7 @@ const FrameworkContent = () => {
         ))}
       </div>
 
-      <hr className="border-0 border-t border-border/60 my-12" />
+      <hr className="border-0 border-t border-border/60 my-8 md:my-12" />
 
       <h2 className="font-heading text-[1.6rem] font-normal mb-4 text-foreground">
         Committee ownership across the six pillars
@@ -268,7 +268,7 @@ const FrameworkContent = () => {
         ))}
       </div>
 
-      <hr className="border-0 border-t border-border/60 my-12" />
+      <hr className="border-0 border-t border-border/60 my-8 md:my-12" />
 
       <h2 className="font-heading text-[1.6rem] font-normal mb-4 text-foreground">
         A 12-month path from baseline to leadership
@@ -281,11 +281,11 @@ const FrameworkContent = () => {
         {roadmap.map((phase, index) => (
           <div
             key={phase.period}
-            className={`grid grid-cols-[7rem_1fr] gap-6 py-6 border-t border-border/60 ${
+            className={`py-6 border-t border-border/60 ${
               index === roadmap.length - 1 ? 'border-b border-border/60' : ''
-            }`}
+            } sm:grid sm:grid-cols-[7rem_1fr] sm:gap-6`}
           >
-            <p className="text-[0.75rem] tracking-[0.08em] uppercase text-muted-foreground pt-1">
+            <p className="text-[0.75rem] tracking-[0.08em] uppercase text-muted-foreground mb-2 sm:mb-0 sm:pt-1">
               {phase.period}
             </p>
             <div>

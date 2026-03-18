@@ -98,11 +98,11 @@ const Footer = () => {
 
         <div className="border-t border-border/60 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-[0.75rem] text-muted-foreground">
           <span>© {currentYear} {siteContent.brand.name}</span>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
             <a href={`mailto:${siteContent.contact.email}`} className="hover:text-foreground transition-colors">
               {siteContent.contact.email}
             </a>
-            <span>·</span>
+            <span className="hidden sm:inline">·</span>
             <span>{siteContent.contact.regions}</span>
           </div>
         </div>

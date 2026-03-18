@@ -16,7 +16,7 @@ const HomePageNarrative = () => {
   return (
     <main>
       <section
-        className="relative min-h-[80vh] flex flex-col justify-end pt-36 pb-16 md:pt-40 md:pb-20 border-b border-border overflow-hidden"
+        className="relative min-h-[70vh] md:min-h-[80vh] flex flex-col justify-end pt-32 pb-14 md:pt-40 md:pb-20 border-b border-border overflow-hidden"
         style={{
           backgroundImage: 'url(/assets/background_hero.png)',
           backgroundSize: 'cover',
@@ -49,7 +49,7 @@ const HomePageNarrative = () => {
       </section>
 
       <div className="container-custom max-w-[900px]">
-        <hr className="border-0 border-t border-border/60 my-12" />
+        <hr className="border-0 border-t border-border/60 my-8 md:my-12" />
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-border/70 rounded-lg overflow-hidden">
           {siteContent.boardService.stats.map((stat) => (
@@ -60,7 +60,7 @@ const HomePageNarrative = () => {
           ))}
         </div>
 
-        <hr className="border-0 border-t border-border/60 my-12" />
+        <hr className="border-0 border-t border-border/60 my-8 md:my-12" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border/70 rounded-lg overflow-hidden">
           <section id="investment-thesis" className="bg-background p-6 md:p-7">
@@ -118,7 +118,7 @@ const HomePageNarrative = () => {
           </section>
         </div>
 
-        <hr className="border-0 border-t border-border/60 my-12" />
+        <hr className="border-0 border-t border-border/60 my-8 md:my-12" />
 
         <section>
           <h2 className="font-heading text-[1.65rem] font-normal text-foreground mb-3">
@@ -144,7 +144,7 @@ const HomePageNarrative = () => {
           </div>
         </section>
 
-        <hr className="border-0 border-t border-border/60 my-12" />
+        <hr className="border-0 border-t border-border/60 my-8 md:my-12" />
 
         <section id="board-service">
           <h2 className="font-heading text-[1.65rem] font-normal text-foreground mb-3">What we deliver</h2>
@@ -190,7 +190,7 @@ const HomePageNarrative = () => {
           </div>
         </section>
 
-        <hr className="border-0 border-t border-border/60 my-12" />
+        <hr className="border-0 border-t border-border/60 my-8 md:my-12" />
 
         <section className="border border-border/70 rounded-lg p-6 bg-background">
           <h3 className="font-heading text-[1.1rem] font-normal text-foreground mb-2">
@@ -221,7 +221,7 @@ const HomePageNarrative = () => {
           </div>
         </section>
 
-        <hr className="border-0 border-t border-border/60 my-12" />
+        <hr className="border-0 border-t border-border/60 my-8 md:my-12" />
 
         <section id="ai-governance">
           <h2 className="font-heading text-[1.65rem] font-normal text-foreground mb-3">Research</h2>

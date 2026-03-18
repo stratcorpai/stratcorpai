@@ -62,21 +62,21 @@ const TeamMemberModal = ({ member, isOpen, onClose }: TeamMemberModalProps) => {
           >
             <button
               onClick={onClose}
-              className="fixed top-24 md:top-28 right-6 z-[110] p-3 bg-stratified text-white hover:bg-stratified-dark transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-stratified focus-visible:ring-offset-2"
+              className="absolute top-4 right-4 z-[110] p-2.5 bg-stratified text-white hover:bg-stratified-dark transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-stratified focus-visible:ring-offset-2"
               aria-label="Close modal"
             >
-              <X size={22} />
+              <X size={20} />
             </button>
 
-            <ScrollArea className="h-full pt-20 md:pt-24">
+            <ScrollArea className="h-full pt-4">
               <div className="pb-16">
-                <div className="border-b border-border bg-muted/20 px-6 md:px-12 py-12 md:py-16">
-                  <div className="max-w-4xl mx-auto flex flex-col lg:flex-row items-start gap-12 lg:gap-16">
+                <div className="border-b border-border bg-muted/20 px-6 md:px-12 py-8 md:py-16">
+                  <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-start gap-6 sm:gap-10 lg:gap-16">
                     <div className="flex-shrink-0">
                       <img
                         src={member.image}
                         alt={member.name}
-                        className="w-36 h-36 md:w-44 md:h-44 object-cover object-center border-2 border-border"
+                        className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 object-cover object-center border-2 border-border"
                       />
                     </div>
                     <div className="flex-1">

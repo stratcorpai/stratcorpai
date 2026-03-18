@@ -37,7 +37,7 @@ const Navbar = () => {
           <img src={siteContent.brand.logoPath} alt={siteContent.brand.logoAlt} className="h-12 md:h-14 w-auto" />
         </Link>
 
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-5 lg:gap-8">
           {isHome ? (
             <>
               {siteContent.navLinks.map((link) => (
