@@ -1,4 +1,6 @@
 import ContactCTA from '@/components/ContactCTA';
+import PillarOverview from '@/components/visuals/PillarOverview';
+import RoadmapTimeline from '@/components/visuals/RoadmapTimeline';
 import { siteContent } from '@/content/siteContent';
 
 const forces = [
@@ -225,6 +227,8 @@ const FrameworkContent = () => {
         can monitor, audit, and improve.
       </p>
 
+      <PillarOverview />
+
       <div className="my-8">
         {pillars.map((pillar, index) => (
           <div
@@ -276,6 +280,8 @@ const FrameworkContent = () => {
       <p className="text-[0.975rem] leading-[1.75] text-muted-foreground font-normal">
         BRIDGE-AI is implemented in three phases. Each phase builds on the last.
       </p>
+
+      <RoadmapTimeline />
 
       <div className="my-6">
         {roadmap.map((phase, index) => (

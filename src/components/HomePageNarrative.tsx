@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import ContactCTA from '@/components/ContactCTA';
 import Team from '@/components/Team';
+import BridgeDiagram from '@/components/visuals/BridgeDiagram';
 import { siteContent } from '@/content/siteContent';
 import { getBlogPosts, openPDF } from '@/utils/blogUtils';
 
@@ -194,20 +195,7 @@ const HomePageNarrative = () => {
             Six pillars that give boards mandate, controls, and a decision model. Not a policy
             checklist: an operating model the board monitors, audits, and improves.
           </p>
-          <div className="flex flex-wrap gap-2 mt-4">
-            {[
-              'B — Board Readiness',
-              'R — Risk & Regulatory',
-              'I — Integrity & Innovation',
-              'D — Direction & Foresight',
-              'G — Governance Excellence',
-              'E — Environmental Stewardship',
-            ].map((pillar) => (
-              <span key={pillar} className="text-[0.75rem] px-3 py-1 border border-border/70 rounded bg-muted/40 text-muted-foreground">
-                {pillar}
-              </span>
-            ))}
-          </div>
+          <BridgeDiagram />
           <div className="mt-5">
             <Button asChild className="btn-primary">
               <Link to="/framework">Open full framework</Link>
