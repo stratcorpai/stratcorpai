@@ -55,7 +55,7 @@ const Footer = () => {
 
         <div className="border-t border-border/60 py-8 flex flex-col md:flex-row md:items-start md:justify-between gap-6">
           <div>
-            <img src={siteContent.brand.logoPath} alt={siteContent.brand.logoAlt} className="h-8 w-auto mb-3" />
+            <img src={siteContent.brand.logoPath} alt={siteContent.brand.logoAlt} className="h-16 md:h-20 w-auto mb-3" />
             <nav className="flex flex-wrap gap-x-5 gap-y-1.5 text-[0.78rem]">
               {quickLinks.map((link) => (
                 <a

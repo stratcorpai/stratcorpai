@@ -16,15 +16,9 @@ const HomePageNarrative = () => {
   return (
     <main>
       <section
-        className="relative min-h-[70vh] md:min-h-[80vh] flex flex-col justify-end pt-32 pb-14 md:pt-40 md:pb-20 border-b border-border overflow-hidden"
-        style={{
-          backgroundImage: 'url(/assets/background_hero.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center bottom',
-        }}
+        className="min-h-[70vh] md:min-h-[80vh] flex flex-col justify-end pt-32 pb-14 md:pt-40 md:pb-20 border-b border-border bg-muted/30"
       >
-        <div className="absolute inset-0 bg-background/90" aria-hidden />
-        <div className="container-custom max-w-[900px] relative z-10">
+        <div className="container-custom max-w-[900px]">
           <p className="text-[11px] tracking-[0.14em] uppercase text-muted-foreground mb-4">
             Stratified Advisory · Board Advisory
           </p>
