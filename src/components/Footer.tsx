@@ -1,120 +1,112 @@
-
-import { Linkedin, Mail, MapPin } from 'lucide-react';
+import { Linkedin, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import ContactCTA from './ContactCTA';
+import { siteContent } from '@/content/siteContent';
+import { scrollToSection } from '@/utils/scrollToSection';
+
+const engagementPaths = [
+  {
+    tag: 'For boards',
+    title: 'Governance before the program scales',
+    cta: 'Start board advisory',
+    variant: 'board-advisory' as const,
+  },
+  {
+    tag: 'For PE & investors',
+    title: 'Portfolio governance across the hold period',
+    cta: 'Start investor discussion',
+    variant: 'consulting' as const,
+  },
+  {
+    tag: 'For institutions',
+    title: 'Build governance capability at scale',
+    cta: 'Explore partnership',
+    variant: 'partnership' as const,
+  },
+];
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
+  const quickLinks = siteContent.navLinks;
+
   return (
-    <footer className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 text-white relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-10 left-10 w-32 h-32 border border-white rounded-full"></div>
-        <div className="absolute bottom-20 right-20 w-24 h-24 border border-white rounded-xl"></div>
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-white rounded-full"></div>
-      </div>
-      
-      <div className="container-custom py-20 relative z-10">
-        <div className="grid md:grid-cols-3 gap-12">
-          {/* Company Info */}
-          <div className="md:col-span-1">
-            <h3 className="text-3xl font-black mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
-              Stratified Advisory
-            </h3>
-            <p className="text-gray-300 mb-8 text-lg leading-relaxed">
-              Strategic advisory services for AI governance, cybersecurity resilience, and digital transformation. 
-              Empowering boards and executives to navigate complex digital landscapes.
-            </p>
-            
-            <div className="space-y-4 text-gray-300">
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-white/10 rounded-lg">
-                  <Mail className="w-5 h-5" />
-                </div>
-                <span className="font-medium">andreea@stratifiedadvisory.com</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-white/10 rounded-lg">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <span className="font-medium">US | EMEA | ASIA</span>
-              </div>
-            </div>
-          </div>
+    <footer id="engagement-paths" className="border-t border-border">
+      <div className="container-custom max-w-[900px]">
 
-          {/* Services */}
-          <div>
-            <h4 className="text-xl font-bold mb-6 text-white">Services</h4>
-            <ul className="space-y-4 text-gray-300">
-              <li>
-                <a href="#team" className="hover:text-white transition-colors duration-300 font-medium group">
-                  <span className="border-b border-transparent group-hover:border-white pb-1">Board Advisory</span>
-                </a>
-              </li>
-              <li>
-                <a href="#investment-thesis" className="hover:text-white transition-colors duration-300 font-medium group">
-                  <span className="border-b border-transparent group-hover:border-white pb-1">Strategic Consulting</span>
-                </a>
-              </li>
-              <li>
-                <a href="#ai-governance" className="hover:text-white transition-colors duration-300 font-medium group">
-                  <span className="border-b border-transparent group-hover:border-white pb-1">AI Governance</span>
-                </a>
-              </li>
-              <li>
-                <a href="#board-service" className="hover:text-white transition-colors duration-300 font-medium group">
-                  <span className="border-b border-transparent group-hover:border-white pb-1">Digital Transformation</span>
-                </a>
-              </li>
-            </ul>
-          </div>
+        <div className="py-12">
+          <h2 className="font-heading text-[1.35rem] font-normal text-foreground mb-2">
+            Ready to set decision quality before capital is committed?
+          </h2>
+          <p className="text-[0.875rem] text-muted-foreground leading-[1.65] max-w-[520px] mb-8">
+            AI, cyber, or transformation decision point where governance
+            architecture is not yet in place — that's where we start.
+          </p>
 
-          {/* Connect */}
-          <div>
-            <h4 className="text-xl font-bold mb-6 text-white">Connect With Us</h4>
-            <div className="space-y-6">
-              <ContactCTA 
-                variant="consulting" 
-                size="default" 
-                customText="Contact Us"
-                customIcon={Mail}
-                className="w-full bg-white/10 hover:bg-white/20 border-white/20 text-white hover:text-white backdrop-blur-sm"
-              />
-              
-              <div className="flex space-x-4">
-                <a 
-                  href="https://linkedin.com/in/andreeabulisache" 
-                  className="bg-white/10 hover:bg-white/20 p-3 rounded-xl transition-all duration-300 group shadow-lg hover:shadow-xl" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  <Linkedin size={24} className="group-hover:scale-110 transition-transform duration-300" />
-                </a>
-                <a 
-                  href="mailto:andreea@stratifiedadvisory.com" 
-                  className="bg-white/10 hover:bg-white/20 p-3 rounded-xl transition-all duration-300 group shadow-lg hover:shadow-xl"
-                >
-                  <Mail size={24} className="group-hover:scale-110 transition-transform duration-300" />
-                </a>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-border/70 rounded-lg overflow-hidden">
+            {engagementPaths.map((path) => (
+              <div key={path.tag} className="bg-background p-5">
+                <p className="text-[0.7rem] tracking-[0.1em] uppercase text-muted-foreground mb-2">{path.tag}</p>
+                <p className="text-[0.875rem] font-medium text-foreground mb-3">{path.title}</p>
+                <ContactCTA variant={path.variant} customText={path.cta} sourceContext={`Footer ${path.tag}`} />
               </div>
-              
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Ready to transform your organization's digital future? Let's discuss how we can help.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
 
-        <div className="border-t border-gray-700 mt-16 pt-10">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-            <p className="text-gray-300 font-medium">
-              © {currentYear} Stratified Advisory. All rights reserved.
-            </p>
-            <p className="text-gray-400 text-sm max-w-md text-center md:text-right leading-relaxed">
-              Data stored securely in EU-based data centers. Your privacy is protected under strict data protection standards.
-            </p>
+        <div className="border-t border-border/60 py-8 flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+          <div>
+            <img src={siteContent.brand.logoPath} alt={siteContent.brand.logoAlt} className="h-8 w-auto mb-3" />
+            <nav className="flex flex-wrap gap-x-5 gap-y-1.5 text-[0.78rem]">
+              {quickLinks.map((link) => (
+                <a
+                  key={link.sectionId}
+                  href={`#${link.sectionId}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(link.sectionId);
+                  }}
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <Link to={siteContent.frameworkNavLink.path} className="text-muted-foreground hover:text-foreground transition-colors">
+                {siteContent.frameworkNavLink.label}
+              </Link>
+            </nav>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <a
+              href="https://linkedin.com/in/andreeabulisache"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              <Linkedin size={16} />
+            </a>
+            <a
+              href={`mailto:${siteContent.contact.email}`}
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Email"
+            >
+              <Mail size={16} />
+            </a>
           </div>
         </div>
+
+        <div className="border-t border-border/60 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-[0.75rem] text-muted-foreground">
+          <span>© {currentYear} {siteContent.brand.name}</span>
+          <div className="flex items-center gap-3">
+            <a href={`mailto:${siteContent.contact.email}`} className="hover:text-foreground transition-colors">
+              {siteContent.contact.email}
+            </a>
+            <span>·</span>
+            <span>{siteContent.contact.regions}</span>
+          </div>
+        </div>
+
       </div>
     </footer>
   );
