@@ -32,7 +32,7 @@ const Footer = () => {
 
   return (
     <footer id="engagement-paths" className="border-t border-border">
-      <div className="container-custom max-w-[900px]">
+      <div className="container-custom max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
 
         {/* ═══ ENGAGEMENT PATHS ═══ */}
         <div className="py-10 sm:py-12">

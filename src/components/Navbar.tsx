@@ -31,7 +31,7 @@ const Navbar = () => {
 
   const linkBase =
     "font-sans uppercase tracking-[0.15em] text-foreground/70 hover:text-stratified transition-colors duration-200";
-  const linkDesktop = `${linkBase} text-[0.65rem] xl:text-[0.7rem]`;
+  const linkDesktop = `${linkBase} text-[0.65rem] xl:text-[0.7rem] 2xl:text-[0.75rem]`;
   const linkMobile = `${linkBase} text-[0.8rem] py-1`;
 
   // Page-level route links — always visible
@@ -57,13 +57,13 @@ const Navbar = () => {
           <img
             src={siteContent.brand.logoPath}
             alt={siteContent.brand.logoAlt}
-            className="h-8 sm:h-9 md:h-10 w-auto"
-            style={{ objectFit: 'contain', objectPosition: 'left center' }}
+            className="h-10 sm:h-12 md:h-14 lg:h-16 2xl:h-20 w-auto"
+            style={{ objectFit: 'contain', objectPosition: 'left center', maxWidth: '100%' }}
           />
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden lg:flex items-center gap-3 xl:gap-5">
+        <div className="hidden lg:flex items-center gap-3 xl:gap-5 2xl:gap-7">
           {isHome &&
             siteContent.navLinks.map((link) => (
               <a

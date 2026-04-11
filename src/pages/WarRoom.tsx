@@ -11,7 +11,7 @@ const WarRoom = () => {
       <Navbar />
 
       <main className="pt-16 pb-10 sm:pt-20 sm:pb-16 md:pt-28 md:pb-24 flex-1">
-        <div className="container-custom max-w-[900px]">
+        <div className="container-custom max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
 
           {/* Hero */}
           <AnimatedSection className="mb-10 sm:mb-12">

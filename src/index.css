@@ -5,6 +5,29 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    font-size: 16px;
+  }
+
+  /* Scale everything proportionately on ultra-wide / Studio displays */
+  @media (min-width: 1536px) { /* 2xl */
+    html {
+      font-size: 18px;
+    }
+  }
+  
+  @media (min-width: 1920px) { /* 3xl/4Kish */
+    html {
+      font-size: 21px;
+    }
+  }
+
+  @media (min-width: 2560px) { /* Studio Display/5K */
+    html {
+      font-size: 24px;
+    }
+  }
+
   :root {
     --background: 0 0% 100%;
     --foreground: 224 71.4% 4.1%;
@@ -27,7 +50,7 @@
     --ring: 349 45.8% 36.9%;
     --radius: 0;
     --section-gap: 5rem;
-    --content-width: 72rem;
+    --content-width: 76rem;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -143,6 +166,24 @@
     .container-custom {
       padding-left: 4rem;
       padding-right: 4rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container-custom {
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .container-custom {
+      padding-left: 6rem;
+      padding-right: 6rem;
+    }
+    .section-padding {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
     }
   }
 }

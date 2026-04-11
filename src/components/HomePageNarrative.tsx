@@ -19,7 +19,7 @@ const HomePageNarrative = () => {
     <main>
       {/* ═══ HERO ═══ */}
       <section className="min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] flex flex-col justify-end pt-20 pb-10 sm:pt-24 sm:pb-14 md:pt-32 md:pb-20 border-b border-border bg-muted/30">
-        <div className="container-custom max-w-[900px]">
+        <div className="container-custom max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
           <p className="text-[10px] sm:text-[11px] tracking-[0.14em] uppercase text-muted-foreground mb-3 sm:mb-4">
             Stratified Advisory · Board Advisory
           </p>
@@ -28,7 +28,7 @@ const HomePageNarrative = () => {
             <br />
             <em className="not-italic font-normal text-muted-foreground">Few have built the controls to manage it.</em>
           </h1>
-          <p className="text-[0.925rem] sm:text-[1.05rem] md:text-[1.1rem] leading-[1.75] text-muted-foreground max-w-[620px] font-normal">
+          <p className="text-[0.925rem] sm:text-[1.05rem] md:text-[1.1rem] 2xl:text-[1.25rem] leading-[1.75] text-muted-foreground max-w-2xl xl:max-w-3xl 2xl:max-w-4xl font-normal">
             We work with boards and PE firms when the AI, cyber, or transformation decision in front of
             them requires governance architecture, not a strategy presentation. We establish who is
             accountable, what the decision criteria are, and how the board stays in control as the
@@ -43,7 +43,7 @@ const HomePageNarrative = () => {
         </div>
       </section>
 
-      <div className="container-custom max-w-[900px]">
+      <div className="container-custom max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
         <hr className="border-0 border-t border-border/60 my-6 sm:my-8 md:my-12" />
 
         {/* ═══ STATS ═══ */}
@@ -232,7 +232,7 @@ const HomePageNarrative = () => {
               <p className="text-[0.75rem] sm:text-[0.8rem] text-muted-foreground mb-3">
                 {formatDate(featuredPost.publishDate)} · {featuredPost.readTime}
               </p>
-              <p className="text-[0.825rem] sm:text-[0.875rem] text-muted-foreground leading-[1.65] max-w-[620px] mb-4">
+              <p className="text-[0.825rem] sm:text-[0.875rem] 2xl:text-[1rem] text-muted-foreground leading-[1.65] max-w-2xl 2xl:max-w-3xl mb-4">
                 {featuredPost.description}
               </p>
               <div className="flex flex-wrap gap-2">

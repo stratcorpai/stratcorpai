@@ -7,7 +7,7 @@ import AnimatedSection from './ui/AnimatedSection';
 const Team = () => {
   return (
     <section id="team" className="section-padding">
-      <div className="container-custom max-w-[900px]">
+      <div className="container-custom max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
         <AnimatedSection className="max-w-3xl mb-16">
           <p className="text-eyebrow mb-4">Leadership</p>
           <h2 className="font-heading text-stratified mb-6">{siteContent.team.title}</h2>

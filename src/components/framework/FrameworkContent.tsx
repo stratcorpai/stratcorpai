@@ -141,7 +141,7 @@ const roadmap = [
 
 const FrameworkContent = () => {
   return (
-    <article className="max-w-[860px] mx-auto px-0 sm:px-6 pb-12 sm:pb-16 md:pb-24">
+    <article className="max-w-[860px] xl:max-w-5xl 2xl:max-w-7xl mx-auto px-0 sm:px-6 pb-12 sm:pb-16 md:pb-24">
       <p className="text-[10px] sm:text-[11px] tracking-[0.14em] uppercase text-muted-foreground mb-3 sm:mb-4">
         Stratified Advisory · A. Bulisache &amp; S. Chaturvedi
       </p>
