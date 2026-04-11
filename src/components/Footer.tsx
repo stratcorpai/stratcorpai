@@ -91,9 +91,6 @@ const Footer = () => {
                 <Link to={siteContent.frameworkNavLink.path} className="text-muted-foreground hover:text-foreground transition-colors">
                   {siteContent.frameworkNavLink.label}
                 </Link>
-                <Link to={siteContent.speakingNavLink.path} className="text-muted-foreground hover:text-foreground transition-colors">
-                  {siteContent.speakingNavLink.label}
-                </Link>
               </nav>
             </div>
 

@@ -31,7 +31,7 @@ export const teamMembers = [
       "International market expansion and regulatory compliance frameworks"
     ],
     linkedinUrl: "https://linkedin.com/in/andreeabulisache",
-    emailUrl: "mailto:andreea@stratifiedadvisory.com"
+    emailUrl: "mailto:partners@stratifiedadvisory.com"
   },
   {
     role: "PARTNER",

@@ -56,7 +56,7 @@ We publish **Governing Intelligence**, a monthly brief on what boards should be 
 ---
 
 **Stratified Advisory**
-andrea@stratifiedadvisory.com
+partners@stratifiedadvisory.com
 US · EMEA · Asia
 
 stratcorp.ai

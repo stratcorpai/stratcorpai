@@ -38,7 +38,6 @@ const Navbar = () => {
   const pageLinks = [
     { label: siteContent.warRoomNavLink.label, path: siteContent.warRoomNavLink.path },
     { label: siteContent.frameworkNavLink.label, path: siteContent.frameworkNavLink.path },
-    { label: siteContent.speakingNavLink.label, path: siteContent.speakingNavLink.path },
   ];
 
   const isActive = (path: string) => location.pathname === path;

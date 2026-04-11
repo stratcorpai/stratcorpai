@@ -309,7 +309,7 @@ export const siteContent = {
     ],
   },
   contact: {
-    email: "andreea@stratifiedadvisory.com",
+    email: "partners@stratifiedadvisory.com",
     regions: "US | EMEA | ASIA",
     ctaConfig: {
       "board-advisory": {
