@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import { siteContent } from '@/content/siteContent';
 
 interface ContactCTAProps {
-  variant?: 'board-advisory' | 'consulting' | 'partnership';
+  variant?: 'board-advisory' | 'consulting' | 'partnership' | 'general';
   sourceContext?: string;
   className?: string;
   size?: 'sm' | 'default' | 'lg';
@@ -26,6 +26,7 @@ const ContactCTA = ({
     'board-advisory': siteContent.contact.ctaConfig['board-advisory'],
     consulting: siteContent.contact.ctaConfig.consulting,
     partnership: siteContent.contact.ctaConfig.partnership,
+    general: siteContent.contact.ctaConfig.general,
   };
 
   const config = ctaConfig[variant];

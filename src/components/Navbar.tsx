@@ -17,6 +17,11 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
   const handleLinkClick = (sectionId: string) => (e: React.MouseEvent) => {
     if (!isHome) return;
     e.preventDefault();
@@ -24,20 +29,98 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
-  const linkClass = "text-xs font-sans uppercase tracking-[0.2em] text-foreground/80 hover:text-stratified transition-colors";
+  const linkBase =
+    "font-sans uppercase tracking-[0.15em] text-foreground/70 hover:text-stratified transition-colors duration-200";
+  const linkDesktop = `${linkBase} text-[0.65rem] xl:text-[0.7rem]`;
+  const linkMobile = `${linkBase} text-[0.8rem] py-1`;
+
+  // Page-level route links — always visible
+  const pageLinks = [
+    { label: siteContent.warRoomNavLink.label, path: siteContent.warRoomNavLink.path },
+    { label: siteContent.frameworkNavLink.label, path: siteContent.frameworkNavLink.path },
+    { label: siteContent.speakingNavLink.label, path: siteContent.speakingNavLink.path },
+  ];
+
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <nav
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-200 ${
-        isScrolled ? "bg-background border-b border-border py-4" : "bg-transparent py-5"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-background/95 backdrop-blur-md border-b border-border/80 py-2"
+          : "bg-background/80 backdrop-blur-sm py-3 sm:py-4"
       }`}
     >
       <div className="container-custom flex items-center justify-between">
-        <Link to="/" className="flex items-center">
-          <img src={siteContent.brand.logoPath} alt={siteContent.brand.logoAlt} className="h-20 md:h-24 w-auto" />
+        {/* Logo */}
+        <Link to="/" className="flex items-center shrink-0" onClick={() => setIsOpen(false)}>
+          <img
+            src={siteContent.brand.logoPath}
+            alt={siteContent.brand.logoAlt}
+            className="h-8 sm:h-9 md:h-10 w-auto"
+            style={{ objectFit: 'contain', objectPosition: 'left center' }}
+          />
         </Link>
 
-        <div className="hidden md:flex items-center gap-5 lg:gap-8">
+        {/* Desktop nav */}
+        <div className="hidden lg:flex items-center gap-3 xl:gap-5">
+          {isHome &&
+            siteContent.navLinks.map((link) => (
+              <a
+                key={link.sectionId}
+                href={`#${link.sectionId}`}
+                onClick={handleLinkClick(link.sectionId)}
+                className={linkDesktop}
+              >
+                {link.label}
+              </a>
+            ))}
+
+          {!isHome && (
+            <Link to="/" className={linkDesktop}>
+              Home
+            </Link>
+          )}
+
+          {pageLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`${linkDesktop} ${isActive(link.path) ? "text-stratified font-semibold" : ""}`}
+            >
+              {link.label}
+            </Link>
+          ))}
+
+          <div className="ml-1">
+            <ContactCTA
+              variant="board-advisory"
+              size="sm"
+              customText="Contact"
+              sourceContext="Navbar"
+            />
+          </div>
+        </div>
+
+        {/* Mobile toggle */}
+        <button
+          type="button"
+          className="lg:hidden text-foreground p-1.5 -mr-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-stratified"
+          onClick={() => setIsOpen((prev) => !prev)}
+          aria-label="Toggle navigation"
+          aria-expanded={isOpen}
+        >
+          {isOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </div>
+
+      {/* Mobile drawer */}
+      <div
+        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="container-custom py-5 flex flex-col gap-3 border-t border-border/60">
           {isHome ? (
             <>
               {siteContent.navLinks.map((link) => (
@@ -45,65 +128,41 @@ const Navbar = () => {
                   key={link.sectionId}
                   href={`#${link.sectionId}`}
                   onClick={handleLinkClick(link.sectionId)}
-                  className={linkClass}
+                  className={linkMobile}
                 >
                   {link.label}
                 </a>
               ))}
-              <Link to={siteContent.frameworkNavLink.path} className={linkClass}>
-                {siteContent.frameworkNavLink.label}
-              </Link>
             </>
           ) : (
-            <Link to="/" className={linkClass}>
+            <Link to="/" className={linkMobile} onClick={() => setIsOpen(false)}>
               Home
             </Link>
           )}
-          <ContactCTA variant="board-advisory" size="sm" customText="Contact" sourceContext="Navbar" className="ml-2" />
-        </div>
 
-        <button
-          type="button"
-          className="md:hidden text-foreground p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-stratified focus-visible:ring-offset-2"
-          onClick={() => setIsOpen((prev) => !prev)}
-          aria-label="Toggle navigation"
-        >
-          {isOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </div>
+          <hr className="border-border/40 my-1" />
 
-      {isOpen && (
-        <div className="md:hidden border-t border-border bg-background">
-          <div className="container-custom py-6 flex flex-col gap-4">
-            {isHome ? (
-              <>
-                {siteContent.navLinks.map((link) => (
-                  <a
-                    key={link.sectionId}
-                    href={`#${link.sectionId}`}
-                    onClick={handleLinkClick(link.sectionId)}
-                    className={linkClass + " text-sm"}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-                <Link
-                  to={siteContent.frameworkNavLink.path}
-                  className={linkClass + " text-sm"}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {siteContent.frameworkNavLink.label}
-                </Link>
-              </>
-            ) : (
-              <Link to="/" className={linkClass + " text-sm"} onClick={() => setIsOpen(false)}>
-                Home
-              </Link>
-            )}
-            <ContactCTA variant="board-advisory" customText="Contact" sourceContext="Navbar Mobile" className="w-fit mt-2" />
+          {pageLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`${linkMobile} ${isActive(link.path) ? "text-stratified font-semibold" : ""}`}
+              onClick={() => setIsOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+
+          <div className="mt-2">
+            <ContactCTA
+              variant="board-advisory"
+              customText="Contact"
+              sourceContext="Navbar Mobile"
+              className="w-full justify-center"
+            />
           </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 };

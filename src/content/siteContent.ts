@@ -187,6 +187,8 @@ export const siteContent = {
     },
   },
   frameworkNavLink: { label: "Framework", path: "/framework" },
+  warRoomNavLink: { label: "War Room", path: "/war-room" },
+  speakingNavLink: { label: "Speaking", path: "/speaking" },
   governancePosts: [
     {
       id: 7,
@@ -263,7 +265,7 @@ export const siteContent = {
   team: {
     title: "Who we are",
     description:
-      "Board governance, enterprise technology, and investor-side experience — built in environments where the cost of getting it wrong is high.",
+      "Board governance, enterprise technology, and investor-side experience built where the cost of getting it wrong is high.",
     expertiseTitle: "Expertise",
     focusTitle: "Where we operate",
     focusDescription:

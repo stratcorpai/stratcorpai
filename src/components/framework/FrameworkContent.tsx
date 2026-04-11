@@ -141,18 +141,18 @@ const roadmap = [
 
 const FrameworkContent = () => {
   return (
-    <article className="max-w-[860px] mx-auto px-6 pb-16 md:pb-24">
-      <p className="text-[11px] tracking-[0.14em] uppercase text-muted-foreground mb-4">
+    <article className="max-w-[860px] mx-auto px-0 sm:px-6 pb-12 sm:pb-16 md:pb-24">
+      <p className="text-[10px] sm:text-[11px] tracking-[0.14em] uppercase text-muted-foreground mb-3 sm:mb-4">
         Stratified Advisory · A. Bulisache &amp; S. Chaturvedi
       </p>
 
-      <h1 className="font-heading text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.15] font-normal mb-6 text-foreground">
+      <h1 className="font-heading text-[clamp(1.6rem,5vw,3.2rem)] leading-[1.12] font-normal mb-5 sm:mb-6 text-foreground">
         BRIDGE-AI™
         <br />
         <em className="not-italic text-muted-foreground">AI governance built for the board</em>
       </h1>
 
-      <p className="text-[1.06rem] leading-[1.75] text-muted-foreground max-w-[620px] mb-12 font-normal">
+      <p className="text-[0.925rem] sm:text-[1.06rem] leading-[1.75] text-muted-foreground max-w-[620px] mb-8 sm:mb-12 font-normal">
         Most boards have approved AI investment. Few have built the governance architecture to
         manage what comes next. BRIDGE-AI is the operating framework that closes that gap: six
         integrated pillars that give boards mandate, controls, and a decision model that holds at
@@ -161,28 +161,28 @@ const FrameworkContent = () => {
 
       <hr className="border-0 border-t border-border/60 my-8 md:my-12" />
 
-      <h2 className="font-heading text-[1.6rem] font-normal mb-4 text-foreground">
+      <h2 className="font-heading text-[1.25rem] sm:text-[1.6rem] font-normal mb-3 sm:mb-4 text-foreground">
         The problem is not technology. It is accountability.
       </h2>
-      <p className="text-[0.975rem] leading-[1.75] text-muted-foreground font-normal">
+      <p className="text-[0.875rem] sm:text-[0.975rem] leading-[1.75] text-muted-foreground font-normal">
         AI programs fail at the board level for a consistent set of reasons: accountability that
         sits nowhere, risk that compounds before it escalates, and capital committed before
         decision quality is established. The result is not delayed innovation; it is unmanaged
         exposure with no decision trace.
       </p>
-      <p className="text-[0.975rem] leading-[1.75] text-muted-foreground font-normal mt-4">
+      <p className="text-[0.875rem] sm:text-[0.975rem] leading-[1.75] text-muted-foreground font-normal mt-4">
         Four forces have made this a board-level priority, not a management issue to resolve in
         time.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 my-6">
         {forces.map((force) => (
           <div key={force.label} className="border border-border/70 rounded-lg p-4 bg-background">
-            <p className="text-xs tracking-[0.1em] uppercase text-muted-foreground mb-2">
+            <p className="text-[0.65rem] sm:text-xs tracking-[0.1em] uppercase text-muted-foreground mb-2">
               {force.label}
             </p>
-            <p className="text-[0.95rem] font-medium text-foreground">{force.title}</p>
-            <p className="text-[0.825rem] text-muted-foreground mt-1 leading-[1.5]">
+            <p className="text-[0.875rem] sm:text-[0.95rem] font-medium text-foreground">{force.title}</p>
+            <p className="text-[0.78rem] sm:text-[0.825rem] text-muted-foreground mt-1 leading-[1.5]">
               {force.description}
             </p>
           </div>
@@ -191,15 +191,15 @@ const FrameworkContent = () => {
 
       <hr className="border-0 border-t border-border/60 my-8 md:my-12" />
 
-      <h2 className="font-heading text-[1.6rem] font-normal mb-4 text-foreground">
+      <h2 className="font-heading text-[1.25rem] sm:text-[1.6rem] font-normal mb-3 sm:mb-4 text-foreground">
         One decision model. Every major commitment.
       </h2>
-      <p className="text-[0.975rem] leading-[1.75] text-muted-foreground font-normal">
+      <p className="text-[0.875rem] sm:text-[0.975rem] leading-[1.75] text-muted-foreground font-normal">
         Before any significant AI investment, BRIDGE-AI requires three tests to pass, not
         sequentially, simultaneously. Each test closes a different failure mode.
       </p>
 
-      <div className="grid md:grid-cols-3 gap-px bg-border/70 rounded-lg overflow-hidden my-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-border/70 rounded-lg overflow-hidden my-6">
         {tests.map((test) => (
           <div key={test.number} className="bg-background p-5">
             <p className="font-heading text-[1.5rem] text-muted-foreground mb-2">{test.number}</p>
@@ -211,17 +211,17 @@ const FrameworkContent = () => {
         ))}
       </div>
 
-      <p className="text-[0.975rem] leading-[1.75] text-muted-foreground font-normal">
+      <p className="text-[0.875rem] sm:text-[0.975rem] leading-[1.75] text-muted-foreground font-normal">
         Capital intensity, execution feasibility, and compliance are the recurring failure points.
         This scorecard makes them explicit before commitment, not visible after failure.
       </p>
 
       <hr className="border-0 border-t border-border/60 my-8 md:my-12" />
 
-      <h2 className="font-heading text-[1.6rem] font-normal mb-4 text-foreground">
+      <h2 className="font-heading text-[1.25rem] sm:text-[1.6rem] font-normal mb-3 sm:mb-4 text-foreground">
         The framework: six pillars, one operating model
       </h2>
-      <p className="text-[0.975rem] leading-[1.75] text-muted-foreground font-normal">
+      <p className="text-[0.875rem] sm:text-[0.975rem] leading-[1.75] text-muted-foreground font-normal">
         BRIDGE-AI is not an acronym layered over existing policy. It is a governance architecture.
         Each pillar addresses a distinct control gap, and together they form one model the board
         can monitor, audit, and improve.
@@ -233,17 +233,17 @@ const FrameworkContent = () => {
         {pillars.map((pillar, index) => (
           <div
             key={pillar.letter}
-            className={`grid grid-cols-[2.5rem_1fr] gap-4 items-start py-6 border-t border-border/60 ${
+            className={`grid grid-cols-[2rem_1fr] sm:grid-cols-[2.5rem_1fr] gap-3 sm:gap-4 items-start py-5 sm:py-6 border-t border-border/60 ${
               index === pillars.length - 1 ? 'border-b border-border/60' : ''
             }`}
           >
-            <p className="font-heading text-[2rem] leading-none text-stratified">{pillar.letter}</p>
+            <p className="font-heading text-[1.5rem] sm:text-[2rem] leading-none text-stratified">{pillar.letter}</p>
             <div>
-              <p className="text-[0.875rem] tracking-[0.06em] uppercase font-medium text-foreground mb-2">
+              <p className="text-[0.78rem] sm:text-[0.875rem] tracking-[0.06em] uppercase font-medium text-foreground mb-1.5 sm:mb-2">
                 {pillar.title}
               </p>
-              <p className="text-[0.925rem] leading-[1.65] text-muted-foreground">{pillar.claim}</p>
-              <p className="inline-block mt-3 px-3 py-1 text-[0.8rem] font-medium text-foreground bg-muted rounded">
+              <p className="text-[0.825rem] sm:text-[0.925rem] leading-[1.65] text-muted-foreground">{pillar.claim}</p>
+              <p className="inline-block mt-2 sm:mt-3 px-2.5 sm:px-3 py-1 text-[0.72rem] sm:text-[0.8rem] font-medium text-foreground bg-muted rounded">
                 {pillar.implication}
               </p>
             </div>
@@ -253,10 +253,10 @@ const FrameworkContent = () => {
 
       <hr className="border-0 border-t border-border/60 my-8 md:my-12" />
 
-      <h2 className="font-heading text-[1.6rem] font-normal mb-4 text-foreground">
+      <h2 className="font-heading text-[1.25rem] sm:text-[1.6rem] font-normal mb-3 sm:mb-4 text-foreground">
         Committee ownership across the six pillars
       </h2>
-      <p className="text-[0.975rem] leading-[1.75] text-muted-foreground font-normal">
+      <p className="text-[0.875rem] sm:text-[0.975rem] leading-[1.75] text-muted-foreground font-normal">
         BRIDGE-AI maps to existing board committee structures. No new committee is required. The
         framework clarifies ownership and handoffs.
       </p>
@@ -274,10 +274,10 @@ const FrameworkContent = () => {
 
       <hr className="border-0 border-t border-border/60 my-8 md:my-12" />
 
-      <h2 className="font-heading text-[1.6rem] font-normal mb-4 text-foreground">
+      <h2 className="font-heading text-[1.25rem] sm:text-[1.6rem] font-normal mb-3 sm:mb-4 text-foreground">
         A 12-month path from baseline to leadership
       </h2>
-      <p className="text-[0.975rem] leading-[1.75] text-muted-foreground font-normal">
+      <p className="text-[0.875rem] sm:text-[0.975rem] leading-[1.75] text-muted-foreground font-normal">
         BRIDGE-AI is implemented in three phases. Each phase builds on the last.
       </p>
 
@@ -302,16 +302,16 @@ const FrameworkContent = () => {
         ))}
       </div>
 
-      <div className="mt-12 p-8 md:p-10 border border-border/70 rounded-lg bg-muted/30">
-        <h2 className="font-heading text-[1.4rem] font-normal mb-3 text-foreground">
+      <div className="mt-8 sm:mt-12 p-5 sm:p-8 md:p-10 border border-border/70 rounded-lg bg-muted/30">
+        <h2 className="font-heading text-[1.15rem] sm:text-[1.4rem] font-normal mb-2 sm:mb-3 text-foreground">
           Governed AI moves faster.
         </h2>
-        <p className="text-[0.975rem] leading-[1.75] text-muted-foreground max-w-[580px]">
+        <p className="text-[0.875rem] sm:text-[0.975rem] leading-[1.75] text-muted-foreground max-w-[580px]">
           When trade-offs are explicit and accountability is clear, AI programs produce less
           rework, less conflict, and less drift. BRIDGE-AI is the operating discipline that sets
           decision quality before capital is committed, not after consequences arrive.
         </p>
-        <p className="mt-5 text-[0.875rem] text-foreground font-medium max-w-[620px]">
+        <p className="mt-4 sm:mt-5 text-[0.825rem] sm:text-[0.875rem] text-foreground font-medium max-w-[620px]">
           The board&apos;s job is not to approve AI investment. It is to govern the conditions under
           which that investment creates durable value.
         </p>

@@ -25,7 +25,7 @@ const ExpertiseGrid = ({ items }: ExpertiseGridProps) => {
   };
 
   return (
-    <div className="grid md:grid-cols-2 gap-x-16 gap-y-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 sm:gap-x-16 gap-y-6 sm:gap-y-8">
       {items.map((item, index) => {
         const isExpanded = expandedItems.has(index);
         const words = item.description.split(' ');

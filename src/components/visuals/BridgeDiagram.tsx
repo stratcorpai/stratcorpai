@@ -34,7 +34,7 @@ const BridgeDiagram = () => {
   return (
     <svg
       viewBox="20 25 460 350"
-      className="w-full max-w-[300px] sm:max-w-[360px] mx-auto block"
+      className="w-full max-w-[260px] sm:max-w-[320px] md:max-w-[360px] mx-auto block my-4 sm:my-6"
       role="img"
       aria-label="BRIDGE-AI framework: six integrated governance pillars"
     >

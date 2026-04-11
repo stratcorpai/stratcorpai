@@ -4,10 +4,10 @@ import FrameworkContent from '@/components/framework/FrameworkContent';
 
 const Framework = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      <div className="pt-24 pb-6 md:pt-28 md:pb-10">
+      <div className="pt-16 pb-4 sm:pt-20 sm:pb-6 md:pt-24 md:pb-10 flex-1">
         <FrameworkContent />
       </div>
 

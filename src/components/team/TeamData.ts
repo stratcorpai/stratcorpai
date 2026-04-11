@@ -3,7 +3,7 @@ export const teamMembers = [
   {
     role: "CEO & Founder",
     name: "Andreea Bulisache",
-    title: "Global Tech Executive and Innovation Leader | AI, Cybersecurity, and Digital Transformation",
+    title: "Board Director & AI Governance Strategist | Former Microsoft NTO | EU AI Act Contributor",
     location: "US & EMEA",
     image: "/assets/team-andreea.png",
     description: [
@@ -67,7 +67,7 @@ export const teamMembers = [
   {
     role: "PARTNER",
     name: "Siddhartha Chaturvedi",
-    title: "DeepTech Investor | Post-Agentic Web for Scientific Discovery",
+    title: "Partner | AI Systems & Governance Architecture | Former Microsoft Director of Product",
     location: "US & Asia",
     image: "/assets/team-siddhartha.png",
     description: [

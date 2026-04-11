@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/hooks/use-toast';
 import { Mail, Shield, MapPin } from 'lucide-react';
 import { siteContent } from '@/content/siteContent';
+import NewsletterSignup from './NewsletterSignup';
 
 type InquiryType = 'board-advisory' | 'consulting' | 'partnership' | 'general';
 
@@ -35,6 +36,7 @@ const ContactForm = ({
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const { toast } = useToast();
 
   const inquiryTypes: Record<InquiryType, string> = {
@@ -72,14 +74,7 @@ const ContactForm = ({
         description: "We'll respond within 24 hours.",
       });
 
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        inquiry_type: defaultInquiryType,
-        message: ''
-      });
+      setIsSuccess(true);
     } catch (error) {
       console.error('Error submitting form:', error);
       toast({
@@ -96,10 +91,24 @@ const ContactForm = ({
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  if (isSuccess) {
+    return (
+      <div className="max-w-2xl mx-auto bg-background p-5 sm:p-8 md:p-12 text-center">
+        <h3 className="font-heading text-2xl text-stratified mb-3">Request Received</h3>
+        <p className="text-body-lg text-muted-foreground mb-10">
+          We have received your context and will respond within 24 hours.
+        </p>
+        <div className="text-left bg-muted/10">
+          <NewsletterSignup />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-2xl mx-auto bg-background">
-      <div className="p-8 md:p-10">
-        <div className="mb-10">
+      <div className="p-5 sm:p-8 md:p-10">
+        <div className="mb-6 sm:mb-10">
           <h3 className="font-heading text-2xl text-stratified mb-2">{title}</h3>
           <p className="text-body-lg text-muted-foreground">{description}</p>
           <div className="mt-4 flex flex-wrap gap-2">
@@ -117,7 +126,7 @@ const ContactForm = ({
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-sm font-medium text-foreground">Name *</Label>
               <Input

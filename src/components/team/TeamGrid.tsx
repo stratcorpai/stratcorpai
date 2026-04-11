@@ -8,7 +8,7 @@ const TeamGrid = () => {
 
   return (
     <div className="relative">
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {teamMembers.map((member, index) => (
           <TeamMemberCard
             key={index}
