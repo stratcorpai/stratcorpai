@@ -14,15 +14,34 @@ export const NewsletterSignup = ({ className = '' }: { className?: string }) => 
     if (!email) return;
 
     setIsSubmitting(true);
-    // In a real implementation this would post to a newsletter service / Netlify function
-    setTimeout(() => {
+    
+    const encode = (data: Record<string, string>) => {
+      return Object.keys(data)
+        .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+        .join('&');
+    };
+
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode({ 'form-name': 'newsletter', email }),
+      });
+      
       toast({
         title: "Subscribed",
         description: "You're now on the list for Governing Intelligence.",
       });
       setEmail('');
+    } catch (error) {
+      toast({
+        title: "Subscription failed",
+        description: "Please try again later or email us directly.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 800);
+    }
   };
 
   return (
