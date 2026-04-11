@@ -12,12 +12,15 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+import ScrollToTop from "@/components/ScrollToTop";
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
       <TooltipProvider>
         <Toaster />
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/framework" element={<Framework />} />

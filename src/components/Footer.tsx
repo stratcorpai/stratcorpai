@@ -20,7 +20,7 @@ const engagementPaths = [
   },
   {
     tag: 'For institutions',
-    title: 'Build governance capability at scale',
+    title: 'Build and embed institutional governance capability at scale',
     cta: 'Explore partnership',
     variant: 'partnership' as const,
   },
