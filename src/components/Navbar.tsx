@@ -1,183 +1,166 @@
-
-import { useState, useEffect } from 'react';
-import { Menu, X, LineChart, Mail } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
-import ContactCTA from './ContactCTA';
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import ContactCTA from "@/components/ContactCTA";
+import { siteContent } from "@/content/siteContent";
+import { scrollToSection } from "@/utils/scrollToSection";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const isHomePage = location.pathname === '/';
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    const onScroll = () => setIsScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleNavClick = (sectionId: string) => (e: React.MouseEvent) => {
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
+  const handleLinkClick = (sectionId: string) => (e: React.MouseEvent) => {
+    if (!isHome) return;
     e.preventDefault();
-    const element = document.getElementById(sectionId);
-    
-    if (element) {
-      // Get the navbar height for offset
-      const navbarHeight = document.querySelector('nav')?.offsetHeight || 0;
-      
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-      
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-      
-      // Close mobile menu if open
-      if (isOpen) setIsOpen(false);
-    }
+    scrollToSection(sectionId);
+    setIsOpen(false);
   };
 
+  const linkBase =
+    "font-sans uppercase tracking-[0.15em] text-foreground/70 hover:text-stratified transition-colors duration-200";
+  const linkDesktop = `${linkBase} text-[0.65rem] xl:text-[0.7rem] 2xl:text-[0.75rem]`;
+  const linkMobile = `${linkBase} text-[0.8rem] py-1`;
+
+  // Page-level route links — always visible
+  const pageLinks = [
+    { label: siteContent.warRoomNavLink.label, path: siteContent.warRoomNavLink.path },
+    { label: siteContent.frameworkNavLink.label, path: siteContent.frameworkNavLink.path },
+  ];
+
+  const isActive = (path: string) => location.pathname === path;
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-background/95 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'
-    }`}>
-      <div className="container-custom flex justify-between items-center">
+    <nav
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-background/95 backdrop-blur-md border-b border-border/80 py-2"
+          : "bg-background/80 backdrop-blur-sm py-3 sm:py-4"
+      }`}
+    >
+      <div className="container-custom flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center">
-          <img 
-            src="/lovable-uploads/bbbadf15-0ecd-4cdd-88b6-7bb56e21837f.png" 
-            alt="Stratified Advisory Logo" 
-            className="h-16 md:h-20" 
+        <Link to="/" className="flex items-center shrink-0" onClick={() => setIsOpen(false)}>
+          <img
+            src={siteContent.brand.logoPath}
+            alt={siteContent.brand.logoAlt}
+            className="h-10 sm:h-12 md:h-14 lg:h-16 2xl:h-20 w-auto"
+            style={{ objectFit: 'contain', objectPosition: 'left center', maxWidth: '100%' }}
           />
         </Link>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-8">
-          {isHomePage ? (
-            <>
-              <a 
-                href="#investment-thesis" 
-                className="text-foreground hover:text-stratified font-medium transition-colors relative group"
-                onClick={handleNavClick('investment-thesis')}
+        {/* Desktop nav */}
+        <div className="hidden lg:flex items-center gap-3 xl:gap-5 2xl:gap-7">
+          {isHome &&
+            siteContent.navLinks.map((link) => (
+              <a
+                key={link.sectionId}
+                href={`#${link.sectionId}`}
+                onClick={handleLinkClick(link.sectionId)}
+                className={linkDesktop}
               >
-                Investment Thesis
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
+                {link.label}
               </a>
-              <a 
-                href="#ai-governance" 
-                className="text-foreground hover:text-stratified font-medium transition-colors relative group"
-                onClick={handleNavClick('ai-governance')}
-              >
-                AI Governance
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
-              </a>
-              <a 
-                href="#team" 
-                className="text-foreground hover:text-stratified font-medium transition-colors relative group"
-                onClick={handleNavClick('team')}
-              >
-                Our Team
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
-              </a>
-              <a 
-                href="#board-service" 
-                className="text-foreground hover:text-stratified font-medium transition-colors relative group"
-                onClick={handleNavClick('board-service')}
-              >
-                Board-as-a-Service
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
-              </a>
-            </>
-          ) : (
-            <Link 
-              to="/" 
-              className="text-foreground hover:text-stratified font-medium transition-colors relative group"
-            >
+            ))}
+
+          {!isHome && (
+            <Link to="/" className={linkDesktop}>
               Home
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-stratified group-hover:w-full transition-all duration-300"></span>
             </Link>
           )}
-          
-          <ContactCTA 
-            variant="consulting" 
-            size="default" 
-            customText="Contact Us"
-            customIcon={Mail}
-            className="bg-stratified hover:bg-stratified-dark text-white shadow-md hover:shadow-lg transition-all"
-          />
-        </div>
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center">
-          <button 
-            className="text-foreground"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+          {pageLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`${linkDesktop} ${isActive(link.path) ? "text-stratified font-semibold" : ""}`}
+            >
+              {link.label}
+            </Link>
+          ))}
 
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-sm shadow-lg mt-0 py-5 px-6 md:hidden flex flex-col space-y-4 animate-fade-in">
-            {isHomePage ? (
-              <>
-                <a 
-                  href="#investment-thesis" 
-                  className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
-                  onClick={handleNavClick('investment-thesis')}
-                >
-                  Investment Thesis
-                </a>
-                <a 
-                  href="#ai-governance" 
-                  className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
-                  onClick={handleNavClick('ai-governance')}
-                >
-                  AI Governance
-                </a>
-                <a 
-                  href="#team" 
-                  className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
-                  onClick={handleNavClick('team')}
-                >
-                  Our Team
-                </a>
-                <a 
-                  href="#board-service" 
-                  className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
-                  onClick={handleNavClick('board-service')}
-                >
-                  Board-as-a-Service
-                </a>
-              </>
-            ) : (
-              <Link 
-                to="/" 
-                className="text-foreground hover:text-stratified font-medium transition-colors border-l-2 border-transparent hover:border-stratified pl-2"
-              >
-                Home
-              </Link>
-            )}
-            
-            <ContactCTA 
-              variant="consulting" 
-              size="default" 
-              customText="Contact Us"
-              customIcon={Mail}
-              className="bg-stratified hover:bg-stratified-dark text-white w-full shadow-md"
+          <div className="ml-1">
+            <ContactCTA
+              variant="board-advisory"
+              size="sm"
+              customText="Contact"
+              sourceContext="Navbar"
             />
           </div>
-        )}
+        </div>
+
+        {/* Mobile toggle */}
+        <button
+          type="button"
+          className="lg:hidden text-foreground p-1.5 -mr-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-stratified"
+          onClick={() => setIsOpen((prev) => !prev)}
+          aria-label="Toggle navigation"
+          aria-expanded={isOpen}
+        >
+          {isOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </div>
+
+      {/* Mobile drawer */}
+      <div
+        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="container-custom py-5 flex flex-col gap-3 border-t border-border/60">
+          {isHome ? (
+            <>
+              {siteContent.navLinks.map((link) => (
+                <a
+                  key={link.sectionId}
+                  href={`#${link.sectionId}`}
+                  onClick={handleLinkClick(link.sectionId)}
+                  className={linkMobile}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </>
+          ) : (
+            <Link to="/" className={linkMobile} onClick={() => setIsOpen(false)}>
+              Home
+            </Link>
+          )}
+
+          <hr className="border-border/40 my-1" />
+
+          {pageLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`${linkMobile} ${isActive(link.path) ? "text-stratified font-semibold" : ""}`}
+              onClick={() => setIsOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+
+          <div className="mt-2">
+            <ContactCTA
+              variant="board-advisory"
+              customText="Contact"
+              sourceContext="Navbar Mobile"
+              className="w-full justify-center"
+            />
+          </div>
+        </div>
       </div>
     </nav>
   );
