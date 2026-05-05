@@ -4,7 +4,6 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useToast } from '@/hooks/use-toast';
 import { Mail, Shield, MapPin } from 'lucide-react';
 import { siteContent } from '@/content/siteContent';
 import NewsletterSignup from './NewsletterSignup';
@@ -20,77 +19,80 @@ interface ContactFormProps {
   intentLabel?: string;
 }
 
-const ContactForm = ({ 
-  defaultInquiryType = 'general', 
-  title = "Get in touch",
+/** Encode an object as application/x-www-form-urlencoded for Netlify Forms */
+function encode(data: Record<string, string>) {
+  return Object.entries(data)
+    .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+    .join('&');
+}
+
+const ContactForm = ({
+  defaultInquiryType = 'general',
+  title = 'Get in touch',
   description = "Share your context. We'll respond within 24 hours.",
-  sourceContext = "Unknown",
+  sourceContext = 'Unknown',
   audienceTag,
-  intentLabel
+  intentLabel,
 }: ContactFormProps) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     company: '',
     inquiry_type: defaultInquiryType,
-    message: ''
+    message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const { toast } = useToast();
+  const [hasFailed, setHasFailed] = useState(false);
 
   const inquiryTypes: Record<InquiryType, string> = {
     'board-advisory': siteContent.contact.ctaConfig['board-advisory'].title,
-    'consulting': siteContent.contact.ctaConfig.consulting.title,
-    'partnership': siteContent.contact.ctaConfig.partnership.title,
-    'general': siteContent.contact.ctaConfig.general.title
+    consulting: siteContent.contact.ctaConfig.consulting.title,
+    partnership: siteContent.contact.ctaConfig.partnership.title,
+    general: siteContent.contact.ctaConfig.general.title,
   };
+
+  const resolvedAudienceTag =
+    audienceTag ?? siteContent.contact.ctaConfig[formData.inquiry_type].audienceTag;
+  const resolvedIntentLabel =
+    intentLabel ?? siteContent.contact.ctaConfig[formData.inquiry_type].intentLabel;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setHasFailed(false);
 
     try {
-      const response = await fetch('/.netlify/functions/contact-intake', {
+      const response = await fetch('/', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode({
+          'form-name': 'contact-intake',
           ...formData,
+          audienceTag: resolvedAudienceTag,
+          intentLabel: resolvedIntentLabel,
           sourceContext,
-          audienceTag: audienceTag ?? siteContent.contact.ctaConfig[formData.inquiry_type].audienceTag,
-          intentLabel: intentLabel ?? siteContent.contact.ctaConfig[formData.inquiry_type].intentLabel
         }),
       });
 
-      const payload = await response.json().catch(() => null);
       if (!response.ok) {
-        throw new Error(payload?.error ?? 'Request failed');
+        throw new Error(`Netlify Forms returned ${response.status}`);
       }
-
-      toast({
-        title: "Sent",
-        description: "We'll respond within 24 hours.",
-      });
 
       setIsSuccess(true);
     } catch (error) {
-      console.error('Error submitting form:', error);
-      toast({
-        title: "Send failed",
-        description: "Try again or email us directly.",
-        variant: "destructive",
-      });
+      console.error('Contact form submission failed:', error);
+      setHasFailed(true);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
+  // ── Success state ──────────────────────────────────────────────────────────
   if (isSuccess) {
     return (
       <div className="max-w-2xl mx-auto bg-background p-5 sm:p-8 md:p-12 text-center">
@@ -105,6 +107,43 @@ const ContactForm = ({
     );
   }
 
+  // ── Failure fallback — show mailto link prominently ────────────────────────
+  if (hasFailed) {
+    const subject = encodeURIComponent(
+      `${inquiryTypes[formData.inquiry_type as InquiryType]} — ${formData.name || 'Inquiry'}`
+    );
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nCompany: ${formData.company || 'N/A'}\n\n${formData.message}`
+    );
+    const mailtoHref = `mailto:${siteContent.contact.email}?subject=${subject}&body=${body}`;
+
+    return (
+      <div className="max-w-2xl mx-auto bg-background p-5 sm:p-8 md:p-12 text-center">
+        <h3 className="font-heading text-2xl text-stratified mb-3">Couldn't send — try email</h3>
+        <p className="text-body-lg text-muted-foreground mb-8">
+          The form couldn't reach our server. Your message has been preserved below — just click to
+          open your mail client with everything pre-filled.
+        </p>
+        <a
+          href={mailtoHref}
+          className="inline-flex items-center gap-2 btn-primary px-8 py-4 text-base font-semibold"
+        >
+          <Mail size={18} />
+          Email us directly
+        </a>
+        <p className="mt-4 text-caption text-muted-foreground">{siteContent.contact.email}</p>
+        <button
+          type="button"
+          onClick={() => setHasFailed(false)}
+          className="mt-6 text-xs underline text-muted-foreground hover:text-foreground transition-colors"
+        >
+          ← Try the form again
+        </button>
+      </div>
+    );
+  }
+
+  // ── Normal form ────────────────────────────────────────────────────────────
   return (
     <div className="max-w-2xl mx-auto bg-background">
       <div className="p-5 sm:p-8 md:p-10">
@@ -125,12 +164,28 @@ const ContactForm = ({
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Netlify Forms requires data-netlify and form-name hidden input */}
+        <form
+          name="contact-intake"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          onSubmit={handleSubmit}
+          className="space-y-6"
+        >
+          {/* Honeypot — hidden from humans */}
+          <input type="hidden" name="form-name" value="contact-intake" />
+          <p className="hidden">
+            <label>
+              Don't fill this out: <input name="bot-field" />
+            </label>
+          </p>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-sm font-medium text-foreground">Name *</Label>
               <Input
                 id="name"
+                name="name"
                 value={formData.name}
                 onChange={(e) => handleInputChange('name', e.target.value)}
                 placeholder="Name"
@@ -142,6 +197,7 @@ const ContactForm = ({
               <Label htmlFor="email" className="text-sm font-medium text-foreground">Email *</Label>
               <Input
                 id="email"
+                name="email"
                 type="email"
                 value={formData.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
@@ -156,6 +212,7 @@ const ContactForm = ({
             <Label htmlFor="company" className="text-sm font-medium text-foreground">Company</Label>
             <Input
               id="company"
+              name="company"
               value={formData.company}
               onChange={(e) => handleInputChange('company', e.target.value)}
               placeholder="Company or fund"
@@ -165,6 +222,8 @@ const ContactForm = ({
 
           <div className="space-y-2">
             <Label htmlFor="inquiry_type" className="text-sm font-medium text-foreground">Inquiry type *</Label>
+            {/* Hidden input so Netlify captures the Select value */}
+            <input type="hidden" name="inquiry_type" value={formData.inquiry_type} />
             <Select
               value={formData.inquiry_type}
               onValueChange={(value: InquiryType) => handleInputChange('inquiry_type', value)}
@@ -184,6 +243,7 @@ const ContactForm = ({
             <Label htmlFor="message" className="text-sm font-medium text-foreground">Message *</Label>
             <Textarea
               id="message"
+              name="message"
               value={formData.message}
               onChange={(e) => handleInputChange('message', e.target.value)}
               placeholder="Goals, context, or how we can help..."
@@ -192,6 +252,11 @@ const ContactForm = ({
               className="border-border focus:border-stratified focus:ring-stratified resize-none"
             />
           </div>
+
+          {/* Hidden metadata fields */}
+          <input type="hidden" name="audienceTag" value={resolvedAudienceTag} />
+          <input type="hidden" name="intentLabel" value={resolvedIntentLabel} />
+          <input type="hidden" name="sourceContext" value={sourceContext} />
 
           <div className="border border-border bg-muted/30 p-4">
             <div className="flex items-start gap-3">
@@ -209,7 +274,10 @@ const ContactForm = ({
         </form>
 
         <div className="mt-8 pt-6 border-t border-border flex flex-col sm:flex-row justify-center gap-4 text-caption">
-          <a href={`mailto:${siteContent.contact.email}`} className="flex items-center gap-2 hover:text-stratified transition-colors">
+          <a
+            href={`mailto:${siteContent.contact.email}`}
+            className="flex items-center gap-2 hover:text-stratified transition-colors"
+          >
             <Mail size={16} /> {siteContent.contact.email}
           </a>
           <span className="hidden sm:inline text-border">|</span>
