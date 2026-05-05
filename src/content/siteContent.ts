@@ -309,7 +309,7 @@ export const siteContent = {
     ],
   },
   contact: {
-    email: "partners@stratifiedadvisory.com",
+    email: "partner@stratcorp.ai",
     regions: "US | EMEA | ASIA",
     ctaConfig: {
       "board-advisory": {
