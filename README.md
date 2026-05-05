@@ -1,69 +1,62 @@
-# Welcome to your Lovable project
+# Stratified Advisory
 
-## Project info
+**Board-level AI governance for enterprises, investors, and regulated institutions.**
 
-**URL**: https://lovable.dev/projects/cd4a0744-3652-451d-9eba-c757e7e61352
+Stratified Advisory works with boards and PE firms at the point where AI, cyber, or transformation decisions require governance architecture — not strategy presentations. We establish who is accountable, what the decision criteria are, and how the board stays in control as the program runs.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## What We Do
 
-**Use Lovable**
+Boards have approved AI investment. Few have built the controls to manage what comes next. Stratified Advisory closes that gap through three practice areas:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/cd4a0744-3652-451d-9eba-c757e7e61352) and start prompting.
+- **Board Advisory** — Governance architecture, mandate boundaries, and decision rights designed for the moments where accountability matters.
+- **Portfolio Governance** — AI and cyber risk diagnostics across the hold period, with board-level execution checkpoints and exit-readiness assessment.
+- **Institutional Capability** — Governance frameworks scaled for regulated industries, with committee ownership models and evidence-based oversight.
 
-Changes made via Lovable will be committed automatically to this repo.
+## BRIDGE-AI™
 
-**Use your preferred IDE**
+Our work is built on **BRIDGE-AI™**, a six-pillar governance framework that gives boards mandate, controls, and a decision model:
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+| Pillar | Focus |
+|--------|-------|
+| **B** — Board Readiness | Competence, mandate boundaries, education as a board KPI |
+| **R** — Risk & Regulatory | Unified cyber, model, and third-party risk in board reporting |
+| **I** — Integrity & Innovation | Decision rights, escalation thresholds, evidence logs |
+| **D** — Direction & Foresight | Portfolio sequencing by reversibility, dependency risk, and value |
+| **G** — Governance Excellence | Board-level execution checkpoints with accountable owners |
+| **E** — Environmental Stewardship | AI infrastructure KPIs integrated into governance cadence |
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+BRIDGE-AI is not a policy checklist. It is an operating model the board monitors, audits, and improves.
 
-Follow these steps:
+## The EU AI Act
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+The EU AI Act takes full effect on **August 2, 2026**. Boards that cannot demonstrate oversight at that point face personal liability exposure. Our urgency architecture is designed around this inflection — governance readiness before enforcement, not remediation after it.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Leadership
 
-# Step 3: Install the necessary dependencies.
-npm i
+**Andreea Bulisache** — CEO & Founder. Board Director & AI Governance Strategist. Former Microsoft NTO. EU AI Act Contributor. Harvard Business School Women on Boards.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+**Siddhartha Chaturvedi** — Partner. AI Systems & Governance Architecture. Former Microsoft Director of Product. Builder of AI platforms recognised by Fast Company's World Changing Ideas Award.
 
-**Edit a file directly in GitHub**
+## Engagement
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+We engage through three paths:
 
-**Use GitHub Codespaces**
+1. **Board Advisory** — Governance before the program scales.
+2. **Investor Discussion** — Portfolio governance across the hold period.
+3. **Institutional Partnership** — Build governance capability at scale.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Investment is discussed in conversation, not on a website. Contact us to start.
 
-## What technologies are used for this project?
+## Research
 
-This project is built with .
+We publish **Governing Intelligence**, a monthly brief on what boards should be asking about AI before regulators ask them first. Our research covers AI governance, capacity constraints, geopolitics, and sustainability — written for FTSE 250 and Fortune 500 board audiences.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+---
 
-## How can I deploy this project?
+**Stratified Advisory**
+partners@stratifiedadvisory.com
+US · EMEA · Asia
 
-Simply open [Lovable](https://lovable.dev/projects/cd4a0744-3652-451d-9eba-c757e7e61352) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+stratcorp.ai
