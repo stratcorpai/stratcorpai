@@ -1,9 +1,12 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import ContactForm from './ContactForm';
 import { ArrowRight } from 'lucide-react';
 import { siteContent } from '@/content/siteContent';
+
+/**
+ * ContactCTA — variant-aware mailto: button.
+ *
+ * Opens the user's mail client with a pre-filled subject and body template.
+ * Zero server dependencies; works everywhere.
+ */
 
 interface ContactCTAProps {
   variant?: 'board-advisory' | 'consulting' | 'partnership' | 'general';
@@ -13,47 +16,47 @@ interface ContactCTAProps {
   customText?: string;
 }
 
+const SUBJECT: Record<string, string> = {
+  'board-advisory': 'Board Advisory Inquiry',
+  consulting:       'Strategic Consulting Inquiry',
+  partnership:      'Partnership & Collaboration',
+  general:          'General Inquiry',
+};
+
+const BODY_TEMPLATE = (label: string) =>
+  `Hi,\n\nI'd like to discuss ${label}.\n\nName:\nCompany:\nContext / what we're navigating:\n\n— sent via stratcorp.ai`;
+
+const SIZE_CLASSES: Record<string, string> = {
+  sm:      'text-xs px-4 py-2',
+  default: 'text-sm px-5 py-2.5',
+  lg:      'text-base px-7 py-3.5',
+};
+
 const ContactCTA = ({
   variant = 'consulting',
-  sourceContext = 'Unknown',
   className = '',
   size = 'default',
   customText,
 }: ContactCTAProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const ctaConfig = {
-    'board-advisory': siteContent.contact.ctaConfig['board-advisory'],
-    consulting: siteContent.contact.ctaConfig.consulting,
-    partnership: siteContent.contact.ctaConfig.partnership,
-    general: siteContent.contact.ctaConfig.general,
-  };
-
-  const config = ctaConfig[variant];
-  const displayText = customText ?? config.text;
+  const config  = siteContent.contact.ctaConfig[variant];
+  const label   = customText ?? config.text;
+  const subject = encodeURIComponent(SUBJECT[variant] ?? 'Inquiry');
+  const body    = encodeURIComponent(BODY_TEMPLATE(SUBJECT[variant] ?? 'your services'));
+  const href    = `mailto:${siteContent.contact.email}?subject=${subject}&body=${body}`;
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button
-          size={size}
-          className={`btn-primary group font-semibold tracking-wide ${className}`}
-        >
-          {displayText}
-          <ArrowRight className="w-4 h-4 ml-2 opacity-90 group-hover:translate-x-0.5 transition-transform duration-200" />
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto p-0 border border-border shadow-lg">
-        <ContactForm
-          defaultInquiryType={variant}
-          title={config.title}
-          description={config.description}
-          sourceContext={sourceContext}
-          audienceTag={config.audienceTag}
-          intentLabel={config.intentLabel}
-        />
-      </DialogContent>
-    </Dialog>
+    <a
+      href={href}
+      className={[
+        'inline-flex items-center gap-2 font-semibold tracking-wide',
+        'btn-primary group transition-all duration-200',
+        SIZE_CLASSES[size] ?? SIZE_CLASSES.default,
+        className,
+      ].join(' ')}
+    >
+      {label}
+      <ArrowRight className="w-4 h-4 opacity-90 group-hover:translate-x-0.5 transition-transform duration-200" />
+    </a>
   );
 };
 
