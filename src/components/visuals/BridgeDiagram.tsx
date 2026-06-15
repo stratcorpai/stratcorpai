@@ -65,7 +65,7 @@ const BridgeDiagram = () => {
         style={{ fill: 'hsl(var(--primary))' }}
         fontSize="13"
         fontWeight="600"
-        fontFamily="'Source Serif 4', Georgia, serif"
+        fontFamily="'Spectral', Georgia, serif"
       >
         BRIDGE-AI
       </text>
@@ -75,7 +75,7 @@ const BridgeDiagram = () => {
         textAnchor="middle"
         style={{ fill: 'hsl(var(--muted-foreground))' }}
         fontSize="7"
-        fontFamily="Inter, sans-serif"
+        fontFamily="'Hanken Grotesk', sans-serif"
         letterSpacing="0.12em"
       >
         GOVERNANCE FRAMEWORK
@@ -97,7 +97,7 @@ const BridgeDiagram = () => {
               fill="white"
               fontSize="12"
               fontWeight="600"
-              fontFamily="'Source Serif 4', Georgia, serif"
+              fontFamily="'Spectral', Georgia, serif"
             >
               {n.letter}
             </text>
@@ -108,7 +108,7 @@ const BridgeDiagram = () => {
               textAnchor={cfg.anchor}
               style={{ fill: 'hsl(var(--muted-foreground))' }}
               fontSize="10"
-              fontFamily="Inter, sans-serif"
+              fontFamily="'Hanken Grotesk', sans-serif"
               className="hidden sm:block"
             >
               <tspan x={lx} dy="0">{n.lines[0]}</tspan>

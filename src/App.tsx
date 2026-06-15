@@ -1,26 +1,28 @@
 
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Index from "./pages/Index";
-import Framework from "./pages/Framework";
-import WarRoom from "./pages/WarRoom";
-import Speaking from "./pages/Speaking";
-import NotFound from "./pages/NotFound";
-
-const queryClient = new QueryClient();
-
 import ScrollToTop from "@/components/ScrollToTop";
 
+const Framework = lazy(() => import("./pages/Framework"));
+const WarRoom = lazy(() => import("./pages/WarRoom"));
+const Speaking = lazy(() => import("./pages/Speaking"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider>
-      <TooltipProvider>
-        <Toaster />
-        <BrowserRouter>
-          <ScrollToTop />
+  <ThemeProvider>
+    <TooltipProvider>
+      <Toaster />
+      <BrowserRouter>
+        <ScrollToTop />
+        <Suspense fallback={
+          <div className="min-h-screen bg-[#030712] flex items-center justify-center text-muted-foreground text-sm font-medium">
+            Loading...
+          </div>
+        }>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/framework" element={<Framework />} />
@@ -29,10 +31,10 @@ const App = () => (
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
+        </Suspense>
+      </BrowserRouter>
+    </TooltipProvider>
+  </ThemeProvider>
 );
 
 export default App;

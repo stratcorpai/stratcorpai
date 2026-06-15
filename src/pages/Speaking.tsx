@@ -43,7 +43,7 @@ const Speaking = () => {
                 <p className="text-[0.825rem] sm:text-[0.875rem] leading-[1.7] text-muted-foreground mb-3 sm:mb-4">
                   There is a measurable distance between a board that is aware of AI risk and a board that can govern through an AI crisis. That gap is where reputational, regulatory, and capital risk concentrates.
                 </p>
-                <div className="border-l-2 border-stratified/50 pl-3 sm:pl-4 py-1 mb-3 sm:mb-4">
+                <div className="rounded-lg bg-muted/40 px-4 py-3 mb-3 sm:mb-4">
                   <p className="text-[0.8rem] sm:text-[0.85rem] italic text-muted-foreground">
                     "The gap between awareness and operational competence is where risk concentrates. Most boards are standing in it."
                   </p>
@@ -65,7 +65,7 @@ const Speaking = () => {
                 <p className="text-[0.825rem] sm:text-[0.875rem] leading-[1.7] text-muted-foreground mb-3 sm:mb-4">
                   AI is no longer a software problem. It is an infrastructure problem — constrained by compute, energy, water, and supply chains that boards do not yet govern.
                 </p>
-                <div className="border-l-2 border-stratified/50 pl-3 sm:pl-4 py-1 mb-3 sm:mb-4">
+                <div className="rounded-lg bg-muted/40 px-4 py-3 mb-3 sm:mb-4">
                   <p className="text-[0.8rem] sm:text-[0.85rem] italic text-muted-foreground">
                     "The question is no longer how fast you can deploy AI. It is whether you can govern at the speed you deploy."
                   </p>

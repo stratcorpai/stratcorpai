@@ -1,14 +1,14 @@
-# Stratified Advisory
+# StratCorp.AI
 
 **Board-level AI governance for enterprises, investors, and regulated institutions.**
 
-Stratified Advisory works with boards and PE firms at the point where AI, cyber, or transformation decisions require governance architecture — not strategy presentations. We establish who is accountable, what the decision criteria are, and how the board stays in control as the program runs.
+StratCorp.AI works with boards and PE firms at the point where AI, cyber, or transformation decisions require governance architecture — not strategy presentations. We establish who is accountable, what the decision criteria are, and how the board stays in control as the program runs.
 
 ---
 
 ## What We Do
 
-Boards have approved AI investment. Few have built the controls to manage what comes next. Stratified Advisory closes that gap through three practice areas:
+Boards have approved AI investment. Few have built the controls to manage what comes next. StratCorp.AI closes that gap through three practice areas:
 
 - **Board Advisory** — Governance architecture, mandate boundaries, and decision rights designed for the moments where accountability matters.
 - **Portfolio Governance** — AI and cyber risk diagnostics across the hold period, with board-level execution checkpoints and exit-readiness assessment.
@@ -55,8 +55,8 @@ We publish **Governing Intelligence**, a monthly brief on what boards should be 
 
 ---
 
-**Stratified Advisory**
-partners@stratifiedadvisory.com
+**StratCorp.AI**
+partner@stratcorp.ai
 US · EMEA · Asia
 
 stratcorp.ai

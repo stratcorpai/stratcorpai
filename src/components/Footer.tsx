@@ -95,22 +95,22 @@ const Footer = () => {
             </div>
 
             {/* Social */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1 -mx-2">
               <a
                 href="https://linkedin.com/in/andreeabulisache"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="inline-flex items-center justify-center p-2.5 text-muted-foreground hover:text-foreground transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
               >
-                <Linkedin size={15} />
+                <Linkedin size={16} />
               </a>
               <a
                 href={`mailto:${siteContent.contact.email}`}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="inline-flex items-center justify-center p-2.5 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Email"
               >
-                <Mail size={15} />
+                <Mail size={16} />
               </a>
             </div>
           </div>
@@ -129,7 +129,7 @@ const Footer = () => {
         </div>
 
         {/* EU AI Act marker */}
-        <div className="pb-4 sm:pb-5 text-center text-[0.65rem] sm:text-[0.7rem] text-muted-foreground/45">
+        <div className="pb-4 sm:pb-5 text-center text-[0.65rem] sm:text-[0.7rem] text-muted-foreground/80">
           The EU AI Act takes full effect August 2, 2026.
         </div>
 

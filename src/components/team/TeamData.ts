@@ -5,7 +5,7 @@ export const teamMembers = [
     name: "Andreea Bulisache",
     title: "Board Director & AI Governance Strategist | Former Microsoft NTO | EU AI Act Contributor",
     location: "US & EMEA",
-    image: "/assets/team-andreea.png",
+    image: "/assets/team-andreea.webp",
     description: [
       "Andreea Bulisache is a global tech executive, strategist, and influential thought leader with a decade of leadership at Microsoft, where she pioneered the integration of AI, data & analytics, blockchain, and cybersecurity into scalable business models. She played a key role in incubating and operationalizing emerging technologies, leading major integrations like GitHub and Databricks, and driving over $1 billion in global revenue through Microsoft's partner-to-partner model.",
       "A sought-after speaker and advisor, Andreea demystifies AI, builds cybersecurity resilience, and leads digital transformation in high-growth and regulated markets. Beyond corporate leadership, she has shaped national cybersecurity policies and AI frameworks, earning her reputation as a trusted advisor to PE-backed companies, scale-ups, and enterprises navigating complex transitions."
@@ -38,7 +38,7 @@ export const teamMembers = [
     name: "Prof. dr. Désirée M. van Gorp LL.M",
     title: "Professor of International Business | Board Leadership & Ecosystem Development Expert",
     location: "EMEA",
-    image: "/assets/team-desiree.png",
+    image: "/assets/team-desiree.webp",
     description: [
       "Désirée van Gorp is a professor of International Business and chairing the International Advisory Board at Nyenrode Business University. She serves on several supervisory and advisory boards including Atradius, World Trade Organization's Chairs Programme, NBTC Holland Marketing, Foundation Young & Bold, Impact Fair and Expert Panel, and chairs the early-stage funding initiative for start-ups with the regional development organization in Utrecht, the Netherlands.",
       "She is involved in the Women in Business Awards for the United Nations' World Investment Forum and regularly participates in AMBA's Assessment Accreditation Committees. In addition to research and education, she advises organizations on building partnerships for sustainable value chains, creating effective ecosystems, and enhancing team and boardroom performance through design thinking and intelligent decision-making methods."
@@ -69,7 +69,7 @@ export const teamMembers = [
     name: "Siddhartha Chaturvedi",
     title: "Partner | AI Systems & Governance Architecture | Former Microsoft Director of Product",
     location: "US & Asia",
-    image: "/assets/team-siddhartha.png",
+    image: "/assets/team-siddhartha.webp",
     description: [
       "Siddhartha Chaturvedi is a visionary product leader and AI strategist with over 13 years of experience driving breakthrough innovations at the intersection of artificial intelligence, healthcare technology, and scientific discovery. After transforming how organizations approach AI-powered solutions as Director of Product Management at Microsoft's Strategic Missions & Technologies division, Siddhartha has founded a startup pioneering the post-agentic web for scientific discovery.",
       "During his Microsoft tenure, Siddhartha spearheaded Microsoft Premonition, an AI-powered biothreat detection platform that earned Fast Company's World Changing Idea Award and secured multi-million dollar government contracts. Now, through his startup work, Siddhartha is building the next evolution of AI-powered scientific discovery—moving beyond current agentic systems to create intelligent infrastructures that fundamentally transform how researchers discover, validate, and build upon scientific knowledge."
@@ -94,7 +94,7 @@ export const teamMembers = [
       "Responsible AI governance and ethical technology deployment"
     ],
     linkedinUrl: "https://linkedin.com/in/siddharth",
-    emailUrl: "mailto:sc@stratcorp.ai"
+    emailUrl: "mailto:partner@stratcorp.ai"
   }
 ];
 

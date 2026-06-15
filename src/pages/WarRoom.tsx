@@ -112,7 +112,7 @@ const WarRoom = () => {
             </div>
             
             {/* BRIDGE-AI connection */}
-            <div className="border-l-2 border-stratified/40 pl-4 sm:pl-5 py-1">
+            <div className="rounded-lg bg-muted/40 px-4 sm:px-5 py-3">
               <p className="text-[0.78rem] sm:text-[0.825rem] text-muted-foreground leading-[1.65]">
                 <span className="font-medium text-foreground">Connection to BRIDGE-AI:</span> The War Room stress-tests whether your governance architecture holds under decision pressure. BRIDGE-AI provides the framework; the War Room reveals whether it's operational.
               </p>

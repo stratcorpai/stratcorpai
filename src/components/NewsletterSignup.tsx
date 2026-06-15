@@ -3,34 +3,28 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { Send } from 'lucide-react';
+import { siteContent } from '@/content/siteContent';
 
 export const NewsletterSignup = ({ className = '' }: { className?: string }) => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
 
     setIsSubmitting(true);
     
-    const encode = (data: Record<string, string>) => {
-      return Object.keys(data)
-        .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-        .join('&');
-    };
-
     try {
-      await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encode({ 'form-name': 'newsletter', email }),
-      });
+      const subject = encodeURIComponent("Subscribe to Governing Intelligence");
+      const body = encodeURIComponent(`Please subscribe my email address to the Governing Intelligence monthly brief: ${email}\n\n— sent via stratcorp.ai`);
+      
+      window.location.href = `mailto:${siteContent.contact.email}?subject=${subject}&body=${body}`;
       
       toast({
-        title: "Subscribed",
-        description: "You're now on the list for Governing Intelligence.",
+        title: "Opening Mail Client...",
+        description: "Please send the pre-composed email to complete your subscription.",
       });
       setEmail('');
     } catch (error) {

@@ -129,7 +129,7 @@ const TeamMemberModal = ({ member, isOpen, onClose }: TeamMemberModalProps) => {
                   </section>
 
                   {member.quote && (
-                    <section className="border-l-2 border-stratified pl-6 md:pl-8 py-2">
+                    <section className="rounded-lg bg-muted/30 px-6 md:px-8 py-5 sm:py-6">
                       <p className="text-xl md:text-2xl font-heading italic text-stratified leading-relaxed">
                         &ldquo;{member.quote}&rdquo;
                       </p>

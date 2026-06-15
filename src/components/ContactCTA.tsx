@@ -48,8 +48,8 @@ const ContactCTA = ({
     <a
       href={href}
       className={[
-        'inline-flex items-center gap-2 font-semibold tracking-wide',
-        'btn-primary group transition-all duration-200',
+        'inline-flex items-center justify-center gap-2 font-semibold tracking-wide rounded-lg',
+        'btn-primary group',
         SIZE_CLASSES[size] ?? SIZE_CLASSES.default,
         className,
       ].join(' ')}
