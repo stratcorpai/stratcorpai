@@ -32,7 +32,7 @@ const Navbar = () => {
   const linkBase =
     "font-sans uppercase tracking-[0.15em] text-foreground/70 hover:text-stratified transition-colors duration-200";
   const linkDesktop = `${linkBase} text-[0.65rem] xl:text-[0.7rem] 2xl:text-[0.75rem]`;
-  const linkMobile = `${linkBase} text-[0.8rem] py-1`;
+  const linkMobile = `${linkBase} text-[0.85rem] py-2.5`;
 
   // Page-level route links — always visible
   const pageLinks = [
@@ -104,7 +104,7 @@ const Navbar = () => {
         {/* Mobile toggle */}
         <button
           type="button"
-          className="lg:hidden text-foreground p-1.5 -mr-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-stratified"
+          className="lg:hidden text-foreground p-2.5 -mr-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-stratified rounded-lg"
           onClick={() => setIsOpen((prev) => !prev)}
           aria-label="Toggle navigation"
           aria-expanded={isOpen}
@@ -115,8 +115,8 @@ const Navbar = () => {
 
       {/* Mobile drawer */}
       <div
-        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+        className={`lg:hidden overflow-hidden transition-all duration-300 ease-out ${
+          isOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="container-custom py-5 flex flex-col gap-3 border-t border-border/60">

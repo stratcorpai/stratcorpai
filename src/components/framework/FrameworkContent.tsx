@@ -175,14 +175,14 @@ const FrameworkContent = () => {
         time.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 my-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 my-6 border-t border-border/60">
         {forces.map((force) => (
-          <div key={force.label} className="border border-border/70 rounded-lg p-4 bg-background">
-            <p className="text-[0.65rem] sm:text-xs tracking-[0.1em] uppercase text-muted-foreground mb-2">
-              {force.label}
-            </p>
-            <p className="text-[0.875rem] sm:text-[0.95rem] font-medium text-foreground">{force.title}</p>
-            <p className="text-[0.78rem] sm:text-[0.825rem] text-muted-foreground mt-1 leading-[1.5]">
+          <div key={force.label} className="border-b border-border/60 py-4 sm:py-5">
+            <div className="flex items-baseline justify-between gap-3 mb-1.5">
+              <p className="text-[0.9rem] sm:text-[0.95rem] font-medium text-foreground">{force.title}</p>
+              <span className="shrink-0 text-[0.7rem] font-medium text-stratified">{force.label}</span>
+            </div>
+            <p className="text-[0.8rem] sm:text-[0.825rem] text-muted-foreground leading-[1.55]">
               {force.description}
             </p>
           </div>
@@ -261,13 +261,13 @@ const FrameworkContent = () => {
         framework clarifies ownership and handoffs.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 my-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 my-6 border-t border-border/60">
         {committees.map((committee) => (
-          <div key={committee.name} className="border border-border/70 rounded-lg p-4">
-            <p className="text-[0.775rem] tracking-[0.08em] uppercase font-medium text-foreground mb-2">
+          <div key={committee.name} className="border-b border-border/60 py-4 sm:py-5">
+            <p className="text-[0.875rem] font-medium text-foreground mb-1">
               {committee.name}
             </p>
-            <p className="text-[0.825rem] text-muted-foreground leading-[1.5]">{committee.owns}</p>
+            <p className="text-[0.825rem] text-muted-foreground leading-[1.55]">{committee.owns}</p>
           </div>
         ))}
       </div>

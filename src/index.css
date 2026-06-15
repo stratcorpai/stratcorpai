@@ -35,20 +35,20 @@
     --card-foreground: 224 71.4% 4.1%;
     --popover: 0 0% 100%;
     --popover-foreground: 224 71.4% 4.1%;
-    --primary: 349 45.8% 36.9%;
+    --primary: 348 49% 36%;
     --primary-foreground: 355 100% 97.3%;
     --secondary: 349 25% 73.5%;
     --secondary-foreground: 349 45.8% 26.9%;
     --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
+    --muted-foreground: 220 12% 38%;
     --accent: 349 15% 88.2%;
-    --accent-foreground: 349 45.8% 36.9%;
+    --accent-foreground: 348 49% 36%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 349 45.8% 36.9%;
-    --radius: 0;
+    --ring: 348 49% 36%;
+    --radius: 0.5rem;
     --section-gap: 5rem;
     --content-width: 76rem;
     --sidebar-background: 0 0% 98%;
@@ -190,12 +190,12 @@
 
 .btn-primary {
   @apply bg-stratified hover:bg-stratified-dark text-white font-semibold tracking-wide;
-  @apply transition-colors duration-200;
+  @apply transition-[background-color,transform] duration-200 ease-out active:scale-[0.98];
 }
 
 .btn-secondary {
   @apply bg-transparent text-stratified font-semibold border border-stratified tracking-wide;
-  @apply transition-colors duration-200 hover:bg-stratified hover:text-white;
+  @apply transition-[background-color,color,transform] duration-200 ease-out hover:bg-stratified hover:text-white active:scale-[0.98];
 }
 
 .line-clamp-3 {
@@ -220,4 +220,18 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(139, 47, 65, 0.4);
+}
+
+/* Respect users who prefer reduced motion: neutralize CSS keyframe + transition
+   motion globally (covers the radar/fade keyframes and Tailwind transitions).
+   Framer Motion is handled separately via useReducedMotion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

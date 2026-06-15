@@ -150,7 +150,7 @@ const HomePageNarrative = () => {
           <p className="text-[0.875rem] sm:text-[0.975rem] leading-[1.75] text-muted-foreground">
             Governance architecture before August 2, not after.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 my-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 my-6 border-t border-border/60">
             {[
               {
                 label: 'Governance',
@@ -183,11 +183,13 @@ const HomePageNarrative = () => {
                 desc: 'Board and executive alignment on critical decisions, with trade-offs visible and ownership clear before execution.',
               },
             ].map((service) => (
-              <article key={service.title} className="border border-border/70 rounded-lg p-4 sm:p-5 bg-background">
-                <p className="text-[0.65rem] sm:text-[0.7rem] tracking-[0.1em] uppercase text-muted-foreground mb-2">{service.label}</p>
-                <h3 className="text-[0.875rem] sm:text-[0.95rem] font-medium text-foreground mb-2">{service.title}</h3>
-                <p className="text-[0.78rem] sm:text-[0.825rem] text-muted-foreground leading-[1.55]">{service.desc}</p>
-              </article>
+              <div key={service.title} className="border-b border-border/60 py-4 sm:py-5">
+                <div className="flex items-baseline justify-between gap-3 mb-1.5">
+                  <h3 className="text-[0.9rem] sm:text-[0.975rem] font-medium text-foreground leading-snug">{service.title}</h3>
+                  <span className="shrink-0 text-[0.7rem] font-medium text-stratified">{service.label}</span>
+                </div>
+                <p className="text-[0.8rem] sm:text-[0.85rem] text-muted-foreground leading-[1.6]">{service.desc}</p>
+              </div>
             ))}
           </div>
         </section>
@@ -222,8 +224,16 @@ const HomePageNarrative = () => {
 
           {featuredPost && (
             <article
-              className="border border-border/70 rounded-lg p-5 sm:p-6 md:p-8 bg-muted/20 cursor-pointer mb-6 group"
+              className="border border-border/70 rounded-lg p-5 sm:p-6 md:p-8 bg-muted/20 cursor-pointer mb-6 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stratified"
               onClick={() => openPDF(featuredPost.pdfUrl)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  openPDF(featuredPost.pdfUrl);
+                }
+              }}
+              role="button"
+              tabIndex={0}
             >
               <p className="text-[0.65rem] sm:text-[0.7rem] tracking-[0.12em] uppercase text-muted-foreground mb-3">Featured</p>
               <h3 className="font-heading text-[1.1rem] sm:text-[1.35rem] md:text-[1.5rem] font-normal text-foreground mb-3 leading-[1.3] group-hover:text-stratified transition-colors">
@@ -249,8 +259,16 @@ const HomePageNarrative = () => {
             {otherPosts.map((post) => (
               <article
                 key={post.id}
-                className="border-b border-border/60 py-4 sm:py-5 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-3 cursor-pointer group"
+                className="border-b border-border/60 py-4 sm:py-5 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-3 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stratified rounded-lg"
                 onClick={() => openPDF(post.pdfUrl)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openPDF(post.pdfUrl);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
               >
                 <div>
                   <h3 className="text-[0.875rem] sm:text-[0.95rem] font-medium text-foreground mb-1 leading-[1.4] group-hover:text-stratified transition-colors">
@@ -261,7 +279,7 @@ const HomePageNarrative = () => {
                   </p>
                   <p className="text-[0.78rem] sm:text-[0.825rem] text-muted-foreground leading-[1.5]">{post.description}</p>
                 </div>
-                <span className="text-[0.75rem] sm:text-[0.8rem] text-stratified/70 whitespace-nowrap sm:mt-1">Read →</span>
+                <span className="text-[0.75rem] sm:text-[0.8rem] font-medium text-stratified whitespace-nowrap sm:mt-1 group-hover:underline underline-offset-4">Read →</span>
               </article>
             ))}
           </div>

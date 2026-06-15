@@ -7,7 +7,7 @@ const Framework = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      <div className="pt-16 pb-4 sm:pt-20 sm:pb-6 md:pt-24 md:pb-10 flex-1">
+      <div className="pt-28 pb-4 sm:pt-32 sm:pb-6 md:pt-36 md:pb-10 flex-1">
         <FrameworkContent />
       </div>
 

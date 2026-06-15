@@ -32,7 +32,7 @@ const RoadmapTimeline = () => (
             style={{ fill: 'hsl(var(--foreground))' }}
             fontSize="11"
             fontWeight="500"
-            fontFamily="Inter, sans-serif"
+            fontFamily="'Hanken Grotesk', sans-serif"
           >
             {phase.name}
           </text>
@@ -42,7 +42,7 @@ const RoadmapTimeline = () => (
             textAnchor="middle"
             style={{ fill: 'hsl(var(--muted-foreground))' }}
             fontSize="9"
-            fontFamily="Inter, sans-serif"
+            fontFamily="'Hanken Grotesk', sans-serif"
             letterSpacing="0.04em"
           >
             {phase.period}
