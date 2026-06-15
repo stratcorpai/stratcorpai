@@ -151,9 +151,9 @@ export default {
 				'radar-pulse-2': 'radar-fade-in 0.8s ease-out 2.7s forwards',
 			},
 			fontFamily: {
-				sans: ['Hanken Grotesk', 'system-ui', 'sans-serif'],
-				heading: ['Spectral', 'Georgia', 'serif'],
-				serif: ['Spectral', 'Georgia', 'serif'],
+				sans: ['Inter', 'sans-serif'],
+				heading: ['Source Serif 4', 'serif'],
+				serif: ['Source Serif 4', 'serif'],
 			},
 		}
 	},
