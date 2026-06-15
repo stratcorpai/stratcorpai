@@ -10,7 +10,7 @@ const WarRoom = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      <main className="pt-16 pb-10 sm:pt-20 sm:pb-16 md:pt-28 md:pb-24 flex-1">
+      <main className="pt-28 pb-10 sm:pt-32 sm:pb-16 md:pt-36 md:pb-24 flex-1">
         <div className="container-custom max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
 
           {/* Hero */}
